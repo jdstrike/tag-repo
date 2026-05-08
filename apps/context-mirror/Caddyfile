@@ -1,0 +1,39 @@
+{
+	auto_https off
+	admin off
+	persist_config off
+}
+
+:80 {
+	root * /srv
+	encode zstd gzip
+
+	header {
+		Access-Control-Allow-Origin  "*"
+		Access-Control-Allow-Methods "GET, HEAD, OPTIONS"
+		Access-Control-Allow-Headers "*"
+		Cache-Control                "public, max-age=300"
+		X-Content-Type-Options       "nosniff"
+		Referrer-Policy              "strict-origin-when-cross-origin"
+	}
+
+	@markdown path *.md
+	header @markdown Content-Type "text/markdown; charset=utf-8"
+
+	@plaintext path *.txt
+	header @plaintext Content-Type "text/plain; charset=utf-8"
+
+	@options method OPTIONS
+
+	handle /healthz {
+		respond "ok" 200
+	}
+
+	handle @options {
+		respond 204
+	}
+
+	handle {
+		file_server
+	}
+}

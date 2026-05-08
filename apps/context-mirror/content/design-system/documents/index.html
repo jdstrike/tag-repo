@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>TAG Document Library</title>
+<meta name="description" content="The Adecco Group document templates: memo, press release, letterhead, RFP, Word doc, email signature, social posts, newsletters. With PNG previews, placeholder lists, and runnable Python recipes." />
+<style>
+:root {
+ --tag-turquoise: #5CB8B2;
+ --tag-primary: #1C304B;
+ --tag-primary-300: #5C6B82;
+ --tag-grey-100: #F5F6F8;
+ --tag-grey-300: #C7CCD3;
+ --gradient: linear-gradient(90deg, #2DBFB8 0%, #1A7BAD 22%, #6B2D8B 44%, #E30613 63%, #F05A28 81%, #F9B233 100%);
+}
+*,*::before,*::after { box-sizing: border-box; }
+body {
+ margin: 0;
+ font-family: "Open Sauce Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+ color: var(--tag-primary);
+ background: #fff;
+ line-height: 1.55;
+}
+.banner { height: 6px; background: var(--gradient); }
+.wrap { max-width: 1140px; margin: 0 auto; padding: 48px 24px 96px; }
+header.page {
+ border-bottom: 1px solid var(--tag-grey-300);
+ padding-bottom: 20px;
+ margin-bottom: 32px;
+}
+header.page .crumb { color: var(--tag-primary-300); font-size: 14px; text-transform: uppercase; letter-spacing: 0.06em; }
+header.page h1 { margin: 6px 0 8px; font-size: 2.1rem; line-height: 1.2; }
+header.page p { color: var(--tag-primary-300); font-size: 16px; max-width: 680px; }
+section.intro {
+ background: var(--tag-grey-100);
+ border-left: 4px solid var(--tag-turquoise);
+ padding: 18px 22px;
+ border-radius: 6px;
+ margin-bottom: 40px;
+}
+section.intro p { margin: 0; font-size: 15px; }
+.tile-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+ gap: 28px;
+ margin: 24px 0 64px;
+}
+.tile {
+ border: 1px solid var(--tag-grey-300);
+ border-radius: 10px;
+ overflow: hidden;
+ background: #fff;
+ transition: transform .15s, box-shadow .15s;
+}
+.tile:hover { transform: translateY(-2px); box-shadow: 0 4px 18px rgba(28,48,75,.08); }
+.tile .preview {
+ background: var(--tag-grey-100);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ height: 220px;
+ overflow: hidden;
+ border-bottom: 1px solid var(--tag-grey-300);
+}
+.tile .preview img {
+ max-width: 100%;
+ max-height: 100%;
+ object-fit: contain;
+ filter: drop-shadow(0 2px 6px rgba(28,48,75,.1));
+}
+.tile .meta { padding: 14px 18px 18px; }
+.tile .meta h3 { margin: 0 0 4px; font-size: 16px; }
+.tile .meta .purpose { color: var(--tag-primary-300); font-size: 13px; min-height: 36px; }
+.tile .meta .links { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+.tile .meta a {
+ display: inline-block;
+ padding: 4px 10px;
+ border-radius: 999px;
+ font-size: 12px;
+ text-decoration: none;
+ border: 1px solid var(--tag-grey-300);
+ color: var(--tag-primary);
+}
+.tile .meta a:hover { background: var(--tag-turquoise); color: #fff; border-color: var(--tag-turquoise); }
+h2 { font-size: 1.4rem; margin: 56px 0 14px; padding-top: 18px; border-top: 1px solid var(--tag-grey-100); }
+h3 { font-size: 1.05rem; }
+pre {
+ background: var(--tag-grey-100);
+ padding: 14px 16px;
+ border-radius: 8px;
+ overflow-x: auto;
+ font-size: 13px;
+ font-family: SFMono-Regular, Consolas, monospace;
+}
+code { font-family: SFMono-Regular, Consolas, monospace; font-size: 0.92em; background: var(--tag-grey-100); padding: 2px 5px; border-radius: 4px; }
+pre code { background: transparent; padding: 0; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0 24px; font-size: 14px; }
+th, td { border: 1px solid var(--tag-grey-300); padding: 8px 12px; vertical-align: top; text-align: left; }
+th { background: var(--tag-grey-100); }
+.footer-bar { height: 6px; background: var(--gradient); margin-top: 64px; }
+.foot { text-align: center; padding: 22px 24px 60px; color: var(--tag-primary-300); font-size: 13px; }
+.foot a { color: var(--tag-primary); }
+</style>
+      <link rel="stylesheet" href="https://tag.schatt.me/assets/css/site.css?v=6.4.0" />
+</head>
+<body>
+<!-- TAG-CHROME-HEADER-BEGIN -->
+<nav class="tag-nav" aria-label="Primary">
+  <div class="tag-nav-inner">
+    <a href="../../index.html" class="tag-nav-logo" aria-label="The Adecco Group">
+      <img src="../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+    </a>
+    <ul class="tag-nav-links">
+      <li><a href="../../index.html#strategy" class="">Brand</a></li>
+      <li><a href="../../index.html#voice" class="">Voice</a></li>
+      <li><a href="../../business-context/index.html" class="">Business</a></li>
+      <li><a href="../components/index.html" class="">Components</a></li>
+      <li><a href="index.html" class="active">Documents</a></li>
+      <li><a href="../logos/index.html" class="">Logos</a></li>
+      <li><a href="../../index.html#context" class="">Context</a></li>
+    </ul>
+    <a href="../../prompt-card.md" class="tag-nav-cta">Prompt card</a>
+    <button class="tag-nav-burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="tag-nav-files" aria-label="Files">
+  <div class="tag-nav-files-inner">
+    <span class="label">Files</span>
+    <a href="../../tag-context.md">tag-context.md</a>
+    <a href="../../prompt-card.md">prompt-card.md</a>
+    <a href="../../copilot-agent-instructions.md">copilot-agent-instructions.md</a>
+    <a href="../../business-context.md">business-context.md</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <span class="sep"></span>
+    <a href="../../assets/tokens/tokens.css">tokens.css</a>
+    <a href="../../assets/templates/index.json">templates</a>
+  </div>
+</nav>
+<div class="tag-stripe"></div>
+<!-- TAG-CHROME-HEADER-END -->
+<div class="wrap">
+
+<header class="page">
+ <div class="crumb">tag.schatt.me &rsaquo; design-system &rsaquo; documents</div>
+ <h1>Document Library</h1>
+ <p>Every TAG-branded artefact starts from one of these templates. Pick the one that matches your intent, fetch the file, and replace only the body content. Header and footer come from the template, not from your imagination.</p>
+</header>
+
+<section class="intro">
+<p><strong>TEMPLATE-FIRST is mandatory.</strong> If an AI tool is generating a TAG document for you, it must fetch the template from this library, run a recipe from <a href="../../assets/recipes/README.md"><code>/assets/recipes/</code></a>, and produce a finished file. It must not synthesize the layout from a description.</p>
+</section>
+
+<h2>Word documents</h2>
+<div class="tile-grid">
+
+ <div class="tile">
+ <div class="preview"><img src="../../assets/previews/tag-memo-template.png" alt="TAG memo template preview"></div>
+ <div class="meta">
+ <h3>Memo</h3>
+ <div class="purpose">Internal memo, formal note, leadership update.</div>
+ <div class="links">
+ <a href="../../assets/templates/tag-memo-template.docx">Download .docx</a>
+ <a href="../../assets/templates/tag-memo-template.pdf">Preview .pdf</a>
+ <a href="../../assets/templates/tagfam-memo-template.docx">TAG Family</a>
+ </div>
+ </div>
+ </div>
+
+ <div class="tile">
+ <div class="preview"><img src="../../assets/previews/tag-press-release-template.png" alt="TAG press release template preview"></div>
+ <div class="meta">
+ <h3>Press release</h3>
+ <div class="purpose">Media release, headline + dateline + body.</div>
+ <div class="links">
+ <a href="../../assets/templates/tag-press-release-template.docx">Download .docx</a>
+ <a href="../../assets/templates/tag-press-release-template.pdf">Preview .pdf</a>
+ </div>
+ </div>
+ </div>
+
+ <div class="tile">
+ <div class="preview"><img src="../../assets/previews/tag-letterhead-zurich-hq.png" alt="TAG letterhead Zurich HQ preview"></div>
+ <div class="meta">
+ <h3>Letterhead (Zurich HQ)</h3>
+ <div class="purpose">Formal letter on Adecco Group AG paper.</div>
+ <div class="links">
+ <a href="../../assets/templates/tag-letterhead-zurich-hq.docx">Download .docx</a>
+ </div>
+ </div>
+ </div>
+
+ <div class="tile">
+ <div class="preview"><img src="../../assets/previews/tag-word-doc-template.png" alt="TAG Word document template preview"></div>
+ <div class="meta">
+ <h3>Word document (general)</h3>
+ <div class="purpose">Multi-page brochure, dossier, white paper.</div>
+ <div class="links">
+ <a href="../../assets/templates/tag-word-doc-template.docx">Download .docx</a>
+ <a href="../../assets/templates/tag-word-doc-template.pdf">Preview .pdf</a>
+ <a href="../../assets/templates/tagfam-word-doc-template.docx">TAG Family</a>
+ </div>
+ </div>
+ </div>
+
+ <div class="tile">
+ <div class="preview"><img src="../../assets/previews/tag-rfp-short-template.png" alt="TAG RFP short template preview"></div>
+ <div class="meta">
+ <h3>RFP / proposal (short)</h3>
+ <div class="purpose">Short-form RFP response, pitch document.</div>
+ <div class="links">
+ <a href="../../assets/templates/tag-rfp-short-template.docx">Download .docx</a>
+ <a href="../../assets/templates/tagfam-rfp-long-template.pdf">Long version (PDF)</a>
+ </div>
+ </div>
+ </div>
+
+ <div class="tile">
+ <div class="preview"><img src="../../assets/previews/tag-boilerplate.png" alt="TAG boilerplate document preview"></div>
+ <div class="meta">
+ <h3>Boilerplate</h3>
+ <div class="purpose">Approved short and long company description, verbatim.</div>
+ <div class="links">
+ <a href="../../assets/templates/tag-boilerplate.docx">Download .docx</a>
+ </div>
+ </div>
+ </div>
+
+ <div class="tile">
+ <div class="preview"><img src="../../assets/previews/tag-email-signature-template.png" alt="TAG email signature template preview"></div>
+ <div class="meta">
+ <h3>Email signature</h3>
+ <div class="purpose">Standard signature with name, title, contact.</div>
+ <div class="links">
+ <a href="../../assets/templates/tag-email-signature-template.docx">Download .docx</a>
+ </div>
+ </div>
+ </div>
+
+</div>
+
+<h2>Print and physical</h2>
+<div class="tile-grid">
+
+ <div class="tile">
+ <div class="preview"><img src="../../assets/previews/tag-envelope-template.png" alt="TAG envelope template preview"></div>
+ <div class="meta">
+ <h3>Envelope</h3>
+ <div class="purpose">DL envelope with sender block.</div>
+ <div class="links">
+ <a href="../../assets/templates/tag-envelope-template.pdf">Download .pdf</a>
+ </div>
+ </div>
+ </div>
+
+ <div class="tile">
+ <div class="preview"><img src="../../assets/previews/tag-newsletter-header-2.png" alt="Newsletter header variant 2"></div>
+ <div class="meta">
+ <h3>Newsletter header (v2)</h3>
+ <div class="purpose">Email/print newsletter masthead.</div>
+ <div class="links">
+ <a href="../../assets/templates/tag-newsletter-header-2.pdf">Download .pdf</a>
+ </div>
+ </div>
+ </div>
+
+ <div class="tile">
+ <div class="preview"><img src="../../assets/previews/tag-newsletter-header-6.png" alt="Newsletter header variant 6"></div>
+ <div class="meta">
+ <h3>Newsletter header (v6)</h3>
+ <div class="purpose">Alternative masthead with imagery slot.</div>
+ <div class="links">
+ <a href="../../assets/templates/tag-newsletter-header-6.pdf">Download .pdf</a>
+ </div>
+ </div>
+ </div>
+
+</div>
+
+<h2>Social media</h2>
+<div class="tile-grid">
+
+ <div class="tile">
+ <div class="preview"><img src="../../assets/previews/tag-social-square-1080-01.png" alt="Social square 1080" loading="lazy"></div>
+ <div class="meta">
+ <h3>Social square (1080&times;1080)</h3>
+ <div class="purpose">Instagram / LinkedIn feed square.</div>
+ <div class="links">
+ <a href="../../assets/templates/tag-social-square-1080.pdf">Download .pdf</a>
+ </div>
+ </div>
+ </div>
+
+ <div class="tile">
+ <div class="preview"><img src="../../assets/previews/tag-social-vertical-1080x1920.png" alt="Social vertical 1080x1920" loading="lazy"></div>
+ <div class="meta">
+ <h3>Social vertical (1080&times;1920)</h3>
+ <div class="purpose">Stories, Reels, Shorts.</div>
+ <div class="links">
+ <a href="../../assets/templates/tag-social-vertical-1080x1920.pdf">Download .pdf</a>
+ </div>
+ </div>
+ </div>
+
+ <div class="tile">
+ <div class="preview"><img src="../../assets/previews/tag-social-linkedin-1200x627.png" alt="LinkedIn landscape 1200x627" loading="lazy"></div>
+ <div class="meta">
+ <h3>LinkedIn landscape (1200&times;627)</h3>
+ <div class="purpose">LinkedIn share image.</div>
+ <div class="links">
+ <a href="../../assets/templates/tag-social-linkedin-1200x627.pdf">Download .pdf</a>
+ </div>
+ </div>
+ </div>
+
+ <div class="tile">
+ <div class="preview"><img src="../../assets/previews/tag-social-media-pptx-guidelines.png" alt="Social media PPTX guidelines" loading="lazy"></div>
+ <div class="meta">
+ <h3>Social media guidelines</h3>
+ <div class="purpose">PowerPoint guidance deck for all social formats.</div>
+ <div class="links">
+ <a href="../../assets/templates/tag-social-media-pptx-guidelines.pdf">Download .pdf</a>
+ </div>
+ </div>
+ </div>
+
+</div>
+
+<h2>Web (Pardot landing pages)</h2>
+
+<table>
+ <thead><tr><th>Variant</th><th>Use case</th><th>Download</th></tr></thead>
+ <tbody>
+ <tr><td>Light</td><td>Default audience-facing campaign page</td><td><a href="../../assets/templates/landing-page-light.html">landing-page-light.html</a></td></tr>
+ <tr><td>Dark</td><td>Premium narrative, leadership campaign</td><td><a href="../../assets/templates/landing-page-dark.html">landing-page-dark.html</a></td></tr>
+ <tr><td>Master (Pardot)</td><td>Account Engagement template seed</td><td><a href="../../assets/templates/landing-page-master.html">landing-page-master.html</a></td></tr>
+ </tbody>
+</table>
+
+<h2>Use a template programmatically</h2>
+
+<p>The recipes at <a href="https://tag.schatt.me/assets/recipes/"><code>/assets/recipes/</code></a> open a template, replace placeholders, save under a new name. Header and footer are never touched.</p>
+
+<pre><code>pip install python-docx python-pptx matplotlib
+
+# Generate a memo from the canonical TAG template
+python replace_docx.py memo \
+ --to "Megan Wickens" \
+ --from "" \
+ --subject "SparkAI integration plan" \
+ --body "First paragraph...||Second paragraph...||Third paragraph..." \
+ --out memo-megan.docx</code></pre>
+
+<p>Library API:</p>
+
+<pre><code>from replace_docx import fill_template
+
+fill_template(
+ template_url_or_path="https://tag.schatt.me/assets/templates/tag-memo-template.docx",
+ replacements={
+ "Dear Mr Other": "Dear Megan,",
+ "Yours sincerely": "Best,\n",
+ },
+ output_path="memo.docx",
+)</code></pre>
+
+<h2>Charts and data visualization</h2>
+
+<p>For any chart that ends up in a TAG document or slide, import <code>tag_chart_style</code> first. The unity gradient bar sits at the bottom of the figure (never the top). Title in Primary 500, gridlines in Grey 100, palette is the 6-stop unity gradient anchors.</p>
+
+<pre><code>import matplotlib.pyplot as plt
+from tag_chart_style import apply, finalize, tag_palette
+
+apply()
+fig, ax = plt.subplots(figsize=(8, 4.5))
+ax.bar(["Q1","Q2","Q3","Q4"], [12, 18, 22, 27])
+ax.set_title("Quarterly results")
+finalize(fig, source="Source: TAG internal data (FY26)")
+fig.savefig("chart.png", dpi=200, bbox_inches="tight")</code></pre>
+
+<p><img src="../../assets/recipes/example_chart.png" alt="TAG chart style example" style="max-width:560px;border:1px solid var(--tag-grey-300);border-radius:6px;"></p>
+
+<h2>Index</h2>
+
+<p>Machine-readable manifest for agents: <a href="../../assets/templates/index.json"><code>/assets/templates/index.json</code></a></p>
+<p>Recipe README: <a href="../../assets/recipes/README.md"><code>/assets/recipes/README.md</code></a></p>
+<p>Master brand context: <a href="../../tag-context.md"><code>/tag-context.md</code></a> &middot; <a href="../../prompt-card.md">Prompt Card</a></p>
+
+</div>
+
+<!-- TAG-CHROME-FOOTER-BEGIN -->
+<div class="tag-footer-bar"></div>
+<footer class="tag-footer" aria-label="Site footer">
+  <div class="tag-footer-inner">
+    <div class="tag-footer-brand">
+      <img src="../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+      <p>Self-hosted brand and AI context. Single source of truth for any AI tool that produces content for the Adecco Group.</p>
+      <span class="tag-footer-tagline">Making the future work for everyone</span>
+    </div>
+    <div>
+      <h4>Brand &amp; AI</h4>
+      <ul>
+        <li><a href="../../tag-context.md">tag-context.md</a></li>
+        <li><a href="../../prompt-card.md">prompt-card.md</a></li>
+        <li><a href="../../copilot-agent-instructions.md">copilot-agent-instructions.md</a></li>
+        <li><a href="../../business-context.md">business-context.md</a></li>
+        <li><a href="../../llms.txt">llms.txt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Design system</h4>
+      <ul>
+        <li><a href="../components/index.html">Components</a></li>
+        <li><a href="index.html">Documents</a></li>
+        <li><a href="../logos/index.html">Logos</a></li>
+        <li><a href="../../business-context/index.html">Business context</a></li>
+        <li><a href="../../assets/tokens/tokens.css">Tokens (CSS)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="../../assets/docs/brand-guidelines.pdf">Brand Guidelines PDF</a></li>
+        <li><a href="../../assets/templates/index.json">Template registry</a></li>
+        <li><a href="../../assets/recipes/README.md">Recipes</a></li>
+        <li><a href="../../playbook.md">Playbook</a></li>
+        <li><a href="../../context.html">Context (SSR)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li>Internal use only</li>
+        <li>Brand assets &copy; The Adecco Group</li>
+        <li>Hosted via Cloudflare Tunnel</li>
+        <li><a href="../../index.html">tag.schatt.me</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tag-footer-bottom">
+    <span>&copy; 2026 The Adecco Group</span>
+    <span><code>v6.3.0</code> &middot; updated 2026-05-05</span>
+  </div>
+</footer>
+<!-- TAG-CHROME-FOOTER-END -->
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f86b8d5abf8363f',t:'MTc3ODIyNTAzNw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

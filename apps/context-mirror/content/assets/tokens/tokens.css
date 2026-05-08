@@ -1,0 +1,592 @@
+/*
+ * The Adecco Group Design Tokens
+ * Source: zeroheight.com/7666d7eae (Design Tokens, Colour System, Typography)
+ * Brand Guidelines: Version 7, June 2025
+ * Mirrored at: https://tag.schatt.me/assets/tokens/tokens.css
+ */
+
+:root {
+  /* ============================================================
+   * TYPOGRAPHY: Spacing, decoration, case
+   * ============================================================ */
+  --paragraph-indent-0: 0px;
+  --text-decoration-underline: underline;
+  --text-decoration-none: none;
+  --text-case-uppercase: uppercase;
+  --text-case-none: none;
+  --paragraph-spacing-0: 0;
+
+  /* ============================================================
+   * TYPOGRAPHY: Letter spacing
+   * ============================================================ */
+  --letter-spacing-0: -0.75%;
+  --letter-spacing-1: -0.5%;
+  --letter-spacing-2: 0%;
+  --letter-spacing-3: 0.4%;
+  --letter-spacing-4: 1.5%;
+  --letter-spacing-5: 5%;
+  --letter-spacing-6: 2%;
+
+  /* ============================================================
+   * TYPOGRAPHY: Font sizes
+   * ============================================================ */
+  --font-size-0: 10px;
+  --font-size-1: 12px;
+  --font-size-2: 14px;
+  --font-size-3: 16px;
+  --font-size-4: 20px;
+  --font-size-5: 24px;
+  --font-size-6: 32px;
+  --font-size-7: 40px;
+  --font-size-8: 48px;
+  --font-size-9: 56px;
+  --font-size-10: 64px;
+  --font-size-11: 80px;
+
+  /* ============================================================
+   * TYPOGRAPHY: Font weights (Roboto base, Open Sauce Sans equivalents in branded use)
+   * ============================================================ */
+  --font-weights-Roboto-0: 300;
+  --font-weights-Roboto-1: 400;
+  --font-weights-Roboto-2: 500;
+  --font-weights-roboto-0: 300;
+  --font-weights-roboto-1: 400;
+  --font-weights-roboto-2: 500;
+
+  /* Open Sauce Sans weights for branded contexts */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* ============================================================
+   * TYPOGRAPHY: Line heights
+   * ============================================================ */
+  --line-heights-0: 88px;
+  --line-heights-1: 72px;
+  --line-heights-2: 64px;
+  --line-heights-3: 56px;
+  --line-heights-4: 48px;
+  --line-heights-5: 40px;
+  --line-heights-6: 32px;
+  --line-heights-7: 24px;
+  --line-heights-8: 16px;
+
+  /* ============================================================
+   * TYPOGRAPHY: Font families
+   * ============================================================ */
+  --font-families-roboto: "Roboto";
+  --font-families-open-sauce-sans: "Open Sauce Sans", "Roboto", system-ui, sans-serif;
+  --font-families-arial: Arial, Helvetica, sans-serif;
+
+  /* ============================================================
+   * SHADOWS: Lists & elevations
+   * ============================================================ */
+  --list-1x: 0px 4px 16px 0px #1c304b;
+  --list-2x: 4px 8px 16px 0px #1c304b;
+  --surface-1x: 4px 2px 16px 0px #1c304b;
+  --surface-2x: 6px 4px 24px 0px #1c304b;
+  --surface-3x: 8px 8px 28px 0px #1c304b;
+
+  /* ============================================================
+   * COLOUR: Semantic
+   * ============================================================ */
+  --full-palette-semantic-error-100: #f7d3d0;
+  --full-palette-semantic-error-200: #f0a6a1;
+  --full-palette-semantic-error-400: #e87a71;
+  --full-palette-semantic-error-600: #e04d42;
+
+  --full-palette-semantic-alert-100: #fff0cc;
+  --full-palette-semantic-alert-200: #ffd166;
+  --full-palette-semantic-alert-400: #ffc133;
+  --full-palette-semantic-alert-600: #b88000;
+
+  --full-palette-semantic-success-100: #dcf5d6;
+  --full-palette-semantic-success-200: #96e283;
+  --full-palette-semantic-success-400: #73d85a;
+  --full-palette-semantic-success-600: #33841f;
+
+  /* ============================================================
+   * COLOUR: Primary palette (the workhorse)
+   * ============================================================ */
+  --full-palette-primary-100: #ced7e4;
+  --full-palette-primary-200: #8894a5;
+  --full-palette-primary-300: #727f8f;
+  --full-palette-primary-400: #495667;
+  --full-palette-primary-500: #1c304b;
+  --full-palette-primary-600: #030c18;
+  --full-palette-primary-700: #000306;
+
+  /* ============================================================
+   * COLOUR: Secondary palette
+   * ============================================================ */
+  --full-palette-secondary-100: #ccf2ff;
+  --full-palette-secondary-200: #99e6ff;
+  --full-palette-secondary-300: #33cdff;
+  --full-palette-secondary-400: #009acc;
+  --full-palette-secondary-500: #107b9e;
+  --full-palette-secondary-600: #0e6987;
+  --full-palette-secondary-700: #004d66;
+
+  /* ============================================================
+   * COLOUR: Accent (TAG Turquoise heritage)
+   * ============================================================ */
+  --full-palette-accent-100: #eff8f7;
+  --full-palette-accent-200: #ceeae8;
+  --full-palette-accent-300: #aedcd9;
+  --full-palette-accent-400: #8dcdc9;
+  --full-palette-accent-500: #5cb8b2;
+  --full-palette-accent-600: #367c78;
+  --full-palette-accent-700: #275956;
+
+  /* ============================================================
+   * COLOUR: Neutrals
+   * ============================================================ */
+  --full-palette-neutrals-0: #ffffff;
+  --full-palette-neutrals-100: #f8f8f9;
+  --full-palette-neutrals-200: #ebebee;
+  --full-palette-neutrals-300: #e0e0e4;
+  --full-palette-neutrals-400: #ccccd3;
+  --full-palette-neutrals-500: #adadb5;
+  --full-palette-neutrals-600: #7c828a;
+  --full-palette-neutrals-700: #5c6573;
+  --full-palette-neutrals-800: #1c304b;
+
+  /* ============================================================
+   * COLOUR: Tertiary (data viz, charts)
+   * ============================================================ */
+  --full-palette-tertiary-100: #7e63e8;
+  --full-palette-tertiary-200: #81a4ff;
+  --full-palette-tertiary-300: #ffc133;
+  --full-palette-tertiary-400: #ff8e4f;
+  --full-palette-tertiary-500: #e87a71;
+  --full-palette-tertiary-600: #eb9fbb;
+
+  /* ============================================================
+   * COLOUR: GBU original brand colours (single-brand contexts)
+   * ============================================================ */
+  --gbu-adecco-red: #da291c;
+  --gbu-adecco-red-lighter-80: #f2a7a1;
+  --gbu-adecco-red-lighter-60: #f2a7a1;
+  --gbu-adecco-red-lighter-40: #ec7a72;
+  --gbu-adecco-red-darker-25: #a31e14;
+
+  --gbu-akkodis-yellow: #fdc601;
+  --gbu-akkodis-yellow-lighter-80: #fff0d1;
+  --gbu-akkodis-yellow-lighter-60: #ffe2a4;
+  --gbu-akkodis-yellow-lighter-40: #ffd476;
+  --gbu-akkodis-yellow-darker-25: #d49100;
+
+  --gbu-lhh-purple: #640451;
+  --gbu-lhh-purple-lighter-80: #e6c0ee;
+  --gbu-lhh-purple-lighter-60: #ce81dd;
+  --gbu-lhh-purple-lighter-40: #b643cc;
+  --gbu-lhh-purple-darker-25: #3b1143;
+
+  /* ============================================================
+   * BORDERS & DIVIDERS
+   * ============================================================ */
+  --borders-dividers-01: #ebebee;
+  --borders-dividers-02: #ccccd3;
+  --borders-dividers-on-primary: #495667;
+  --borders-dividers-on-accent: #367c78;
+  --borders-dividers-on-secondary: #107b9e;
+  --borders-dividers-alert: #ffc133;
+  --borders-dividers-success: #73d85a;
+  --borders-dividers-error: #e87a71;
+  --borders-dividers-info: #33cdff;
+  --borders-dividers-cta-focused: #b85b14;
+
+  --borders-dividers-buttons-enabled: #1c304b;
+  --borders-dividers-buttons-hover: #009acc;
+  --borders-dividers-buttons-pressed: #009acc;
+  --borders-dividers-buttons-focused: #33cdff;
+  --borders-dividers-buttons-disabled: #ced7e4;
+
+  --borders-dividers-interactive-enabled: #1c304b;
+  --borders-dividers-interactive-hover: #009acc;
+  --borders-dividers-interactive-pressed: #009acc;
+  --borders-dividers-interactive-focused: #33cdff;
+  --borders-dividers-interactive-active: #009acc;
+  --borders-dividers-interactive-disabled: #ced7e4;
+  --borders-dividers-interactive-error: #e87a71;
+
+  /* ============================================================
+   * CHART
+   * ============================================================ */
+  --chart-base: #ebebee;
+  --chart-01: #5cb8b2;
+  --chart-02: #7e63e8;
+  --chart-03: #81a4ff;
+  --chart-04: #ffc133;
+  --chart-05: #ff8e4f;
+  --chart-06: #e87a71;
+  --chart-07: #eb9fbb;
+
+  /* ============================================================
+   * ICONS
+   * ============================================================ */
+  --icons-01: #1c304b;
+  --icons-02: #5c6573;
+  --icons-03: #adadb5;
+  --icons-accent: #5cb8b2;
+  --icons-inverse: #ffffff;
+
+  --icons-buttons-default: #1c304b;
+  --icons-buttons-default-inverse: #ffffff;
+  --icons-buttons-disabled: #ced7e4;
+
+  --icons-feedback-info: #33cdff;
+  --icons-feedback-error: #e87a71;
+  --icons-feedback-success: #73d85a;
+  --icons-feedback-alert: #ffc133;
+
+  --icons-interactive-on-light-enabled: #107b9e;
+  --icons-interactive-on-light-hover: #0e6987;
+  --icons-interactive-on-light-pressed: #004d66;
+  --icons-interactive-on-light-disabled: #adadb5;
+
+  --icons-interactive-on-dark-enabled: #33cdff;
+  --icons-interactive-on-dark-hover: #99e6ff;
+  --icons-interactive-on-dark-pressed: #009acc;
+  --icons-interactive-on-dark-disabled: #adadb5;
+
+  /* ============================================================
+   * SURFACES
+   * ============================================================ */
+  --surface-01: #ffffff;
+  --surface-02: #f8f8f9;
+  --surface-03: #1c304b;
+  --surface-accent: #5cb8b2;
+  --surface-gradient: linear-gradient(180deg, #8dcdc9 0.68%, #5cb8b2 100%);
+
+  --surface-interactive-default: #ffffff;
+  --surface-interactive-disabled: #f8f8f9;
+  --surface-interactive-pressed: #ccf2ff;
+
+  --surface-feedback-info: #ccf2ff;
+  --surface-feedback-error: #f7d3d0;
+  --surface-feedback-success: #dcf5d6;
+  --surface-feedback-alert: #fff0cc;
+
+  /* ============================================================
+   * BACKGROUNDS
+   * ============================================================ */
+  --backgrounds-01: #ffffff;
+  --backgrounds-02: #f8f8f9;
+  --backgrounds-03: #ebebee;
+  --backgrounds-04: #1c304b;
+  --backgrounds-secondary: #009acc;
+  --backgrounds-accent: #5cb8b2;
+  --backgrounds-gradient: linear-gradient(180deg, #8dcdc9 0.68%, #5cb8b2 100%);
+
+  /* The Adecco Group unity gradient (canonical 6-stop spec).
+   * Sourced from the official Adecco Group discover landing pages.
+   * Used at 135deg for surfaces and 90deg for the unity gradient bar.
+   */
+  --backgrounds-unity-gradient:
+    linear-gradient(
+      135deg,
+      #2DBFB8   0%,
+      #1A7BAD  22%,
+      #6B2D8B  44%,
+      #E30613  63%,
+      #F05A28  81%,
+      #F9B233 100%
+    );
+
+  /* Horizontal variant for thin gradient bars (footer, dividers, hero bottom) */
+  --backgrounds-unity-gradient-bar:
+    linear-gradient(
+      90deg,
+      #2DBFB8   0%,
+      #1A7BAD  20%,
+      #6B2D8B  42%,
+      #E30613  62%,
+      #F05A28  81%,
+      #F9B233 100%
+    );
+
+  /* Radial variant used as a fallback for the unity sphere */
+  --backgrounds-unity-gradient-radial:
+    radial-gradient(
+      circle at 35% 30%,
+      #2DBFB8   0%,
+      #1A7BAD  22%,
+      #6B2D8B  44%,
+      #E30613  63%,
+      #F05A28  81%,
+      #F9B233 100%
+    );
+
+  /* Individual gradient anchor colours (for swatches and reference) */
+  --unity-gradient-teal:    #2DBFB8;
+  --unity-gradient-blue:    #1A7BAD;
+  --unity-gradient-purple:  #6B2D8B;
+  --unity-gradient-red:     #E30613;
+  --unity-gradient-orange:  #F05A28;
+  --unity-gradient-yellow:  #F9B233;
+
+  --backgrounds-skeleton: #ebebee;
+  --backgrounds-skeleton-accent: #8dcdc9;
+  --backgrounds-skeleton-primary: #495667;
+  --backgrounds-overlay: #1c304b;
+
+  --backgrounds-action-cta-action-200: #ffc9a0;
+  --backgrounds-action-cta-action-300: #fdb985;
+  --backgrounds-action-cta-action-700: #b85b14;
+  --backgrounds-action-cta-enabled: #f29b59;
+  --backgrounds-action-cta-hover: #f8852d;
+  --backgrounds-action-cta-pressed: #fdab6d;
+  --backgrounds-action-cta-focused: #f29b59;
+  --backgrounds-action-cta-disabled: #ffe7d4;
+
+  --backgrounds-interactive-default: #ffffff;
+  --backgrounds-interactive-pressed: #ccf2ff;
+  --backgrounds-interactive-disabled: #ced7e4;
+  --backgrounds-interactive-active: #009acc;
+  --backgrounds-interactive-selected-01: #ebebee;
+  --backgrounds-interactive-selected-02: #ccf2ff;
+
+  --backgrounds-feedback-info-icon-bg: #33cdff;
+  --backgrounds-feedback-error-icon-bg: #e87a71;
+  --backgrounds-feedback-success-icon-bg: #73d85a;
+  --backgrounds-feedback-alert-icon-bg: #ffc133;
+
+  --backgrounds-buttons-enabled: #1c304b;
+  --backgrounds-buttons-hover: #030c18;
+  --backgrounds-buttons-pressed-01: #495667;
+  --backgrounds-buttons-pressed-02: #ccf2ff;
+  --backgrounds-buttons-focused: #1c304b;
+  --backgrounds-buttons-disabled: #ced7e4;
+
+  /* ============================================================
+   * TEXT
+   * ============================================================ */
+  --text-01: #1c304b;
+  --text-02: #5c6573;
+  --text-03: #adadb5;
+  --text-on-accent: #1c304b;
+  --text-accent-on-light: #367c78;
+  --text-accent-on-dark: #5cb8b2;
+  --text-inverse: #ffffff;
+
+  --text-cta-default: #1c304b;
+  --text-cta-disabled: #5c6573;
+
+  --text-buttons-default: #1c304b;
+  --text-buttons-default-inverse: #ffffff;
+  --text-buttons-disabled: #ced7e4;
+
+  --text-interactive-link-on-light-enabled: #107b9e;
+  --text-interactive-link-on-light-hover: #0e6987;
+  --text-interactive-link-on-light-pressed: #004d66;
+  --text-interactive-link-on-light-disabled: #adadb5;
+
+  --text-interactive-link-on-dark-enabled: #33cdff;
+  --text-interactive-link-on-dark-hover: #99e6ff;
+  --text-interactive-link-on-dark-h-pressed: #009acc;
+  --text-interactive-link-on-dark-disabled: #adadb5;
+}
+
+/* ============================================================
+ * TEXT STYLES (composite tokens)
+ * ============================================================ */
+:root {
+  --link-small-font-family: var(--font-families-roboto);
+  --link-small-font-weight: var(--font-weights-roboto-2);
+  --link-small-line-height: var(--line-heights-8);
+  --link-small-font-size: var(--font-size-1);
+  --link-small-letter-spacing: var(--letter-spacing-6);
+  --link-small-text-case: var(--text-case-uppercase);
+  --link-small-text-decoration: var(--text-decoration-none);
+
+  --link-small-underline-font-family: var(--font-families-roboto);
+  --link-small-underline-font-weight: var(--font-weights-roboto-2);
+  --link-small-underline-line-height: var(--line-heights-8);
+  --link-small-underline-font-size: var(--font-size-1);
+  --link-small-underline-letter-spacing: var(--letter-spacing-6);
+  --link-small-underline-text-case: var(--text-case-uppercase);
+  --link-small-underline-text-decoration: var(--text-decoration-underline);
+
+  --link-big-font-family: var(--font-families-roboto);
+  --link-big-font-weight: var(--font-weights-roboto-2);
+  --link-big-line-height: var(--line-heights-8);
+  --link-big-font-size: var(--font-size-2);
+  --link-big-letter-spacing: var(--letter-spacing-6);
+  --link-big-text-case: var(--text-case-uppercase);
+  --link-big-text-decoration: var(--text-decoration-none);
+
+  --link-big-underline-font-family: var(--font-families-roboto);
+  --link-big-underline-font-weight: var(--font-weights-roboto-2);
+  --link-big-underline-line-height: var(--line-heights-8);
+  --link-big-underline-font-size: var(--font-size-2);
+  --link-big-underline-letter-spacing: var(--letter-spacing-6);
+  --link-big-underline-text-case: var(--text-case-uppercase);
+  --link-big-underline-text-decoration: var(--text-decoration-underline);
+
+  --tag-font-family: var(--font-families-roboto);
+  --tag-font-weight: var(--font-weights-roboto-2);
+  --tag-line-height: var(--line-heights-8);
+  --tag-font-size: var(--font-size-0);
+  --tag-letter-spacing: var(--letter-spacing-5);
+  --tag-text-case: var(--text-case-uppercase);
+  --tag-text-decoration: var(--text-decoration-none);
+
+  --button-s-font-family: var(--font-families-roboto);
+  --button-s-font-weight: var(--font-weights-roboto-2);
+  --button-s-line-height: var(--line-heights-8);
+  --button-s-font-size: var(--font-size-1);
+  --button-s-letter-spacing: var(--letter-spacing-5);
+  --button-s-text-case: var(--text-case-uppercase);
+  --button-s-text-decoration: var(--text-decoration-none);
+
+  --button-m-font-family: var(--font-families-roboto);
+  --button-m-font-weight: var(--font-weights-roboto-2);
+  --button-m-line-height: var(--line-heights-7);
+  --button-m-font-size: var(--font-size-2);
+  --button-m-letter-spacing: var(--letter-spacing-5);
+  --button-m-text-case: var(--text-case-uppercase);
+  --button-m-text-decoration: var(--text-decoration-none);
+
+  --button-l-font-family: var(--font-families-roboto);
+  --button-l-font-weight: var(--font-weights-roboto-2);
+  --button-l-line-height: var(--line-heights-7);
+  --button-l-font-size: var(--font-size-2);
+  --button-l-letter-spacing: var(--letter-spacing-5);
+  --button-l-text-case: var(--text-case-uppercase);
+  --button-l-text-decoration: var(--text-decoration-none);
+
+  --caption-font-family: var(--font-families-roboto);
+  --caption-font-weight: var(--font-weights-roboto-1);
+  --caption-line-height: var(--line-heights-8);
+  --caption-font-size: var(--font-size-1);
+  --caption-letter-spacing: var(--letter-spacing-4);
+  --caption-text-case: var(--text-case-uppercase);
+  --caption-text-decoration: var(--text-decoration-none);
+
+  --body-small-font-family: var(--font-families-roboto);
+  --body-small-font-weight: var(--font-weights-roboto-1);
+  --body-small-line-height: var(--line-heights-8);
+  --body-small-font-size: var(--font-size-1);
+  --body-small-letter-spacing: var(--letter-spacing-3);
+  --body-small-text-case: var(--text-case-none);
+  --body-small-text-decoration: var(--text-decoration-none);
+
+  --body-medium-font-family: var(--font-families-roboto);
+  --body-medium-font-weight: var(--font-weights-roboto-1);
+  --body-medium-line-height: var(--line-heights-7);
+  --body-medium-font-size: var(--font-size-2);
+  --body-medium-letter-spacing: var(--letter-spacing-3);
+  --body-medium-text-case: var(--text-case-none);
+  --body-medium-text-decoration: var(--text-decoration-none);
+
+  --body-base-font-family: var(--font-families-roboto);
+  --body-base-font-weight: var(--font-weights-roboto-1);
+  --body-base-line-height: var(--line-heights-7);
+  --body-base-font-size: var(--font-size-3);
+  --body-base-letter-spacing: var(--letter-spacing-2);
+  --body-base-text-case: var(--text-case-none);
+  --body-base-text-decoration: var(--text-decoration-none);
+
+  --body-large-font-family: var(--font-families-roboto);
+  --body-large-font-weight: var(--font-weights-roboto-1);
+  --body-large-line-height: var(--line-heights-6);
+  --body-large-font-size: var(--font-size-4);
+  --body-large-letter-spacing: var(--letter-spacing-2);
+  --body-large-text-case: var(--text-case-none);
+  --body-large-text-decoration: var(--text-decoration-none);
+
+  --small-title-font-family: var(--font-families-roboto);
+  --small-title-font-weight: var(--font-weights-roboto-2);
+  --small-title-line-height: var(--line-heights-7);
+  --small-title-font-size: var(--font-size-2);
+  --small-title-letter-spacing: var(--letter-spacing-2);
+  --small-title-text-case: var(--text-case-none);
+  --small-title-text-decoration: var(--text-decoration-none);
+
+  --subtitle-font-family: var(--font-families-roboto);
+  --subtitle-font-weight: var(--font-weights-roboto-2);
+  --subtitle-line-height: var(--line-heights-7);
+  --subtitle-font-size: var(--font-size-3);
+  --subtitle-letter-spacing: var(--letter-spacing-2);
+  --subtitle-text-case: var(--text-case-none);
+  --subtitle-text-decoration: var(--text-decoration-none);
+
+  --h4-mobile-font-family: var(--font-families-roboto);
+  --h4-mobile-font-weight: var(--font-weights-roboto-1);
+  --h4-mobile-line-height: var(--line-heights-6);
+  --h4-mobile-font-size: var(--font-size-4);
+  --h4-mobile-letter-spacing: var(--letter-spacing-2);
+
+  --h4-desktop-font-family: var(--font-families-roboto);
+  --h4-desktop-font-weight: var(--font-weights-roboto-1);
+  --h4-desktop-line-height: var(--line-heights-6);
+  --h4-desktop-font-size: var(--font-size-5);
+  --h4-desktop-letter-spacing: var(--letter-spacing-2);
+
+  --h3-mobile-font-family: var(--font-families-roboto);
+  --h3-mobile-font-weight: var(--font-weights-roboto-1);
+  --h3-mobile-line-height: var(--line-heights-6);
+  --h3-mobile-font-size: var(--font-size-5);
+  --h3-mobile-letter-spacing: var(--letter-spacing-2);
+
+  --h3-desktop-font-family: var(--font-families-roboto);
+  --h3-desktop-font-weight: var(--font-weights-roboto-1);
+  --h3-desktop-line-height: var(--line-heights-5);
+  --h3-desktop-font-size: var(--font-size-6);
+  --h3-desktop-letter-spacing: var(--letter-spacing-2);
+
+  --h2-mobile-font-family: var(--font-families-roboto);
+  --h2-mobile-font-weight: var(--font-weights-roboto-1);
+  --h2-mobile-line-height: var(--line-heights-5);
+  --h2-mobile-font-size: var(--font-size-6);
+  --h2-mobile-letter-spacing: var(--letter-spacing-2);
+
+  --h2-desktop-font-family: var(--font-families-roboto);
+  --h2-desktop-font-weight: var(--font-weights-roboto-1);
+  --h2-desktop-line-height: var(--line-heights-4);
+  --h2-desktop-font-size: var(--font-size-7);
+  --h2-desktop-letter-spacing: var(--letter-spacing-2);
+
+  --h1-mobile-font-family: var(--font-families-roboto);
+  --h1-mobile-font-weight: var(--font-weights-roboto-1);
+  --h1-mobile-line-height: var(--line-heights-4);
+  --h1-mobile-font-size: var(--font-size-7);
+  --h1-mobile-letter-spacing: var(--letter-spacing-2);
+
+  --h1-desktop-font-family: var(--font-families-roboto);
+  --h1-desktop-font-weight: var(--font-weights-roboto-1);
+  --h1-desktop-line-height: var(--line-heights-3);
+  --h1-desktop-font-size: var(--font-size-8);
+  --h1-desktop-letter-spacing: var(--letter-spacing-2);
+
+  --hero-mobile-font-family: var(--font-families-roboto);
+  --hero-mobile-font-weight: var(--font-weights-roboto-1);
+  --hero-mobile-line-height: var(--line-heights-2);
+  --hero-mobile-font-size: var(--font-size-9);
+  --hero-mobile-letter-spacing: var(--letter-spacing-1);
+
+  --hero-desktop-font-family: var(--font-families-roboto);
+  --hero-desktop-font-weight: var(--font-weights-roboto-1);
+  --hero-desktop-line-height: var(--line-heights-1);
+  --hero-desktop-font-size: var(--font-size-10);
+  --hero-desktop-letter-spacing: var(--letter-spacing-1);
+
+  --figures-mobile-font-family: var(--font-families-roboto);
+  --figures-mobile-font-weight: var(--font-weights-roboto-0);
+  --figures-mobile-line-height: var(--line-heights-1);
+  --figures-mobile-font-size: var(--font-size-10);
+  --figures-mobile-letter-spacing: var(--letter-spacing-0);
+
+  --figures-desktop-font-family: var(--font-families-roboto);
+  --figures-desktop-font-weight: var(--font-weights-roboto-0);
+  --figures-desktop-line-height: var(--line-heights-0);
+  --figures-desktop-font-size: var(--font-size-11);
+  --figures-desktop-letter-spacing: var(--letter-spacing-0);
+}
+
+/* ============================================================
+ * FONT FACE: Open Sauce Sans (branded c

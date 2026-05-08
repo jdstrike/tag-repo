@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Overlays | TAG Components</title>
+<meta name="description" content="Surfaces that appear above the page.">
+<link rel="stylesheet" href="../_shared.css">
+      <link rel="stylesheet" href="https://tag.schatt.me/assets/css/site.css?v=6.4.0" />
+</head><body>
+<!-- TAG-CHROME-HEADER-BEGIN -->
+<nav class="tag-nav" aria-label="Primary">
+  <div class="tag-nav-inner">
+    <a href="../../../index.html" class="tag-nav-logo" aria-label="The Adecco Group">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+    </a>
+    <ul class="tag-nav-links">
+      <li><a href="../../../index.html#strategy" class="">Brand</a></li>
+      <li><a href="../../../index.html#voice" class="">Voice</a></li>
+      <li><a href="../../../business-context/index.html" class="">Business</a></li>
+      <li><a href="../index.html" class="active">Components</a></li>
+      <li><a href="../../documents/index.html" class="">Documents</a></li>
+      <li><a href="../../logos/index.html" class="">Logos</a></li>
+      <li><a href="../../../index.html#context" class="">Context</a></li>
+    </ul>
+    <a href="../../../prompt-card.md" class="tag-nav-cta">Prompt card</a>
+    <button class="tag-nav-burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="tag-nav-files" aria-label="Files">
+  <div class="tag-nav-files-inner">
+    <span class="label">Files</span>
+    <a href="../../../tag-context.md">tag-context.md</a>
+    <a href="../../../prompt-card.md">prompt-card.md</a>
+    <a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a>
+    <a href="../../../business-context.md">business-context.md</a>
+    <a href="../../../llms.txt">llms.txt</a>
+    <span class="sep"></span>
+    <a href="../../../assets/tokens/tokens.css">tokens.css</a>
+    <a href="../../../assets/templates/index.json">templates</a>
+  </div>
+</nav>
+<div class="tag-stripe"></div>
+<!-- TAG-CHROME-HEADER-END -->
+<div class="layout">
+
+<aside class="sidebar">
+ <h4>Get started</h4>
+ <ul>
+ <li><a href="../index.html" data-page="index">Overview</a></li>
+ </ul>
+ <h4>Foundations</h4>
+ <ul>
+ <li><a href="../foundations/index.html" data-page="foundations">Tokens, color, type, spacing</a></li>
+ </ul>
+ <h4>Components</h4>
+ <ul>
+ <li><a href="../buttons/index.html" data-page="buttons">Buttons</a></li>
+ <li><a href="../forms/index.html" data-page="forms">Forms &amp; inputs</a></li>
+ <li><a href="../feedback/index.html" data-page="feedback">Feedback &amp; status</a></li>
+ <li><a href="../navigation/index.html" data-page="navigation">Navigation</a></li>
+ <li><a href="../data-display/index.html" data-page="data-display">Data display</a></li>
+ <li><a href="index.html" data-page="overlays" class="active">Overlays</a></li>
+ <li><a href="../content/index.html" data-page="content">Content blocks</a></li>
+ </ul>
+ <h4>Modules &amp; templates</h4>
+ <ul>
+ <li><a href="../modules/index.html" data-page="modules">Modules</a></li>
+ <li><a href="../page-templates/index.html" data-page="page-templates">Page templates</a></li>
+ </ul>
+ <h4>Documents &amp; slides</h4>
+ <ul>
+ <li><a href="../documents/index.html" data-page="documents">Document patterns</a></li>
+ <li><a href="../slides/index.html" data-page="slides">Slide layouts</a></li>
+ <li><a href="../charts/index.html" data-page="charts">Charts</a></li>
+ </ul>
+ <h4>External</h4>
+ <ul>
+ <li><a href="https://dev.tagds.adeccogroup.com" target="_blank" rel="noopener">TAG-DS Storybook ↗</a></li>
+ <li><a href="https://zeroheight.com/7666d7eae" target="_blank" rel="noopener">zeroheight ↗</a></li>
+ </ul>
+</aside>
+
+<main class="content">
+<header><span class="eyebrow">Components / overlays</span><h1>Modals, drawers, sheets, tooltips, popovers, lightboxes, walkthroughs.</h1><p>Surfaces that appear above the page.</p></header>
+
+<section class="comp" id="modal"><h2>Modal / dialog</h2>
+<p class="lede">Use for confirmation, destructive flows, or short workflows. Trap focus, restore on close.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0">
+<div class="modal-shell"><div class="modal">
+<h3>Publish to Pardot</h3>
+<p>This will replace the current live version. Continue?</p>
+<div class="actions"><a class="btn btn-secondary">Cancel</a><a class="btn btn-primary">Publish</a></div>
+</div></div></div></div></section>
+
+<section class="comp" id="confirm-dialog"><h2>Confirm dialog (destructive)</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0">
+<div class="modal-shell"><div class="modal">
+<div class="row" style="align-items:flex-start;gap:12px"><span style="width:36px;height:36px;border-radius:50%;background:#FBE0E2;color:var(--red);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700">!</span><div><h3 style="margin:0 0 4px">Delete this template?</h3><p style="margin:0">This cannot be undone. Anyone using this template will lose access immediately.</p></div></div>
+<div class="actions"><a class="btn btn-secondary">Cancel</a><a class="btn btn-destructive">Delete</a></div>
+</div></div></div></div></section>
+
+<section class="comp" id="form-dialog"><h2>Form dialog</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0">
+<div class="modal-shell"><div class="modal" style="max-width:420px">
+<h3>Create memo</h3>
+<p>Fill in the brief; the file will be generated from the canonical template.</p>
+<div class="field"><label>Recipient</label><input class="input" placeholder="Megan Wickens"></div>
+<div class="field"><label>Subject</label><input class="input" placeholder="SparkAI integration plan"></div>
+<div class="field"><label>Body (one paragraph per line)</label><textarea class="input" rows="3"></textarea></div>
+<div class="actions"><a class="btn btn-secondary">Cancel</a><a class="btn btn-primary">Generate</a></div>
+</div></div></div></div></section>
+
+<section class="comp" id="full-screen-modal"><h2>Full-screen modal</h2>
+<p class="lede">For complex workflows that need their own canvas.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0;height:280px;background:var(--primary-2);position:relative">
+<header style="display:flex;justify-content:space-between;align-items:center;padding:14px 22px;color:#fff;border-bottom:1px solid rgba(255,255,255,.1)"><strong>Brief: SparkAI Q3 plan</strong><a class="btn btn-tertiary btn-icon" style="background:rgba(255,255,255,.1);color:#fff">✕</a></header>
+<div style="padding:18px 22px;color:#fff;font-size:14px">Workflow content fills the entire viewport.</div>
+</div></div></section>
+
+<section class="comp" id="drawer"><h2>Drawer / side panel (right)</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0">
+<div class="drawer-host">
+<div class="drawer">
+<h4>Filter campaigns</h4>
+<p style="margin-bottom:14px">Narrow the list by region and status.</p>
+<div class="field"><label>Region</label><select class="input"><option>All</option><option>EMEA</option><option>APAC</option></select></div>
+<div class="field"><label>Status</label><select class="input"><option>All</option><option>Live</option><option>Draft</option></select></div>
+<div class="row"><a class="btn btn-secondary btn-sm">Reset</a><a class="btn btn-primary btn-sm">Apply</a></div>
+</div></div></div></div></section>
+
+<section class="comp" id="side-sheet-left"><h2>Side sheet (left)</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0">
+<div class="drawer-host">
+<div class="drawer" style="left:0;right:auto;box-shadow:8px 0 20px rgba(28,48,75,.08)">
+<h4>Settings</h4>
+<p>Workspace, notifications, integrations.</p>
+<ul style="list-style:none;padding:0;margin:14px 0;font-size:14px">
+<li style="padding:8px 0;border-bottom:1px solid var(--grey-200)">Workspace</li>
+<li style="padding:8px 0;border-bottom:1px solid var(--grey-200)">Notifications</li>
+<li style="padding:8px 0">Integrations</li>
+</ul></div></div></div></div></section>
+
+<section class="comp" id="bottom-sheet"><h2>Bottom sheet (mobile)</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0;background:var(--grey-100);min-height:300px;display:flex;justify-content:center;align-items:flex-end">
+<div style="background:#fff;width:280px;border-radius:16px 16px 0 0;padding:22px;box-shadow:var(--shadow-lg)">
+<div style="width:36px;height:4px;border-radius:999px;background:var(--grey-300);margin:0 auto 14px"></div>
+<h3 style="margin:0 0 6px">Share</h3>
+<div class="row" style="gap:10px;justify-content:space-around;margin:14px 0"><a class="btn btn-tertiary btn-icon">in</a><a class="btn btn-tertiary btn-icon">𝕏</a><a class="btn btn-tertiary btn-icon">@</a><a class="btn btn-tertiary btn-icon">⌗</a></div>
+</div></div></div></section>
+
+<section class="comp" id="action-sheet"><h2>Action sheet</h2>
+<p class="lede">List of contextual actions, modal-style. Mobile primary.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0;background:var(--grey-100);min-height:280px;display:flex;justify-content:center;align-items:flex-end">
+<div style="background:#fff;width:280px;border-radius:16px 16px 0 0;padding:8px;box-shadow:var(--shadow-lg)">
+<button class="btn btn-tertiary" style="display:block;width:100%;margin-bottom:4px;text-align:left">Generate memo</button>
+<button class="btn btn-tertiary" style="display:block;width:100%;margin-bottom:4px;text-align:left">Generate press release</button>
+<button class="btn btn-tertiary" style="display:block;width:100%;margin-bottom:4px;text-align:left">Open in Pardot</button>
+<button class="btn btn-destructive" style="display:block;width:100%;margin-bottom:8px;text-align:left">Delete brief</button>
+<button class="btn btn-tertiary" style="display:block;width:100%;text-align:center">Cancel</button>
+</div></div></div></section>
+
+<section class="comp" id="context-menu"><h2>Context / right-click menu</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="background:#fff;border:1px solid var(--grey-300);border-radius:8px;padding:6px;width:200px;box-shadow:var(--shadow-md)">
+<div style="padding:8px 12px;font-size:13.5px;border-radius:6px;cursor:pointer">Open</div>
+<div style="padding:8px 12px;font-size:13.5px;border-radius:6px;cursor:pointer;background:var(--grey-100)">Duplicate</div>
+<div style="padding:8px 12px;font-size:13.5px;border-radius:6px;cursor:pointer">Move to…</div>
+<div style="border-top:1px solid var(--grey-200);margin:4px 0"></div>
+<div style="padding:8px 12px;font-size:13.5px;border-radius:6px;cursor:pointer;color:var(--red)">Delete</div>
+</div></div></div></section>
+
+<section class="comp" id="tooltip"><h2>Tooltip</h2>
+<div class="preview"><div class="preview-label">Live (hover the button)</div><div class="frame" style="padding:60px 28px">
+<span class="tip-host"><a class="btn btn-tertiary">Hover me</a><span class="tip">Tooltip text</span></span>
+</div></div></section>
+
+<section class="comp" id="popover"><h2>Popover</h2>
+<p class="lede">Tooltip's bigger cousin. Clickable, dismissible. For filter pickers, quick edits, share menus.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame" style="padding:60px 28px">
+<div style="position:relative;display:inline-block">
+<a class="btn btn-secondary">Filter</a>
+<div style="position:absolute;top:calc(100% + 8px);left:0;background:#fff;border:1px solid var(--grey-300);border-radius:8px;padding:14px;box-shadow:var(--shadow-md);min-width:240px;z-index:1">
+<div class="field" style="margin-bottom:10px"><label>Region</label><select class="input"><option>All regions</option></select></div>
+<div class="field" style="margin-bottom:10px"><label>Period</label><select class="input"><option>Last 30 days</option></select></div>
+<div class="row" style="justify-content:flex-end;gap:8px"><a class="btn btn-tertiary btn-sm">Reset</a><a class="btn btn-primary btn-sm">Apply</a></div>
+</div></div></div></div></section>
+
+<section class="comp" id="hovercard"><h2>Hover card</h2>
+<p class="lede">Rich preview when hovering an entity link. People, accounts, documents.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame" style="padding:60px 28px">
+<div style="position:relative;display:inline-block">
+<a style="color:var(--turquoise);text-decoration:underline">Megan Wickens</a>
+<div style="position:absolute;top:calc(100% + 6px);left:0;background:#fff;border:1px solid var(--grey-300);border-radius:8px;padding:14px;box-shadow:var(--shadow-md);min-width:280px">
+<div class="row" style="margin-bottom:8px"><span class="avatar avatar-lg">MW</span><div><strong>Megan Wickens</strong><div style="font-size:13px;color:var(--primary-300)">Global Head of SparkAI</div></div></div>
+<p style="margin:0;font-size:13.5px;color:var(--primary-300)">London · joined 2024 · administers AI Use Guidelines</p>
+</div></div></div></div></section>
+
+<section class="comp" id="splash"><h2>Splash screen</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0;height:240px;background:var(--gradient);display:flex;align-items:center;justify-content:center">
+<img src="../../../assets/logos/tag-unity-sphere.png" style="height:100px;filter:drop-shadow(0 4px 18px rgba(0,0,0,.4))">
+</div></div></section>
+
+<section class="comp" id="lightbox"><h2>Image lightbox</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0;height:280px;background:rgba(28,48,75,.88);display:flex;align-items:center;justify-content:center;position:relative">
+<a class="btn btn-tertiary btn-icon" style="position:absolute;top:14px;right:14px;background:rgba(255,255,255,.15);color:#fff">✕</a>
+<a class="btn btn-tertiary btn-icon" style="position:absolute;left:14px;top:50%;background:rgba(255,255,255,.15);color:#fff">‹</a>
+<a class="btn btn-tertiary btn-icon" style="position:absolute;right:14px;top:50%;background:rgba(255,255,255,.15);color:#fff">›</a>
+<div style="background:var(--gradient);width:240px;height:160px;border-radius:8px"></div>
+</div></div></section>
+
+<section class="comp" id="walkthrough"><h2>Walkthrough overlay</h2>
+<p class="lede">Stepped tour with spotlight + tooltip. First-run only.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0;height:240px;background:rgba(28,48,75,.6);position:relative">
+<div style="position:absolute;left:30px;top:30px;width:80px;height:80px;border-radius:50%;background:#fff;box-shadow:0 0 0 9999px rgba(28,48,75,.5)"></div>
+<div class="coach" style="position:absolute;top:130px;left:60px">Step 2 of 4 · Click here to generate your first memo from the template.<div class="row" style="margin-top:10px;justify-content:flex-end"><a class="btn btn-tertiary btn-sm" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4)">Skip</a><a class="btn btn-primary btn-sm">Next</a></div></div>
+</div></div></section>
+
+</main>
+</div>
+
+<!-- TAG-CHROME-FOOTER-BEGIN -->
+<div class="tag-footer-bar"></div>
+<footer class="tag-footer" aria-label="Site footer">
+  <div class="tag-footer-inner">
+    <div class="tag-footer-brand">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+      <p>Self-hosted brand and AI context. Single source of truth for any AI tool that produces content for the Adecco Group.</p>
+      <span class="tag-footer-tagline">Making the future work for everyone</span>
+    </div>
+    <div>
+      <h4>Brand &amp; AI</h4>
+      <ul>
+        <li><a href="../../../tag-context.md">tag-context.md</a></li>
+        <li><a href="../../../prompt-card.md">prompt-card.md</a></li>
+        <li><a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a></li>
+        <li><a href="../../../business-context.md">business-context.md</a></li>
+        <li><a href="../../../llms.txt">llms.txt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Design system</h4>
+      <ul>
+        <li><a href="../index.html">Components</a></li>
+        <li><a href="../../documents/index.html">Documents</a></li>
+        <li><a href="../../logos/index.html">Logos</a></li>
+        <li><a href="../../../business-context/index.html">Business context</a></li>
+        <li><a href="../../../assets/tokens/tokens.css">Tokens (CSS)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="../../../assets/docs/brand-guidelines.pdf">Brand Guidelines PDF</a></li>
+        <li><a href="../../../assets/templates/index.json">Template registry</a></li>
+        <li><a href="../../../assets/recipes/README.md">Recipes</a></li>
+        <li><a href="../../../playbook.md">Playbook</a></li>
+        <li><a href="../../../context.html">Context (SSR)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li>Internal use only</li>
+        <li>Brand assets &copy; The Adecco Group</li>
+        <li>Hosted via Cloudflare Tunnel</li>
+        <li><a href="../../../index.html">tag.schatt.me</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tag-footer-bottom">
+    <span>&copy; 2026 The Adecco Group</span>
+    <span><code>v6.3.0</code> &middot; updated 2026-05-05</span>
+  </div>
+</footer>
+<!-- TAG-CHROME-FOOTER-END -->
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f86b8f66d92363f',t:'MTc3ODIyNTA0Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body></html>

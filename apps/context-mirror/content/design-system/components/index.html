@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TAG Components — Overview | TAG Components</title>
+<meta name="description" content="What is in here, where it came from, and how to use it.">
+<link rel="stylesheet" href="_shared.css">
+      <link rel="stylesheet" href="https://tag.schatt.me/assets/css/site.css?v=6.4.0" />
+</head><body>
+<!-- TAG-CHROME-HEADER-BEGIN -->
+<nav class="tag-nav" aria-label="Primary">
+  <div class="tag-nav-inner">
+    <a href="../../index.html" class="tag-nav-logo" aria-label="The Adecco Group">
+      <img src="../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+    </a>
+    <ul class="tag-nav-links">
+      <li><a href="../../index.html#strategy" class="">Brand</a></li>
+      <li><a href="../../index.html#voice" class="">Voice</a></li>
+      <li><a href="../../business-context/index.html" class="">Business</a></li>
+      <li><a href="index.html" class="active">Components</a></li>
+      <li><a href="../documents/index.html" class="">Documents</a></li>
+      <li><a href="../logos/index.html" class="">Logos</a></li>
+      <li><a href="../../index.html#context" class="">Context</a></li>
+    </ul>
+    <a href="../../prompt-card.md" class="tag-nav-cta">Prompt card</a>
+    <button class="tag-nav-burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="tag-nav-files" aria-label="Files">
+  <div class="tag-nav-files-inner">
+    <span class="label">Files</span>
+    <a href="../../tag-context.md">tag-context.md</a>
+    <a href="../../prompt-card.md">prompt-card.md</a>
+    <a href="../../copilot-agent-instructions.md">copilot-agent-instructions.md</a>
+    <a href="../../business-context.md">business-context.md</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <span class="sep"></span>
+    <a href="../../assets/tokens/tokens.css">tokens.css</a>
+    <a href="../../assets/templates/index.json">templates</a>
+  </div>
+</nav>
+<div class="tag-stripe"></div>
+<!-- TAG-CHROME-HEADER-END -->
+<div class="layout">
+
+<aside class="sidebar">
+ <h4>Get started</h4>
+ <ul>
+ <li><a href="index.html" data-page="index">Overview</a></li>
+ </ul>
+ <h4>Foundations</h4>
+ <ul>
+ <li><a href="foundations/index.html" data-page="foundations">Tokens, color, type, spacing</a></li>
+ </ul>
+ <h4>Components</h4>
+ <ul>
+ <li><a href="buttons/index.html" data-page="buttons">Buttons</a></li>
+ <li><a href="forms/index.html" data-page="forms">Forms &amp; inputs</a></li>
+ <li><a href="feedback/index.html" data-page="feedback">Feedback &amp; status</a></li>
+ <li><a href="navigation/index.html" data-page="navigation">Navigation</a></li>
+ <li><a href="data-display/index.html" data-page="data-display">Data display</a></li>
+ <li><a href="overlays/index.html" data-page="overlays">Overlays</a></li>
+ <li><a href="content/index.html" data-page="content">Content blocks</a></li>
+ </ul>
+ <h4>Modules &amp; templates</h4>
+ <ul>
+ <li><a href="modules/index.html" data-page="modules">Modules</a></li>
+ <li><a href="page-templates/index.html" data-page="page-templates">Page templates</a></li>
+ </ul>
+ <h4>Documents &amp; slides</h4>
+ <ul>
+ <li><a href="documents/index.html" data-page="documents">Document patterns</a></li>
+ <li><a href="slides/index.html" data-page="slides">Slide layouts</a></li>
+ <li><a href="charts/index.html" data-page="charts">Charts</a></li>
+ </ul>
+ <h4>External</h4>
+ <ul>
+ <li><a href="https://dev.tagds.adeccogroup.com" target="_blank" rel="noopener">TAG-DS Storybook ↗</a></li>
+ <li><a href="https://zeroheight.com/7666d7eae" target="_blank" rel="noopener">zeroheight ↗</a></li>
+ </ul>
+</aside>
+
+<main class="content">
+<header><span class="eyebrow">Component library</span><h1>Mirror of the TAG Design System, locally hosted.</h1><p>What is in here, where it came from, and how to use it.</p></header>
+
+<section class="comp">
+<h2>What is this</h2>
+<p class="lede">A locally hosted, curated mirror of the patterns documented in the official TAG Design System (Storybook + zeroheight). Use it as the canonical reference inside any TAG-branded artefact: landing pages, Pardot, internal portals, vanilla HTML, plus document and slide layouts that AIs can reproduce.</p>
+<p class="lede">For React product UI, use the actual <code>@adeccoux/tag-ds</code> v4.9.0 package via the Storybook on <a href="https://dev.tagds.adeccogroup.com" target="_blank">dev.tagds.adeccogroup.com</a>. The patterns here are for everything that doesn't ship a React build, plus the document layouts the React library doesn't cover.</p>
+</section>
+
+<section class="comp">
+<h2>Components</h2>
+<dl class="spec" style="grid-template-columns:220px 1fr">
+<dt><a href="foundations/index.html">Foundations</a></dt><dd>Color, typography, spacing, radii, shadow, motion, iconography, layout, sizing.</dd>
+<dt><a href="buttons/index.html">Buttons</a></dt><dd>Primary, secondary, tertiary, ghost, CTA, destructive, success, loading, disabled, sizes, icon-only, button group, split button, FAB, link, pill.</dd>
+<dt><a href="forms/index.html">Forms &amp; inputs</a></dt><dd>Text input (with prefix/suffix), textarea, rich text, select, combobox, multi-select, tags input, checkbox, radio, switch/toggle, slider, range slider (dual), number, OTP/PIN, password with strength, datepicker, time picker, search, file uploader, ratings, NPS, form layout.</dd>
+<dt><a href="feedback/index.html">Feedback &amp; status</a></dt><dd>Alert, banner (gradient/dark/subtle), notification toast, snackbar, badge, status tag, progress (solid/gradient), step progress, loader, AI generating, skeleton (3 variants), empty state, cookie message, coachmark, connectivity, save indicator, stale data.</dd>
+<dt><a href="navigation/index.html">Navigation</a></dt><dd>Header (web + app), sidebar, mega menu, mobile expanded nav, bottom nav, breadcrumbs, back link, anchor TOC, tabs, vertical tabs, pagination, stepper, content switcher, overflow menu, filter sidebar, back to top, skip-to-content.</dd>
+<dt><a href="data-display/index.html">Data display</a></dt><dd>Card, KPI, big stat, tile, table, data table (sortable/selectable), comparison table, list, list view (rich), tree view, accordion, timeline, activity feed, avatar (sizes/stack), chip, separator, code block, diff viewer, JSON viewer.</dd>
+<dt><a href="overlays/index.html">Overlays</a></dt><dd>Modal, confirm dialog, form dialog, full-screen modal, drawer, side sheet, bottom sheet, action sheet, context menu, tooltip, popover, hover card, splash screen, lightbox, walkthrough.</dd>
+<dt><a href="content/index.html">Content blocks</a></dt><dd>Hero (5 variants), figure banner, text+media, quote, pull quote, testimonials, stats row, image gallery, logo cloud, press mentions, awards, FAQ, pricing, newsletter, team grid, locations, carousel, video, social sharing, related cards.</dd>
+</dl>
+</section>
+
+<section class="comp">
+<h2>Modules &amp; templates</h2>
+<dl class="spec" style="grid-template-columns:220px 1fr">
+<dt><a href="modules/index.html">Modules</a></dt><dd>Header (web), footer (web), hero (web), login, dashboard shell, profile/settings, search results, error pages, article, press release page, AI Generation, AI Suggestion, AI Feedback, AI Voice, AI Conversation, AI Document Input, AI Recommendation.</dd>
+<dt><a href="page-templates/index.html">Page templates</a></dt><dd>Conversion landing, lead-gen campaign, content download, event registration, specific offer, content/standard page.</dd>
+</dl>
+</section>
+
+<section class="comp">
+<h2>Documents &amp; slides</h2>
+<dl class="spec" style="grid-template-columns:220px 1fr">
+<dt><a href="documents/index.html">Document patterns</a></dt><dd>4 cover variants, title block, document header, footer, TOC, section divider, executive summary, two- and three-column body, sidebar callout, pull quote, image with caption, footnotes, references, author bio, data callout, comparison block, appendix, back cover.</dd>
+<dt><a href="slides/index.html">Slide layouts</a></dt><dd>Cover (default + gradient), section divider, content, two-column, before/after, quote, big stat, image+text, full-bleed image, table, chart, timeline, closing.</dd>
+<dt><a href="charts/index.html">Charts</a></dt><dd>Bar, grouped bar, line, area, stacked, donut, scatter, heat map, KPI with sparkline, gauge. With colour rules, layout rules, and the matplotlib recipe.</dd>
+</dl>
+</section>
+
+<section class="comp">
+<h2>Sources</h2>
+<p class="lede">Component names follow the official TAG Design System inventory mined from the Storybook bundle (99 stories) and the zeroheight nav (230 entries). Where Storybook and zeroheight diverge, both names are listed in the relevant section. The library mirrors the spec; for production code, use the official package.</p>
+</section>
+
+</main>
+</div>
+
+<!-- TAG-CHROME-FOOTER-BEGIN -->
+<div class="tag-footer-bar"></div>
+<footer class="tag-footer" aria-label="Site footer">
+  <div class="tag-footer-inner">
+    <div class="tag-footer-brand">
+      <img src="../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+      <p>Self-hosted brand and AI context. Single source of truth for any AI tool that produces content for the Adecco Group.</p>
+      <span class="tag-footer-tagline">Making the future work for everyone</span>
+    </div>
+    <div>
+      <h4>Brand &amp; AI</h4>
+      <ul>
+        <li><a href="../../tag-context.md">tag-context.md</a></li>
+        <li><a href="../../prompt-card.md">prompt-card.md</a></li>
+        <li><a href="../../copilot-agent-instructions.md">copilot-agent-instructions.md</a></li>
+        <li><a href="../../business-context.md">business-context.md</a></li>
+        <li><a href="../../llms.txt">llms.txt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Design system</h4>
+      <ul>
+        <li><a href="index.html">Components</a></li>
+        <li><a href="../documents/index.html">Documents</a></li>
+        <li><a href="../logos/index.html">Logos</a></li>
+        <li><a href="../../business-context/index.html">Business context</a></li>
+        <li><a href="../../assets/tokens/tokens.css">Tokens (CSS)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="../../assets/docs/brand-guidelines.pdf">Brand Guidelines PDF</a></li>
+        <li><a href="../../assets/templates/index.json">Template registry</a></li>
+        <li><a href="../../assets/recipes/README.md">Recipes</a></li>
+        <li><a href="../../playbook.md">Playbook</a></li>
+        <li><a href="../../context.html">Context (SSR)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li>Internal use only</li>
+        <li>Brand assets &copy; The Adecco Group</li>
+        <li>Hosted via Cloudflare Tunnel</li>
+        <li><a href="../../index.html">tag.schatt.me</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tag-footer-bottom">
+    <span>&copy; 2026 The Adecco Group</span>
+    <span><code>v6.3.0</code> &middot; updated 2026-05-05</span>
+  </div>
+</footer>
+<!-- TAG-CHROME-FOOTER-END -->
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f86b8d55bbb363f',t:'MTc3ODIyNTAzNw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body></html>

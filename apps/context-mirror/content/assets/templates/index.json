@@ -1,0 +1,266 @@
+{
+  "$schema": "https://tag.schatt.me/assets/templates/index.schema.json",
+  "version": "1.0.0",
+  "last_updated": "2026-04-29",
+  "description": "Canonical TAG document and web template registry. Any AI tool generating a TAG-branded artefact must look up the appropriate template here first, fetch it, and use it as the container, not re-create the layout.",
+  "rule": "TEMPLATE-FIRST: never re-create a document or web layout from a description in tag-context.md. Always fetch the actual template file from this registry, open it (python-docx for .docx, python-pptx for .pptx, raw HTML for .html), replace ONLY content placeholders, save under a new name. Visual structure must come from the template.",
+  "templates": [
+    {
+      "id": "memo",
+      "purpose": "Internal memo, formal note, leadership update",
+      "audience": "Internal Adecco Group employees",
+      "intent_keywords_en": ["memo", "internal memo", "note to", "briefing memo"],
+      "intent_keywords_de": ["Memo", "Notiz", "Aktennotiz", "interne Notiz"],
+      "format": "docx",
+      "url": "https://tag.schatt.me/assets/templates/tag-memo-template.docx",
+      "preview_url": "https://tag.schatt.me/assets/templates/tag-memo-template.pdf",
+      "tagfam_variant": "https://tag.schatt.me/assets/templates/tagfam-memo-template.docx",
+      "placeholders": [
+        {"key": "TO",      "kind": "text", "example": "Sample Name"},
+        {"key": "CC",      "kind": "text", "example": "Sample Name, Sample Name"},
+        {"key": "FROM",    "kind": "text", "example": "Another Name"},
+        {"key": "DATE",    "kind": "text", "example": "28 February 2026"},
+        {"key": "SUBJECT", "kind": "text", "example": "This is a sample heading"},
+        {"key": "GREETING","kind": "text", "example": "Dear Mr Other"},
+        {"key": "BODY",    "kind": "rich",  "example": "Multi-paragraph body text."},
+        {"key": "SIGNOFF", "kind": "text", "example": "Yours sincerely"}
+      ],
+      "max_pages": 2
+    },
+    {
+      "id": "press-release",
+      "purpose": "External press release at Group level",
+      "audience": "Press, media, public",
+      "intent_keywords_en": ["press release", "media release", "announcement"],
+      "intent_keywords_de": ["Pressemitteilung", "Presseaussendung", "Bekanntmachung"],
+      "format": "docx",
+      "url": "https://tag.schatt.me/assets/templates/tag-press-release-template.docx",
+      "preview_url": "https://tag.schatt.me/assets/templates/tag-press-release-template.pdf",
+      "placeholders": [
+        {"key": "HEADLINE",        "kind": "text", "example": "The Adecco Group ranked 7th among the best multinationals to work for in the world"},
+        {"key": "SUBHEAD",         "kind": "text", "example": "A strong sense of purpose, team spirit and trust propel the Adecco Group onto the 2016 ranking"},
+        {"key": "DATELINE",        "kind": "text", "example": "Zurich, Switzerland, October 26, 2026"},
+        {"key": "LEAD_PARAGRAPH",  "kind": "rich"},
+        {"key": "BODY",            "kind": "rich"},
+        {"key": "QUOTE_1",         "kind": "rich"},
+        {"key": "QUOTE_2",         "kind": "rich", "optional": true},
+        {"key": "CONTACT_BLOCK",   "kind": "text", "default": "The Adecco Group Corporate Press Office\\npress.office@adecco.com or +41 (0) 44 878 87 87"},
+        {"key": "BOILERPLATE_GLOBAL", "kind": "rich", "use_section": "tag-context.md#661-official-about-the-adecco-group-current-september-2025-version"},
+        {"key": "BOILERPLATE_COUNTRY","kind": "rich", "optional": true}
+      ]
+    },
+    {
+      "id": "letterhead",
+      "purpose": "Formal letter on registered Zurich HQ letterhead",
+      "audience": "External stakeholders, partners, regulators",
+      "intent_keywords_en": ["letter", "letterhead", "formal letter", "official letter", "correspondence"],
+      "intent_keywords_de": ["Brief", "Briefkopf", "Schreiben", "offizieller Brief", "Korrespondenz"],
+      "format": "docx",
+      "url": "https://tag.schatt.me/assets/templates/tag-letterhead-zurich-hq.docx",
+      "registered_address": "Adecco Group AG, Bellerivestrasse 30, 8008 Zurich, Switzerland",
+      "placeholders": [
+        {"key": "DATE",        "kind": "text"},
+        {"key": "RECIPIENT_NAME", "kind": "text"},
+        {"key": "RECIPIENT_TITLE","kind": "text"},
+        {"key": "RECIPIENT_COMPANY","kind": "text"},
+        {"key": "RECIPIENT_ADDRESS","kind": "text"},
+        {"key": "GREETING",    "kind": "text", "example": "Dear [Name],"},
+        {"key": "BODY",        "kind": "rich"},
+        {"key": "SIGNOFF",     "kind": "text", "default": "Sincerely,"},
+        {"key": "SENDER_NAME", "kind": "text"},
+        {"key": "SENDER_TITLE","kind": "text"},
+        {"key": "SENDER_MOBILE","kind": "text"},
+        {"key": "SENDER_EMAIL","kind": "text"}
+      ]
+    },
+    {
+      "id": "word-doc",
+      "purpose": "Multi-page Word document, brochure, dossier, capability deck, white paper",
+      "audience": "Mixed (depends on use)",
+      "intent_keywords_en": ["report", "brochure", "dossier", "white paper", "long document", "multi-page", "10-pager"],
+      "intent_keywords_de": ["Bericht", "Broschuere", "Dossier", "Whitepaper", "Studie", "mehrseitig"],
+      "format": "docx",
+      "url": "https://tag.schatt.me/assets/templates/tag-word-doc-template.docx",
+      "preview_url": "https://tag.schatt.me/assets/templates/tag-word-doc-template.pdf",
+      "tagfam_variant": "https://tag.schatt.me/assets/templates/tagfam-word-doc-template.docx",
+      "styles_available": ["Heading1", "Heading2", "Heading3", "ListBullet", "ListBullet2", "ListBullet3", "TOCHeading", "TOC1", "TOC2", "TOC3", "Estilo1"]
+    },
+    {
+      "id": "rfp-short",
+      "purpose": "Short RFP / sales proposal (5-15 pages)",
+      "audience": "Client procurement, evaluation team",
+      "intent_keywords_en": ["RFP short", "proposal short", "qualification response", "sales proposal", "tender response short"],
+      "intent_keywords_de": ["Angebot kurz", "RFP kurz", "Qualifizierungsantwort"],
+      "format": "docx",
+      "url": "https://tag.schatt.me/assets/templates/tag-rfp-short-template.docx",
+      "styles_available": ["RFP-title", "Coverconfidential", "A-H1", "A-Body", "Answer"]
+    },
+    {
+      "id": "rfp-long",
+      "purpose": "Long RFP / multi-GBU proposal (30-100 pages)",
+      "audience": "Large-account procurement, executive committee",
+      "intent_keywords_en": ["RFP long", "proposal long", "multi-GBU proposal", "tender response long"],
+      "intent_keywords_de": ["Angebot lang", "RFP lang", "GBU-uebergreifendes Angebot"],
+      "format": "pdf",
+      "url": "https://tag.schatt.me/assets/templates/tagfam-rfp-long-template.pdf",
+      "note": "Source PDF only. For editing, ask Central Marketing for the .docx source."
+    },
+    {
+      "id": "email-signature",
+      "purpose": "Outlook email signature block (Global HQ + Country variants)",
+      "audience": "All Adecco Group employees",
+      "intent_keywords_en": ["email signature", "signature block", "outlook signature"],
+      "intent_keywords_de": ["E-Mail-Signatur", "Signatur", "Outlook-Signatur"],
+      "format": "docx",
+      "url": "https://tag.schatt.me/assets/templates/tag-email-signature-template.docx",
+      "placeholders": [
+        {"key": "FIRST_NAME", "kind": "text"},
+        {"key": "LAST_NAME",  "kind": "text"},
+        {"key": "JOB_TITLE",  "kind": "text"},
+        {"key": "PHONE_T",    "kind": "text", "optional": true},
+        {"key": "PHONE_M",    "kind": "text", "optional": true},
+        {"key": "EMAIL",      "kind": "text"},
+        {"key": "LEGAL_ENTITY", "kind": "text", "default": "Adecco Group AG"},
+        {"key": "ADDRESS",    "kind": "text", "default": "Bellerivestrasse 30, 8008 Zurich, Switzerland"}
+      ]
+    },
+    {
+      "id": "boilerplate",
+      "purpose": "Official 'About The Adecco Group' boilerplate text (current Sept 2025)",
+      "audience": "Press, RFPs, investor materials, web footers",
+      "intent_keywords_en": ["about us", "boilerplate", "company description", "about TAG"],
+      "intent_keywords_de": ["Ueber uns", "Unternehmensbeschreibung", "Kurzbeschreibung TAG"],
+      "format": "docx",
+      "url": "https://tag.schatt.me/assets/templates/tag-boilerplate.docx",
+      "verbatim_text_section": "tag-context.md#661-official-about-the-adecco-group-current-september-2025-version"
+    },
+    {
+      "id": "powerpoint-deck",
+      "purpose": "PowerPoint deck (62 layouts available)",
+      "audience": "Mixed",
+      "intent_keywords_en": ["PowerPoint", "deck", "slides", "presentation", "pitch deck", "board deck"],
+      "intent_keywords_de": ["PowerPoint", "Folien", "Praesentation", "Pitch", "Board-Deck"],
+      "format": "pptx",
+      "url": "https://tag.schatt.me/assets/docs/tag-ppt-template-arial.pptx",
+      "layouts_available_count": 62,
+      "layouts_documented_in": "tag-context.md#33-slide-layouts-pptx-template",
+      "default_cover_layout": "Cover 01: Gradient Sphere",
+      "default_closing_layout": "Cover 04: Gradient Canvas Center",
+      "footer_rule": "Unity gradient bar at the bottom on every content slide. Family lockup colour positive bottom-right."
+    },
+    {
+      "id": "envelope",
+      "purpose": "Envelope template for postal mail",
+      "audience": "External postal recipients",
+      "intent_keywords_en": ["envelope", "mailing envelope"],
+      "intent_keywords_de": ["Briefumschlag", "Umschlag"],
+      "format": "pdf",
+      "url": "https://tag.schatt.me/assets/templates/tag-envelope-template.pdf"
+    },
+    {
+      "id": "newsletter-header",
+      "purpose": "Newsletter header banner",
+      "audience": "Newsletter recipients (internal or external)",
+      "intent_keywords_en": ["newsletter header", "email banner", "newsletter banner"],
+      "intent_keywords_de": ["Newsletter-Header", "Newsletter-Banner"],
+      "format": "pdf",
+      "variants": [
+        "https://tag.schatt.me/assets/templates/tag-newsletter-header-2.pdf",
+        "https://tag.schatt.me/assets/templates/tag-newsletter-header-6.pdf"
+      ]
+    },
+    {
+      "id": "social-square",
+      "purpose": "Social media post, square format",
+      "audience": "LinkedIn, Instagram, X, Facebook feed",
+      "intent_keywords_en": ["social post square", "instagram post", "linkedin square post"],
+      "intent_keywords_de": ["Social Post quadratisch", "Instagram Post"],
+      "format": "pdf",
+      "size_px": "1080 x 1080",
+      "url": "https://tag.schatt.me/assets/templates/tag-social-square-1080.pdf"
+    },
+    {
+      "id": "social-vertical",
+      "purpose": "Social media post, vertical (Stories, Reels)",
+      "audience": "Instagram and Facebook stories/reels",
+      "intent_keywords_en": ["story", "reel", "vertical post"],
+      "intent_keywords_de": ["Story", "Reel", "vertikaler Post"],
+      "format": "pdf",
+      "size_px": "1080 x 1920",
+      "url": "https://tag.schatt.me/assets/templates/tag-social-vertical-1080x1920.pdf"
+    },
+    {
+      "id": "social-linkedin-landscape",
+      "purpose": "LinkedIn landscape post",
+      "audience": "LinkedIn feed",
+      "intent_keywords_en": ["linkedin landscape post", "linkedin landscape"],
+      "intent_keywords_de": ["LinkedIn quer"],
+      "format": "pdf",
+      "size_px": "1200 x 627",
+      "url": "https://tag.schatt.me/assets/templates/tag-social-linkedin-1200x627.pdf"
+    },
+    {
+      "id": "social-pptx-guidelines",
+      "purpose": "Social media PowerPoint template guidelines reference",
+      "format": "pdf",
+      "url": "https://tag.schatt.me/assets/templates/tag-social-media-pptx-guidelines.pdf"
+    },
+    {
+      "id": "landing-page-light",
+      "purpose": "Pardot / Account Engagement landing page, light theme (white background)",
+      "audience": "Marketing campaigns, lead-gen, downloads",
+      "intent_keywords_en": ["landing page", "campaign page", "lead gen page", "pardot light", "marketing landing"],
+      "intent_keywords_de": ["Landingpage", "Kampagnenseite", "Lead-Gen-Seite", "Pardot hell"],
+      "format": "html",
+      "url": "https://tag.schatt.me/assets/templates/landing-page-light.html",
+      "theme": "light",
+      "stack": "Tailwind CDN + GSAP + Material Symbols + Pardot %%content%% region",
+      "use_for": ["client microsites", "report downloads", "event invites", "executive content"]
+    },
+    {
+      "id": "landing-page-dark",
+      "purpose": "Pardot / Account Engagement landing page, dark theme (#050505 background)",
+      "audience": "Marketing campaigns with cinematic/scroll-narrative feel",
+      "intent_keywords_en": ["landing page dark", "scroll narrative", "report landing", "discover-style page"],
+      "intent_keywords_de": ["Landingpage dunkel", "Scroll-Narrative", "Discover-Style"],
+      "format": "html",
+      "url": "https://tag.schatt.me/assets/templates/landing-page-dark.html",
+      "theme": "dark",
+      "stack": "Tailwind CDN + GSAP + Material Symbols + Pardot %%content%% region",
+      "use_for": ["report downloads", "thought leadership", "AI/tech announcements", "C-suite content"]
+    },
+    {
+      "id": "pardot-master",
+      "purpose": "Pardot generic master layout with all components (header, hero, cards, FAQ, video, form, footer)",
+      "audience": "Designers building custom Pardot pages",
+      "intent_keywords_en": ["pardot master", "pardot template", "all components", "component library"],
+      "intent_keywords_de": ["Pardot Master", "Komponentensammlung"],
+      "format": "html",
+      "url": "https://tag.schatt.me/assets/templates/landing-page-master.html",
+      "theme": "light",
+      "note": "Use as a kitchen-sink reference. Copy individual sections rather than the whole file."
+    }
+  ],
+  "web_stack_decisions": {
+    "pardot_landing_page": {
+      "use": "landing-page-light or landing-page-dark from this registry",
+      "do_not": "build a custom HTML landing page from scratch"
+    },
+    "react_app_or_component": {
+      "use": "@adeccoux/tag-ds npm package, version 4.9.0",
+      "react_version_compatibility": "16-17 (version 18 may produce unstable components)",
+      "storybook": "https://dev.tagds.adeccogroup.com",
+      "design_system": "https://designsystem.adeccogroup.com/7666d7eae/p/01f98c-tag-design-system",
+      "components_md": "https://designsystem.adeccogroup.com/7666d7eae/p/7566ad-components.md",
+      "modules_md": "https://designsystem.adeccogroup.com/7666d7eae/p/74fb9d-modules.md"
+    },
+    "static_html_or_microsite": {
+      "use": "tag.schatt.me/assets/tokens/tokens.css for foundation, plus Pardot template patterns from tag-context.md Part H",
+      "fonts": "Open Sauce Sans from tag.schatt.me/assets/fonts/"
+    },
+    "internal_dashboard_or_tool": {
+      "use": "@adeccoux/tag-ds React components",
+      "fall_back_to": "tokens.css if React is not available"
+    }
+  }
+}

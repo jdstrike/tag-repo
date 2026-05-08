@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Charts | TAG Components</title>
+<meta name="description" content="Chart styles produced by tag_chart_style.py with colour and layout rules.">
+<link rel="stylesheet" href="../_shared.css">
+      <link rel="stylesheet" href="https://tag.schatt.me/assets/css/site.css?v=6.4.0" />
+</head><body>
+<!-- TAG-CHROME-HEADER-BEGIN -->
+<nav class="tag-nav" aria-label="Primary">
+  <div class="tag-nav-inner">
+    <a href="../../../index.html" class="tag-nav-logo" aria-label="The Adecco Group">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+    </a>
+    <ul class="tag-nav-links">
+      <li><a href="../../../index.html#strategy" class="">Brand</a></li>
+      <li><a href="../../../index.html#voice" class="">Voice</a></li>
+      <li><a href="../../../business-context/index.html" class="">Business</a></li>
+      <li><a href="../index.html" class="active">Components</a></li>
+      <li><a href="../../documents/index.html" class="">Documents</a></li>
+      <li><a href="../../logos/index.html" class="">Logos</a></li>
+      <li><a href="../../../index.html#context" class="">Context</a></li>
+    </ul>
+    <a href="../../../prompt-card.md" class="tag-nav-cta">Prompt card</a>
+    <button class="tag-nav-burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="tag-nav-files" aria-label="Files">
+  <div class="tag-nav-files-inner">
+    <span class="label">Files</span>
+    <a href="../../../tag-context.md">tag-context.md</a>
+    <a href="../../../prompt-card.md">prompt-card.md</a>
+    <a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a>
+    <a href="../../../business-context.md">business-context.md</a>
+    <a href="../../../llms.txt">llms.txt</a>
+    <span class="sep"></span>
+    <a href="../../../assets/tokens/tokens.css">tokens.css</a>
+    <a href="../../../assets/templates/index.json">templates</a>
+  </div>
+</nav>
+<div class="tag-stripe"></div>
+<!-- TAG-CHROME-HEADER-END -->
+<div class="layout">
+
+<aside class="sidebar">
+ <h4>Get started</h4>
+ <ul>
+ <li><a href="../index.html" data-page="index">Overview</a></li>
+ </ul>
+ <h4>Foundations</h4>
+ <ul>
+ <li><a href="../foundations/index.html" data-page="foundations">Tokens, color, type, spacing</a></li>
+ </ul>
+ <h4>Components</h4>
+ <ul>
+ <li><a href="../buttons/index.html" data-page="buttons">Buttons</a></li>
+ <li><a href="../forms/index.html" data-page="forms">Forms &amp; inputs</a></li>
+ <li><a href="../feedback/index.html" data-page="feedback">Feedback &amp; status</a></li>
+ <li><a href="../navigation/index.html" data-page="navigation">Navigation</a></li>
+ <li><a href="../data-display/index.html" data-page="data-display">Data display</a></li>
+ <li><a href="../overlays/index.html" data-page="overlays">Overlays</a></li>
+ <li><a href="../content/index.html" data-page="content">Content blocks</a></li>
+ </ul>
+ <h4>Modules &amp; templates</h4>
+ <ul>
+ <li><a href="../modules/index.html" data-page="modules">Modules</a></li>
+ <li><a href="../page-templates/index.html" data-page="page-templates">Page templates</a></li>
+ </ul>
+ <h4>Documents &amp; slides</h4>
+ <ul>
+ <li><a href="../documents/index.html" data-page="documents">Document patterns</a></li>
+ <li><a href="../slides/index.html" data-page="slides">Slide layouts</a></li>
+ <li><a href="index.html" data-page="charts" class="active">Charts</a></li>
+ </ul>
+ <h4>External</h4>
+ <ul>
+ <li><a href="https://dev.tagds.adeccogroup.com" target="_blank" rel="noopener">TAG-DS Storybook ↗</a></li>
+ <li><a href="https://zeroheight.com/7666d7eae" target="_blank" rel="noopener">zeroheight ↗</a></li>
+ </ul>
+</aside>
+
+<main class="content">
+<header><span class="eyebrow">Documents / charts</span><h1>Bar, line, area, donut, scatter, heat map, KPI with sparkline.</h1><p>Chart styles produced by tag_chart_style.py with colour and layout rules.</p></header>
+
+<section class="comp" id="bar"><h2>Bar chart</h2>
+<p class="lede">Categorical comparison. Colour bars sequentially using the unity gradient anchors.</p>
+<div class="preview"><div class="preview-label">Mock</div><div class="frame">
+<div style="display:flex;align-items:flex-end;gap:14px;height:160px;padding:14px">
+<div style="flex:1;background:#2DBFB8;height:36%"></div>
+<div style="flex:1;background:#1A7BAD;height:54%"></div>
+<div style="flex:1;background:#6B2D8B;height:68%"></div>
+<div style="flex:1;background:#E30613;height:82%"></div>
+</div>
+<div class="row" style="font-size:11px;color:var(--primary-300);justify-content:space-around;padding:0 14px;margin-top:4px"><span>Q1</span><span>Q2</span><span>Q3</span><span>Q4</span></div>
+</div></div>
+<pre><code>import matplotlib.pyplot as plt
+from tag_chart_style import apply, finalize, tag_palette
+apply()
+fig, ax = plt.subplots(figsize=(8, 4.5))
+ax.bar(["Q1","Q2","Q3","Q4"], [12, 18, 22, 27], color=tag_palette()[:4])
+ax.set_title("Quarterly results")
+ax.set_ylabel("Revenue (millions)")
+finalize(fig, source="Source: TAG internal data (FY26)")</code></pre></section>
+
+<section class="comp" id="bar-grouped"><h2>Grouped bar chart</h2>
+<p class="lede">Two or three series side by side per category.</p>
+<div class="preview"><div class="preview-label">Mock</div><div class="frame">
+<div style="display:flex;align-items:flex-end;gap:6px;height:160px;padding:14px">
+<div style="display:flex;gap:2px;flex:1;align-items:flex-end"><div style="flex:1;background:#2DBFB8;height:40%"></div><div style="flex:1;background:#1A7BAD;height:55%"></div><div style="flex:1;background:#6B2D8B;height:30%"></div></div>
+<div style="display:flex;gap:2px;flex:1;align-items:flex-end"><div style="flex:1;background:#2DBFB8;height:60%"></div><div style="flex:1;background:#1A7BAD;height:75%"></div><div style="flex:1;background:#6B2D8B;height:50%"></div></div>
+<div style="display:flex;gap:2px;flex:1;align-items:flex-end"><div style="flex:1;background:#2DBFB8;height:78%"></div><div style="flex:1;background:#1A7BAD;height:88%"></div><div style="flex:1;background:#6B2D8B;height:70%"></div></div>
+</div>
+<div class="row" style="margin-top:6px"><span style="font-size:11px"><span style="display:inline-block;width:10px;height:10px;background:#2DBFB8;margin-right:4px;vertical-align:middle"></span>Adecco</span><span style="font-size:11px"><span style="display:inline-block;width:10px;height:10px;background:#1A7BAD;margin-right:4px;vertical-align:middle"></span>LHH</span><span style="font-size:11px"><span style="display:inline-block;width:10px;height:10px;background:#6B2D8B;margin-right:4px;vertical-align:middle"></span>Akkodis</span></div>
+</div></div></section>
+
+<section class="comp" id="line"><h2>Line chart</h2>
+<p class="lede">Trends over time. Use Turquoise for the primary series.</p>
+<div class="preview"><div class="preview-label">Mock</div><div class="frame">
+<svg viewBox="0 0 320 160" style="width:100%">
+<polyline points="20,120 60,100 100,80 140,90 180,60 220,40 260,30 300,20" stroke="#5CB8B2" stroke-width="2.5" fill="none"/>
+<polyline points="20,140 60,135 100,120 140,118 180,100 220,90 260,75 300,60" stroke="#1A7BAD" stroke-width="2.5" fill="none" stroke-dasharray="4 3"/>
+<line x1="20" y1="150" x2="300" y2="150" stroke="#C7CCD3"/>
+</svg>
+<div class="row" style="font-size:11px;color:var(--primary-300);justify-content:space-around"><span>Jan</span><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span><span>Nov</span></div>
+</div></div>
+<pre><code>ax.plot(months, revenue, color="#5CB8B2", linewidth=2.5, label="FY26")
+ax.plot(months, last_year, color="#1A7BAD", linewidth=2.5, linestyle="--", label="FY25")
+ax.legend(frameon=False)</code></pre></section>
+
+<section class="comp" id="area"><h2>Area chart</h2>
+<div class="preview"><div class="preview-label">Mock</div><div class="frame">
+<svg viewBox="0 0 320 160" style="width:100%">
+<defs><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#5CB8B2" stop-opacity=".6"/><stop offset="100%" stop-color="#5CB8B2" stop-opacity="0"/></linearGradient></defs>
+<path d="M20,120 L60,100 L100,80 L140,90 L180,60 L220,40 L260,30 L300,20 L300,150 L20,150 Z" fill="url(#g)"/>
+<polyline points="20,120 60,100 100,80 140,90 180,60 220,40 260,30 300,20" stroke="#5CB8B2" stroke-width="2.5" fill="none"/>
+<line x1="20" y1="150" x2="300" y2="150" stroke="#C7CCD3"/>
+</svg></div></div></section>
+
+<section class="comp" id="stacked"><h2>Stacked bar chart</h2>
+<p class="lede">Compositional comparison. Use unity gradient anchors top to bottom.</p>
+<div class="preview"><div class="preview-label">Mock</div><div class="frame">
+<div style="display:flex;align-items:flex-end;gap:14px;height:160px;padding:14px">
+<div style="flex:1;display:flex;flex-direction:column-reverse;height:100%"><div style="background:#2DBFB8;height:40%"></div><div style="background:#1A7BAD;height:30%"></div><div style="background:#6B2D8B;height:20%"></div></div>
+<div style="flex:1;display:flex;flex-direction:column-reverse;height:100%"><div style="background:#2DBFB8;height:35%"></div><div style="background:#1A7BAD;height:35%"></div><div style="background:#6B2D8B;height:25%"></div></div>
+<div style="flex:1;display:flex;flex-direction:column-reverse;height:100%"><div style="background:#2DBFB8;height:30%"></div><div style="background:#1A7BAD;height:30%"></div><div style="background:#6B2D8B;height:35%"></div></div>
+<div style="flex:1;display:flex;flex-direction:column-reverse;height:100%"><div style="background:#2DBFB8;height:25%"></div><div style="background:#1A7BAD;height:35%"></div><div style="background:#6B2D8B;height:40%"></div></div>
+</div></div></div></section>
+
+<section class="comp" id="donut"><h2>Donut chart</h2>
+<p class="lede">Use sparingly — only for 2-3 categories.</p>
+<div class="preview"><div class="preview-label">Mock</div><div class="frame" style="display:flex;justify-content:center;padding:18px">
+<svg viewBox="0 0 100 100" style="width:160px">
+<circle cx="50" cy="50" r="42" fill="none" stroke="#F5F6F8" stroke-width="14"/>
+<circle cx="50" cy="50" r="42" fill="none" stroke="#5CB8B2" stroke-width="14" stroke-dasharray="158 264" stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
+<circle cx="50" cy="50" r="42" fill="none" stroke="#1A7BAD" stroke-width="14" stroke-dasharray="79 264" stroke-dashoffset="-158" transform="rotate(-90 50 50)"/>
+<circle cx="50" cy="50" r="42" fill="none" stroke="#6B2D8B" stroke-width="14" stroke-dasharray="27 264" stroke-dashoffset="-237" transform="rotate(-90 50 50)"/>
+<text x="50" y="48" text-anchor="middle" font-size="14" font-weight="700">62</text>
+<text x="50" y="62" text-anchor="middle" font-size="7" fill="#5C6B82">markets</text>
+</svg></div></div></section>
+
+<section class="comp" id="scatter"><h2>Scatter plot</h2>
+<div class="preview"><div class="preview-label">Mock</div><div class="frame">
+<svg viewBox="0 0 320 160" style="width:100%">
+<line x1="20" y1="150" x2="300" y2="150" stroke="#C7CCD3"/>
+<line x1="20" y1="150" x2="20" y2="20" stroke="#C7CCD3"/>
+<circle cx="60" cy="120" r="6" fill="#5CB8B2"/>
+<circle cx="100" cy="90" r="9" fill="#1A7BAD"/>
+<circle cx="160" cy="70" r="14" fill="#6B2D8B"/>
+<circle cx="220" cy="50" r="11" fill="#E30613"/>
+<circle cx="260" cy="40" r="7" fill="#F05A28"/>
+</svg></div></div></section>
+
+<section class="comp" id="heatmap"><h2>Heat map</h2>
+<div class="preview"><div class="preview-label">Mock</div><div class="frame">
+<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;max-width:280px"><div style="aspect-ratio:1;background:rgba(92,184,178,0.1);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.28);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.46);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.64);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.82);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.1);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.28);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.46);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.64);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.82);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.1);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.28);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.46);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.64);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.82);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.1);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.28);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.46);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.64);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.82);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.1);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.28);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.46);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.64);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.82);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.1);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.28);border-radius:2px"></div><div style="aspect-ratio:1;background:rgba(92,184,178,0.46);border-radius:2px"></div>
+</div>
+</div></div></section>
+
+<section class="comp" id="kpi-sparkline"><h2>KPI with sparkline</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="kpi" style="max-width:200px"><div class="label">Revenue</div><div class="v">€ 24.6 b</div><svg viewBox="0 0 100 24" style="width:100%;height:24px;margin-top:4px"><polyline points="0,18 15,16 30,14 45,12 60,10 75,7 90,5 100,4" stroke="#5CB8B2" stroke-width="1.5" fill="none"/></svg><div class="delta up" style="margin-top:2px">▲ 4.2%</div></div>
+</div></div></section>
+
+<section class="comp" id="gauge"><h2>Gauge / progress ring</h2>
+<div class="preview"><div class="preview-label">Mock</div><div class="frame" style="display:flex;justify-content:center;padding:14px">
+<svg viewBox="0 0 100 100" style="width:120px">
+<circle cx="50" cy="50" r="42" fill="none" stroke="#F5F6F8" stroke-width="10"/>
+<circle cx="50" cy="50" r="42" fill="none" stroke="#5CB8B2" stroke-width="10" stroke-dasharray="186 264" transform="rotate(-90 50 50)" stroke-linecap="round"/>
+<text x="50" y="48" text-anchor="middle" font-size="20" font-weight="700">70%</text>
+<text x="50" y="62" text-anchor="middle" font-size="7" fill="#5C6B82">eNPS goal</text>
+</svg></div></div></section>
+
+<section class="comp" id="palette-rules"><h2>When to use which colour</h2>
+<dl class="spec" style="grid-template-columns:200px 1fr">
+<dt>Single primary series</dt><dd>Use TAG Turquoise <code>#5CB8B2</code>.</dd>
+<dt>Up to 6 categorical</dt><dd>Use the unity-gradient anchors in order: Turquoise, Blue, Purple, Red, Orange, Yellow.</dd>
+<dt>Sequential (heat / intensity)</dt><dd>Tint Turquoise from 10% to 100%.</dd>
+<dt>Diverging (negative / positive)</dt><dd>Red <code>#E30613</code> (low) to Green <code>#2EA84F</code> (high), via Grey 100 mid.</dd>
+<dt>Status colours</dt><dd>Reserved for status only: success/warning/error/info. Do not reuse for series.</dd>
+</dl></section>
+
+<section class="comp" id="chart-rules"><h2>Layout rules</h2>
+<dl class="spec" style="grid-template-columns:200px 1fr">
+<dt>Title</dt><dd>Sentence case, Primary 500, bold.</dd>
+<dt>Axes</dt><dd>Primary 300 labels, Grey 300 axis lines.</dd>
+<dt>Gridlines</dt><dd>Grey 100, horizontal only by default.</dd>
+<dt>Source line</dt><dd>Bottom-left, Primary 300, 12pt.</dd>
+<dt>Unity bar</dt><dd>Always at the bottom of the figure, never resized in height.</dd>
+<dt>Spines</dt><dd>Top and right hidden by default.</dd>
+<dt>Font</dt><dd>Arial in print/Office, Open Sauce Sans on web.</dd>
+</dl></section>
+
+<section class="comp" id="recipe"><h2>The recipe</h2>
+<p class="lede">All charts on this page can be reproduced with <a href="../../../assets/recipes/tag_chart_style.py"><code>tag_chart_style.py</code></a>.</p>
+<pre><code>import matplotlib.pyplot as plt
+from tag_chart_style import apply, finalize, tag_palette
+
+apply()
+fig, ax = plt.subplots(figsize=(8, 4.5))
+ax.bar(["Q1","Q2","Q3","Q4"], [12, 18, 22, 27])
+ax.set_title("Quarterly results")
+ax.set_ylabel("Revenue (millions)")
+finalize(fig, source="Source: TAG internal data (FY26)")
+fig.savefig("chart.png", dpi=200, bbox_inches="tight")</code></pre></section>
+
+</main>
+</div>
+
+<!-- TAG-CHROME-FOOTER-BEGIN -->
+<div class="tag-footer-bar"></div>
+<footer class="tag-footer" aria-label="Site footer">
+  <div class="tag-footer-inner">
+    <div class="tag-footer-brand">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+      <p>Self-hosted brand and AI context. Single source of truth for any AI tool that produces content for the Adecco Group.</p>
+      <span class="tag-footer-tagline">Making the future work for everyone</span>
+    </div>
+    <div>
+      <h4>Brand &amp; AI</h4>
+      <ul>
+        <li><a href="../../../tag-context.md">tag-context.md</a></li>
+        <li><a href="../../../prompt-card.md">prompt-card.md</a></li>
+        <li><a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a></li>
+        <li><a href="../../../business-context.md">business-context.md</a></li>
+        <li><a href="../../../llms.txt">llms.txt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Design system</h4>
+      <ul>
+        <li><a href="../index.html">Components</a></li>
+        <li><a href="../../documents/index.html">Documents</a></li>
+        <li><a href="../../logos/index.html">Logos</a></li>
+        <li><a href="../../../business-context/index.html">Business context</a></li>
+        <li><a href="../../../assets/tokens/tokens.css">Tokens (CSS)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="../../../assets/docs/brand-guidelines.pdf">Brand Guidelines PDF</a></li>
+        <li><a href="../../../assets/templates/index.json">Template registry</a></li>
+        <li><a href="../../../assets/recipes/README.md">Recipes</a></li>
+        <li><a href="../../../playbook.md">Playbook</a></li>
+        <li><a href="../../../context.html">Context (SSR)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li>Internal use only</li>
+        <li>Brand assets &copy; The Adecco Group</li>
+        <li>Hosted via Cloudflare Tunnel</li>
+        <li><a href="../../../index.html">tag.schatt.me</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tag-footer-bottom">
+    <span>&copy; 2026 The Adecco Group</span>
+    <span><code>v6.3.0</code> &middot; updated 2026-05-05</span>
+  </div>
+</footer>
+<!-- TAG-CHROME-FOOTER-END -->
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f86b8f89f5c363f',t:'MTc3ODIyNTA0Mw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body></html>

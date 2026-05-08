@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>TAG Logos | Brand & AI Context</title>
+<meta name="description" content="The Adecco Group family lockup, every variant, on multiple background tints. Click any tile to download." />
+<style>
+:root {
+ --turquoise: #5CB8B2;
+ --turquoise-2: #2DBFB8;
+ --primary: #1C304B;
+ --primary-2: #0E1A2E;
+ --primary-300: #5C6B82;
+ --grey-50: #FAFBFC;
+ --grey-100: #F5F6F8;
+ --grey-300: #C7CCD3;
+ --red: #E30613;
+ --gradient: linear-gradient(90deg, #2DBFB8 0%, #1A7BAD 22%, #6B2D8B 44%, #E30613 63%, #F05A28 81%, #F9B233 100%);
+}
+*,*::before,*::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+ font-family: "Open Sauce Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+ color: var(--primary);
+ background: var(--grey-50);
+ line-height: 1.55;
+ -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+
+/* ---------- TOP BAR ---------- */
+.banner { height: 6px; background: var(--gradient); }
+.topbar {
+ background: #fff;
+ border-bottom: 1px solid var(--grey-300);
+ padding: 14px 28px;
+ display: flex; align-items: center; justify-content: space-between;
+ font-size: 14px;
+}
+.topbar .crumbs { color: var(--primary-300); }
+.topbar .crumbs a { color: var(--primary-300); text-decoration: none; }
+.topbar .crumbs a:hover { color: var(--primary); }
+.topbar .crumbs .sep { margin: 0 8px; opacity: .5; }
+.topbar .links a {
+ color: var(--primary); text-decoration: none; margin-left: 18px; font-size: 13px;
+}
+.topbar .links a:hover { color: var(--turquoise); }
+
+/* ---------- HERO ---------- */
+.hero {
+ background: var(--primary-2);
+ color: #fff;
+ padding: 80px 32px 100px;
+ position: relative;
+ overflow: hidden;
+}
+.hero-grid-bg {
+ position: absolute; inset: 0; opacity: .35;
+ background-image:
+ radial-gradient(circle at 20% 30%, rgba(45,191,184,.18) 0%, transparent 45%),
+ radial-gradient(circle at 80% 70%, rgba(107,45,139,.18) 0%, transparent 50%);
+ pointer-events: none;
+}
+.hero-inner { max-width: 1200px; margin: 0 auto; position: relative; }
+.hero .eyebrow {
+ color: var(--turquoise);
+ font-size: 12px; font-weight: 700; letter-spacing: .14em;
+ text-transform: uppercase;
+ display: block; margin-bottom: 12px;
+}
+.hero h1 {
+ margin: 0;
+ font-size: clamp(36px, 5vw, 56px);
+ line-height: 1.05;
+ letter-spacing: -.015em;
+ font-weight: 700;
+ max-width: 880px;
+}
+.hero h1 .accent { background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero p {
+ margin: 18px 0 0;
+ max-width: 680px;
+ color: #B0BCD0;
+ font-size: 17px;
+}
+.hero-stats {
+ display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+ gap: 24px;
+ margin-top: 56px;
+ max-width: 880px;
+}
+.hero-stats .stat strong {
+ display: block; font-size: 28px; font-weight: 700; color: #fff;
+}
+.hero-stats .stat span {
+ display: block; color: #7A8AA0; font-size: 13px; margin-top: 4px;
+}
+
+/* ---------- PAGE BODY ---------- */
+.body-wrap {
+ max-width: 1200px;
+ margin: -56px auto 80px;
+ padding: 0 32px;
+ position: relative;
+}
+.section { margin: 56px 0; }
+.section-head { margin-bottom: 24px; }
+.section-head h2 { margin: 0 0 4px; font-size: 22px; font-weight: 700; }
+.section-head p { margin: 0; color: var(--primary-300); font-size: 14px; }
+
+/* ---------- HERO LOGO STAGE ---------- */
+.lead-stage {
+ background: #fff;
+ border-radius: 14px;
+ padding: 56px 40px;
+ display: flex; align-items: center; justify-content: center;
+ border: 1px solid var(--grey-300);
+ box-shadow: 0 1px 2px rgba(28,48,75,0.04), 0 8px 24px rgba(28,48,75,0.06);
+}
+.lead-stage img { max-width: 480px; width: 100%; height: auto; }
+
+/* ---------- LOGO GRID ---------- */
+.logo-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+ gap: 20px;
+}
+.tile {
+ background: #fff;
+ border-radius: 14px;
+ border: 1px solid var(--grey-300);
+ overflow: hidden;
+ display: block;
+ text-decoration: none;
+ color: inherit;
+ transition: transform .15s ease, box-shadow .15s ease;
+ position: relative;
+}
+.tile:hover {
+ transform: translateY(-3px);
+ box-shadow: 0 12px 28px rgba(28,48,75,.08);
+}
+.tile .stage {
+ display: flex; align-items: center; justify-content: center;
+ height: 200px; padding: 32px 28px;
+ position: relative;
+}
+.tile .stage img { max-width: 100%; max-height: 100px; object-fit: contain; }
+.tile .meta {
+ padding: 14px 18px 16px;
+ border-top: 1px solid var(--grey-300);
+ background: #fff;
+}
+.tile .meta-line {
+ display: flex; align-items: center; justify-content: space-between;
+ gap: 12px;
+}
+.tile h3 { margin: 0; font-size: 14px; font-weight: 700; color: var(--primary); }
+.tile .pill {
+ font-size: 11px; padding: 2px 8px; border-radius: 999px;
+ background: var(--grey-100); color: var(--primary-300);
+ text-transform: uppercase; letter-spacing: .06em; font-weight: 700;
+}
+.tile p { margin: 6px 0 0; color: var(--primary-300); font-size: 12.5px; line-height: 1.4; }
+.tile .download {
+ position: absolute; top: 14px; right: 14px;
+ width: 30px; height: 30px;
+ border-radius: 50%;
+ background: rgba(255,255,255,.95);
+ display: flex; align-items: center; justify-content: center;
+ border: 1px solid var(--grey-300);
+ opacity: 0; transition: opacity .12s;
+ color: var(--primary);
+}
+.tile:hover .download { opacity: 1; }
+.tile .download svg { width: 14px; height: 14px; }
+
+/* Stage backgrounds */
+.bg-white .stage { background: #fff; }
+.bg-grey .stage { background: var(--grey-100); }
+.bg-navy .stage { background: var(--primary); }
+.bg-grad .stage { background: var(--gradient); }
+.bg-grad .meta { color: var(--primary); }
+
+.bg-navy h3, .bg-grad h3 { color: var(--primary); }
+
+/* ---------- DEVICES ---------- */
+.devices-grid {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 20px;
+}
+.device-card {
+ background: #fff;
+ border-radius: 14px;
+ border: 1px solid var(--grey-300);
+ overflow: hidden;
+}
+.device-card .stage {
+ display: flex; align-items: center; justify-content: center;
+ height: 180px; padding: 24px;
+ background: var(--grey-100);
+}
+.device-card .stage.bar img { max-width: 92%; height: auto; }
+.device-card .stage.sphere img { max-height: 130px; width: auto; }
+.device-card .meta { padding: 14px 18px 16px; border-top: 1px solid var(--grey-300); }
+.device-card h3 { margin: 0 0 4px; font-size: 14px; font-weight: 700; }
+.device-card p { margin: 0; color: var(--primary-300); font-size: 12.5px; }
+
+/* ---------- DON'T BLOCK ---------- */
+.dont {
+ background: #fff;
+ border-left: 4px solid var(--red);
+ border-radius: 8px;
+ padding: 18px 22px;
+ margin: 32px 0;
+ border-top: 1px solid var(--grey-300);
+ border-right: 1px solid var(--grey-300);
+ border-bottom: 1px solid var(--grey-300);
+}
+.dont strong { color: var(--red); display: block; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.dont p { margin: 0; color: var(--primary-300); font-size: 14px; }
+
+/* ---------- TABLE ---------- */
+.linktable {
+ width: 100%;
+ border-collapse: collapse;
+ margin: 12px 0 24px;
+ font-size: 14px;
+ background: #fff;
+ border-radius: 14px;
+ overflow: hidden;
+ border: 1px solid var(--grey-300);
+}
+.linktable th, .linktable td {
+ padding: 12px 18px; vertical-align: top; text-align: left;
+ border-bottom: 1px solid var(--grey-300);
+}
+.linktable thead th {
+ background: var(--grey-100);
+ font-size: 12px; text-transform: uppercase; letter-spacing: .08em;
+ color: var(--primary-300);
+}
+.linktable tr:last-child td { border-bottom: 0; }
+.linktable a { color: var(--primary); }
+.linktable a:hover { color: var(--turquoise); }
+
+/* ---------- FOOTER ---------- */
+.unity-bar { height: 6px; background: var(--gradient); }
+.foot {
+ text-align: center; padding: 24px 24px 64px;
+ color: var(--primary-300); font-size: 13px;
+}
+.foot a { color: var(--primary); text-decoration: none; }
+.foot a:hover { color: var(--turquoise); }
+
+@media (max-width: 720px) {
+ .topbar { flex-direction: column; gap: 8px; align-items: flex-start; }
+ .topbar .links a { margin-left: 0; margin-right: 14px; }
+ .body-wrap { margin-top: -32px; padding: 0 20px; }
+ .lead-stage { padding: 36px 24px; }
+ .devices-grid { grid-template-columns: 1fr; }
+}
+</style>
+      <link rel="stylesheet" href="https://tag.schatt.me/assets/css/site.css?v=6.4.0" />
+</head>
+<body>
+<!-- TAG-CHROME-HEADER-BEGIN -->
+<nav class="tag-nav" aria-label="Primary">
+  <div class="tag-nav-inner">
+    <a href="../../index.html" class="tag-nav-logo" aria-label="The Adecco Group">
+      <img src="../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+    </a>
+    <ul class="tag-nav-links">
+      <li><a href="../../index.html#strategy" class="">Brand</a></li>
+      <li><a href="../../index.html#voice" class="">Voice</a></li>
+      <li><a href="../../business-context/index.html" class="">Business</a></li>
+      <li><a href="../components/index.html" class="">Components</a></li>
+      <li><a href="../documents/index.html" class="">Documents</a></li>
+      <li><a href="index.html" class="active">Logos</a></li>
+      <li><a href="../../index.html#context" class="">Context</a></li>
+    </ul>
+    <a href="../../prompt-card.md" class="tag-nav-cta">Prompt card</a>
+    <button class="tag-nav-burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="tag-nav-files" aria-label="Files">
+  <div class="tag-nav-files-inner">
+    <span class="label">Files</span>
+    <a href="../../tag-context.md">tag-context.md</a>
+    <a href="../../prompt-card.md">prompt-card.md</a>
+    <a href="../../copilot-agent-instructions.md">copilot-agent-instructions.md</a>
+    <a href="../../business-context.md">business-context.md</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <span class="sep"></span>
+    <a href="../../assets/tokens/tokens.css">tokens.css</a>
+    <a href="../../assets/templates/index.json">templates</a>
+  </div>
+</nav>
+<div class="tag-stripe"></div>
+<!-- TAG-CHROME-HEADER-END -->
+<header class="hero">
+ <div class="hero-grid-bg"></div>
+ <div class="hero-inner">
+ <span class="eyebrow">Brand identity / logos</span>
+ <h1>The family lockup, in <span class="accent">every form</span> you need it.</h1>
+ <p>Adecco + LHH + Akkodis. Always together, always in that order. Click any tile to download. The brand book in Section 14 of <a href="../../tag-context.md" style="color:#fff;text-decoration:underline">tag-context.md</a> is the binding reference.</p>
+ <div class="hero-stats">
+ <div class="stat"><strong>5</strong><span>Lockup variants</span></div>
+ <div class="stat"><strong>4</strong><span>Background tints tested</span></div>
+ <div class="stat"><strong>2</strong><span>Graphic devices</span></div>
+ <div class="stat"><strong>1</strong><span>Brand book to obey</span></div>
+ </div>
+ </div>
+</header>
+
+<main class="body-wrap">
+
+ <section class="section">
+ <div class="lead-stage">
+ <img src="../../assets/logos/tag-family-lockup-colour-pos.svg" alt="The Adecco Group family lockup, colour positive">
+ </div>
+ </section>
+
+ <section class="section">
+ <div class="section-head">
+ <h2>The five lockup variants</h2>
+ <p>Each variant lives on a background it's built for. Don't mix and match.</p>
+ </div>
+ <div class="logo-grid">
+
+ <a class="tile bg-white" href="../../assets/logos/tag-family-lockup-colour-pos.svg" download>
+ <span class="download" aria-label="Download"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 1v9M3 7l4 4 4-4M2 13h10"/></svg></span>
+ <div class="stage"><img src="../../assets/logos/tag-family-lockup-colour-pos.svg" alt=""></div>
+ <div class="meta">
+ <div class="meta-line"><h3>Colour positive</h3><span class="pill">SVG</span></div>
+ <p>Default. White or near-white backgrounds.</p>
+ </div>
+ </a>
+
+ <a class="tile bg-grey" href="../../assets/logos/tag-family-lockup-colour-pos.svg" download>
+ <span class="download" aria-label="Download"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 1v9M3 7l4 4 4-4M2 13h10"/></svg></span>
+ <div class="stage"><img src="../../assets/logos/tag-family-lockup-colour-pos.svg" alt=""></div>
+ <div class="meta">
+ <div class="meta-line"><h3>On Grey 100</h3><span class="pill">SVG</span></div>
+ <p>Same file, neutral background contrast test.</p>
+ </div>
+ </a>
+
+ <a class="tile bg-navy" href="../../assets/logos/tag-family-lockup-colour-neg.svg" download>
+ <span class="download" aria-label="Download"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 1v9M3 7l4 4 4-4M2 13h10"/></svg></span>
+ <div class="stage"><img src="../../assets/logos/tag-family-lockup-colour-neg.svg" alt=""></div>
+ <div class="meta">
+ <div class="meta-line"><h3>Colour negative</h3><span class="pill">SVG</span></div>
+ <p>For Primary 500 and dark backgrounds.</p>
+ </div>
+ </a>
+
+ <a class="tile bg-grad" href="../../assets/logos/tag-family-lockup-white.svg" download>
+ <span class="download" aria-label="Download"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 1v9M3 7l4 4 4-4M2 13h10"/></svg></span>
+ <div class="stage"><img src="../../assets/logos/tag-family-lockup-white.svg" alt=""></div>
+ <div class="meta">
+ <div class="meta-line"><h3>White</h3><span class="pill">SVG</span></div>
+ <p>The only variant for the unity gradient.</p>
+ </div>
+ </a>
+
+ <a class="tile bg-white" href="../../assets/logos/tag-family-lockup-black.svg" download>
+ <span class="download" aria-label="Download"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 1v9M3 7l4 4 4-4M2 13h10"/></svg></span>
+ <div class="stage"><img src="../../assets/logos/tag-family-lockup-black.svg" alt=""></div>
+ <div class="meta">
+ <div class="meta-line"><h3>Black</h3><span class="pill">SVG</span></div>
+ <p>Single colour, technical use only.</p>
+ </div>
+ </a>
+
+ <a class="tile bg-navy" href="../../assets/logos/tag-family-lockup-colour-neg.png" download>
+ <span class="download" aria-label="Download"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 1v9M3 7l4 4 4-4M2 13h10"/></svg></span>
+ <div class="stage"><img src="../../assets/logos/tag-family-lockup-colour-neg.png" alt=""></div>
+ <div class="meta">
+ <div class="meta-line"><h3>Colour negative (PNG)</h3><span class="pill">PNG</span></div>
+ <p>For Office, Pardot, ad units that won't take SVG.</p>
+ </div>
+ </a>
+
+ </div>
+ </section>
+
+ <section class="section">
+ <div class="section-head">
+ <h2>Graphic devices</h2>
+ <p>The two visual devices that travel with the brand. Use sparingly; less is more.</p>
+ </div>
+ <div class="devices-grid">
+
+ <a class="device-card" href="../../assets/logos/tag-unity-gradient-bar.png" download>
+ <div class="stage bar"><img src="../../assets/logos/tag-unity-gradient-bar.png" alt="Unity gradient bar"></div>
+ <div class="meta">
+ <h3>Unity gradient bar</h3>
+ <p>Always at the bottom of a layout. Never the top. Never recoloured. Never resized in height.</p>
+ </div>
+ </a>
+
+ <a class="device-card" href="../../assets/logos/tag-unity-sphere.png" download>
+ <div class="stage sphere"><img src="../../assets/logos/tag-unity-sphere.png" alt="Unity sphere"></div>
+ <div class="meta">
+ <h3>Unity sphere</h3>
+ <p>Cover slide, divider, hero accent. Never as a background fill.</p>
+ </div>
+ </a>
+
+ </div>
+ </section>
+
+ <section class="section">
+ <div class="section-head">
+ <h2>The dont's</h2>
+ <p>The brand book is the binding reference; this is the highlight reel.</p>
+ </div>
+ <div class="dont">
+ <strong>Don't</strong>
+ <p>Recolour, rotate, distort, recreate, or apply effects. Don't use the symbol alone without the wordmark. Don't use the family lockup without the keyline. Don't put colour-positive on dark backgrounds, or colour-negative on light. Don't use a turquoise keyline on the family lockup.</p>
+ </div>
+ </section>
+
+ <section class="section">
+ <div class="section-head">
+ <h2>Direct file links</h2>
+ <p>For when you know exactly which file you need.</p>
+ </div>
+ <table class="linktable">
+ <thead><tr><th>File</th><th>Use</th></tr></thead>
+ <tbody>
+ <tr><td><a href="../../assets/logos/tag-family-lockup-colour-pos.svg">tag-family-lockup-colour-pos.svg</a></td><td>White or near-white backgrounds</td></tr>
+ <tr><td><a href="../../assets/logos/tag-family-lockup-colour-neg.svg">tag-family-lockup-colour-neg.svg</a></td><td>Primary 500, dark backgrounds</td></tr>
+ <tr><td><a href="../../assets/logos/tag-family-lockup-colour-neg.png">tag-family-lockup-colour-neg.png</a></td><td>Office, Pardot, ad units (raster)</td></tr>
+ <tr><td><a href="../../assets/logos/tag-family-lockup-white.svg">tag-family-lockup-white.svg</a></td><td>Unity gradient backgrounds</td></tr>
+ <tr><td><a href="../../assets/logos/tag-family-lockup-black.svg">tag-family-lockup-black.svg</a></td><td>Single-colour technical reproduction</td></tr>
+ <tr><td><a href="../../assets/logos/tag-unity-gradient-bar.png">tag-unity-gradient-bar.png</a></td><td>Page footer / slide footer</td></tr>
+ <tr><td><a href="../../assets/logos/tag-unity-sphere.png">tag-unity-sphere.png</a></td><td>Slide cover, hero accent</td></tr>
+ </tbody>
+ </table>
+ </section>
+
+</main>
+
+
+<!-- TAG-CHROME-FOOTER-BEGIN -->
+<div class="tag-footer-bar"></div>
+<footer class="tag-footer" aria-label="Site footer">
+  <div class="tag-footer-inner">
+    <div class="tag-footer-brand">
+      <img src="../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+      <p>Self-hosted brand and AI context. Single source of truth for any AI tool that produces content for the Adecco Group.</p>
+      <span class="tag-footer-tagline">Making the future work for everyone</span>
+    </div>
+    <div>
+      <h4>Brand &amp; AI</h4>
+      <ul>
+        <li><a href="../../tag-context.md">tag-context.md</a></li>
+        <li><a href="../../prompt-card.md">prompt-card.md</a></li>
+        <li><a href="../../copilot-agent-instructions.md">copilot-agent-instructions.md</a></li>
+        <li><a href="../../business-context.md">business-context.md</a></li>
+        <li><a href="../../llms.txt">llms.txt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Design system</h4>
+      <ul>
+        <li><a href="../components/index.html">Components</a></li>
+        <li><a href="../documents/index.html">Documents</a></li>
+        <li><a href="index.html">Logos</a></li>
+        <li><a href="../../business-context/index.html">Business context</a></li>
+        <li><a href="../../assets/tokens/tokens.css">Tokens (CSS)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="../../assets/docs/brand-guidelines.pdf">Brand Guidelines PDF</a></li>
+        <li><a href="../../assets/templates/index.json">Template registry</a></li>
+        <li><a href="../../assets/recipes/README.md">Recipes</a></li>
+        <li><a href="../../playbook.md">Playbook</a></li>
+        <li><a href="../../context.html">Context (SSR)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li>Internal use only</li>
+        <li>Brand assets &copy; The Adecco Group</li>
+        <li>Hosted via Cloudflare Tunnel</li>
+        <li><a href="../../index.html">tag.schatt.me</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tag-footer-bottom">
+    <span>&copy; 2026 The Adecco Group</span>
+    <span><code>v6.3.0</code> &middot; updated 2026-05-05</span>
+  </div>
+</footer>
+<!-- TAG-CHROME-FOOTER-END -->
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f86b8d60c44363f',t:'MTc3ODIyNTAzNw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

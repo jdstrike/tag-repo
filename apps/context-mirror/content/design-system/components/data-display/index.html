@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Data display | TAG Components</title>
+<meta name="description" content="How information shows up at rest.">
+<link rel="stylesheet" href="../_shared.css">
+      <link rel="stylesheet" href="https://tag.schatt.me/assets/css/site.css?v=6.4.0" />
+</head><body>
+<!-- TAG-CHROME-HEADER-BEGIN -->
+<nav class="tag-nav" aria-label="Primary">
+  <div class="tag-nav-inner">
+    <a href="../../../index.html" class="tag-nav-logo" aria-label="The Adecco Group">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+    </a>
+    <ul class="tag-nav-links">
+      <li><a href="../../../index.html#strategy" class="">Brand</a></li>
+      <li><a href="../../../index.html#voice" class="">Voice</a></li>
+      <li><a href="../../../business-context/index.html" class="">Business</a></li>
+      <li><a href="../index.html" class="active">Components</a></li>
+      <li><a href="../../documents/index.html" class="">Documents</a></li>
+      <li><a href="../../logos/index.html" class="">Logos</a></li>
+      <li><a href="../../../index.html#context" class="">Context</a></li>
+    </ul>
+    <a href="../../../prompt-card.md" class="tag-nav-cta">Prompt card</a>
+    <button class="tag-nav-burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="tag-nav-files" aria-label="Files">
+  <div class="tag-nav-files-inner">
+    <span class="label">Files</span>
+    <a href="../../../tag-context.md">tag-context.md</a>
+    <a href="../../../prompt-card.md">prompt-card.md</a>
+    <a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a>
+    <a href="../../../business-context.md">business-context.md</a>
+    <a href="../../../llms.txt">llms.txt</a>
+    <span class="sep"></span>
+    <a href="../../../assets/tokens/tokens.css">tokens.css</a>
+    <a href="../../../assets/templates/index.json">templates</a>
+  </div>
+</nav>
+<div class="tag-stripe"></div>
+<!-- TAG-CHROME-HEADER-END -->
+<div class="layout">
+
+<aside class="sidebar">
+ <h4>Get started</h4>
+ <ul>
+ <li><a href="../index.html" data-page="index">Overview</a></li>
+ </ul>
+ <h4>Foundations</h4>
+ <ul>
+ <li><a href="../foundations/index.html" data-page="foundations">Tokens, color, type, spacing</a></li>
+ </ul>
+ <h4>Components</h4>
+ <ul>
+ <li><a href="../buttons/index.html" data-page="buttons">Buttons</a></li>
+ <li><a href="../forms/index.html" data-page="forms">Forms &amp; inputs</a></li>
+ <li><a href="../feedback/index.html" data-page="feedback">Feedback &amp; status</a></li>
+ <li><a href="../navigation/index.html" data-page="navigation">Navigation</a></li>
+ <li><a href="index.html" data-page="data-display" class="active">Data display</a></li>
+ <li><a href="../overlays/index.html" data-page="overlays">Overlays</a></li>
+ <li><a href="../content/index.html" data-page="content">Content blocks</a></li>
+ </ul>
+ <h4>Modules &amp; templates</h4>
+ <ul>
+ <li><a href="../modules/index.html" data-page="modules">Modules</a></li>
+ <li><a href="../page-templates/index.html" data-page="page-templates">Page templates</a></li>
+ </ul>
+ <h4>Documents &amp; slides</h4>
+ <ul>
+ <li><a href="../documents/index.html" data-page="documents">Document patterns</a></li>
+ <li><a href="../slides/index.html" data-page="slides">Slide layouts</a></li>
+ <li><a href="../charts/index.html" data-page="charts">Charts</a></li>
+ </ul>
+ <h4>External</h4>
+ <ul>
+ <li><a href="https://dev.tagds.adeccogroup.com" target="_blank" rel="noopener">TAG-DS Storybook ↗</a></li>
+ <li><a href="https://zeroheight.com/7666d7eae" target="_blank" rel="noopener">zeroheight ↗</a></li>
+ </ul>
+</aside>
+
+<main class="content">
+<header><span class="eyebrow">Components / data display</span><h1>Tables, KPIs, cards, lists, accordions, avatars, timelines, activity feeds, code blocks.</h1><p>How information shows up at rest.</p></header>
+
+<section class="comp" id="card"><h2>Card</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame"><div class="row">
+<div class="card" style="width:240px"><h3>Adecco</h3><p>The world's leading workforce solutions company.</p></div>
+<div class="card" style="width:240px"><h3>LHH</h3><p>Talent your competitive edge.</p></div>
+<div class="card" style="width:240px"><h3>Akkodis</h3><p>Global digital engineering for IT and R&amp;D.</p></div>
+</div></div></div></section>
+
+<section class="comp" id="kpi"><h2>KPI / metric card</h2>
+<p class="lede">For dashboards. Big number, label, delta vs previous period.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame"><div class="dash">
+<div class="kpi"><div class="label">Revenue</div><div class="v">€ 24.6 b</div><div class="delta up">▲ 4.2% vs FY25</div></div>
+<div class="kpi"><div class="label">Markets</div><div class="v">62</div><div class="delta up">▲ 2 new</div></div>
+<div class="kpi"><div class="label">FTEs</div><div class="v">33,440</div><div class="delta down">▼ 1.1%</div></div>
+<div class="kpi"><div class="label">eNPS</div><div class="v">+38</div><div class="delta up">▲ 4 pts</div></div>
+</div></div></div></section>
+
+<section class="comp" id="hugenum"><h2>Big stat</h2>
+<p class="lede">Single hero number, used in landing pages and slides.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="hugenum">60+</div>
+<div style="margin-top:6px;color:var(--primary-300);font-size:14px">markets where we make the future work for everyone.</div>
+</div></div></section>
+
+<section class="comp" id="tile"><h2>Tile</h2>
+<p class="lede">Image-led card; first thing the eye lands on is the visual.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame"><div class="row">
+<div style="width:240px;border:1px solid var(--grey-300);border-radius:10px;overflow:hidden">
+<div style="height:120px;background:var(--gradient)"></div>
+<div style="padding:14px"><strong>Workforce report</strong><p style="color:var(--primary-300);margin:4px 0 0;font-size:13px">FY26 outlook for Tier-1 markets.</p></div>
+</div></div></div></div></section>
+
+<section class="comp" id="table"><h2>Table</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<table class="tbl"><thead><tr><th>GBU</th><th>Markets</th><th>Status</th></tr></thead><tbody>
+<tr><td>Adecco</td><td>60+</td><td><span class="status status-success">Live</span></td></tr>
+<tr><td>LHH</td><td>60+</td><td><span class="status status-success">Live</span></td></tr>
+<tr><td>Akkodis</td><td>30+</td><td><span class="status status-info">Expanding</span></td></tr>
+</tbody></table></div></div></section>
+
+<section class="comp" id="data-table"><h2>Data table (sortable, selectable)</h2>
+<p class="lede">Sortable column headers, row selection, bulk actions.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="row" style="background:var(--grey-100);padding:10px 14px;border:1px solid var(--grey-300);border-radius:8px 8px 0 0;border-bottom:0;justify-content:space-between">
+<div class="row"><label class="check"><input type="checkbox">3 selected</label></div>
+<div class="row"><a class="btn btn-tertiary btn-sm">Archive</a><a class="btn btn-tertiary btn-sm">Export</a><a class="btn btn-destructive btn-sm">Delete</a></div>
+</div>
+<table class="tbl" style="border-radius:0 0 8px 8px;border-top:0"><thead><tr><th><input type="checkbox" checked></th><th>Account ▾</th><th>Region</th><th>ARR</th><th>Status</th></tr></thead><tbody>
+<tr><td><input type="checkbox" checked></td><td>Microsoft</td><td>Global</td><td>€ 24.5 m</td><td><span class="status status-success">Active</span></td></tr>
+<tr><td><input type="checkbox" checked></td><td>Siemens</td><td>EMEA</td><td>€ 18.2 m</td><td><span class="status status-success">Active</span></td></tr>
+<tr><td><input type="checkbox" checked></td><td>Toyota</td><td>APAC</td><td>€ 12.8 m</td><td><span class="status status-warning">Renewing</span></td></tr>
+<tr><td><input type="checkbox"></td><td>BNP Paribas</td><td>EMEA</td><td>€ 9.1 m</td><td><span class="status status-info">In review</span></td></tr>
+</tbody></table>
+</div></div></section>
+
+<section class="comp" id="comparison-table"><h2>Comparison table</h2>
+<p class="lede">Plans, tiers, GBUs side by side.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<table class="tbl"><thead><tr><th></th><th>Adecco</th><th>LHH</th><th>Akkodis</th></tr></thead><tbody>
+<tr><td>Workforce solutions</td><td>✓</td><td>—</td><td>—</td></tr>
+<tr><td>Career mobility</td><td>—</td><td>✓</td><td>—</td></tr>
+<tr><td>Digital engineering</td><td>—</td><td>—</td><td>✓</td></tr>
+<tr><td>AI consulting</td><td>—</td><td>✓</td><td>✓</td></tr>
+<tr><td>Markets</td><td>60+</td><td>60+</td><td>30+</td></tr>
+</tbody></table></div></div></section>
+
+<section class="comp" id="list"><h2>List</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<ul style="margin:0;padding-left:20px;font-size:14px">
+<li>Lead with the agility advantage</li>
+<li>Use US English everywhere</li>
+<li>Tagline verbatim, with emphasis</li>
+<li>Unity gradient bar always at the bottom</li>
+</ul></div></div></section>
+
+<section class="comp" id="list-view"><h2>List view (rich)</h2>
+<p class="lede">Avatar + primary + secondary + meta + action.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame col-gap" style="max-width:480px">
+<div class="row" style="padding:12px 14px;border:1px solid var(--grey-300);border-radius:8px;justify-content:space-between"><div class="row"><span class="avatar">MW</span><div><strong>Megan Wickens</strong><div style="font-size:13px;color:var(--primary-300)">Global Head of SparkAI · Updated 2 h ago</div></div></div><a class="btn btn-tertiary btn-sm">Open</a></div>
+<div class="row" style="padding:12px 14px;border:1px solid var(--grey-300);border-radius:8px;justify-content:space-between"><div class="row"><span class="avatar" style="background:var(--blue)">FA</span><div><strong>Fabiola Asensio</strong><div style="font-size:13px;color:var(--primary-300)">VP Brand · Updated yesterday</div></div></div><a class="btn btn-tertiary btn-sm">Open</a></div>
+<div class="row" style="padding:12px 14px;border:1px solid var(--grey-300);border-radius:8px;justify-content:space-between"><div class="row"><span class="avatar" style="background:var(--purple)">RM</span><div><strong>Rui Macedo</strong><div style="font-size:13px;color:var(--primary-300)">CEO · Updated last week</div></div></div><a class="btn btn-tertiary btn-sm">Open</a></div>
+</div></div></section>
+
+<section class="comp" id="treeview"><h2>Tree view</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="font-size:14px">
+<div>📁 the Adecco Group</div>
+<div style="padding-left:20px">📁 Adecco</div>
+<div style="padding-left:40px">📄 Workforce solutions</div>
+<div style="padding-left:20px">📁 LHH</div>
+<div style="padding-left:40px">📄 Career mobility</div>
+<div style="padding-left:20px">📁 Akkodis</div>
+</div></div></div></section>
+
+<section class="comp" id="accordion"><h2>Accordion</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<details class="acc"><summary>What is the agility advantage?</summary><p>What we create by combining talent and technology.</p></details>
+<details class="acc" open><summary>Where does TAG operate?</summary><p>Across more than 60 markets.</p></details>
+<details class="acc"><summary>Who is SparkAI?</summary><p>The team that administers Responsible AI Principles.</p></details>
+</div></div></section>
+
+<section class="comp" id="timeline"><h2>Timeline</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="timeline">
+<div class="ev"><div class="when">2026-04-30 · 14:42</div><strong>Hub v4.1.0 deployed</strong><p>Section 75 (Prompt Card) live, US English globally.</p></div>
+<div class="ev"><div class="when">2026-04-29 · 12:43</div><strong>Components library expanded</strong><p>10 sub-pages with sticky sidebar.</p></div>
+<div class="ev"><div class="when">2026-04-28 · 16:29</div><strong>Document templates registered</strong><p>18 templates and PNG previews.</p></div>
+<div class="ev"><div class="when">2026-04-15</div><strong>Hub launched</strong><p>tag.schatt.me went live behind Cloudflare Tunnel.</p></div>
+</div></div></div></section>
+
+<section class="comp" id="activity-feed"><h2>Activity feed</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="feed">
+<div class="item"><span class="avatar avatar-sm">MW</span><div><span class="who">Megan Wickens</span> <span class="when">· 14 min ago</span><p>Approved the SparkAI integration plan and added two notes.</p></div></div>
+<div class="item"><span class="avatar avatar-sm" style="background:var(--purple)">RM</span><div><span class="who">Rui Macedo</span> <span class="when">· 2 h ago</span><p>Mentioned you in <a style="color:var(--turquoise)">Q3 board prep</a>.</p></div></div>
+<div class="item"><span class="avatar avatar-sm" style="background:var(--blue)">FA</span><div><span class="who">Fabiola Asensio</span> <span class="when">· yesterday</span><p>Uploaded a new version of <a style="color:var(--turquoise)">brand-guidelines.pdf</a>.</p></div></div>
+</div></div></div></section>
+
+<section class="comp" id="avatar"><h2>Avatar</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame"><div class="row">
+<span class="avatar avatar-sm">JS</span>
+<span class="avatar">MW</span>
+<span class="avatar avatar-lg">JS</span>
+<div class="avatar-stack">
+<span class="avatar">JS</span>
+<span class="avatar" style="background:#1A7BAD">MW</span>
+<span class="avatar" style="background:#6B2D8B">FA</span>
+<span class="avatar" style="background:#E30613">RM</span>
+</div></div></div></div></section>
+
+<section class="comp" id="chip"><h2>Chip / pill</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame"><div class="row">
+<span class="chip">All markets</span>
+<span class="chip selected">EMEA <span class="x">×</span></span>
+<span class="chip">APAC</span>
+<span class="chip">Americas</span>
+</div></div></div></section>
+
+<section class="comp" id="separator"><h2>Separator / divider</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div>Above</div><div class="divider"></div><div>Below</div>
+</div></div></section>
+
+<section class="comp" id="code-block"><h2>Code block</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="codeblock">$ python replace_docx.py memo \
+ --to "Megan Wickens" \
+ --from "" \
+ --subject "Q3 plan"</div>
+</div></div></section>
+
+<section class="comp" id="diff"><h2>Diff viewer</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="diff">
+<div class="ctx"> Voice: four-pair voice</div>
+<div class="rem">- British English, sentence case headlines</div>
+<div class="add">+ US English, sentence case headlines</div>
+<div class="ctx"> Tagline: Making the future work for everyone</div>
+</div></div></div></section>
+
+<section class="comp" id="json-viewer"><h2>JSON viewer</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<pre style="background:var(--primary-2);color:#DDE6F1;padding:14px;border-radius:8px;font-size:12.5px;margin:0"><code>{
+ <span style="color:#9DD0E8">"id"</span>: <span style="color:#F6CB5E">"memo"</span>,
+ <span style="color:#9DD0E8">"format"</span>: <span style="color:#F6CB5E">"docx"</span>,
+ <span style="color:#9DD0E8">"placeholders"</span>: [
+ { <span style="color:#9DD0E8">"key"</span>: <span style="color:#F6CB5E">"TO"</span>, <span style="color:#9DD0E8">"kind"</span>: <span style="color:#F6CB5E">"text"</span> },
+ { <span style="color:#9DD0E8">"key"</span>: <span style="color:#F6CB5E">"FROM"</span>, <span style="color:#9DD0E8">"kind"</span>: <span style="color:#F6CB5E">"text"</span> }
+ ]
+}</code></pre></div></div></section>
+
+</main>
+</div>
+
+<!-- TAG-CHROME-FOOTER-BEGIN -->
+<div class="tag-footer-bar"></div>
+<footer class="tag-footer" aria-label="Site footer">
+  <div class="tag-footer-inner">
+    <div class="tag-footer-brand">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+      <p>Self-hosted brand and AI context. Single source of truth for any AI tool that produces content for the Adecco Group.</p>
+      <span class="tag-footer-tagline">Making the future work for everyone</span>
+    </div>
+    <div>
+      <h4>Brand &amp; AI</h4>
+      <ul>
+        <li><a href="../../../tag-context.md">tag-context.md</a></li>
+        <li><a href="../../../prompt-card.md">prompt-card.md</a></li>
+        <li><a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a></li>
+        <li><a href="../../../business-context.md">business-context.md</a></li>
+        <li><a href="../../../llms.txt">llms.txt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Design system</h4>
+      <ul>
+        <li><a href="../index.html">Components</a></li>
+        <li><a href="../../documents/index.html">Documents</a></li>
+        <li><a href="../../logos/index.html">Logos</a></li>
+        <li><a href="../../../business-context/index.html">Business context</a></li>
+        <li><a href="../../../assets/tokens/tokens.css">Tokens (CSS)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="../../../assets/docs/brand-guidelines.pdf">Brand Guidelines PDF</a></li>
+        <li><a href="../../../assets/templates/index.json">Template registry</a></li>
+        <li><a href="../../../assets/recipes/README.md">Recipes</a></li>
+        <li><a href="../../../playbook.md">Playbook</a></li>
+        <li><a href="../../../context.html">Context (SSR)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li>Internal use only</li>
+        <li>Brand assets &copy; The Adecco Group</li>
+        <li>Hosted via Cloudflare Tunnel</li>
+        <li><a href="../../../index.html">tag.schatt.me</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tag-footer-bottom">
+    <span>&copy; 2026 The Adecco Group</span>
+    <span><code>v6.3.0</code> &middot; updated 2026-05-05</span>
+  </div>
+</footer>
+<!-- TAG-CHROME-FOOTER-END -->
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f86b8f60d39363f',t:'MTc3ODIyNTA0Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body></html>

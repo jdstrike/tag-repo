@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Foundations | TAG Components</title>
+<meta name="description" content="The visual language every component is built on.">
+<link rel="stylesheet" href="../_shared.css">
+      <link rel="stylesheet" href="https://tag.schatt.me/assets/css/site.css?v=6.4.0" />
+</head><body>
+<!-- TAG-CHROME-HEADER-BEGIN -->
+<nav class="tag-nav" aria-label="Primary">
+  <div class="tag-nav-inner">
+    <a href="../../../index.html" class="tag-nav-logo" aria-label="The Adecco Group">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+    </a>
+    <ul class="tag-nav-links">
+      <li><a href="../../../index.html#strategy" class="">Brand</a></li>
+      <li><a href="../../../index.html#voice" class="">Voice</a></li>
+      <li><a href="../../../business-context/index.html" class="">Business</a></li>
+      <li><a href="../index.html" class="active">Components</a></li>
+      <li><a href="../../documents/index.html" class="">Documents</a></li>
+      <li><a href="../../logos/index.html" class="">Logos</a></li>
+      <li><a href="../../../index.html#context" class="">Context</a></li>
+    </ul>
+    <a href="../../../prompt-card.md" class="tag-nav-cta">Prompt card</a>
+    <button class="tag-nav-burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="tag-nav-files" aria-label="Files">
+  <div class="tag-nav-files-inner">
+    <span class="label">Files</span>
+    <a href="../../../tag-context.md">tag-context.md</a>
+    <a href="../../../prompt-card.md">prompt-card.md</a>
+    <a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a>
+    <a href="../../../business-context.md">business-context.md</a>
+    <a href="../../../llms.txt">llms.txt</a>
+    <span class="sep"></span>
+    <a href="../../../assets/tokens/tokens.css">tokens.css</a>
+    <a href="../../../assets/templates/index.json">templates</a>
+  </div>
+</nav>
+<div class="tag-stripe"></div>
+<!-- TAG-CHROME-HEADER-END -->
+<div class="layout">
+
+<aside class="sidebar">
+ <h4>Get started</h4>
+ <ul>
+ <li><a href="../index.html" data-page="index">Overview</a></li>
+ </ul>
+ <h4>Foundations</h4>
+ <ul>
+ <li><a href="index.html" data-page="foundations" class="active">Tokens, color, type, spacing</a></li>
+ </ul>
+ <h4>Components</h4>
+ <ul>
+ <li><a href="../buttons/index.html" data-page="buttons">Buttons</a></li>
+ <li><a href="../forms/index.html" data-page="forms">Forms &amp; inputs</a></li>
+ <li><a href="../feedback/index.html" data-page="feedback">Feedback &amp; status</a></li>
+ <li><a href="../navigation/index.html" data-page="navigation">Navigation</a></li>
+ <li><a href="../data-display/index.html" data-page="data-display">Data display</a></li>
+ <li><a href="../overlays/index.html" data-page="overlays">Overlays</a></li>
+ <li><a href="../content/index.html" data-page="content">Content blocks</a></li>
+ </ul>
+ <h4>Modules &amp; templates</h4>
+ <ul>
+ <li><a href="../modules/index.html" data-page="modules">Modules</a></li>
+ <li><a href="../page-templates/index.html" data-page="page-templates">Page templates</a></li>
+ </ul>
+ <h4>Documents &amp; slides</h4>
+ <ul>
+ <li><a href="../documents/index.html" data-page="documents">Document patterns</a></li>
+ <li><a href="../slides/index.html" data-page="slides">Slide layouts</a></li>
+ <li><a href="../charts/index.html" data-page="charts">Charts</a></li>
+ </ul>
+ <h4>External</h4>
+ <ul>
+ <li><a href="https://dev.tagds.adeccogroup.com" target="_blank" rel="noopener">TAG-DS Storybook ↗</a></li>
+ <li><a href="https://zeroheight.com/7666d7eae" target="_blank" rel="noopener">zeroheight ↗</a></li>
+ </ul>
+</aside>
+
+<main class="content">
+<header><span class="eyebrow">Foundations</span><h1>Color, typography, spacing, radii, elevation, motion.</h1><p>The visual language every component is built on.</p></header>
+
+<section class="comp" id="color"><h2>Color system</h2>
+<p class="lede">Primary 500 for body text, Turquoise as the default accent. The 6-stop unity gradient is the canonical brand expression. Don't recolour; don't add stops.</p>
+<div class="preview"><div class="preview-label">Brand colors</div><div class="frame">
+<div class="row" style="gap:14px">
+<div style="text-align:center"><div style="width:80px;height:80px;border-radius:8px;background:#5CB8B2;border:1px solid var(--grey-300)"></div><code style="display:block;margin-top:6px">#5CB8B2</code><span style="font-size:12px;color:var(--primary-300)">Turquoise</span></div>
+<div style="text-align:center"><div style="width:80px;height:80px;border-radius:8px;background:#1C304B"></div><code style="display:block;margin-top:6px">#1C304B</code><span style="font-size:12px;color:var(--primary-300)">Primary 500</span></div>
+<div style="text-align:center"><div style="width:80px;height:80px;border-radius:8px;background:#5C6B82"></div><code style="display:block;margin-top:6px">#5C6B82</code><span style="font-size:12px;color:var(--primary-300)">Primary 300</span></div>
+<div style="text-align:center"><div style="width:80px;height:80px;border-radius:8px;background:#F5F6F8;border:1px solid var(--grey-300)"></div><code style="display:block;margin-top:6px">#F5F6F8</code><span style="font-size:12px;color:var(--primary-300)">Grey 100</span></div>
+<div style="text-align:center"><div style="width:80px;height:80px;border-radius:8px;background:#C7CCD3"></div><code style="display:block;margin-top:6px">#C7CCD3</code><span style="font-size:12px;color:var(--primary-300)">Grey 300</span></div>
+</div></div></div>
+<div class="preview"><div class="preview-label">Semantic / state</div><div class="frame"><div class="row">
+<div><div style="width:60px;height:32px;background:var(--green);border-radius:6px"></div><code>#2EA84F success</code></div>
+<div><div style="width:60px;height:32px;background:var(--amber);border-radius:6px"></div><code>#E89B0E warning</code></div>
+<div><div style="width:60px;height:32px;background:var(--red);border-radius:6px"></div><code>#E30613 error</code></div>
+<div><div style="width:60px;height:32px;background:var(--blue);border-radius:6px"></div><code>#1A7BAD info</code></div>
+</div></div></div>
+<div class="preview"><div class="preview-label">Unity gradient (canonical 6-stop)</div><div class="frame">
+<div style="height:80px;border-radius:10px;background:var(--gradient)"></div>
+<pre style="margin-top:14px"><code>linear-gradient(90deg,
+ #2DBFB8 0%, #1A7BAD 22%, #6B2D8B 44%,
+ #E30613 63%, #F05A28 81%, #F9B233 100%);</code></pre>
+</div></div></section>
+
+<section class="comp" id="typography"><h2>Typography</h2>
+<p class="lede">Open Sauce Sans for digital. Arial for editable Office files. Sentence case in every headline.</p>
+<div class="preview"><div class="preview-label">Type scale</div><div class="frame">
+<div style="font-size:48px;font-weight:700;line-height:1.1;margin-bottom:14px">Display 48 / Bold</div>
+<div style="font-size:32px;font-weight:700;margin-bottom:10px">Heading 1 · 32 / Bold</div>
+<div style="font-size:24px;font-weight:700;margin-bottom:10px">Heading 2 · 24 / Bold</div>
+<div style="font-size:20px;font-weight:600;margin-bottom:10px">Heading 3 · 20 / Semibold</div>
+<div style="font-size:16px;line-height:1.55;margin-bottom:8px">Body 16. The body text style of the TAG brand. We make the future work for everyone by creating the agility advantage.</div>
+<div style="font-size:14px;color:var(--primary-300)">Caption 14 / Primary 300</div>
+</div></div></section>
+
+<section class="comp" id="spacing"><h2>Spacing scale</h2>
+<p class="lede">8-pixel base. Use the named tokens, never raw pixel values.</p>
+<div class="preview"><div class="preview-label">Spacing tokens (px)</div><div class="frame">
+<div class="col-gap">
+<div class="row" style="align-items:center"><span style="width:60px;font-size:12px;color:var(--primary-300)">4 / xs</span><div style="height:14px;width:4px;background:var(--turquoise)"></div></div>
+<div class="row" style="align-items:center"><span style="width:60px;font-size:12px;color:var(--primary-300)">8 / sm</span><div style="height:14px;width:8px;background:var(--turquoise)"></div></div>
+<div class="row" style="align-items:center"><span style="width:60px;font-size:12px;color:var(--primary-300)">16 / md</span><div style="height:14px;width:16px;background:var(--turquoise)"></div></div>
+<div class="row" style="align-items:center"><span style="width:60px;font-size:12px;color:var(--primary-300)">24 / lg</span><div style="height:14px;width:24px;background:var(--turquoise)"></div></div>
+<div class="row" style="align-items:center"><span style="width:60px;font-size:12px;color:var(--primary-300)">32 / xl</span><div style="height:14px;width:32px;background:var(--turquoise)"></div></div>
+<div class="row" style="align-items:center"><span style="width:60px;font-size:12px;color:var(--primary-300)">48 / 2xl</span><div style="height:14px;width:48px;background:var(--turquoise)"></div></div>
+<div class="row" style="align-items:center"><span style="width:60px;font-size:12px;color:var(--primary-300)">64 / 3xl</span><div style="height:14px;width:64px;background:var(--turquoise)"></div></div>
+</div></div></div></section>
+
+<section class="comp" id="radii"><h2>Corner radius</h2>
+<div class="preview"><div class="preview-label">Radii tokens</div><div class="frame"><div class="row">
+<div style="text-align:center"><div style="width:80px;height:60px;border-radius:4px;background:var(--turquoise)"></div><code>4 / xs</code></div>
+<div style="text-align:center"><div style="width:80px;height:60px;border-radius:6px;background:var(--turquoise)"></div><code>6 / sm</code></div>
+<div style="text-align:center"><div style="width:80px;height:60px;border-radius:10px;background:var(--turquoise)"></div><code>10 / md</code></div>
+<div style="text-align:center"><div style="width:80px;height:60px;border-radius:14px;background:var(--turquoise)"></div><code>14 / lg</code></div>
+<div style="text-align:center"><div style="width:120px;height:60px;border-radius:999px;background:var(--turquoise)"></div><code>pill</code></div>
+</div></div></div></section>
+
+<section class="comp" id="elevation"><h2>Elevation</h2>
+<p class="lede">Three shadow levels. Use sparingly. Use elevation to signal interactivity, not to decorate.</p>
+<div class="preview"><div class="preview-label">Shadow tokens</div><div class="frame"><div class="row" style="gap:24px;background:var(--grey-100);padding:30px;border-radius:8px">
+<div style="background:#fff;padding:20px;border-radius:8px;box-shadow:var(--shadow-sm);width:120px;text-align:center;font-size:13px">sm</div>
+<div style="background:#fff;padding:20px;border-radius:8px;box-shadow:var(--shadow-md);width:120px;text-align:center;font-size:13px">md</div>
+<div style="background:#fff;padding:20px;border-radius:8px;box-shadow:var(--shadow-lg);width:120px;text-align:center;font-size:13px">lg</div>
+</div></div></div></section>
+
+<section class="comp" id="motion"><h2>Motion</h2>
+<p class="lede">Use 120-180 ms ease-out for hover, 200-300 ms for layout transitions. Avoid bouncy easings on TAG.</p>
+<dl class="spec" style="grid-template-columns:200px 1fr">
+<dt>Tap / hover</dt><dd>120-180 ms, ease-out</dd>
+<dt>Layout shift</dt><dd>220-280 ms, ease-in-out</dd>
+<dt>Modal / drawer</dt><dd>220 ms ease-out (in), 180 ms ease-in (out)</dd>
+<dt>Spinner</dt><dd>900 ms linear, infinite</dd>
+</dl></section>
+
+<section class="comp" id="iconography"><h2>Iconography</h2>
+<p class="lede">Material-style line icons, 24×24 default, 1.6-2 px stroke. Mirror specific glyphs into <code>/assets/icons/</code> as needed; don't ship the whole icon set.</p></section>
+
+<section class="comp" id="layout"><h2>Layout grid</h2>
+<p class="lede">12-column grid with 24 px gutters at desktop, 16 px at tablet, 12 px at mobile. Max content width 1200 px.</p></section>
+
+</main>
+</div>
+
+<!-- TAG-CHROME-FOOTER-BEGIN -->
+<div class="tag-footer-bar"></div>
+<footer class="tag-footer" aria-label="Site footer">
+  <div class="tag-footer-inner">
+    <div class="tag-footer-brand">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+      <p>Self-hosted brand and AI context. Single source of truth for any AI tool that produces content for the Adecco Group.</p>
+      <span class="tag-footer-tagline">Making the future work for everyone</span>
+    </div>
+    <div>
+      <h4>Brand &amp; AI</h4>
+      <ul>
+        <li><a href="../../../tag-context.md">tag-context.md</a></li>
+        <li><a href="../../../prompt-card.md">prompt-card.md</a></li>
+        <li><a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a></li>
+        <li><a href="../../../business-context.md">business-context.md</a></li>
+        <li><a href="../../../llms.txt">llms.txt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Design system</h4>
+      <ul>
+        <li><a href="../index.html">Components</a></li>
+        <li><a href="../../documents/index.html">Documents</a></li>
+        <li><a href="../../logos/index.html">Logos</a></li>
+        <li><a href="../../../business-context/index.html">Business context</a></li>
+        <li><a href="../../../assets/tokens/tokens.css">Tokens (CSS)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="../../../assets/docs/brand-guidelines.pdf">Brand Guidelines PDF</a></li>
+        <li><a href="../../../assets/templates/index.json">Template registry</a></li>
+        <li><a href="../../../assets/recipes/README.md">Recipes</a></li>
+        <li><a href="../../../playbook.md">Playbook</a></li>
+        <li><a href="../../../context.html">Context (SSR)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li>Internal use only</li>
+        <li>Brand assets &copy; The Adecco Group</li>
+        <li>Hosted via Cloudflare Tunnel</li>
+        <li><a href="../../../index.html">tag.schatt.me</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tag-footer-bottom">
+    <span>&copy; 2026 The Adecco Group</span>
+    <span><code>v6.3.0</code> &middot; updated 2026-05-05</span>
+  </div>
+</footer>
+<!-- TAG-CHROME-FOOTER-END -->
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f86b8f44bf3363f',t:'MTc3ODIyNTA0Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body></html>

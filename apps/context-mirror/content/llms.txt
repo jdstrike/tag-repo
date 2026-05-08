@@ -1,0 +1,80 @@
+# The Adecco Group: brand and AI context for any AI tool
+
+> Canonical brand and AI context for The Adecco Group, hosted at https://tag.schatt.me. Apply before producing any TAG-branded artefact (document, slide, image, email, landing page, social post). Designed for Microsoft Copilot, Claude, ChatGPT, Gemini, Perplexity, internal RAG, and any agent system.
+
+The Adecco Group is the world's leading talent and technology company. Across Adecco, Akkodis, and LHH we deliver end-to-end talent and technology solutions in more than 60 markets. Our purpose is to make the future work for everyone by creating the agility advantage.
+
+## Start here
+
+- [Business Context, paste-ready commercial card](https://tag.schatt.me/business-context.md): what TAG sells, how it goes to market, how it delivers. Sibling of the prompt card. Pair with `/prompt-card.md` for voice and `/copilot-agent-instructions.md` for agent role.
+- [Business Context, human library](https://tag.schatt.me/business-context/index.md): a cross-linked structured library. Portfolio (25 services across 4 pillars), 6 selling models (incl. Pontoon and rPotential), 7 solutions, 4 delivery models, 10 GDM operating topics, 5 industry plays, 2 internal AI tools, plus Workforce Trends 2026 and the Workforce Solutions Ecosystem report.
+- [Copilot Agent Instruction Layer](https://tag.schatt.me/copilot-agent-instructions.md): the full April 2026 Tone of Voice for Copilot, Draft 001. Paste into a Copilot Studio agent's core instructions. Includes role, required process, do/don't writing rules, claims-and-evidence protocol, review behaviour, output style, and the human-review escalation list.
+- [The Prompt Card (copy-paste ready)](https://tag.schatt.me/prompt-card.md): the smallest payload that locks in TAG voice. Paste into Claude project memory, Copilot Studio agent instructions, ChatGPT custom instructions, or Gemini system instructions.
+- [The full brand and AI context (Markdown)](https://tag.schatt.me/tag-context.md): the master file. 75+ sections covering strategy, narrative, voice, identity, portfolio, AI governance, web component library, document pattern library, and template registry.
+- [Same context as plain text](https://tag.schatt.me/tag-context.txt)
+- [SSR HTML mirror](https://tag.schatt.me/context.html): server-rendered HTML version for AI tools that fetch HTML rather than Markdown.
+
+## Brand essentials
+
+- One-line summary: in a world where agility is the only sustainable advantage, whoever controls talent, leadership, and technology drives the future. The Adecco Group is your single strategic partner across the full talent and technology cycle: workforce, development, transformation, unified.
+- FY25 numbers: € 23.1 bn group revenue (Adecco €18.5 bn, Akkodis €3.3 bn, LHH €1.3 bn), 169,000 FTEs incl. tech experts and bench, 2M+ associates per year, 100K+ clients, 870K+ people up- or reskilled in 2025, 60+ countries, 5,000 offices, NPS 48.
+- r·Potential: the AI-powered workforce innovation company across the Group, designing digital workers that act as coworkers and helping clients optimise the mix of human and digital labour.
+- Tagline (verbatim, always): "Making the future work for everyone".
+- Brand name: "the Adecco Group" with lowercase "t" except at sentence start. Never "Adecco Group" without the article.
+- GBU lockup order: Adecco + LHH + Akkodis.
+- Tone-of-voice (4 pairs, all binding): clear and credible; inclusive and approachable; energetic and optimistic; curious and courageous.
+- Language: US English. Sentence-case headlines. Contractions for warmth. The em-dash character (`—`) is banned in TAG copy, hard rule.
+- Brand language (use these phrases): agility, the agility advantage, talent and technology, human-centric technology, skills, employability, workforce transformation, opportunity, preparing people and organisations for change, making the future work for everyone.
+
+## Design system pages
+
+- [Hub landing page](https://tag.schatt.me/): human-facing entry, prompt-adapter at top.
+- [Component library](https://tag.schatt.me/design-system/components/): live previews of every TAG web component, copy-paste HTML.
+- [Document library](https://tag.schatt.me/design-system/documents/): all 18 TAG document templates with PNG previews and runnable Python recipes.
+- [Logo gallery](https://tag.schatt.me/design-system/logos/): family lockup variants on multiple background tints.
+- [Recipes](https://tag.schatt.me/assets/recipes/README.md): runnable Python (replace_docx, tag_chart_style, tag_company_info) for the TEMPLATE-FIRST pipeline.
+- [Brand Design System Playbook](https://tag.schatt.me/playbook.md): the methodology behind the hub, transferable to any other brand.
+
+## Visual identity
+
+- [Brand Guidelines PDF, 85 pages, V7 June 2025](https://tag.schatt.me/assets/docs/brand-guidelines.pdf)
+- [Family lockup logos (SVG and PNG)](https://tag.schatt.me/assets/logos/)
+- [Open Sauce Sans font (digital primary)](https://tag.schatt.me/assets/fonts/)
+- [Design tokens, CSS](https://tag.schatt.me/assets/tokens/tokens.css)
+- [Design tokens, JSON](https://tag.schatt.me/assets/tokens/tokens.json)
+
+Unity gradient (canonical 6-stop, always horizontal, always at the bottom of a layout, never the top, never recolored, never resized in height):
+
+```
+linear-gradient(90deg,
+ #2DBFB8 0%,
+ #1A7BAD 22%,
+ #6B2D8B 44%,
+ #E30613 63%,
+ #F05A28 81%,
+ #F9B233 100%);
+```
+
+Default body text color: Primary 500 `#1C304B`, not pure black.
+Default accent for primary buttons / highlights: TAG Turquoise `#5CB8B2`.
+
+## Templates (the TEMPLATE-FIRST rule, mandatory)
+
+- [Template registry, machine-readable manifest](https://tag.schatt.me/assets/templates/index.json): every TAG document, slide deck, social asset, and landing page has a canonical template. Look up the right template by intent keyword, fetch the file, and replace only the placeholders. Never recreate layouts from scratch.
+
+Document templates: memo, press release, letterhead, multi-page Word doc, RFP, email signature, social PDFs, newsletter headers, envelope.
+Slide template: PowerPoint (Arial, 62 layouts).
+Landing pages: `landing-page-light.html`, `landing-page-dark.html`, `landing-page-master.html` (Pardot / Account Engagement).
+
+## Governance
+
+All AI use must comply with the Adecco Group Responsible AI Principles, AI Governance Policy, and AI Use Guidelines administered by **SparkAI** (managed by Megan Wickens, Global Head of SparkAI).
+
+Five Responsible AI Principles: Ethical, Human-Centric, Transparent, Safe, Lawful. See Section 35 in the master context.
+
+## Optional
+
+- [robots.txt](https://tag.schatt.me/robots.txt): default-allow for AI inputs (`Content-Signal: search=yes,ai-input=yes,ai-train=no`).
+- [Asset library (logos, fonts, tokens, templates, docs)](https://tag.schatt.me/assets/)
+
+Maintained by , VP Global Digital Marketing, on behalf of the Group Strategy & Marketing Office.

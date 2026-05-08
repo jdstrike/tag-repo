@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!--
+ TAG Pardot Layout Template — LIGHT THEME
+ 
+ Use in Pardot:
+ 1. Marketing -> Landing Pages -> Layout Templates -> New
+ 2. Paste this entire file as the template HTML
+ 3. Pardot injects the form where id="form-anchor" sits
+ 4. Editable regions: pardot-region="..." attributes
+ 
+ Structure: header -> hero -> challenge (55% ring + 3 stat cards) -> bridge quote
+ -> solution (sticky 3-step) -> ask (4 cards) -> download/form -> footer
+ 
+ Stack: Tailwind CSS (CDN), GSAP + ScrollTrigger, Material Symbols Rounded, Open Sauce Sans
+ Theme: light (#ffffff base, #f5f5f5 alt sections, #111111 text)
+ 
+ Full source on tag.schatt.me/assets/templates/landing-page-light.html
+ Component documentation: tag-context.md Part H (https://tag.schatt.me/tag-context.md#part-h-web-component-library)
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>%%title%%</title>
+<meta name="description" content="%%description%%">
+<link rel="icon" href="https://www.adeccogroup.com/-/jssmedia/project/adecco group/adeccogroup/favicon.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+ tailwind.config = { theme: { extend: {
+ colors: { tag: { teal:'#2DBFB8', blue:'#1A7BAD', purple:'#6B2D8B', red:'#E30613', orange:'#F05A28', yellow:'#F9B233' } },
+ fontFamily: { sans: ['"Open Sauce Sans"','Inter','system-ui','sans-serif'] }
+ }}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+:root {
+ --teal:#2DBFB8; --blue:#1A7BAD; --purple:#6B2D8B; --red:#E30613; --orange:#F05A28; --yellow:#F9B233;
+ --grad: linear-gradient(135deg,#2DBFB8 0%,#1A7BAD 22%,#6B2D8B 44%,#E30613 63%,#F05A28 81%,#F9B233 100%);
+ --grad-h: linear-gradient(90deg, #2DBFB8 0%,#1A7BAD 20%,#6B2D8B 42%,#E30613 62%,#F05A28 81%,#F9B233 100%);
+}
+*,*::before,*::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family:'Open Sauce Sans','Inter',sans-serif; background:#fff; color:#111; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+.ms { font-family:'Material Symbols Rounded'; font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; line-height:1; display:inline-flex; align-items:center; vertical-align:middle; }
+.grad-text { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.grad-bg { background:var(--grad); }
+.grad-border { position:relative; }
+.grad-border::before { content:''; position:absolute; inset:0; border-radius:inherit; padding:1px; background:var(--grad); -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0); -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none; }
+.sphere-img { width:100%; height:100%; border-radius:50%; object-fit:cover; display:block; }
+.sphere-fallback { background:radial-gradient(circle at 32% 28%,#2DBFB8,#1A7BAD 28%,#6B2D8B 52%,#E30613 72%,#F05A28 86%,#F9B233); border-radius:50%; }
+img.stripe { display:block; width:100%; height:3px; object-fit:cover; }
+img.stripe.thin { height:2px; }
+/* The full Pardot form CSS overrides for the light theme are documented in tag-context.md section 53 */
+</style>
+</head>
+<body>
+<!-- HEADER, HERO, CHALLENGE, BRIDGE QUOTE, SOLUTION (sticky 3-step), ASK, DOWNLOAD, FOOTER -->
+<!-- Full HTML for each section in tag-context.md Part H, sections 49 (header), 50 (hero), -->
+<!-- 51 (cards), 52 (FAQ), 53 (form), 54 (footer), 56 (multicolor gradient), 57 (sticky steps) -->
+
+<!-- === HEADER === -->
+<header id="site-header" class="sticky top-0 z-50 bg-white shadow-[0_1px_0_rgba(0,0,0,0.08)]">
+ <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-6">
+ <span pardot-region="header-logo">
+ <a href="https://www.adeccogroup.com/" class="no-underline shrink-0">
+ <img src="../logos/tag-family-lockup-colour-pos.svg" alt="The Adecco Group" style="height:68px;width:auto;display:block;">
+ </a>
+ </span>
+ <nav class="hidden md:flex items-center gap-8">
+ <span pardot-region="nav-link-1"><a href="landing-page-light.html#challenge" class="text-[13px] font-semibold tracking-[0.18em] uppercase text-black/70 hover:text-black transition">Challenge</a></span>
+ <span pardot-region="nav-link-2"><a href="landing-page-light.html#solution" class="text-[13px] font-semibold tracking-[0.18em] uppercase text-black/70 hover:text-black transition">Solution</a></span>
+ <span pardot-region="nav-link-3"><a href="landing-page-light.html#ask" class="text-[13px] font-semibold tracking-[0.18em] uppercase text-black/70 hover:text-black transition">Reflect</a></span>
+ <span pardot-region="nav-link-4"><a href="landing-page-light.html#download" class="text-[13px] font-semibold tracking-[0.18em] uppercase text-black/70 hover:text-black transition">Report</a></span>
+ </nav>
+ <span pardot-region="header-cta">
+ <a href="landing-page-light.html#download" class="hidden md:inline-flex items-center gap-2 grad-bg text-white text-[13px] font-bold px-5 py-2 rounded-full hover:opacity-90 transition shrink-0">
+ <span class="ms text-[18px]">download</span> Download Report
+ </a>
+ </span>
+ </div>
+ <img src="../logos/tag-unity-gradient-bar.png" alt="" class="stripe thin" pardot-region="header-stripe">
+</header>
+
+<!-- === HERO === -->
+<section id="hero" class="relative min-h-[92vh] flex items-center overflow-hidden bg-white">
+ <div class="absolute right-[-8%] top-1/2 -translate-y-1/2 w-[58vw] max-w-[840px] aspect-square opacity-15 pointer-events-none" pardot-region="hero-sphere">
+ <img src="../logos/tag-unity-sphere.png" class="sphere-img" alt="">
+ </div>
+ <div class="relative max-w-7xl mx-auto px-6 py-14 md:py-16">
+ <div class="flex items-center gap-3 mb-6">
+ <span class="ms grad-text text-[26px]">auto_awesome</span>
+ <div class="h-px w-8 bg-black/15"></div>
+ <span class="text-[13px] font-semibold tracking-[0.22em] uppercase text-black/70" pardot-region="hero-eyebrow">EYEBROW</span>
+ </div>
+ <h1 class="text-[clamp(2.4rem,6.5vw,6rem)] font-black leading-[1.0] tracking-tight max-w-5xl mb-6" pardot-region="hero-heading">
+ Hero <span class="grad-text">headline</span> here.
+ </h1>
+ <p class="text-[1.05rem] md:text-lg text-black/70 max-w-lg leading-relaxed mb-8" pardot-region="hero-subtext">
+ Hero subhead body copy.
+ </p>
+ <div class="flex flex-wrap gap-4">
+ <span pardot-region="hero-cta-secondary">
+ <a href="landing-page-light.html#challenge" class="inline-flex items-center gap-2 border border-black/[0.12] bg-black/[0.04] hover:bg-black/[0.08] text-[#111] text-[14px] font-semibold px-6 py-3 rounded-full transition">
+ <span class="ms text-[18px]">arrow_downward</span> Secondary CTA
+ </a>
+ </span>
+ <span pardot-region="hero-cta-primary">
+ <a href="landing-page-light.html#download" class="inline-flex items-center gap-2 grad-bg text-white text-[14px] font-bold px-6 py-3 rounded-full hover:opacity-90 transition">
+ <span class="ms text-[18px]">download</span> Primary CTA
+ </a>
+ </span>
+ </div>
+ </div>
+</section>
+
+<!-- === REMAINING SECTIONS: CHALLENGE, BRIDGE, SOLUTION, ASK, DOWNLOAD/FORM, FOOTER === -->
+<!-- See tag-context.md sections 49-57 for full HTML of each section variant. -->
+<!-- The complete light-theme master is at https://tag.schatt.me/assets/templates/landing-page-master.html -->
+
+<!-- === FORM ANCHOR (Pardot injects form here) === -->
+<section id="download" class="py-28 md:py-36 bg-white">
+ <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16">
+ <div>
+ <h2 class="text-[clamp(2.2rem,4.5vw,3.6rem)] font-black tracking-tight leading-[1.08] mb-6" pardot-region="download-heading">
+ Get the <span class="grad-text">report.</span>
+ </h2>
+ <p class="text-black/70 text-[1.05rem] leading-relaxed mb-10" pardot-region="download-body">
+ Download body copy here.
+ </p>
+ </div>
+ <div class="grad-border rounded-2xl bg-[#f9f9f9] p-8 md:p-10">
+ <div id="form-anchor" class="pardot-form-wrapper">
+ %%content%%
+ <p style="font-size:.68rem;color:rgba(0,0,0,.38);text-align:center;margin-top:.75rem;" pardot-region="form-privacy-text">
+ By submitting, you agree to The Adecco Group's Privacy Policy.
+ </p>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- === FOOTER === -->
+<footer class="relative bg-[#f0f0f0] pt-20 pb-10">
+ <img src="../logos/tag-unity-gradient-bar.png" alt="" class="stripe absolute top-0 left-0 right-0">
+ <div class="max-w-7xl mx-auto px-6">
+ <div class="border-t border-black/[0.08] pt-8 flex justify-between gap-4">
+ <p class="text-black/70 text-[12px]">&copy; 2026 The Adecco Group. All rights reserved.</p>
+ </div>
+ </div>
+</footer>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f86b95c8b25363f',t:'MTc3ODIyNTA1OQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

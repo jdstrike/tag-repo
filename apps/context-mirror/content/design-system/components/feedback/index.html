@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Feedback &amp; status | TAG Components</title>
+<meta name="description" content="Telling the user what is happening or what just happened.">
+<link rel="stylesheet" href="../_shared.css">
+      <link rel="stylesheet" href="https://tag.schatt.me/assets/css/site.css?v=6.4.0" />
+</head><body>
+<!-- TAG-CHROME-HEADER-BEGIN -->
+<nav class="tag-nav" aria-label="Primary">
+  <div class="tag-nav-inner">
+    <a href="../../../index.html" class="tag-nav-logo" aria-label="The Adecco Group">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+    </a>
+    <ul class="tag-nav-links">
+      <li><a href="../../../index.html#strategy" class="">Brand</a></li>
+      <li><a href="../../../index.html#voice" class="">Voice</a></li>
+      <li><a href="../../../business-context/index.html" class="">Business</a></li>
+      <li><a href="../index.html" class="active">Components</a></li>
+      <li><a href="../../documents/index.html" class="">Documents</a></li>
+      <li><a href="../../logos/index.html" class="">Logos</a></li>
+      <li><a href="../../../index.html#context" class="">Context</a></li>
+    </ul>
+    <a href="../../../prompt-card.md" class="tag-nav-cta">Prompt card</a>
+    <button class="tag-nav-burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="tag-nav-files" aria-label="Files">
+  <div class="tag-nav-files-inner">
+    <span class="label">Files</span>
+    <a href="../../../tag-context.md">tag-context.md</a>
+    <a href="../../../prompt-card.md">prompt-card.md</a>
+    <a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a>
+    <a href="../../../business-context.md">business-context.md</a>
+    <a href="../../../llms.txt">llms.txt</a>
+    <span class="sep"></span>
+    <a href="../../../assets/tokens/tokens.css">tokens.css</a>
+    <a href="../../../assets/templates/index.json">templates</a>
+  </div>
+</nav>
+<div class="tag-stripe"></div>
+<!-- TAG-CHROME-HEADER-END -->
+<div class="layout">
+
+<aside class="sidebar">
+ <h4>Get started</h4>
+ <ul>
+ <li><a href="../index.html" data-page="index">Overview</a></li>
+ </ul>
+ <h4>Foundations</h4>
+ <ul>
+ <li><a href="../foundations/index.html" data-page="foundations">Tokens, color, type, spacing</a></li>
+ </ul>
+ <h4>Components</h4>
+ <ul>
+ <li><a href="../buttons/index.html" data-page="buttons">Buttons</a></li>
+ <li><a href="../forms/index.html" data-page="forms">Forms &amp; inputs</a></li>
+ <li><a href="index.html" data-page="feedback" class="active">Feedback &amp; status</a></li>
+ <li><a href="../navigation/index.html" data-page="navigation">Navigation</a></li>
+ <li><a href="../data-display/index.html" data-page="data-display">Data display</a></li>
+ <li><a href="../overlays/index.html" data-page="overlays">Overlays</a></li>
+ <li><a href="../content/index.html" data-page="content">Content blocks</a></li>
+ </ul>
+ <h4>Modules &amp; templates</h4>
+ <ul>
+ <li><a href="../modules/index.html" data-page="modules">Modules</a></li>
+ <li><a href="../page-templates/index.html" data-page="page-templates">Page templates</a></li>
+ </ul>
+ <h4>Documents &amp; slides</h4>
+ <ul>
+ <li><a href="../documents/index.html" data-page="documents">Document patterns</a></li>
+ <li><a href="../slides/index.html" data-page="slides">Slide layouts</a></li>
+ <li><a href="../charts/index.html" data-page="charts">Charts</a></li>
+ </ul>
+ <h4>External</h4>
+ <ul>
+ <li><a href="https://dev.tagds.adeccogroup.com" target="_blank" rel="noopener">TAG-DS Storybook ↗</a></li>
+ <li><a href="https://zeroheight.com/7666d7eae" target="_blank" rel="noopener">zeroheight ↗</a></li>
+ </ul>
+</aside>
+
+<main class="content">
+<header><span class="eyebrow">Components / feedback</span><h1>Alerts, banners, notifications, snackbars, badges, status tags, progress, skeletons.</h1><p>Telling the user what is happening or what just happened.</p></header>
+
+<section class="comp" id="alert"><h2>Alert</h2>
+<p class="lede">Inline message inside a content area. Don't use for transient toast messages.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame col-gap">
+<div class="alert info"><div><strong>Heads up</strong>You're viewing FY26 figures. Choose another year above.</div><span class="x">✕</span></div>
+<div class="alert success"><div><strong>Saved</strong>Your changes have been published.</div><span class="x">✕</span></div>
+<div class="alert warning"><div><strong>Heads up</strong>This template was last updated 9 months ago.</div><span class="x">✕</span></div>
+<div class="alert error"><div><strong>Couldn't save</strong>Try again, or contact <a>SparkAI support</a>.</div><span class="x">✕</span></div>
+</div></div></section>
+
+<section class="comp" id="banner"><h2>Banner (full-width)</h2>
+<p class="lede">Above-the-fold marketing or system-wide notice.</p>
+<div class="preview"><div class="preview-label">Gradient banner</div><div class="frame compact" style="padding:0">
+<div class="banner-wide gradient"><strong>New:</strong> the Premium Client Intelligence Tracker is live for Microsoft. <a style="color:#fff;text-decoration:underline">Read more</a><span class="x">✕</span></div>
+</div></div>
+<div class="preview"><div class="preview-label">Dark banner</div><div class="frame compact" style="padding:0">
+<div class="banner-wide dark"><strong>System notice</strong>Maintenance window 02:00-03:00 UTC.<span class="x">✕</span></div>
+</div></div>
+<div class="preview"><div class="preview-label">Subtle banner</div><div class="frame compact" style="padding:0">
+<div class="banner-wide subtle">Read the FY26 strategy. <a style="color:var(--turquoise);font-weight:600">Open ↗</a><span class="x">✕</span></div>
+</div></div></section>
+
+<section class="comp" id="notification"><h2>Notification (toast)</h2>
+<p class="lede">Transient, top-right. 4-6 seconds, dismissible.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="background:var(--grey-100);min-height:140px;position:relative">
+<div class="alert success" style="position:absolute;right:18px;top:18px;box-shadow:var(--shadow-md);max-width:340px"><div><strong>Memo generated</strong>memo-megan.docx is ready in your downloads.</div></div>
+</div></div></section>
+
+<section class="comp" id="snackbar"><h2>Snackbar</h2>
+<p class="lede">Quick confirmation, optional Undo. Bottom-center, 3-5 seconds.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="background:var(--grey-100);min-height:120px;position:relative">
+<div style="position:absolute;left:50%;bottom:18px;transform:translateX(-50%);background:var(--primary);color:#fff;padding:10px 14px;border-radius:8px;font-size:13.5px;display:flex;gap:14px;align-items:center;box-shadow:var(--shadow-md)">Item archived <a style="color:var(--turquoise);text-decoration:underline;cursor:pointer">Undo</a></div>
+</div></div></section>
+
+<section class="comp" id="badge-status"><h2>Badge &amp; status tag</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame"><div class="row">
+<span class="badge">12</span>
+<span class="badge" style="background:var(--red)">3 new</span>
+<span class="badge-dot"></span>
+<span class="status status-success">Live</span>
+<span class="status status-warning">Review</span>
+<span class="status status-error">Blocked</span>
+<span class="status status-info">Draft</span>
+<span class="status status-neutral">Archived</span>
+</div></div></div></section>
+
+<section class="comp" id="progress"><h2>Progress bar</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame col-gap">
+<div class="progress"><span style="width:18%"></span></div>
+<div class="progress"><span style="width:64%"></span></div>
+<div class="progress gradient"><span style="width:92%"></span></div>
+</div></div></section>
+
+<section class="comp" id="step-progress"><h2>Step progress</h2>
+<p class="lede">Numbered, with sub-progress under the active step.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="stepper">
+<div class="step done"><div class="num">✓</div>Audience</div><div class="line"></div>
+<div class="step done"><div class="num">✓</div>Channel</div><div class="line"></div>
+<div class="step current"><div class="num">3</div>Mode</div><div class="line"></div>
+<div class="step"><div class="num">4</div>Outcome</div>
+</div>
+<div class="progress" style="margin-top:14px;max-width:200px"><span style="width:55%"></span></div>
+</div></div></section>
+
+<section class="comp" id="loader"><h2>Loader / spinner</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame row-gap">
+<span class="spinner"></span>
+<span class="spinner" style="width:18px;height:18px;border-width:2px"></span>
+<span class="spinner" style="width:42px;height:42px;border-width:4px"></span>
+</div></div></section>
+
+<section class="comp" id="ai-generating"><h2>AI generating state</h2>
+<p class="lede">Use whenever the AI is actively producing output. Streaming dot pattern signals "live writing".</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="card"><div class="row"><span class="spinner" style="width:18px;height:18px;border-width:2px"></span><strong>SparkAI is writing…</strong></div></div>
+</div></div></section>
+
+<section class="comp" id="skeleton"><h2>Skeleton</h2>
+<p class="lede">Content placeholder while data is loading. Use per chunk, not full-page.</p>
+<div class="preview"><div class="preview-label">Card skeleton</div><div class="frame">
+<div class="card">
+<div class="skel" style="height:18px;width:50%;margin-bottom:8px"></div>
+<div class="skel" style="height:12px;width:80%;margin-bottom:6px"></div>
+<div class="skel" style="height:12px;width:65%"></div>
+</div></div></div>
+<div class="preview"><div class="preview-label">List skeleton</div><div class="frame col-gap">
+<div class="row"><span class="skel" style="width:36px;height:36px;border-radius:50%"></span><div style="flex:1"><div class="skel" style="height:14px;width:60%;margin-bottom:6px"></div><div class="skel" style="height:12px;width:30%"></div></div></div>
+<div class="row"><span class="skel" style="width:36px;height:36px;border-radius:50%"></span><div style="flex:1"><div class="skel" style="height:14px;width:50%;margin-bottom:6px"></div><div class="skel" style="height:12px;width:25%"></div></div></div>
+<div class="row"><span class="skel" style="width:36px;height:36px;border-radius:50%"></span><div style="flex:1"><div class="skel" style="height:14px;width:70%;margin-bottom:6px"></div><div class="skel" style="height:12px;width:35%"></div></div></div>
+</div></div>
+<div class="preview"><div class="preview-label">Table skeleton</div><div class="frame">
+<table class="tbl"><thead><tr><th>GBU</th><th>Markets</th><th>Status</th></tr></thead><tbody>
+<tr><td><span class="skel" style="display:block;height:12px;width:80%"></span></td><td><span class="skel" style="display:block;height:12px;width:30%"></span></td><td><span class="skel" style="display:block;height:12px;width:50%"></span></td></tr>
+<tr><td><span class="skel" style="display:block;height:12px;width:70%"></span></td><td><span class="skel" style="display:block;height:12px;width:30%"></span></td><td><span class="skel" style="display:block;height:12px;width:60%"></span></td></tr>
+</tbody></table>
+</div></div></section>
+
+<section class="comp" id="empty"><h2>Empty state</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="text-align:center;padding:40px 20px">
+<div style="font-size:42px;opacity:.4">∅</div>
+<h3 style="margin:10px 0 4px">No memos yet</h3>
+<p style="color:var(--primary-300);margin:0 0 16px">Generate one from the canonical template in two seconds.</p>
+<a class="btn btn-primary">Generate a memo</a>
+</div></div></div></section>
+
+<section class="comp" id="cookie"><h2>Cookie message</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="background:var(--grey-100);position:relative;min-height:120px">
+<div class="card" style="position:absolute;left:14px;right:14px;bottom:14px;background:var(--primary);color:#fff;border:0">
+<div class="row" style="justify-content:space-between;gap:18px;flex-wrap:wrap">
+<div style="font-size:13px">We use essential cookies and, with your consent, analytics. <a style="color:var(--turquoise)">Read more</a>.</div>
+<div class="row"><a class="btn btn-tertiary btn-sm" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4)">Reject</a><a class="btn btn-primary btn-sm">Accept</a></div>
+</div></div></div></div></section>
+
+<section class="comp" id="coachmark"><h2>Coachmark / onboarding tooltip</h2>
+<p class="lede">Spot tooltip with arrow. Use sparingly during first-run flows.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame" style="padding:60px 28px">
+<div class="coach"><strong style="color:var(--turquoise)">New ✦</strong><br>This button now generates the file from the canonical template.</div>
+</div></div></section>
+
+<section class="comp" id="connectivity"><h2>Connectivity status</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame"><div class="row">
+<span class="status status-success">● Online</span>
+<span class="status status-warning">● Reconnecting</span>
+<span class="status status-error">● Offline</span>
+</div></div></div></section>
+
+<section class="comp" id="save-indicator"><h2>Save indicator</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame"><div class="row">
+<span style="font-size:13px;color:var(--primary-300)">All changes saved · 2s ago</span>
+<span style="font-size:13px;color:var(--primary-300)">Saving<span class="spinner" style="width:12px;height:12px;border-width:1.5px;margin-left:6px;vertical-align:middle"></span></span>
+<span style="font-size:13px;color:var(--red)">Couldn't save · <a style="color:var(--turquoise);text-decoration:underline">Retry</a></span>
+</div></div></div></section>
+
+<section class="comp" id="stale-data"><h2>Stale data warning</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="alert warning"><div><strong>Data is 9 days old</strong>Click refresh to pull the latest figures.</div><a class="btn btn-secondary btn-sm">Refresh</a></div>
+</div></div></section>
+
+</main>
+</div>
+
+<!-- TAG-CHROME-FOOTER-BEGIN -->
+<div class="tag-footer-bar"></div>
+<footer class="tag-footer" aria-label="Site footer">
+  <div class="tag-footer-inner">
+    <div class="tag-footer-brand">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+      <p>Self-hosted brand and AI context. Single source of truth for any AI tool that produces content for the Adecco Group.</p>
+      <span class="tag-footer-tagline">Making the future work for everyone</span>
+    </div>
+    <div>
+      <h4>Brand &amp; AI</h4>
+      <ul>
+        <li><a href="../../../tag-context.md">tag-context.md</a></li>
+        <li><a href="../../../prompt-card.md">prompt-card.md</a></li>
+        <li><a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a></li>
+        <li><a href="../../../business-context.md">business-context.md</a></li>
+        <li><a href="../../../llms.txt">llms.txt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Design system</h4>
+      <ul>
+        <li><a href="../index.html">Components</a></li>
+        <li><a href="../../documents/index.html">Documents</a></li>
+        <li><a href="../../logos/index.html">Logos</a></li>
+        <li><a href="../../../business-context/index.html">Business context</a></li>
+        <li><a href="../../../assets/tokens/tokens.css">Tokens (CSS)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="../../../assets/docs/brand-guidelines.pdf">Brand Guidelines PDF</a></li>
+        <li><a href="../../../assets/templates/index.json">Template registry</a></li>
+        <li><a href="../../../assets/recipes/README.md">Recipes</a></li>
+        <li><a href="../../../playbook.md">Playbook</a></li>
+        <li><a href="../../../context.html">Context (SSR)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li>Internal use only</li>
+        <li>Brand assets &copy; The Adecco Group</li>
+        <li>Hosted via Cloudflare Tunnel</li>
+        <li><a href="../../../index.html">tag.schatt.me</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tag-footer-bottom">
+    <span>&copy; 2026 The Adecco Group</span>
+    <span><code>v6.3.0</code> &middot; updated 2026-05-05</span>
+  </div>
+</footer>
+<!-- TAG-CHROME-FOOTER-END -->
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f86b8f55ca3363f',t:'MTc3ODIyNTA0Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body></html>

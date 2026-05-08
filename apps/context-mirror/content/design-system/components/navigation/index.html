@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Navigation | TAG Components</title>
+<meta name="description" content="How users move between places in a TAG product or site.">
+<link rel="stylesheet" href="../_shared.css">
+      <link rel="stylesheet" href="https://tag.schatt.me/assets/css/site.css?v=6.4.0" />
+</head><body>
+<!-- TAG-CHROME-HEADER-BEGIN -->
+<nav class="tag-nav" aria-label="Primary">
+  <div class="tag-nav-inner">
+    <a href="../../../index.html" class="tag-nav-logo" aria-label="The Adecco Group">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+    </a>
+    <ul class="tag-nav-links">
+      <li><a href="../../../index.html#strategy" class="">Brand</a></li>
+      <li><a href="../../../index.html#voice" class="">Voice</a></li>
+      <li><a href="../../../business-context/index.html" class="">Business</a></li>
+      <li><a href="../index.html" class="active">Components</a></li>
+      <li><a href="../../documents/index.html" class="">Documents</a></li>
+      <li><a href="../../logos/index.html" class="">Logos</a></li>
+      <li><a href="../../../index.html#context" class="">Context</a></li>
+    </ul>
+    <a href="../../../prompt-card.md" class="tag-nav-cta">Prompt card</a>
+    <button class="tag-nav-burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="tag-nav-files" aria-label="Files">
+  <div class="tag-nav-files-inner">
+    <span class="label">Files</span>
+    <a href="../../../tag-context.md">tag-context.md</a>
+    <a href="../../../prompt-card.md">prompt-card.md</a>
+    <a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a>
+    <a href="../../../business-context.md">business-context.md</a>
+    <a href="../../../llms.txt">llms.txt</a>
+    <span class="sep"></span>
+    <a href="../../../assets/tokens/tokens.css">tokens.css</a>
+    <a href="../../../assets/templates/index.json">templates</a>
+  </div>
+</nav>
+<div class="tag-stripe"></div>
+<!-- TAG-CHROME-HEADER-END -->
+<div class="layout">
+
+<aside class="sidebar">
+ <h4>Get started</h4>
+ <ul>
+ <li><a href="../index.html" data-page="index">Overview</a></li>
+ </ul>
+ <h4>Foundations</h4>
+ <ul>
+ <li><a href="../foundations/index.html" data-page="foundations">Tokens, color, type, spacing</a></li>
+ </ul>
+ <h4>Components</h4>
+ <ul>
+ <li><a href="../buttons/index.html" data-page="buttons">Buttons</a></li>
+ <li><a href="../forms/index.html" data-page="forms">Forms &amp; inputs</a></li>
+ <li><a href="../feedback/index.html" data-page="feedback">Feedback &amp; status</a></li>
+ <li><a href="index.html" data-page="navigation" class="active">Navigation</a></li>
+ <li><a href="../data-display/index.html" data-page="data-display">Data display</a></li>
+ <li><a href="../overlays/index.html" data-page="overlays">Overlays</a></li>
+ <li><a href="../content/index.html" data-page="content">Content blocks</a></li>
+ </ul>
+ <h4>Modules &amp; templates</h4>
+ <ul>
+ <li><a href="../modules/index.html" data-page="modules">Modules</a></li>
+ <li><a href="../page-templates/index.html" data-page="page-templates">Page templates</a></li>
+ </ul>
+ <h4>Documents &amp; slides</h4>
+ <ul>
+ <li><a href="../documents/index.html" data-page="documents">Document patterns</a></li>
+ <li><a href="../slides/index.html" data-page="slides">Slide layouts</a></li>
+ <li><a href="../charts/index.html" data-page="charts">Charts</a></li>
+ </ul>
+ <h4>External</h4>
+ <ul>
+ <li><a href="https://dev.tagds.adeccogroup.com" target="_blank" rel="noopener">TAG-DS Storybook ↗</a></li>
+ <li><a href="https://zeroheight.com/7666d7eae" target="_blank" rel="noopener">zeroheight ↗</a></li>
+ </ul>
+</aside>
+
+<main class="content">
+<header><span class="eyebrow">Components / navigation</span><h1>Headers, sidebars, breadcrumbs, tabs, pagination, mega menu, bottom nav.</h1><p>How users move between places in a TAG product or site.</p></header>
+
+<section class="comp" id="header"><h2>Header / top nav</h2>
+<p class="lede">Sticky on scroll. Lockup left, primary nav right, CTA on the far right.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0">
+<header style="display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:#fff;border-bottom:1px solid var(--grey-300)">
+<div style="font-weight:800">the Adecco Group</div>
+<nav class="row" style="gap:22px"><a style="text-decoration:none;color:var(--primary)">About</a><a style="text-decoration:none;color:var(--primary)">Brands</a><a style="text-decoration:none;color:var(--primary)">Insights</a><a style="text-decoration:none;color:var(--primary)">Investors</a></nav>
+<a class="btn btn-primary btn-sm">Talk to us</a>
+</header>
+</div></div></section>
+
+<section class="comp" id="header-app"><h2>Header (app shell)</h2>
+<p class="lede">Inside an app: workspace switcher, search, notifications, avatar.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0">
+<header style="display:flex;align-items:center;justify-content:space-between;padding:10px 18px;background:var(--primary);color:#fff;border-bottom:1px solid var(--primary-2)">
+<div class="row" style="gap:16px;align-items:center"><strong>SparkAI</strong><span style="opacity:.5">›</span><span>Premium Client Tracker</span></div>
+<div class="row" style="gap:6px">
+<a class="btn btn-tertiary btn-icon" style="background:rgba(255,255,255,.1);color:#fff">⌕</a>
+<a class="btn btn-tertiary btn-icon" style="background:rgba(255,255,255,.1);color:#fff">🔔<span class="badge-dot" style="position:absolute;top:6px;right:6px"></span></a>
+<span class="avatar avatar-sm" style="background:var(--turquoise)">JS</span>
+</div></header>
+</div></div></section>
+
+<section class="comp" id="sidebar"><h2>Sidebar / app nav</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0;background:var(--grey-100)">
+<div style="display:flex;height:240px">
+<aside style="width:200px;background:#fff;border-right:1px solid var(--grey-300);padding:18px">
+<div style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--primary-300);margin-bottom:6px">Workspace</div>
+<ul style="list-style:none;padding:0;margin:0;font-size:14px">
+<li style="padding:6px 8px;border-radius:6px;background:var(--primary);color:#fff;margin-bottom:2px">Dashboard</li>
+<li style="padding:6px 8px;border-radius:6px;margin-bottom:2px;color:var(--primary)">Clients</li>
+<li style="padding:6px 8px;border-radius:6px;margin-bottom:2px;color:var(--primary)">Reports</li>
+<li style="padding:6px 8px;border-radius:6px;margin-bottom:2px;color:var(--primary)">Settings</li>
+</ul></aside>
+<main style="flex:1;padding:18px"><h3 style="margin:0 0 6px">Dashboard</h3><p style="color:var(--primary-300);font-size:14px;margin:0">Page content goes here.</p></main>
+</div></div></div></section>
+
+<section class="comp" id="mega-menu"><h2>Mega menu</h2>
+<p class="lede">Multi-column dropdown. Three or four content columns plus a featured promo on the left.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="mega">
+<div style="background:var(--gradient);border-radius:8px;padding:16px;color:#fff;font-size:13px"><strong>Premium Tracker</strong><p style="opacity:.9;margin:6px 0 0">Live client intelligence in 20 seconds.</p></div>
+<div class="col"><h4>About</h4><ul><li>Strategy</li><li>Leadership</li><li>Investors</li><li>Innovation</li></ul></div>
+<div class="col"><h4>Brands</h4><ul><li>Adecco</li><li>LHH</li><li>Akkodis</li><li>Pontoon</li></ul></div>
+<div class="col"><h4>Resources</h4><ul><li>Insights</li><li>Reports</li><li>Press</li><li>Careers</li></ul></div>
+</div>
+</div></div></section>
+
+<section class="comp" id="mobile-nav"><h2>Mobile expanded navigation</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0;background:var(--grey-100);min-height:340px;display:flex;justify-content:center">
+<div style="background:#fff;width:280px;height:340px;border-radius:14px;box-shadow:var(--shadow-lg);padding:22px">
+<div class="row" style="justify-content:space-between;margin-bottom:18px"><strong>Menu</strong><a class="btn btn-tertiary btn-icon">✕</a></div>
+<ul style="list-style:none;padding:0;margin:0;font-size:15px;border-top:1px solid var(--grey-200)">
+<li style="padding:14px 0;border-bottom:1px solid var(--grey-200);display:flex;justify-content:space-between">About <span style="opacity:.4">›</span></li>
+<li style="padding:14px 0;border-bottom:1px solid var(--grey-200);display:flex;justify-content:space-between">Brands <span style="opacity:.4">›</span></li>
+<li style="padding:14px 0;border-bottom:1px solid var(--grey-200);display:flex;justify-content:space-between">Insights <span style="opacity:.4">›</span></li>
+<li style="padding:14px 0;display:flex;justify-content:space-between">Careers <span style="opacity:.4">›</span></li>
+</ul></div>
+</div></div></section>
+
+<section class="comp" id="bottom-nav"><h2>Bottom navigation (mobile)</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0;background:var(--grey-100);min-height:140px;display:flex;justify-content:center;align-items:flex-end">
+<div style="width:280px;background:#fff">
+<div style="padding:18px;font-size:13px">App content area</div>
+<div class="bnav"><a class="active"><span class="i">⌂</span>Home</a><a><span class="i">⌕</span>Search</a><a><span class="i">★</span>Saved</a><a><span class="i">⏍</span>Profile</a></div>
+</div></div></div></section>
+
+<section class="comp" id="breadcrumbs"><h2>Breadcrumbs</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<nav class="bc"><a>tag.schatt.me</a><span class="sep">›</span><a>design-system</a><span class="sep">›</span><a>components</a><span class="sep">›</span><span class="current">Navigation</span></nav>
+</div></div></section>
+
+<section class="comp" id="back-link"><h2>Back link</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<a style="color:var(--primary);text-decoration:none;font-size:14px;display:inline-flex;align-items:center;gap:6px"><span style="font-size:18px">‹</span>Back to all reports</a>
+</div></div></section>
+
+<section class="comp" id="anchor-toc"><h2>Anchor / in-page TOC</h2>
+<p class="lede">Sticky list of anchors that highlights the current section.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<aside style="border-left:2px solid var(--grey-200);padding-left:14px;font-size:13px">
+<div style="text-transform:uppercase;letter-spacing:.08em;color:var(--primary-300);margin-bottom:8px;font-size:11px">On this page</div>
+<a style="display:block;padding:3px 0;color:var(--primary-300);text-decoration:none">Introduction</a>
+<a style="display:block;padding:3px 0;color:var(--turquoise);font-weight:600;border-left:2px solid var(--turquoise);margin-left:-16px;padding-left:14px;text-decoration:none">Brand voice</a>
+<a style="display:block;padding:3px 0;color:var(--primary-300);text-decoration:none">Visual identity</a>
+<a style="display:block;padding:3px 0;color:var(--primary-300);text-decoration:none">Templates</a>
+<a style="display:block;padding:3px 0;color:var(--primary-300);text-decoration:none">Governance</a>
+</aside></div></div></section>
+
+<section class="comp" id="tabs"><h2>Tabs</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="tabs"><div class="tab active">Overview</div><div class="tab">Components</div><div class="tab">Modules</div><div class="tab">Foundations</div></div>
+<div style="padding:18px 0">Tab content goes here.</div>
+</div></div></section>
+
+<section class="comp" id="vertical-tabs"><h2>Vertical tabs</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="display:grid;grid-template-columns:160px 1fr;gap:18px">
+<div style="border-right:1px solid var(--grey-200)">
+<div style="padding:8px 12px;border-right:2px solid var(--turquoise);margin-right:-1px;color:var(--turquoise);font-weight:600;font-size:14px">Profile</div>
+<div style="padding:8px 12px;color:var(--primary-300);font-size:14px">Notifications</div>
+<div style="padding:8px 12px;color:var(--primary-300);font-size:14px">Security</div>
+<div style="padding:8px 12px;color:var(--primary-300);font-size:14px">Billing</div>
+</div>
+<div><h3 style="margin:0 0 6px">Profile</h3><p style="color:var(--primary-300);font-size:14px">Manage your name, photo, and contact details.</p></div>
+</div></div></div></section>
+
+<section class="comp" id="pagination"><h2>Pagination</h2>
+<div class="preview"><div class="preview-label">Default</div><div class="frame">
+<div class="pag"><a class="p disabled">‹</a><a class="p active">1</a><a class="p">2</a><a class="p">3</a><a class="p">…</a><a class="p">12</a><a class="p">›</a></div>
+</div></div>
+<div class="preview"><div class="preview-label">Compact (text)</div><div class="frame">
+<span style="font-size:13.5px;color:var(--primary-300)"><a style="color:var(--primary)">‹ Previous</a> · Page 4 of 12 · <a style="color:var(--primary)">Next ›</a></span>
+</div></div></section>
+
+<section class="comp" id="stepper"><h2>Stepper</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="stepper">
+<div class="step done"><div class="num">✓</div>Audience</div><div class="line"></div>
+<div class="step done"><div class="num">✓</div>Channel</div><div class="line"></div>
+<div class="step current"><div class="num">3</div>Mode</div><div class="line"></div>
+<div class="step"><div class="num">4</div>Outcome</div>
+</div></div></div></section>
+
+<section class="comp" id="content-switcher"><h2>Content switcher</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="display:inline-flex;border:1px solid var(--grey-300);border-radius:8px;overflow:hidden">
+<button class="btn btn-tertiary" style="border-radius:0;background:var(--primary);color:#fff">List</button>
+<button class="btn btn-tertiary" style="border-radius:0">Grid</button>
+<button class="btn btn-tertiary" style="border-radius:0">Kanban</button>
+</div></div></div></section>
+
+<section class="comp" id="overflow"><h2>Overflow / kebab menu</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame"><div class="row">
+<a class="btn btn-tertiary btn-icon">⋯</a>
+<a class="btn btn-tertiary btn-icon">⋮</a>
+</div></div></div></section>
+
+<section class="comp" id="filter-side"><h2>Filter sidebar</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<aside class="filter-side">
+<h4>Region</h4>
+<label class="check"><input type="checkbox" checked>EMEA (12)</label>
+<label class="check"><input type="checkbox">Americas (9)</label>
+<label class="check"><input type="checkbox">APAC (6)</label>
+<h4>Status</h4>
+<label class="check"><input type="checkbox" checked>Live</label>
+<label class="check"><input type="checkbox">Draft</label>
+<label class="check"><input type="checkbox">Archived</label>
+<h4>Mode</h4>
+<label class="radio"><input type="radio" name="mode" checked>All</label>
+<label class="radio"><input type="radio" name="mode">Lead</label>
+<label class="radio"><input type="radio" name="mode">Engage</label>
+</aside>
+</div></div></section>
+
+<section class="comp" id="back-to-top"><h2>Back to top</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0;background:var(--grey-100);height:160px;position:relative">
+<button class="btn btn-primary btn-icon" style="position:absolute;right:18px;bottom:18px;border-radius:50%;width:42px;height:42px">↑</button>
+</div></div></section>
+
+<section class="comp" id="skip"><h2>Skip to content</h2>
+<p class="lede">Keyboard-only link, hidden until focused. Required for WCAG.</p>
+<pre><code>&lt;a href="#main" class="skip"&gt;Skip to main content&lt;/a&gt;</code></pre></section>
+
+</main>
+</div>
+
+<!-- TAG-CHROME-FOOTER-BEGIN -->
+<div class="tag-footer-bar"></div>
+<footer class="tag-footer" aria-label="Site footer">
+  <div class="tag-footer-inner">
+    <div class="tag-footer-brand">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+      <p>Self-hosted brand and AI context. Single source of truth for any AI tool that produces content for the Adecco Group.</p>
+      <span class="tag-footer-tagline">Making the future work for everyone</span>
+    </div>
+    <div>
+      <h4>Brand &amp; AI</h4>
+      <ul>
+        <li><a href="../../../tag-context.md">tag-context.md</a></li>
+        <li><a href="../../../prompt-card.md">prompt-card.md</a></li>
+        <li><a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a></li>
+        <li><a href="../../../business-context.md">business-context.md</a></li>
+        <li><a href="../../../llms.txt">llms.txt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Design system</h4>
+      <ul>
+        <li><a href="../index.html">Components</a></li>
+        <li><a href="../../documents/index.html">Documents</a></li>
+        <li><a href="../../logos/index.html">Logos</a></li>
+        <li><a href="../../../business-context/index.html">Business context</a></li>
+        <li><a href="../../../assets/tokens/tokens.css">Tokens (CSS)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="../../../assets/docs/brand-guidelines.pdf">Brand Guidelines PDF</a></li>
+        <li><a href="../../../assets/templates/index.json">Template registry</a></li>
+        <li><a href="../../../assets/recipes/README.md">Recipes</a></li>
+        <li><a href="../../../playbook.md">Playbook</a></li>
+        <li><a href="../../../context.html">Context (SSR)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li>Internal use only</li>
+        <li>Brand assets &copy; The Adecco Group</li>
+        <li>Hosted via Cloudflare Tunnel</li>
+        <li><a href="../../../index.html">tag.schatt.me</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tag-footer-bottom">
+    <span>&copy; 2026 The Adecco Group</span>
+    <span><code>v6.3.0</code> &middot; updated 2026-05-05</span>
+  </div>
+</footer>
+<!-- TAG-CHROME-FOOTER-END -->
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f86b8f5bce8363f',t:'MTc3ODIyNTA0Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body></html>

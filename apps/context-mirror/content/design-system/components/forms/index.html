@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Forms &amp; inputs | TAG Components</title>
+<meta name="description" content="The interactive primitives every form is made of, plus rich-text and password-strength helpers.">
+<link rel="stylesheet" href="../_shared.css">
+      <link rel="stylesheet" href="https://tag.schatt.me/assets/css/site.css?v=6.4.0" />
+</head><body>
+<!-- TAG-CHROME-HEADER-BEGIN -->
+<nav class="tag-nav" aria-label="Primary">
+  <div class="tag-nav-inner">
+    <a href="../../../index.html" class="tag-nav-logo" aria-label="The Adecco Group">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+    </a>
+    <ul class="tag-nav-links">
+      <li><a href="../../../index.html#strategy" class="">Brand</a></li>
+      <li><a href="../../../index.html#voice" class="">Voice</a></li>
+      <li><a href="../../../business-context/index.html" class="">Business</a></li>
+      <li><a href="../index.html" class="active">Components</a></li>
+      <li><a href="../../documents/index.html" class="">Documents</a></li>
+      <li><a href="../../logos/index.html" class="">Logos</a></li>
+      <li><a href="../../../index.html#context" class="">Context</a></li>
+    </ul>
+    <a href="../../../prompt-card.md" class="tag-nav-cta">Prompt card</a>
+    <button class="tag-nav-burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="tag-nav-files" aria-label="Files">
+  <div class="tag-nav-files-inner">
+    <span class="label">Files</span>
+    <a href="../../../tag-context.md">tag-context.md</a>
+    <a href="../../../prompt-card.md">prompt-card.md</a>
+    <a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a>
+    <a href="../../../business-context.md">business-context.md</a>
+    <a href="../../../llms.txt">llms.txt</a>
+    <span class="sep"></span>
+    <a href="../../../assets/tokens/tokens.css">tokens.css</a>
+    <a href="../../../assets/templates/index.json">templates</a>
+  </div>
+</nav>
+<div class="tag-stripe"></div>
+<!-- TAG-CHROME-HEADER-END -->
+<div class="layout">
+
+<aside class="sidebar">
+ <h4>Get started</h4>
+ <ul>
+ <li><a href="../index.html" data-page="index">Overview</a></li>
+ </ul>
+ <h4>Foundations</h4>
+ <ul>
+ <li><a href="../foundations/index.html" data-page="foundations">Tokens, color, type, spacing</a></li>
+ </ul>
+ <h4>Components</h4>
+ <ul>
+ <li><a href="../buttons/index.html" data-page="buttons">Buttons</a></li>
+ <li><a href="index.html" data-page="forms" class="active">Forms &amp; inputs</a></li>
+ <li><a href="../feedback/index.html" data-page="feedback">Feedback &amp; status</a></li>
+ <li><a href="../navigation/index.html" data-page="navigation">Navigation</a></li>
+ <li><a href="../data-display/index.html" data-page="data-display">Data display</a></li>
+ <li><a href="../overlays/index.html" data-page="overlays">Overlays</a></li>
+ <li><a href="../content/index.html" data-page="content">Content blocks</a></li>
+ </ul>
+ <h4>Modules &amp; templates</h4>
+ <ul>
+ <li><a href="../modules/index.html" data-page="modules">Modules</a></li>
+ <li><a href="../page-templates/index.html" data-page="page-templates">Page templates</a></li>
+ </ul>
+ <h4>Documents &amp; slides</h4>
+ <ul>
+ <li><a href="../documents/index.html" data-page="documents">Document patterns</a></li>
+ <li><a href="../slides/index.html" data-page="slides">Slide layouts</a></li>
+ <li><a href="../charts/index.html" data-page="charts">Charts</a></li>
+ </ul>
+ <h4>External</h4>
+ <ul>
+ <li><a href="https://dev.tagds.adeccogroup.com" target="_blank" rel="noopener">TAG-DS Storybook ↗</a></li>
+ <li><a href="https://zeroheight.com/7666d7eae" target="_blank" rel="noopener">zeroheight ↗</a></li>
+ </ul>
+</aside>
+
+<main class="content">
+<header><span class="eyebrow">Components / forms</span><h1>Inputs, selects, checkboxes, radios, toggles, sliders, datepickers.</h1><p>The interactive primitives every form is made of, plus rich-text and password-strength helpers.</p></header>
+
+<section class="comp" id="text-input"><h2>Text input</h2>
+<p class="lede">Default with label and helper. Error and success variants. Disabled.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="max-width:360px">
+<div class="field"><label>Email</label><input class="input" placeholder="you@adeccogroup.com"><div class="help">We'll never share this.</div></div>
+<div class="field"><label>Phone</label><input class="input error" value="not-a-number"><div class="help error">Phone number isn't valid.</div></div>
+<div class="field"><label>Name</label><input class="input success" value="Megan Wickens"></div>
+<div class="field"><label>Read-only</label><input class="input" value="Adecco Group AG" disabled></div>
+</div></div></div>
+<pre><code>&lt;div class="field"&gt;
+ &lt;label&gt;Email&lt;/label&gt;
+ &lt;input class="input" placeholder="<a href="https://tag.schatt.me/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dda4b2a89dbcb9b8bebeb2baafb2a8adf3beb2b0">[email&#160;protected]</a>"&gt;
+&lt;/div&gt;</code></pre></section>
+
+<section class="comp" id="prefix-suffix"><h2>Input with prefix / suffix</h2>
+<p class="lede">For currency, units, percentages, URLs.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame col-gap">
+<div class="input-affix"><span class="prefix">€</span><input value="1,250"><span class="suffix">EUR</span></div>
+<div class="input-affix"><span class="prefix">https://</span><input value="adeccogroup.com"></div>
+<div class="input-affix"><input value="60"><span class="suffix">%</span></div>
+</div></div></section>
+
+<section class="comp" id="textarea"><h2>Textarea</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="max-width:360px"><textarea class="input" rows="4" placeholder="Tell us about your team…"></textarea></div>
+</div></div></section>
+
+<section class="comp" id="rich-text"><h2>Rich text editor</h2>
+<p class="lede">Roadmap in TAG-DS. Stub here; production should use the official component.</p>
+<div class="preview"><div class="preview-label">Live (stub)</div><div class="frame">
+<div style="max-width:480px;border:1px solid var(--grey-300);border-radius:8px;background:#fff">
+<div class="row" style="padding:8px 10px;border-bottom:1px solid var(--grey-300);gap:4px">
+<a class="btn btn-tertiary btn-sm">B</a><a class="btn btn-tertiary btn-sm"><i>I</i></a><a class="btn btn-tertiary btn-sm">U</a><span style="border-left:1px solid var(--grey-300);height:16px;align-self:center;margin:0 4px"></span><a class="btn btn-tertiary btn-sm">H1</a><a class="btn btn-tertiary btn-sm">H2</a><a class="btn btn-tertiary btn-sm">•</a><a class="btn btn-tertiary btn-sm">1.</a><a class="btn btn-tertiary btn-sm">↗</a>
+</div>
+<div style="padding:14px;min-height:140px;font-size:14px;color:var(--primary-300)">Start writing here…</div>
+</div>
+</div></div></section>
+
+<section class="comp" id="select"><h2>Select</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="max-width:280px">
+<select class="input"><option>The Adecco Group</option><option>Adecco</option><option>LHH</option><option>Akkodis</option></select>
+</div></div></div></section>
+
+<section class="comp" id="combobox"><h2>Combobox / autocomplete</h2>
+<p class="lede">Type-ahead with menu of matching options.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="combobox">
+<input class="input" value="Mar" placeholder="Type a month…">
+<div class="menu">
+<div class="opt">January</div>
+<div class="opt">February</div>
+<div class="opt selected">March</div>
+<div class="opt">April</div>
+<div class="opt">May</div>
+</div>
+</div>
+<div style="height:80px"></div>
+</div></div></section>
+
+<section class="comp" id="multi-select"><h2>Multi-select with chips</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="tags-input">
+<span class="chip selected">EMEA <span class="x">×</span></span>
+<span class="chip selected">APAC <span class="x">×</span></span>
+<span class="chip selected">DACH <span class="x">×</span></span>
+<input placeholder="Add region…">
+</div>
+</div></div></section>
+
+<section class="comp" id="tags-input"><h2>Tags input</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="tags-input">
+<span class="chip selected">workforce <span class="x">×</span></span>
+<span class="chip selected">AI <span class="x">×</span></span>
+<span class="chip selected">skills <span class="x">×</span></span>
+<input placeholder="Add a tag…">
+</div>
+</div></div></section>
+
+<section class="comp" id="checkbox"><h2>Checkbox</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame col-gap">
+<label class="check"><input type="checkbox" checked>I agree to the AI Use Guidelines</label>
+<label class="check"><input type="checkbox">Send me the weekly newsletter</label>
+<label class="check"><input type="checkbox" disabled>Disabled option</label>
+</div></div></section>
+
+<section class="comp" id="radio"><h2>Radio</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame col-gap">
+<label class="radio"><input type="radio" name="r" checked>Adecco</label>
+<label class="radio"><input type="radio" name="r">LHH</label>
+<label class="radio"><input type="radio" name="r">Akkodis</label>
+</div></div></section>
+
+<section class="comp" id="toggle"><h2>Switch / toggle</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<label class="switch"><input type="checkbox" checked><span class="track"></span><span>Email me weekly</span></label>
+&nbsp;&nbsp;
+<label class="switch"><input type="checkbox"><span class="track"></span><span>Off</span></label>
+</div></div></section>
+
+<section class="comp" id="slider"><h2>Slider</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<input class="slider" type="range" min="0" max="100" value="42">
+</div></div></section>
+
+<section class="comp" id="range-dual"><h2>Range slider (dual handle)</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="range-dual">
+<div class="track"></div>
+<div class="fill" style="left:24%;right:32%"></div>
+<div class="h" style="left:24%"></div>
+<div class="h" style="left:68%"></div>
+</div>
+<div class="row" style="margin-top:8px;font-size:12px;color:var(--primary-300)">€ 24k <span style="margin-left:auto">€ 68k</span></div>
+</div></div></section>
+
+<section class="comp" id="number-input"><h2>Number input</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="max-width:120px"><input class="input" type="number" value="60" min="1" max="999"></div>
+</div></div></section>
+
+<section class="comp" id="otp"><h2>OTP / PIN input</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="otp"><input value="4"><input value="2"><input value="9"><input value=""><input><input></div>
+</div></div></section>
+
+<section class="comp" id="password"><h2>Password with strength</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="field" style="max-width:320px">
+<label>Password</label><input class="input" type="password" value="••••••••••••">
+<div class="pwd-strength"><div class="seg on-s"></div><div class="seg on-s"></div><div class="seg on-s"></div><div class="seg on-s"></div></div>
+<div class="help" style="color:var(--green)">Strong</div>
+</div>
+</div></div></section>
+
+<section class="comp" id="datepicker"><h2>Datepicker</h2>
+<p class="lede">Native input. The official component takes <code>yyyy/MM/dd</code>.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="max-width:200px"><input class="input" type="date"></div>
+</div></div></section>
+
+<section class="comp" id="time"><h2>Time picker</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="max-width:140px"><input class="input" type="time" value="09:30"></div>
+</div></div></section>
+
+<section class="comp" id="search"><h2>Search box</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="max-width:360px;position:relative"><input class="input" placeholder="Search the brand context…" style="padding-left:36px"><span style="position:absolute;left:12px;top:11px;color:var(--primary-300)">⌕</span></div>
+</div></div></section>
+
+<section class="comp" id="file-uploader"><h2>File uploader</h2>
+<p class="lede">Drag-and-drop with click fallback. States: idle, uploading, success, error.</p>
+<div class="preview"><div class="preview-label">Idle</div><div class="frame">
+<div style="border:2px dashed var(--grey-300);border-radius:10px;padding:32px;text-align:center;background:var(--grey-50)">
+<div style="font-size:14px;font-weight:600">Drop your .docx here</div>
+<div style="font-size:12px;color:var(--primary-300);margin-top:4px">or click to browse</div>
+</div>
+</div></div>
+<div class="preview"><div class="preview-label">Uploading</div><div class="frame">
+<div style="border:1px solid var(--grey-300);border-radius:10px;padding:18px">
+<div class="row" style="justify-content:space-between"><strong>brief.docx</strong><span style="font-size:12px;color:var(--primary-300)">62%</span></div>
+<div class="progress" style="margin-top:8px"><span style="width:62%"></span></div>
+</div>
+</div></div>
+<div class="preview"><div class="preview-label">Success</div><div class="frame">
+<div style="border:1px solid var(--green);border-radius:10px;padding:18px;background:#E2F5E8">
+<div class="row" style="justify-content:space-between"><div><strong>brief.docx</strong><div style="font-size:12px;color:#1F7C36">Uploaded · 482 KB</div></div><span class="status status-success">Done</span></div>
+</div>
+</div></div></section>
+
+<section class="comp" id="ratings"><h2>Ratings</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="font-size:24px;letter-spacing:4px">★★★★<span style="color:var(--grey-300)">★</span></div>
+</div></div></section>
+
+<section class="comp" id="nps"><h2>NPS</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="row" style="gap:6px">
+<button class="chip" style="width:36px;justify-content:center">0</button>
+<button class="chip" style="width:36px;justify-content:center">1</button>
+<button class="chip" style="width:36px;justify-content:center">2</button>
+<button class="chip" style="width:36px;justify-content:center">3</button>
+<button class="chip" style="width:36px;justify-content:center">4</button>
+<button class="chip" style="width:36px;justify-content:center">5</button>
+<button class="chip" style="width:36px;justify-content:center">6</button>
+<button class="chip" style="width:36px;justify-content:center">7</button>
+<button class="chip selected" style="width:36px;justify-content:center">8</button>
+<button class="chip" style="width:36px;justify-content:center">9</button>
+<button class="chip" style="width:36px;justify-content:center">10</button>
+</div>
+</div></div></section>
+
+<section class="comp" id="form-layout"><h2>Form layout</h2>
+<p class="lede">Two-column on desktop, single-column on mobile. Submit row pinned bottom-right.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<form style="max-width:520px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div class="field" style="grid-column:span 2"><label>Full name</label><input class="input" placeholder="Megan Wickens"></div>
+<div class="field"><label>Region</label><select class="input"><option>EMEA</option></select></div>
+<div class="field"><label>Role</label><input class="input" placeholder="Global Head"></div>
+<div class="field" style="grid-column:span 2"><label>What are you looking for?</label><textarea class="input" rows="3"></textarea></div>
+<div class="row" style="grid-column:span 2;justify-content:flex-end"><a class="btn btn-secondary">Cancel</a><a class="btn btn-primary">Submit</a></div>
+</form>
+</div></div></section>
+
+</main>
+</div>
+
+<!-- TAG-CHROME-FOOTER-BEGIN -->
+<div class="tag-footer-bar"></div>
+<footer class="tag-footer" aria-label="Site footer">
+  <div class="tag-footer-inner">
+    <div class="tag-footer-brand">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+      <p>Self-hosted brand and AI context. Single source of truth for any AI tool that produces content for the Adecco Group.</p>
+      <span class="tag-footer-tagline">Making the future work for everyone</span>
+    </div>
+    <div>
+      <h4>Brand &amp; AI</h4>
+      <ul>
+        <li><a href="../../../tag-context.md">tag-context.md</a></li>
+        <li><a href="../../../prompt-card.md">prompt-card.md</a></li>
+        <li><a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a></li>
+        <li><a href="../../../business-context.md">business-context.md</a></li>
+        <li><a href="../../../llms.txt">llms.txt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Design system</h4>
+      <ul>
+        <li><a href="../index.html">Components</a></li>
+        <li><a href="../../documents/index.html">Documents</a></li>
+        <li><a href="../../logos/index.html">Logos</a></li>
+        <li><a href="../../../business-context/index.html">Business context</a></li>
+        <li><a href="../../../assets/tokens/tokens.css">Tokens (CSS)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="../../../assets/docs/brand-guidelines.pdf">Brand Guidelines PDF</a></li>
+        <li><a href="../../../assets/templates/index.json">Template registry</a></li>
+        <li><a href="../../../assets/recipes/README.md">Recipes</a></li>
+        <li><a href="../../../playbook.md">Playbook</a></li>
+        <li><a href="../../../context.html">Context (SSR)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li>Internal use only</li>
+        <li>Brand assets &copy; The Adecco Group</li>
+        <li>Hosted via Cloudflare Tunnel</li>
+        <li><a href="../../../index.html">tag.schatt.me</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tag-footer-bottom">
+    <span>&copy; 2026 The Adecco Group</span>
+    <span><code>v6.3.0</code> &middot; updated 2026-05-05</span>
+  </div>
+</footer>
+<!-- TAG-CHROME-FOOTER-END -->
+<script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f86b8f4fc58363f',t:'MTc3ODIyNTA0Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body></html>

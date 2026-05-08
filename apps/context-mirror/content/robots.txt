@@ -1,0 +1,43 @@
+# tag.schatt.me hosts the Adecco Group brand and AI context.
+# Designed to be consumed by any AI tool inside the company:
+# Microsoft Copilot, Claude, ChatGPT, Gemini, Perplexity, internal RAG.
+#
+# Default policy: ALLOW. Any AI tool can fetch this content as
+# real-time grounding context for generating Adecco Group artefacts.
+#
+# Content signals (Cloudflare convention, https://signals.cloudflare.com/):
+# search = yes : OK for search engines to index
+# ai-input = yes : fetch as real-time context for grounding / RAG: yes
+# ai-train = no : use for model training: no
+
+User-agent: *
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+Allow: /
+
+# Bots typically used for training datasets without grounding:
+# blocked here in addition to the ai-train=no signal above.
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+# LLM-friendly index pointer
+# https://llmstxt.org/
+Sitemap: https://tag.schatt.me/llms.txt

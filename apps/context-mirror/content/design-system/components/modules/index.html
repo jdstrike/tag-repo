@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Modules | TAG Components</title>
+<meta name="description" content="Larger units made of components, ready to drop into a page.">
+<link rel="stylesheet" href="../_shared.css">
+      <link rel="stylesheet" href="https://tag.schatt.me/assets/css/site.css?v=6.4.0" />
+</head><body>
+<!-- TAG-CHROME-HEADER-BEGIN -->
+<nav class="tag-nav" aria-label="Primary">
+  <div class="tag-nav-inner">
+    <a href="../../../index.html" class="tag-nav-logo" aria-label="The Adecco Group">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+    </a>
+    <ul class="tag-nav-links">
+      <li><a href="../../../index.html#strategy" class="">Brand</a></li>
+      <li><a href="../../../index.html#voice" class="">Voice</a></li>
+      <li><a href="../../../business-context/index.html" class="">Business</a></li>
+      <li><a href="../index.html" class="active">Components</a></li>
+      <li><a href="../../documents/index.html" class="">Documents</a></li>
+      <li><a href="../../logos/index.html" class="">Logos</a></li>
+      <li><a href="../../../index.html#context" class="">Context</a></li>
+    </ul>
+    <a href="../../../prompt-card.md" class="tag-nav-cta">Prompt card</a>
+    <button class="tag-nav-burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="tag-nav-files" aria-label="Files">
+  <div class="tag-nav-files-inner">
+    <span class="label">Files</span>
+    <a href="../../../tag-context.md">tag-context.md</a>
+    <a href="../../../prompt-card.md">prompt-card.md</a>
+    <a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a>
+    <a href="../../../business-context.md">business-context.md</a>
+    <a href="../../../llms.txt">llms.txt</a>
+    <span class="sep"></span>
+    <a href="../../../assets/tokens/tokens.css">tokens.css</a>
+    <a href="../../../assets/templates/index.json">templates</a>
+  </div>
+</nav>
+<div class="tag-stripe"></div>
+<!-- TAG-CHROME-HEADER-END -->
+<div class="layout">
+
+<aside class="sidebar">
+ <h4>Get started</h4>
+ <ul>
+ <li><a href="../index.html" data-page="index">Overview</a></li>
+ </ul>
+ <h4>Foundations</h4>
+ <ul>
+ <li><a href="../foundations/index.html" data-page="foundations">Tokens, color, type, spacing</a></li>
+ </ul>
+ <h4>Components</h4>
+ <ul>
+ <li><a href="../buttons/index.html" data-page="buttons">Buttons</a></li>
+ <li><a href="../forms/index.html" data-page="forms">Forms &amp; inputs</a></li>
+ <li><a href="../feedback/index.html" data-page="feedback">Feedback &amp; status</a></li>
+ <li><a href="../navigation/index.html" data-page="navigation">Navigation</a></li>
+ <li><a href="../data-display/index.html" data-page="data-display">Data display</a></li>
+ <li><a href="../overlays/index.html" data-page="overlays">Overlays</a></li>
+ <li><a href="../content/index.html" data-page="content">Content blocks</a></li>
+ </ul>
+ <h4>Modules &amp; templates</h4>
+ <ul>
+ <li><a href="index.html" data-page="modules" class="active">Modules</a></li>
+ <li><a href="../page-templates/index.html" data-page="page-templates">Page templates</a></li>
+ </ul>
+ <h4>Documents &amp; slides</h4>
+ <ul>
+ <li><a href="../documents/index.html" data-page="documents">Document patterns</a></li>
+ <li><a href="../slides/index.html" data-page="slides">Slide layouts</a></li>
+ <li><a href="../charts/index.html" data-page="charts">Charts</a></li>
+ </ul>
+ <h4>External</h4>
+ <ul>
+ <li><a href="https://dev.tagds.adeccogroup.com" target="_blank" rel="noopener">TAG-DS Storybook ↗</a></li>
+ <li><a href="https://zeroheight.com/7666d7eae" target="_blank" rel="noopener">zeroheight ↗</a></li>
+ </ul>
+</aside>
+
+<main class="content">
+<header><span class="eyebrow">Modules</span><h1>Composed patterns: header, footer, hero, login, dashboard shell, AI patterns.</h1><p>Larger units made of components, ready to drop into a page.</p></header>
+
+<section class="comp" id="header-web"><h2>Header (web)</h2>
+<p class="lede">Marketing-site nav: lockup, mega-nav, language switcher, search, "Talk to us" CTA.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0">
+<header style="background:#fff;border-bottom:1px solid var(--grey-300)">
+<div class="row" style="justify-content:space-between;padding:14px 28px">
+<div class="row" style="gap:30px"><div style="font-weight:800">the Adecco Group</div><nav class="row" style="gap:22px;font-size:14px"><a style="text-decoration:none;color:var(--primary)">About</a><a style="text-decoration:none;color:var(--primary)">Strategy</a><a style="text-decoration:none;color:var(--primary)">Brands</a><a style="text-decoration:none;color:var(--primary)">Careers</a></nav></div>
+<div class="row"><a class="btn btn-tertiary btn-sm">EN</a><a class="btn btn-tertiary btn-icon">⌕</a><a class="btn btn-primary btn-sm">Talk to us</a></div>
+</div></header></div></div></section>
+
+<section class="comp" id="footer-web"><h2>Footer (web)</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0">
+<footer style="background:var(--primary);color:#fff;padding:32px 28px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px">
+<div><h4 style="margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.08em">The Group</h4><ul style="list-style:none;padding:0;margin:0;font-size:13px;opacity:.85"><li>About</li><li>Strategy</li><li>Investors</li></ul></div>
+<div><h4 style="margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.08em">Brands</h4><ul style="list-style:none;padding:0;margin:0;font-size:13px;opacity:.85"><li>Adecco</li><li>LHH</li><li>Akkodis</li></ul></div>
+<div><h4 style="margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.08em">Connect</h4><ul style="list-style:none;padding:0;margin:0;font-size:13px;opacity:.85"><li>linkedin.com/company/the-adecco-group</li><li>@AdeccoGroup</li></ul></div>
+<div><h4 style="margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.08em">Legal</h4><ul style="list-style:none;padding:0;margin:0;font-size:13px;opacity:.85"><li>Imprint</li><li>Privacy</li></ul></div>
+</footer><div class="unity-bar" style="margin:0"></div>
+</div></div></section>
+
+<section class="comp" id="hero-web"><h2>Hero (web)</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0">
+<section style="display:grid;grid-template-columns:1fr 1fr;background:#fff">
+<div style="background:var(--gradient);padding:56px 40px;color:#fff"><div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.85">Talent &amp; technology</div><h1 style="font-size:36px;line-height:1.1;margin:10px 0 14px">Making the future work for everyone</h1><a class="btn btn-tertiary btn-sm" style="background:#fff;color:var(--primary)">Read more</a></div>
+<div style="background:var(--primary);min-height:280px"></div>
+</section></div></div></section>
+
+<section class="comp" id="login"><h2>Login</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0;background:var(--grey-100);min-height:340px;display:flex;align-items:center;justify-content:center">
+<div style="background:#fff;border-radius:14px;padding:28px;width:340px;box-shadow:var(--shadow-md)">
+<h3 style="margin:0 0 4px">Welcome back</h3><p style="color:var(--primary-300);margin:0 0 18px;font-size:14px">Sign in to continue</p>
+<div class="field"><label>Email</label><input class="input" type="email"></div>
+<div class="field"><label>Password</label><input class="input" type="password"></div>
+<a class="btn btn-primary" style="display:block;text-align:center;width:100%">Sign in</a>
+<div style="text-align:center;margin-top:12px;font-size:13px;color:var(--primary-300)">or <a style="color:var(--turquoise)">single sign-on</a></div>
+</div></div></div></section>
+
+<section class="comp" id="dashboard-shell"><h2>Dashboard shell</h2>
+<p class="lede">Sidebar + header + main canvas. The shell every TAG SaaS app sits inside.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0;background:var(--grey-100)">
+<div style="display:flex;height:320px">
+<aside style="width:200px;background:var(--primary);color:#fff;padding:18px;font-size:13px"><div style="font-weight:800;margin-bottom:18px">SparkAI</div>
+<div style="opacity:.6;font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin:14px 0 6px">Workspace</div>
+<div style="padding:6px 8px;border-radius:6px;background:rgba(255,255,255,.15)">Dashboard</div>
+<div style="padding:6px 8px;border-radius:6px;opacity:.7">Clients</div>
+<div style="padding:6px 8px;border-radius:6px;opacity:.7">Reports</div>
+<div style="padding:6px 8px;border-radius:6px;opacity:.7">Settings</div>
+</aside>
+<main style="flex:1;display:flex;flex-direction:column">
+<header style="padding:14px 22px;background:#fff;border-bottom:1px solid var(--grey-300);display:flex;justify-content:space-between"><strong>Dashboard</strong><div class="row" style="gap:10px"><a class="btn btn-tertiary btn-icon">⌕</a><a class="btn btn-tertiary btn-icon">🔔</a><span class="avatar avatar-sm">JS</span></div></header>
+<div style="flex:1;background:var(--grey-100);padding:18px"><div class="dash"><div class="kpi"><div class="label">Revenue</div><div class="v" style="font-size:22px">€ 24.6 b</div></div><div class="kpi"><div class="label">Markets</div><div class="v" style="font-size:22px">62</div></div><div class="kpi"><div class="label">FTEs</div><div class="v" style="font-size:22px">33,440</div></div><div class="kpi"><div class="label">eNPS</div><div class="v" style="font-size:22px">+38</div></div></div></div>
+</main></div></div></div></section>
+
+<section class="comp" id="profile-settings"><h2>Profile / settings</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="padding:0;background:var(--grey-100)">
+<div style="display:grid;grid-template-columns:200px 1fr;height:300px">
+<aside style="background:#fff;border-right:1px solid var(--grey-300);padding:18px"><div style="padding:8px 12px;background:var(--primary);color:#fff;border-radius:6px;font-size:14px">Profile</div><div style="padding:8px 12px;font-size:14px;color:var(--primary-300)">Notifications</div><div style="padding:8px 12px;font-size:14px;color:var(--primary-300)">Security</div><div style="padding:8px 12px;font-size:14px;color:var(--primary-300)">Billing</div></aside>
+<main style="padding:24px"><h3 style="margin:0 0 14px">Profile</h3>
+<div style="max-width:380px"><div class="field"><label>Name</label><input class="input" value="Megan Wickens"></div><div class="field"><label>Email</label><input class="input" value="megan@adeccogroup.com"></div></div>
+</main></div></div></div></section>
+
+<section class="comp" id="search-results"><h2>Search results</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="max-width:520px">
+<div style="position:relative;margin-bottom:18px"><input class="input" value="agility advantage" style="padding-left:36px"><span style="position:absolute;left:12px;top:11px">⌕</span></div>
+<div style="font-size:13px;color:var(--primary-300);margin-bottom:14px">12 results · sorted by relevance</div>
+<div class="col-gap">
+<div><a style="color:var(--turquoise);font-weight:600;text-decoration:none">The agility advantage</a><div style="font-size:12px;color:var(--primary-300)">tag-context.md · § 1</div><p style="font-size:13.5px;margin:4px 0 0">We make the future work for everyone by creating the agility advantage…</p></div>
+<div><a style="color:var(--turquoise);font-weight:600;text-decoration:none">Tone of voice: agility-led</a><div style="font-size:12px;color:var(--primary-300)">tag-context.md · § 8</div><p style="font-size:13.5px;margin:4px 0 0">Energetic and optimistic, grounded in reality and honesty…</p></div>
+</div></div></div></div></section>
+
+<section class="comp" id="error-page"><h2>Error pages (404 / 500)</h2>
+<div class="preview"><div class="preview-label">404</div><div class="frame compact" style="padding:0;height:280px;background:var(--grey-100);display:flex;align-items:center;justify-content:center;text-align:center">
+<div><div class="hugenum">404</div><h2 style="margin:14px 0 6px">We couldn't find that page</h2><p style="color:var(--primary-300);margin:0 0 18px">The link may be old. Try the homepage or use search.</p><a class="btn btn-primary">Back to home</a></div>
+</div></div></section>
+
+<section class="comp" id="article"><h2>Article / blog post</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<article style="max-width:680px">
+<div style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--turquoise);font-weight:700">Insight · 4 min read</div>
+<h1 style="font-size:32px;line-height:1.15;margin:10px 0 14px">The agility advantage, made visible</h1>
+<div class="row" style="margin-bottom:18px"><span class="avatar avatar-sm">JS</span><div><strong style="font-size:13px"></strong><div style="font-size:12px;color:var(--primary-300)">VP Global Digital · 2026-04-29</div></div></div>
+<p style="font-size:16px;line-height:1.65">When we say "agility advantage" we mean a specific thing. We mean what we create when we put talent and technology on the same brief, deployed against a real workforce problem.</p>
+<p style="font-size:16px;line-height:1.65">In FY26, three concrete signals told us the agility advantage had clicked into place inside the Group itself. The Premium Client Intelligence Tracker went live for Microsoft. The brand context layer landed at <code>tag.schatt.me</code>. SparkAI started writing in TAG voice automatically.</p>
+</article></div></div></section>
+
+<section class="comp" id="press-release-page"><h2>Press release page</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="max-width:680px;font-size:14px;line-height:1.65">
+<div style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--turquoise);font-weight:700">Press · For immediate release</div>
+<h1 style="font-size:24px;margin:10px 0 6px">The Adecco Group launches Premium Client Intelligence Tracker</h1>
+<div style="color:var(--primary-300);font-size:13px">Zurich, Switzerland · 2026-04-30</div>
+<p style="margin-top:14px"><strong>The Adecco Group</strong> announced today the launch of the Premium Client Intelligence Tracker, deployed first for Microsoft. The system replaces multi-tab account research with a two-page on-brand briefing in twenty seconds.</p>
+<p>Across Adecco, Akkodis, and LHH the Group serves more than 60 markets…</p>
+<div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--grey-300);font-size:13px;color:var(--primary-300)">For further information: <a href="https://tag.schatt.me/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c5b5b7a0b6b6ebaaa3a3aca6a085a4a1a0a6a6aaeba6aaa8">[email&#160;protected]</a> · adeccogroup.com</div>
+</div></div></div></section>
+
+<section class="comp" id="ai-generation"><h2>AI Generation</h2>
+<p class="lede">Reusable surface where the user requests an AI output and gets a typed-out streaming response.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="card"><div class="row" style="justify-content:space-between;margin-bottom:8px"><strong>AI assist</strong><span class="status status-info">Generating…</span></div>
+<p style="color:var(--primary-300);font-size:14px;margin:0">Here's a 60-word LinkedIn post about the agility advantage in account-manager workflows. The piece leads with possibility, references the Premium Client Intelligence Tracker as the proof point, and ends with a soft CTA…</p>
+</div></div></div></section>
+
+<section class="comp" id="ai-suggestion"><h2>AI Suggestion</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="field" style="max-width:480px"><label>Subject line</label><input class="input" value="SparkAI integration"><div class="help" style="display:flex;justify-content:space-between"><span>AI suggests: "SparkAI integration plan, Q3 phase"</span><a class="btn btn-ghost btn-sm" style="padding:2px 8px">Tab to accept</a></div></div>
+</div></div></section>
+
+<section class="comp" id="ai-feedback"><h2>AI Feedback</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="card"><p style="margin:0 0 10px;color:var(--primary-300);font-size:14px">How was that response?</p><div class="row"><a class="btn btn-tertiary btn-sm">👍</a><a class="btn btn-tertiary btn-sm">👎</a></div></div>
+</div></div></section>
+
+<section class="comp" id="ai-voice"><h2>AI Voice Input</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<button class="btn btn-primary" style="border-radius:50%;width:60px;height:60px;padding:0">🎤</button>
+<div style="margin-top:8px;color:var(--primary-300);font-size:13px">Tap, then speak. Stop with another tap.</div>
+</div></div></section>
+
+<section class="comp" id="ai-conversation"><h2>AI Conversational Interface</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="col-gap" style="max-width:520px">
+<div style="display:flex;gap:10px"><span class="avatar avatar-sm">JS</span><div class="card" style="background:var(--grey-100);border:0;padding:10px 14px">Generate a memo for Megan about Q3.</div></div>
+<div style="display:flex;gap:10px;flex-direction:row-reverse"><span class="avatar avatar-sm" style="background:var(--gradient)">AI</span><div class="card" style="background:var(--primary);color:#fff;border:0;padding:10px 14px">Sure. What's the outcome you'd like Megan to take from it?</div></div>
+</div></div></div></section>
+
+<section class="comp" id="ai-document-input"><h2>AI Document Input</h2>
+<p class="lede">Drop or paste a document; the AI extracts structured data and asks for confirmation.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="border:2px dashed var(--turquoise);border-radius:10px;padding:28px;text-align:center;background:#ECF6F5"><div style="font-size:28px;margin-bottom:6px">📄</div><strong>Drop a brief.docx</strong><p style="font-size:12px;color:var(--primary-300);margin:4px 0 0">SparkAI extracts audience, channel, mode, and outcome.</p></div>
+</div></div></section>
+
+<section class="comp" id="ai-recommendation"><h2>AI Recommendation</h2>
+<p class="lede">Inline suggestion based on what the user just did.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="banner-wide subtle"><span style="background:var(--gradient);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">✦</span><div><strong>Recommended next</strong><div style="font-size:13px;color:var(--primary-300)">Generate the matching press release for this memo.</div></div><a class="btn btn-primary btn-sm">Generate</a><span class="x">✕</span></div>
+</div></div></section>
+
+<section class="comp" id="navigation-system"><h2>Navigation system (composed)</h2>
+<p class="lede">Header + breadcrumbs + sidebar + bottom nav working as a unit. Use the Storybook reference implementation for production.</p>
+</section>
+
+</main>
+</div>
+
+<!-- TAG-CHROME-FOOTER-BEGIN -->
+<div class="tag-footer-bar"></div>
+<footer class="tag-footer" aria-label="Site footer">
+  <div class="tag-footer-inner">
+    <div class="tag-footer-brand">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+      <p>Self-hosted brand and AI context. Single source of truth for any AI tool that produces content for the Adecco Group.</p>
+      <span class="tag-footer-tagline">Making the future work for everyone</span>
+    </div>
+    <div>
+      <h4>Brand &amp; AI</h4>
+      <ul>
+        <li><a href="../../../tag-context.md">tag-context.md</a></li>
+        <li><a href="../../../prompt-card.md">prompt-card.md</a></li>
+        <li><a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a></li>
+        <li><a href="../../../business-context.md">business-context.md</a></li>
+        <li><a href="../../../llms.txt">llms.txt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Design system</h4>
+      <ul>
+        <li><a href="../index.html">Components</a></li>
+        <li><a href="../../documents/index.html">Documents</a></li>
+        <li><a href="../../logos/index.html">Logos</a></li>
+        <li><a href="../../../business-context/index.html">Business context</a></li>
+        <li><a href="../../../assets/tokens/tokens.css">Tokens (CSS)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="../../../assets/docs/brand-guidelines.pdf">Brand Guidelines PDF</a></li>
+        <li><a href="../../../assets/templates/index.json">Template registry</a></li>
+        <li><a href="../../../assets/recipes/README.md">Recipes</a></li>
+        <li><a href="../../../playbook.md">Playbook</a></li>
+        <li><a href="../../../context.html">Context (SSR)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li>Internal use only</li>
+        <li>Brand assets &copy; The Adecco Group</li>
+        <li>Hosted via Cloudflare Tunnel</li>
+        <li><a href="../../../index.html">tag.schatt.me</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tag-footer-bottom">
+    <span>&copy; 2026 The Adecco Group</span>
+    <span><code>v6.3.0</code> &middot; updated 2026-05-05</span>
+  </div>
+</footer>
+<!-- TAG-CHROME-FOOTER-END -->
+<script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f86b8f72e21363f',t:'MTc3ODIyNTA0Mw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body></html>

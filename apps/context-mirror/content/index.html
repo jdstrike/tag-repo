@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="The Adecco Group: brand and AI context. Single source of truth for any AI tool that produces TAG content." />
+<title>The Adecco Group: Brand &amp; AI Context</title>
+    <link rel="stylesheet" href="https://tag.schatt.me/assets/css/site.css?v=6.4.0" />
+</head>
+<body class="tag-page">
+<!-- TAG-CHROME-HEADER-BEGIN -->
+<nav class="tag-nav" aria-label="Primary">
+  <div class="tag-nav-inner">
+    <a href="index.html" class="tag-nav-logo" aria-label="The Adecco Group">
+      <img src="assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+    </a>
+    <ul class="tag-nav-links">
+      <li><a href="index.html#strategy" class="active">Brand</a></li>
+      <li><a href="index.html#voice" class="">Voice</a></li>
+      <li><a href="business-context/index.html" class="">Business</a></li>
+      <li><a href="design-system/components/index.html" class="">Components</a></li>
+      <li><a href="design-system/documents/index.html" class="">Documents</a></li>
+      <li><a href="design-system/logos/index.html" class="">Logos</a></li>
+      <li><a href="index.html#context" class="">Context</a></li>
+    </ul>
+    <a href="prompt-card.md" class="tag-nav-cta">Prompt card</a>
+    <button class="tag-nav-burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="tag-nav-files" aria-label="Files">
+  <div class="tag-nav-files-inner">
+    <span class="label">Files</span>
+    <a href="tag-context.md">tag-context.md</a>
+    <a href="prompt-card.md">prompt-card.md</a>
+    <a href="copilot-agent-instructions.md">copilot-agent-instructions.md</a>
+    <a href="business-context.md">business-context.md</a>
+    <a href="llms.txt">llms.txt</a>
+    <span class="sep"></span>
+    <a href="assets/tokens/tokens.css">tokens.css</a>
+    <a href="assets/templates/index.json">templates</a>
+  </div>
+</nav>
+<div class="tag-stripe"></div>
+<!-- TAG-CHROME-HEADER-END -->
+
+<!-- ========== HERO ========== -->
+<header class="tag-hero">
+  <div class="tag-hero-sphere"></div>
+  <div class="tag-hero-fade"></div>
+  <div class="tag-hero-inner">
+    <span class="tag-eyebrow">Brand &amp; AI context</span>
+    <h1 class="tag-h1">Making the future <span class="tag-grad-text">work for everyone.</span></h1>
+    <p class="lead">The single source of truth that any AI tool, any human, any partner inside the Adecco Group can read before producing TAG content. Strategy, voice, identity, business, governance. One canvas, one chrome, one set of files.</p>
+    <div class="tag-hero-ctas">
+      <a class="tag-btn tag-btn-primary" href="prompt-card.md">Open the prompt card</a>
+      <a class="tag-btn tag-btn-secondary" href="tag-context.md">Read the master context</a>
+    </div>
+    <div class="tag-stats-row" style="margin-top:56px;max-width:920px">
+      <div class="tag-stat"><span class="num">€23.1bn</span><span class="lbl">Group revenue FY25</span></div>
+      <div class="tag-stat"><span class="num">169K</span><span class="lbl">FTEs incl. tech &amp; bench</span></div>
+      <div class="tag-stat"><span class="num">60+</span><span class="lbl">countries · 5,000 offices</span></div>
+      <div class="tag-stat"><span class="num">NPS 48</span><span class="lbl">client NPS</span></div>
+    </div>
+  </div>
+</header>
+<div class="tag-stripe"></div>
+
+<!-- ========== ALL-IN-ONE PROMPT ========== -->
+<section class="tag-zone tag-zone--alt" id="prompt">
+  <div class="tag-zone-inner">
+    <span class="tag-eyebrow">Copy &amp; paste</span>
+    <h2 class="tag-h2">Lock TAG context <span class="tag-grad-text">in one paste.</span></h2>
+    <p class="lede">The single payload that locks brand voice, agent role, commercial knowledge, em-dash ban, claims and escalation rules, and TEMPLATE-FIRST behaviour. Paste this into Claude project memory, Copilot Studio agent instructions, ChatGPT custom instructions, Gemini system instructions, or any internal RAG.</p>
+
+    <div class="tag-grad-border tag-prompt-shell"><div class="gb-inner" style="padding:0;background:transparent">
+      <div class="tag-prompt-bar">
+        <span class="tag-prompt-label">All-in-one prompt</span>
+        <button class="tag-prompt-copy" id="tag-prompt-copy" type="button" aria-label="Copy the full prompt">Copy <span aria-hidden="true">&rarr;</span></button>
+      </div>
+<pre class="tag-prompt-pre" id="tag-prompt-text">You are writing for the Adecco Group. Apply the canonical brand and AI context.
+
+CANONICAL CONTEXT (fetch all five before producing any artefact)
+- https://tag.schatt.me/tag-context.md             (full master, 77 sections)
+- https://tag.schatt.me/prompt-card.md             (voice card)
+- https://tag.schatt.me/copilot-agent-instructions.md  (agent role, claims and evidence, escalation list)
+- https://tag.schatt.me/business-context.md        (commercial knowledge: portfolio, selling models, GDM, industry plays)
+- https://tag.schatt.me/llms.txt                   (curated index of everything else)
+
+FY25 FRAMING
+In a world where agility is the only sustainable advantage, whoever controls talent, leadership, and technology drives the future. The Adecco Group is the single strategic partner across the full talent and technology cycle: workforce (Adecco, &euro;18.5 bn), development (LHH, &euro;1.3 bn), transformation (Akkodis, &euro;3.3 bn), unified. Group total FY25: &euro;23.1 bn revenue, 169,000 FTEs incl. tech experts and bench, 2M+ associates per year, 100K+ clients, 870K+ reskilled in 2025, NPS 48, 60+ countries, 5,000 offices.
+
+VOICE
+Four binding tone-of-voice pairs (apply ALL):
+1. Clear and credible. Plain language, substantiated claims, no jargon, no hedging.
+2. Inclusive and approachable. Speak directly. Contractions are encouraged.
+3. Energetic and optimistic. Lead with possibility. Move at the pace of change.
+4. Curious and courageous. Ask the question worth asking. State the conviction worth stating.
+
+Writing rhythm: to the point, punchy, active, confident and clear. The core voice doesn't change. Tone flexes by audience (C-suite vs candidate), situation (issue vs celebration), and channel (social vs AGM). Adapt intensity, not identity.
+
+LANGUAGE
+Use US English (realize, color, organize, center, defense, analyze, behavior). Sentence-case headlines. Use contractions for warmth.
+
+HARD RULE: NEVER use the em-dash character. Use commas, periods, colons, parentheses, or rephrase. This is a ban, not a guideline.
+
+BRAND LANGUAGE (use these phrases where natural)
+agility, the agility advantage, talent and technology, human-centric technology, skills, employability, workforce transformation, opportunity, single strategic partner, workforce-development-transformation unified, digital workers as coworkers, agentic AI, leadership advantage, from idea to impact, industrial-scale AI.
+
+Tagline verbatim: "Making the future work for everyone".
+
+Brand name: "the Adecco Group" with lowercase "t" except at sentence start. Never "Adecco Group" without the article. GBU lockup order: Adecco + LHH + Akkodis.
+
+BEFORE WRITING, IDENTIFY
+1. Audience (C-suite, candidate, journalist, etc.)
+2. Channel (LinkedIn, press release, .docx, Pardot, etc.)
+3. Mode (Lead / Engage / Inform / Promote)
+4. Purpose / outcome
+5. Core message
+6. Desired action or response
+7. Evidence or source material provided
+
+If essential information is missing, ask one clarifying question. Otherwise, make a practical assumption and proceed.
+
+CLAIMS AND EVIDENCE
+Never invent evidence. Flag claims that are broad, comparative, or reputational (market leadership, "industry-leading", "best-in-class", performance, productivity, impact, large numbers, client results, candidate outcomes, future predictions). If the user bypasses evidence, log who approved and when.
+
+ESCALATE FOR HUMAN REVIEW (every time, single approval not enough)
+Legal claims, financial information, regulatory statements, sensitive employment matters, DEI claims, sustainability or social impact claims, client-specific claims, market leadership claims, unverified data, crisis or issue communications, statements attributed to named executives.
+
+TEMPLATE-FIRST (mandatory for files)
+For .docx, .pptx, or Pardot landing pages: fetch the canonical template from https://tag.schatt.me/assets/templates/index.json, use it as the container, replace only content placeholders. Never synthesize the layout from a description.
+
+BEFORE FINALIZING, CHECK
+- US English throughout (no "colour", "realise", "organise")
+- Sentence-case headings
+- Contractions used at least once
+- Brand name rendered as "the Adecco Group"
+- Tagline emphasised verbatim if used
+- At least one brand-language phrase present
+- No banned patterns or AI-tells (no em-dashes, no "delve", no clichés)
+- All four tone pairs satisfied
+
+Now help me with: [INSERT YOUR TASK]</pre>
+    </div></div>
+
+    <p class="tag-prompt-hint">Pair with the per-card files in the secondary nav above for deeper grounding. The voice card is the smallest payload (~6 KB). The full agent layer adds ~8 KB. The commercial card adds ~9 KB. Or paste this single block to lock all of it.</p>
+  </div>
+</section>
+<div class="tag-stripe"></div>
+
+<!-- ========== STRATEGY ========== -->
+<section class="tag-zone" id="strategy">
+  <div class="tag-zone-inner">
+    <span class="tag-eyebrow">Strategy</span>
+    <h2 class="tag-h2">Purpose, mission, <span class="tag-grad-text">belief.</span></h2>
+    <p class="lede">The three sentences every TAG argument is built on. Memorise them.</p>
+    <div class="tag-grid-3">
+      <div class="tag-grad-border"><div class="gb-inner">
+        <h3 style="color:#2DBFB8;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 8px">Purpose</h3>
+        <p style="font-size:1.5rem;font-weight:700;line-height:1.2;color:#fff;margin:0">We make the future work for everyone.</p>
+      </div></div>
+      <div class="tag-grad-border"><div class="gb-inner">
+        <h3 style="color:#2DBFB8;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 8px">Mission</h3>
+        <p style="font-size:1.5rem;font-weight:700;line-height:1.2;color:#fff;margin:0">Creating the agility advantage. Talent and technology to elevate human and business potential.</p>
+      </div></div>
+      <div class="tag-grad-border"><div class="gb-inner">
+        <h3 style="color:#2DBFB8;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 8px">Belief</h3>
+        <p style="font-size:1.5rem;font-weight:700;line-height:1.2;color:#fff;margin:0">Where people are allowed to thrive, economies grow, and societies prosper.</p>
+      </div></div>
+    </div>
+
+    <div class="tag-grad-border" style="margin-top:36px"><div class="gb-inner" style="padding:32px">
+      <h3 style="color:#2DBFB8;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 12px">FY25 framing</h3>
+      <p style="font-size:1.6rem;font-weight:700;line-height:1.25;color:#fff;margin:0 0 14px;font-style:italic">"In a world where agility is the only sustainable advantage, whoever controls talent, leadership, and technology drives the future."</p>
+      <p style="color:rgba(255,255,255,.78);font-size:1rem;line-height:1.6;margin:0">The Adecco Group is your <strong style="color:#fff">single strategic partner across the full talent and technology cycle: workforce, development, transformation, unified.</strong></p>
+    </div></div>
+  </div>
+</section>
+<div class="tag-stripe"></div>
+
+<!-- ========== VOICE ========== -->
+<section class="tag-zone tag-zone--alt" id="voice">
+  <div class="tag-zone-inner">
+    <span class="tag-eyebrow">Voice</span>
+    <h2 class="tag-h2">How we <span class="tag-grad-text">sound.</span></h2>
+    <p class="lede">Four binding tone-of-voice pairs. One writing rhythm: to the point, punchy, active, confident and clear. Adapt intensity, not identity.</p>
+
+    <div style="margin:18px 0 32px;padding:16px 20px;border-left:4px solid #E30613;background:rgba(227,6,19,.10);border-radius:0 10px 10px 0">
+      <strong style="color:#FF7A6E;font-size:11px;text-transform:uppercase;letter-spacing:.14em;font-weight:700">Hard rule</strong>
+      <p style="margin:6px 0 0;color:#fff;font-size:1rem">The em-dash character <code>&mdash;</code> is <strong>banned</strong> in TAG copy. Always. Use commas, periods, colons, parentheses, or rephrase.</p>
+    </div>
+
+    <div class="tag-grid-4">
+      <div class="tag-grad-border"><div class="gb-inner"><h3 class="tag-h3">Clear &amp; credible</h3><p style="color:rgba(255,255,255,.78);font-size:.95rem;margin:8px 0 0">Plain language, substantiated claims, no jargon, no hedging.</p></div></div>
+      <div class="tag-grad-border"><div class="gb-inner"><h3 class="tag-h3">Inclusive &amp; approachable</h3><p style="color:rgba(255,255,255,.78);font-size:.95rem;margin:8px 0 0">Speak directly. Contractions encouraged. Avoid corporate distance.</p></div></div>
+      <div class="tag-grad-border"><div class="gb-inner"><h3 class="tag-h3">Energetic &amp; optimistic</h3><p style="color:rgba(255,255,255,.78);font-size:.95rem;margin:8px 0 0">Lead with possibility. Move at the pace of change.</p></div></div>
+      <div class="tag-grad-border"><div class="gb-inner"><h3 class="tag-h3">Curious &amp; courageous</h3><p style="color:rgba(255,255,255,.78);font-size:.95rem;margin:8px 0 0">Ask the question worth asking. State the conviction worth stating.</p></div></div>
+    </div>
+    <p style="margin-top:32px;color:rgba(255,255,255,.42);font-size:.85rem">Source: TAG Tone of Voice Guide, March 23, 2026. Pair with the Copilot ToV Draft 001 at <a href="copilot-agent-instructions.md" style="color:#5CB8B2">/copilot-agent-instructions.md</a>.</p>
+  </div>
+</section>
+<div class="tag-stripe"></div>
+
+<!-- ========== IDENTITY ========== -->
+<section class="tag-zone" id="identity">
+  <div class="tag-zone-inner">
+    <span class="tag-eyebrow">Identity</span>
+    <h2 class="tag-h2">The unity <span class="tag-grad-text">gradient.</span></h2>
+    <p class="lede">Six-stop spec, used everywhere as a thin accent on near-black. Never as a heavy fill behind copy.</p>
+    <div style="height:8px;border-radius:4px;background:var(--tag-gradient);margin-bottom:24px"></div>
+    <div class="tag-grid-cards">
+      <div class="tag-grad-border"><div class="gb-inner"><h3 class="tag-h3">Logo gallery</h3><p style="color:rgba(255,255,255,.78);font-size:.95rem;margin:8px 0 14px">Family lockup in every variant on every background tint.</p><a class="tag-btn tag-btn-secondary" href="design-system/logos/index.html">Open</a></div></div>
+      <div class="tag-grad-border"><div class="gb-inner"><h3 class="tag-h3">Components</h3><p style="color:rgba(255,255,255,.78);font-size:.95rem;margin:8px 0 14px">200+ live previews mirrored from TAG-DS Storybook.</p><a class="tag-btn tag-btn-secondary" href="design-system/components/index.html">Open</a></div></div>
+      <div class="tag-grad-border"><div class="gb-inner"><h3 class="tag-h3">Documents</h3><p style="color:rgba(255,255,255,.78);font-size:.95rem;margin:8px 0 14px">18 templates + runnable Python recipes.</p><a class="tag-btn tag-btn-secondary" href="design-system/documents/index.html">Open</a></div></div>
+    </div>
+  </div>
+</section>
+<div class="tag-stripe"></div>
+
+<!-- ========== BUSINESS ========== -->
+<section class="tag-zone tag-zone--alt" id="business">
+  <div class="tag-zone-inner">
+    <span class="tag-eyebrow">Business</span>
+    <h2 class="tag-h2">What we sell, <span class="tag-grad-text">how we go to market.</span></h2>
+    <p class="lede">The commercial layer that sits next to the brand voice. The brand layer says how to write. This layer says what we do.</p>
+
+    <div class="tag-grid-3">
+      <div class="tag-grad-border"><div class="gb-inner">
+        <h3 style="color:#2DBFB8;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 8px">Adecco</h3>
+        <p style="font-size:2rem;font-weight:800;color:#fff;margin:0 0 4px;line-height:1">€18.5 bn</p>
+        <p style="color:rgba(255,255,255,.78);font-size:.95rem;margin:6px 0 0">Workforce agility, guaranteed. From supply chain to agentic AI.</p>
+      </div></div>
+      <div class="tag-grad-border"><div class="gb-inner">
+        <h3 style="color:#2DBFB8;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 8px">Akkodis</h3>
+        <p style="font-size:2rem;font-weight:800;color:#fff;margin:0 0 4px;line-height:1">€3.3 bn</p>
+        <p style="color:rgba(255,255,255,.78);font-size:.95rem;margin:6px 0 0">From idea to impact, engineering transformation at speed.</p>
+      </div></div>
+      <div class="tag-grad-border"><div class="gb-inner">
+        <h3 style="color:#2DBFB8;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 8px">LHH</h3>
+        <p style="font-size:2rem;font-weight:800;color:#fff;margin:0 0 4px;line-height:1">€1.3 bn</p>
+        <p style="color:rgba(255,255,255,.78);font-size:.95rem;margin:6px 0 0">Turn disruption into leadership advantage.</p>
+      </div></div>
+    </div>
+
+    <div class="tag-grid-4" style="margin-top:36px">
+      <a class="tag-grad-border" href="business-context/02-portfolio/pillar-1-attract-hire-deploy.md" style="text-decoration:none;color:inherit"><div class="gb-inner"><h3 style="color:#2DBFB8;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 8px">Pillar 1</h3><p style="font-size:1.05rem;font-weight:700;color:#fff;margin:0 0 6px">Attract, hire, deploy</p><p style="color:rgba(255,255,255,.62);font-size:.85rem;margin:0">Search, RPO, BPO, MSP, MVP, flexible jobs.</p></div></a>
+      <a class="tag-grad-border" href="business-context/02-portfolio/pillar-2-skill-develop-transition.md" style="text-decoration:none;color:inherit"><div class="gb-inner"><h3 style="color:#2DBFB8;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 8px">Pillar 2</h3><p style="font-size:1.05rem;font-weight:700;color:#fff;margin:0 0 6px">Skill, develop, transition</p><p style="color:rgba(255,255,255,.62);font-size:.85rem;margin:0">Reskilling, leadership, Salary Benchmarks, Academies.</p></div></a>
+      <a class="tag-grad-border" href="business-context/02-portfolio/pillar-3-workforce-strategy.md" style="text-decoration:none;color:inherit"><div class="gb-inner"><h3 style="color:#2DBFB8;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 8px">Pillar 3</h3><p style="font-size:1.05rem;font-weight:700;color:#fff;margin:0 0 6px">Workforce strategy</p><p style="color:rgba(255,255,255,.62);font-size:.85rem;margin:0">Planning, analytics, regulatory, process.</p></div></a>
+      <a class="tag-grad-border" href="business-context/02-portfolio/pillar-4-transform-evolve.md" style="text-decoration:none;color:inherit"><div class="gb-inner"><h3 style="color:#2DBFB8;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 8px">Pillar 4</h3><p style="font-size:1.05rem;font-weight:700;color:#fff;margin:0 0 6px">Transform and evolve</p><p style="color:rgba(255,255,255,.62);font-size:.85rem;margin:0">Akkodis Intelligence, AI Core, R&amp;D outsourcing.</p></div></a>
+    </div>
+
+    <div style="margin-top:48px;display:flex;gap:14px;flex-wrap:wrap">
+      <a class="tag-btn tag-btn-primary" href="business-context/index.html">Open the business context</a>
+      <a class="tag-btn tag-btn-secondary" href="business-context.md">Paste-ready card</a>
+    </div>
+  </div>
+</section>
+<div class="tag-stripe"></div>
+
+<!-- ========== GOVERNANCE ========== -->
+<section class="tag-zone" id="governance">
+  <div class="tag-zone-inner">
+    <span class="tag-eyebrow">Governance</span>
+    <h2 class="tag-h2">SparkAI <span class="tag-grad-text">Responsible AI.</span></h2>
+    <p class="lede">Five Responsible AI Principles administered by SparkAI. Every TAG output ships only after these are satisfied.</p>
+    <div class="tag-grid-cards">
+      <div class="tag-grad-border"><div class="gb-inner"><h3 class="tag-h3">Ethical</h3><p style="color:rgba(255,255,255,.78);font-size:.95rem;margin:6px 0 0">Aligned with Group values and the workforces we serve.</p></div></div>
+      <div class="tag-grad-border"><div class="gb-inner"><h3 class="tag-h3">Human-centric</h3><p style="color:rgba(255,255,255,.78);font-size:.95rem;margin:6px 0 0">Technology serves people. AI is augmentation, not replacement.</p></div></div>
+      <div class="tag-grad-border"><div class="gb-inner"><h3 class="tag-h3">Transparent</h3><p style="color:rgba(255,255,255,.78);font-size:.95rem;margin:6px 0 0">Sources cited. Reasoning shown. Claims flagged.</p></div></div>
+      <div class="tag-grad-border"><div class="gb-inner"><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f86b8d43aff363f',t:'MTc3ODIyNTAzNw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>

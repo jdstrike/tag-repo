@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Buttons | TAG Components</title>
+<meta name="description" content="Primary, secondary, tertiary, ghost, CTA, destructive, success, loading, disabled, sizes, icon-only, button group, split, floating action.">
+<link rel="stylesheet" href="../_shared.css">
+      <link rel="stylesheet" href="https://tag.schatt.me/assets/css/site.css?v=6.4.0" />
+</head><body>
+<!-- TAG-CHROME-HEADER-BEGIN -->
+<nav class="tag-nav" aria-label="Primary">
+  <div class="tag-nav-inner">
+    <a href="../../../index.html" class="tag-nav-logo" aria-label="The Adecco Group">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+    </a>
+    <ul class="tag-nav-links">
+      <li><a href="../../../index.html#strategy" class="">Brand</a></li>
+      <li><a href="../../../index.html#voice" class="">Voice</a></li>
+      <li><a href="../../../business-context/index.html" class="">Business</a></li>
+      <li><a href="../index.html" class="active">Components</a></li>
+      <li><a href="../../documents/index.html" class="">Documents</a></li>
+      <li><a href="../../logos/index.html" class="">Logos</a></li>
+      <li><a href="../../../index.html#context" class="">Context</a></li>
+    </ul>
+    <a href="../../../prompt-card.md" class="tag-nav-cta">Prompt card</a>
+    <button class="tag-nav-burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="tag-nav-files" aria-label="Files">
+  <div class="tag-nav-files-inner">
+    <span class="label">Files</span>
+    <a href="../../../tag-context.md">tag-context.md</a>
+    <a href="../../../prompt-card.md">prompt-card.md</a>
+    <a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a>
+    <a href="../../../business-context.md">business-context.md</a>
+    <a href="../../../llms.txt">llms.txt</a>
+    <span class="sep"></span>
+    <a href="../../../assets/tokens/tokens.css">tokens.css</a>
+    <a href="../../../assets/templates/index.json">templates</a>
+  </div>
+</nav>
+<div class="tag-stripe"></div>
+<!-- TAG-CHROME-HEADER-END -->
+<div class="layout">
+
+<aside class="sidebar">
+ <h4>Get started</h4>
+ <ul>
+ <li><a href="../index.html" data-page="index">Overview</a></li>
+ </ul>
+ <h4>Foundations</h4>
+ <ul>
+ <li><a href="../foundations/index.html" data-page="foundations">Tokens, color, type, spacing</a></li>
+ </ul>
+ <h4>Components</h4>
+ <ul>
+ <li><a href="index.html" data-page="buttons" class="active">Buttons</a></li>
+ <li><a href="../forms/index.html" data-page="forms">Forms &amp; inputs</a></li>
+ <li><a href="../feedback/index.html" data-page="feedback">Feedback &amp; status</a></li>
+ <li><a href="../navigation/index.html" data-page="navigation">Navigation</a></li>
+ <li><a href="../data-display/index.html" data-page="data-display">Data display</a></li>
+ <li><a href="../overlays/index.html" data-page="overlays">Overlays</a></li>
+ <li><a href="../content/index.html" data-page="content">Content blocks</a></li>
+ </ul>
+ <h4>Modules &amp; templates</h4>
+ <ul>
+ <li><a href="../modules/index.html" data-page="modules">Modules</a></li>
+ <li><a href="../page-templates/index.html" data-page="page-templates">Page templates</a></li>
+ </ul>
+ <h4>Documents &amp; slides</h4>
+ <ul>
+ <li><a href="../documents/index.html" data-page="documents">Document patterns</a></li>
+ <li><a href="../slides/index.html" data-page="slides">Slide layouts</a></li>
+ <li><a href="../charts/index.html" data-page="charts">Charts</a></li>
+ </ul>
+ <h4>External</h4>
+ <ul>
+ <li><a href="https://dev.tagds.adeccogroup.com" target="_blank" rel="noopener">TAG-DS Storybook ↗</a></li>
+ <li><a href="https://zeroheight.com/7666d7eae" target="_blank" rel="noopener">zeroheight ↗</a></li>
+ </ul>
+</aside>
+
+<main class="content">
+<header><span class="eyebrow">Components / buttons</span><h1>Buttons in every official variant.</h1><p>Primary, secondary, tertiary, ghost, CTA, destructive, success, loading, disabled, sizes, icon-only, button group, split, floating action.</p></header>
+
+<section class="comp" id="primary"><h2>Primary</h2>
+<div class="meta">Storybook: <code>Button primary</code></div>
+<p class="lede">Main call to action. One per primary section.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame"><div class="row">
+<a class="btn btn-primary">Primary</a>
+<a class="btn btn-primary btn-loading">Loading…</a>
+<a class="btn btn-primary btn-success">Success ✓</a>
+<a class="btn btn-primary btn-sm">Small</a>
+<a class="btn btn-primary btn-lg">Large</a>
+<a class="btn btn-disabled">Disabled</a>
+<a class="btn btn-primary btn-pill">Pill shape</a>
+</div></div></div>
+<pre><code>&lt;a class="btn btn-primary"&gt;Primary&lt;/a&gt;
+&lt;a class="btn btn-primary btn-loading"&gt;Loading…&lt;/a&gt;
+&lt;a class="btn btn-primary btn-success"&gt;Success ✓&lt;/a&gt;</code></pre></section>
+
+<section class="comp" id="secondary"><h2>Secondary</h2>
+<div class="meta">Storybook: <code>Button secondary</code></div>
+<p class="lede">Outline button. Companions to a primary.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame"><div class="row">
+<a class="btn btn-secondary">Secondary</a>
+<a class="btn btn-secondary btn-loading">Loading…</a>
+<a class="btn btn-secondary btn-success">Success ✓</a>
+<a class="btn btn-secondary btn-sm">Small</a>
+<a class="btn btn-secondary btn-lg">Large</a>
+</div></div></div></section>
+
+<section class="comp" id="cta"><h2>CTA</h2>
+<div class="meta">Storybook: <code>Button cta</code></div>
+<p class="lede">Full-bleed unity gradient. Use sparingly, once per page.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<a class="btn btn-cta">Make it work →</a></div></div></section>
+
+<section class="comp" id="tertiary-ghost"><h2>Tertiary &amp; ghost</h2>
+<p class="lede">Lower-emphasis. Tertiary uses Grey 100; ghost is transparent.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame"><div class="row">
+<a class="btn btn-tertiary">Tertiary</a>
+<a class="btn btn-ghost">Ghost</a>
+<a class="btn btn-tertiary btn-pill">Pill tertiary</a>
+</div></div></div></section>
+
+<section class="comp" id="destructive"><h2>Destructive</h2>
+<p class="lede">For irreversible actions. Always pair with a confirm step.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<a class="btn btn-destructive">Delete account</a></div></div></section>
+
+<section class="comp" id="link"><h2>Link button</h2>
+<p class="lede">Looks like a link, behaves like a button. Use inline.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+We have <a style="color:var(--turquoise);text-decoration:underline;cursor:pointer">view the report</a> for more.
+</div></div></section>
+
+<section class="comp" id="icon-button"><h2>Icon button</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame"><div class="row">
+<a class="btn btn-tertiary btn-icon">⚙</a>
+<a class="btn btn-tertiary btn-icon">↗</a>
+<a class="btn btn-tertiary btn-icon">⌄</a>
+<a class="btn btn-tertiary btn-icon">＋</a>
+<a class="btn btn-tertiary btn-icon">✕</a>
+<a class="btn btn-primary btn-icon">＋</a>
+</div></div></div></section>
+
+<section class="comp" id="button-group"><h2>Button group</h2>
+<p class="lede">A connected row of related actions. Single-select; first child rounded left, last child rounded right.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame"><div class="row">
+<div class="btn-group">
+<a class="btn active">Day</a><a class="btn">Week</a><a class="btn">Month</a><a class="btn">Year</a>
+</div>
+<div class="btn-group">
+<a class="btn">‹</a><a class="btn">FY26</a><a class="btn">›</a>
+</div>
+</div></div></div></section>
+
+<section class="comp" id="split-button"><h2>Split button</h2>
+<p class="lede">Primary action on the left, dropdown for related variants on the right.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="btn-split"><a class="btn-primary">Generate memo</a><span class="btn-icon-r">⌄</span></div>
+</div></div></section>
+
+<section class="comp" id="floating-action"><h2>Floating action button</h2>
+<p class="lede">Persistent primary action, always available. Bottom-right by default.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame compact" style="background:var(--grey-100);height:160px;position:relative;padding:0">
+<button class="fab" style="position:absolute;right:18px;bottom:18px">＋</button>
+</div></div></section>
+
+<section class="comp" id="states"><h2>State table</h2>
+<dl class="spec" style="grid-template-columns:160px 1fr">
+<dt>Default</dt><dd>Standard render.</dd>
+<dt>Hover</dt><dd>Darken background by 6-8%.</dd>
+<dt>Active</dt><dd>Darken further by 4%; subtle inset shadow OK.</dd>
+<dt>Focus</dt><dd>3 px ring at <code>rgba(92,184,178,.18)</code>.</dd>
+<dt>Loading</dt><dd>Spinner replaces leading icon; disable interaction.</dd>
+<dt>Success</dt><dd>Green background plus check mark, 1.2 s, then revert.</dd>
+<dt>Disabled</dt><dd>Grey 200 background, Grey 500 text, no pointer events.</dd>
+</dl></section>
+
+</main>
+</div>
+
+<!-- TAG-CHROME-FOOTER-BEGIN -->
+<div class="tag-footer-bar"></div>
+<footer class="tag-footer" aria-label="Site footer">
+  <div class="tag-footer-inner">
+    <div class="tag-footer-brand">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+      <p>Self-hosted brand and AI context. Single source of truth for any AI tool that produces content for the Adecco Group.</p>
+      <span class="tag-footer-tagline">Making the future work for everyone</span>
+    </div>
+    <div>
+      <h4>Brand &amp; AI</h4>
+      <ul>
+        <li><a href="../../../tag-context.md">tag-context.md</a></li>
+        <li><a href="../../../prompt-card.md">prompt-card.md</a></li>
+        <li><a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a></li>
+        <li><a href="../../../business-context.md">business-context.md</a></li>
+        <li><a href="../../../llms.txt">llms.txt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Design system</h4>
+      <ul>
+        <li><a href="../index.html">Components</a></li>
+        <li><a href="../../documents/index.html">Documents</a></li>
+        <li><a href="../../logos/index.html">Logos</a></li>
+        <li><a href="../../../business-context/index.html">Business context</a></li>
+        <li><a href="../../../assets/tokens/tokens.css">Tokens (CSS)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="../../../assets/docs/brand-guidelines.pdf">Brand Guidelines PDF</a></li>
+        <li><a href="../../../assets/templates/index.json">Template registry</a></li>
+        <li><a href="../../../assets/recipes/README.md">Recipes</a></li>
+        <li><a href="../../../playbook.md">Playbook</a></li>
+        <li><a href="../../../context.html">Context (SSR)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li>Internal use only</li>
+        <li>Brand assets &copy; The Adecco Group</li>
+        <li>Hosted via Cloudflare Tunnel</li>
+        <li><a href="../../../index.html">tag.schatt.me</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tag-footer-bottom">
+    <span>&copy; 2026 The Adecco Group</span>
+    <span><code>v6.3.0</code> &middot; updated 2026-05-05</span>
+  </div>
+</footer>
+<!-- TAG-CHROME-FOOTER-END -->
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f86b8f4ac2b363f',t:'MTc3ODIyNTA0Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body></html>

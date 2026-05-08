@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Document patterns | TAG Components</title>
+<meta name="description" content="Layout patterns for Word and PDF documents. Use these alongside replace_docx.py.">
+<link rel="stylesheet" href="../_shared.css">
+      <link rel="stylesheet" href="https://tag.schatt.me/assets/css/site.css?v=6.4.0" />
+</head><body>
+<!-- TAG-CHROME-HEADER-BEGIN -->
+<nav class="tag-nav" aria-label="Primary">
+  <div class="tag-nav-inner">
+    <a href="../../../index.html" class="tag-nav-logo" aria-label="The Adecco Group">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+    </a>
+    <ul class="tag-nav-links">
+      <li><a href="../../../index.html#strategy" class="">Brand</a></li>
+      <li><a href="../../../index.html#voice" class="">Voice</a></li>
+      <li><a href="../../../business-context/index.html" class="">Business</a></li>
+      <li><a href="../index.html" class="active">Components</a></li>
+      <li><a href="../../documents/index.html" class="">Documents</a></li>
+      <li><a href="../../logos/index.html" class="">Logos</a></li>
+      <li><a href="../../../index.html#context" class="">Context</a></li>
+    </ul>
+    <a href="../../../prompt-card.md" class="tag-nav-cta">Prompt card</a>
+    <button class="tag-nav-burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="tag-nav-files" aria-label="Files">
+  <div class="tag-nav-files-inner">
+    <span class="label">Files</span>
+    <a href="../../../tag-context.md">tag-context.md</a>
+    <a href="../../../prompt-card.md">prompt-card.md</a>
+    <a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a>
+    <a href="../../../business-context.md">business-context.md</a>
+    <a href="../../../llms.txt">llms.txt</a>
+    <span class="sep"></span>
+    <a href="../../../assets/tokens/tokens.css">tokens.css</a>
+    <a href="../../../assets/templates/index.json">templates</a>
+  </div>
+</nav>
+<div class="tag-stripe"></div>
+<!-- TAG-CHROME-HEADER-END -->
+<div class="layout">
+
+<aside class="sidebar">
+ <h4>Get started</h4>
+ <ul>
+ <li><a href="../index.html" data-page="index">Overview</a></li>
+ </ul>
+ <h4>Foundations</h4>
+ <ul>
+ <li><a href="../foundations/index.html" data-page="foundations">Tokens, color, type, spacing</a></li>
+ </ul>
+ <h4>Components</h4>
+ <ul>
+ <li><a href="../buttons/index.html" data-page="buttons">Buttons</a></li>
+ <li><a href="../forms/index.html" data-page="forms">Forms &amp; inputs</a></li>
+ <li><a href="../feedback/index.html" data-page="feedback">Feedback &amp; status</a></li>
+ <li><a href="../navigation/index.html" data-page="navigation">Navigation</a></li>
+ <li><a href="../data-display/index.html" data-page="data-display">Data display</a></li>
+ <li><a href="../overlays/index.html" data-page="overlays">Overlays</a></li>
+ <li><a href="../content/index.html" data-page="content">Content blocks</a></li>
+ </ul>
+ <h4>Modules &amp; templates</h4>
+ <ul>
+ <li><a href="../modules/index.html" data-page="modules">Modules</a></li>
+ <li><a href="../page-templates/index.html" data-page="page-templates">Page templates</a></li>
+ </ul>
+ <h4>Documents &amp; slides</h4>
+ <ul>
+ <li><a href="index.html" data-page="documents" class="active">Document patterns</a></li>
+ <li><a href="../slides/index.html" data-page="slides">Slide layouts</a></li>
+ <li><a href="../charts/index.html" data-page="charts">Charts</a></li>
+ </ul>
+ <h4>External</h4>
+ <ul>
+ <li><a href="https://dev.tagds.adeccogroup.com" target="_blank" rel="noopener">TAG-DS Storybook ↗</a></li>
+ <li><a href="https://zeroheight.com/7666d7eae" target="_blank" rel="noopener">zeroheight ↗</a></li>
+ </ul>
+</aside>
+
+<main class="content">
+<header><span class="eyebrow">Documents / patterns</span><h1>Cover pages, TOCs, headers, footers, callouts, pull quotes, captions, references.</h1><p>Layout patterns for Word and PDF documents. Use these alongside replace_docx.py.</p></header>
+
+<section class="comp" id="cover-page-default"><h2>Cover page · default</h2>
+<p class="lede">Title block over Primary 500. Unity gradient bar at the bottom.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="doc-page cover"><div class="doc-cover-content">
+<div class="doc-eyebrow" style="color:var(--turquoise)">FY26 brand and AI context</div>
+<h1 class="doc-h1">Making the future work for everyone</h1>
+<p style="color:#B0BCD0;font-size:11px;margin:6px 0 0">The Adecco Group · April 2026</p>
+</div><div class="doc-bar"></div></div>
+</div></div></section>
+
+<section class="comp" id="cover-gradient"><h2>Cover page · unity gradient</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="doc-page cover gradient"><div class="doc-cover-content">
+<div class="doc-eyebrow" style="color:#fff;opacity:.85">Brand strategy</div>
+<h1 class="doc-h1">The agility advantage</h1>
+<p style="color:#fff;opacity:.85;font-size:11px;margin:6px 0 0">Group narrative · 2026</p>
+</div></div>
+</div></div></section>
+
+<section class="comp" id="cover-sphere"><h2>Cover page · with unity sphere</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="doc-page cover sphere"><div class="doc-cover-content">
+<div class="doc-eyebrow" style="color:var(--turquoise)">SparkAI</div>
+<h1 class="doc-h1">Responsible AI Principles</h1>
+<p style="color:#B0BCD0;font-size:11px;margin:6px 0 0">Group governance · 2026</p>
+</div><div class="doc-bar"></div></div>
+</div></div></section>
+
+<section class="comp" id="cover-minimal"><h2>Cover page · minimal</h2>
+<p class="lede">For confidential or internal documents. White background, lockup at top, title centered.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="doc-page" style="display:flex;flex-direction:column;justify-content:space-between">
+<div style="font-size:9px;color:var(--primary-300);text-transform:uppercase;letter-spacing:.1em">the Adecco Group</div>
+<div style="text-align:center"><div class="doc-eyebrow">Internal · confidential</div><h1 class="doc-h1" style="margin:14px 0 6px">Q3 strategy memo</h1><div style="font-size:10px;color:var(--primary-300)">For ExCo only · 2026-04-30</div></div>
+<div style="font-size:9px;color:var(--primary-300)">Page 1 of 12</div>
+<div class="doc-bar"></div></div>
+</div></div></section>
+
+<section class="comp" id="title-block"><h2>Title block (in-document)</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="max-width:560px;border-bottom:1px solid var(--grey-300);padding-bottom:18px">
+<div style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--turquoise);font-weight:700">Memo · internal</div>
+<h1 style="font-size:28px;margin:6px 0 4px">SparkAI integration plan, Q3 phase</h1>
+<div style="display:flex;gap:24px;color:var(--primary-300);font-size:13px;margin-top:8px"><div><strong style="color:var(--primary)">To</strong> Megan Wickens</div><div><strong style="color:var(--primary)">From</strong> </div><div><strong style="color:var(--primary)">Date</strong> 2026-04-30</div></div>
+</div></div></div></section>
+
+<section class="comp" id="document-header"><h2>Document running header</h2>
+<p class="lede">Repeats on every page. Document title left, section right, date in the middle.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--grey-300);padding-bottom:6px;font-size:11px;color:var(--primary-300)">
+<span>Brand &amp; AI Context · v4.1.0</span>
+<span style="text-transform:uppercase;letter-spacing:.08em">§ 8 · Tone of voice</span>
+<span>April 2026</span>
+</div></div></div></section>
+
+<section class="comp" id="document-footer"><h2>Document running footer</h2>
+<p class="lede">Repeats on every page. Logo left, classification middle, page number right.</p>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="border-top:1px solid var(--grey-300);padding-top:6px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--primary-300)">
+<span style="font-weight:700">the Adecco Group</span>
+<span>Internal · confidential</span>
+<span>Page 14 of 32</span>
+</div>
+<div class="unity-bar" style="margin-top:6px;height:3px"></div>
+</div></div></section>
+
+<section class="comp" id="toc"><h2>Table of contents</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="toc-block">
+<h3 style="font-size:18px;margin:0 0 14px">Contents</h3>
+<div class="row"><span class="num">1</span><span class="title">Purpose, mission, belief</span><span class="pg">04</span></div>
+<div class="row"><span class="num">2</span><span class="title">The agility advantage</span><span class="pg">07</span></div>
+<div class="row"><span class="num">3</span><span class="title">Tone of voice (four pairs)</span><span class="pg">12</span></div>
+<div class="row"><span class="num">4</span><span class="title">Visual identity</span><span class="pg">18</span></div>
+<div class="row"><span class="num">5</span><span class="title">Portfolio &amp; operations</span><span class="pg">26</span></div>
+<div class="row"><span class="num">6</span><span class="title">SparkAI governance</span><span class="pg">38</span></div>
+<div class="row"><span class="num">7</span><span class="title">Templates &amp; recipes</span><span class="pg">52</span></div>
+</div></div></div></section>
+
+<section class="comp" id="section-divider"><h2>Section divider page</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="doc-page" style="background:var(--gradient);display:flex;flex-direction:column;justify-content:center;align-items:center;color:#fff">
+<div style="font-size:10px;text-transform:uppercase;letter-spacing:.18em;opacity:.85">Part B</div>
+<h1 style="font-size:22px;margin:10px 0;text-align:center">Voice &amp; messaging</h1>
+<div style="font-size:11px;opacity:.7">Sections 8 to 13</div>
+</div></div></div></section>
+
+<section class="comp" id="executive-summary"><h2>Executive summary</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="max-width:600px"><div style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--turquoise);font-weight:700">Executive summary</div><h2 style="font-size:22px;margin:8px 0 14px;line-height:1.2">Three sentences, three signals, one decision.</h2>
+<p>1. The agility advantage is what we create when talent and technology operate on the same brief.</p>
+<p>2. Three FY26 signals tell us we've reached it: Premium Client Tracker live for Microsoft, brand context layer at <code>tag.schatt.me</code>, SparkAI writing in TAG voice automatically.</p>
+<p>3. The decision: scale the layer, or maintain it as a Group asset and let GBUs adopt at their own pace.</p>
+</div></div></div></section>
+
+<section class="comp" id="two-column-body"><h2>Two-column body text</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="cols-2" style="font-size:14px;line-height:1.6">
+<p>Across Adecco, Akkodis, and LHH we deliver end-to-end talent and technology solutions in more than 60 markets, combining global scale with local connection to deliver tailored, human-centred outcomes.</p>
+<p>The agility advantage is what we create. Talent and technology, deployed together, against a real workforce problem. We make the future work for everyone.</p>
+<p>SparkAI administers our Responsible AI Principles. Every output must satisfy ethical, human-centric, transparent, safe, and lawful standards before it ships.</p>
+<p>The brand context layer at tag.schatt.me is the runtime substrate that makes all of this addressable by any AI tool the Group uses.</p>
+</div></div></div></section>
+
+<section class="comp" id="three-column-body"><h2>Three-column body</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="cols-3" style="font-size:13px;line-height:1.55">
+<p>Across Adecco, Akkodis, and LHH we deliver end-to-end talent and technology solutions in more than 60 markets.</p>
+<p>The agility advantage is what we create. Talent and technology, deployed together, against a real workforce problem.</p>
+<p>SparkAI administers our Responsible AI Principles. Every output must satisfy ethical, human-centric, transparent, safe, and lawful standards.</p>
+</div></div></div></section>
+
+<section class="comp" id="callout"><h2>Sidebar callout</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="callout"><div class="label">Note</div><p>The unity gradient bar always sits at the bottom of the layout. Never the top, never recoloured, never resized in height.</p></div>
+</div></div></section>
+
+<section class="comp" id="pull-quote-doc"><h2>Pull quote (in body)</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<p style="margin:0 0 12px">The first phase covers the brand context layer: tag.schatt.me as the canonical hub for any AI tool inside the Group.</p>
+<div class="pull-quote"><p>"The agility advantage is what we create. Talent and technology, deployed together."</p><span class="src">Brand Narrative · November 2025</span></div>
+<p style="margin:12px 0 0">The second phase wires the Premium Client Intelligence Tracker into Microsoft (live since 2026-04-30).</p>
+</div></div></section>
+
+<section class="comp" id="image-with-caption"><h2>Image with caption</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<figure style="margin:0;max-width:480px">
+<div style="aspect-ratio:16/9;background:var(--gradient);border-radius:8px"></div>
+<figcaption style="margin-top:8px;font-size:12.5px;color:var(--primary-300)"><strong style="color:var(--primary)">Figure 1.</strong> Unity gradient (canonical 6-stop). Always horizontal, always at the bottom of a layout.</figcaption>
+</figure>
+</div></div></section>
+
+<section class="comp" id="footnote"><h2>Footnotes / inline notes</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="max-width:560px;font-size:14px;line-height:1.65">
+<p>The Group is a Fortune Global 500 company<sup style="color:var(--turquoise);font-size:11px">[1]</sup>, headquartered in Zurich, Switzerland<sup style="color:var(--turquoise);font-size:11px">[2]</sup>.</p>
+<div style="border-top:1px solid var(--grey-300);margin-top:18px;padding-top:10px;font-size:12px;color:var(--primary-300)">
+<p style="margin:2px 0">[1] Fortune 500, 2025 ranking.</p>
+<p style="margin:2px 0">[2] Bellerivestrasse 30, 8008 Zurich, Switzerland.</p>
+</div></div></div></div></section>
+
+<section class="comp" id="references"><h2>References / bibliography</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="max-width:560px">
+<h3 style="font-size:16px;margin:0 0 10px">References</h3>
+<ol style="font-size:13px;color:var(--primary-300);line-height:1.6;padding-left:20px">
+<li>The Adecco Group. <em>Brand Guidelines V7</em>. June 2025.</li>
+<li>The Adecco Group. <em>Brand Narrative</em>. November 2025.</li>
+<li>The Adecco Group. <em>Tone of Voice Guide</em>. March 2026.</li>
+<li>SparkAI. <em>Responsible AI Principles</em>. Internal document, 2024.</li>
+</ol></div></div></div></section>
+
+<section class="comp" id="author-bio"><h2>Author bio</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="card" style="display:flex;gap:16px;align-items:flex-start;max-width:520px">
+<span class="avatar avatar-lg">JS</span>
+<div><strong style="font-size:15px"></strong><div style="font-size:13px;color:var(--primary-300);margin:2px 0 8px">VP Global Digital Marketing · Group Strategy &amp; Marketing Office</div><p style="font-size:13.5px;line-height:1.55;margin:0;color:var(--primary)">Building the brand and AI context layer for the Adecco Group. Based in Munich.</p></div>
+</div></div></div></section>
+
+<section class="comp" id="data-callout"><h2>Data callout (in document)</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;background:var(--grey-100);padding:24px;border-radius:10px">
+<div style="text-align:center"><div style="font-size:32px;font-weight:800;color:var(--turquoise);line-height:1">62</div><div style="font-size:11px;color:var(--primary-300);text-transform:uppercase;letter-spacing:.06em">Markets</div></div>
+<div style="text-align:center"><div style="font-size:32px;font-weight:800;color:var(--turquoise);line-height:1">€ 24.6 b</div><div style="font-size:11px;color:var(--primary-300);text-transform:uppercase;letter-spacing:.06em">FY25 revenue</div></div>
+<div style="text-align:center"><div style="font-size:32px;font-weight:800;color:var(--turquoise);line-height:1">33,000</div><div style="font-size:11px;color:var(--primary-300);text-transform:uppercase;letter-spacing:.06em">FTEs</div></div>
+</div></div></div></section>
+
+<section class="comp" id="comparison-doc"><h2>Comparison block</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="border-left:4px solid var(--red);background:#FBE0E2;padding:14px 18px;border-radius:0 8px 8px 0"><div style="font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--red);font-weight:700">Before</div><p style="margin:6px 0 0;font-size:14px">Six tabs, five copy-pastes, twelve minutes per account.</p></div>
+<div style="border-left:4px solid var(--green);background:#E2F5E8;padding:14px 18px;border-radius:0 8px 8px 0"><div style="font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--green);font-weight:700">After</div><p style="margin:6px 0 0;font-size:14px">One brief, twenty seconds, on-brand.</p></div>
+</div></div></div></section>
+
+<section class="comp" id="appendix-page"><h2>Appendix page</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div style="max-width:560px"><div style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--primary-300);font-weight:700">Appendix A</div><h2 style="font-size:22px;margin:6px 0 14px">Glossary</h2>
+<dl style="font-size:14px"><dt style="font-weight:700;margin-top:10px">Agility advantage</dt><dd style="color:var(--primary-300);margin:4px 0 0">What TAG creates by combining talent and technology.</dd>
+<dt style="font-weight:700;margin-top:10px">SparkAI</dt><dd style="color:var(--primary-300);margin:4px 0 0">The Group's AI governance team.</dd>
+<dt style="font-weight:700;margin-top:10px">TEMPLATE-FIRST</dt><dd style="color:var(--primary-300);margin:4px 0 0">Mandatory rule: open the canonical template, never recreate.</dd></dl></div></div></div></section>
+
+<section class="comp" id="back-cover"><h2>Back cover</h2>
+<div class="preview"><div class="preview-label">Live</div><div class="frame">
+<div class="doc-page" style="background:var(--primary);color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:0">
+<div style="padding:24px"><div style="font-size:9px;text-transform:uppercase;letter-spacing:.12em;opacity:.6">Adecco Group AG</div><div style="font-size:11px;margin:8px 0 0">Bellerivestrasse 30 · 8008 Zurich · Switzerland</div><div style="font-size:11px;margin:4px 0 0">adeccogroup.com</div><div style="font-size:9px;margin-top:18px;opacity:.5">© 2026 Adecco Group AG. All rights reserved.</div></div>
+<div class="doc-bar"></div></div>
+</div></div></section>
+
+</main>
+</div>
+
+<!-- TAG-CHROME-FOOTER-BEGIN -->
+<div class="tag-footer-bar"></div>
+<footer class="tag-footer" aria-label="Site footer">
+  <div class="tag-footer-inner">
+    <div class="tag-footer-brand">
+      <img src="../../../assets/logos/tag-family-lockup-colour-neg.svg" alt="The Adecco Group" />
+      <p>Self-hosted brand and AI context. Single source of truth for any AI tool that produces content for the Adecco Group.</p>
+      <span class="tag-footer-tagline">Making the future work for everyone</span>
+    </div>
+    <div>
+      <h4>Brand &amp; AI</h4>
+      <ul>
+        <li><a href="../../../tag-context.md">tag-context.md</a></li>
+        <li><a href="../../../prompt-card.md">prompt-card.md</a></li>
+        <li><a href="../../../copilot-agent-instructions.md">copilot-agent-instructions.md</a></li>
+        <li><a href="../../../business-context.md">business-context.md</a></li>
+        <li><a href="../../../llms.txt">llms.txt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Design system</h4>
+      <ul>
+        <li><a href="../index.html">Components</a></li>
+        <li><a href="../../documents/index.html">Documents</a></li>
+        <li><a href="../../logos/index.html">Logos</a></li>
+        <li><a href="../../../business-context/index.html">Business context</a></li>
+        <li><a href="../../../assets/tokens/tokens.css">Tokens (CSS)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="../../../assets/docs/brand-guidelines.pdf">Brand Guidelines PDF</a></li>
+        <li><a href="../../../assets/templates/index.json">Template registry</a></li>
+        <li><a href="../../../assets/recipes/README.md">Recipes</a></li>
+        <li><a href="../../../playbook.md">Playbook</a></li>
+        <li><a href="../../../context.html">Context (SSR)</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li>Internal use only</li>
+        <li>Brand assets &copy; The Adecco Group</li>
+        <li>Hosted via Cloudflare Tunnel</li>
+        <li><a href="../../../index.html">tag.schatt.me</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tag-footer-bottom">
+    <span>&copy; 2026 The Adecco Group</span>
+    <span><code>v6.3.0</code> &middot; updated 2026-05-05</span>
+  </div>
+</footer>
+<!-- TAG-CHROME-FOOTER-END -->
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f86b8f7ded1363f',t:'MTc3ODIyNTA0Mw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body></html>
