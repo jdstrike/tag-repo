@@ -43,7 +43,7 @@ fig.savefig("chart.png", dpi=200, bbox_inches="tight")
 from replace_docx import fill_template
 
 fill_template(
- template_url_or_path="https://tag.schatt.me/assets/templates/tag-memo-template.docx",
+ template_url_or_path="https://context.tag-repo.com/assets/templates/tag-memo-template.docx",
  replacements={
  "Dear Mr Other": "Dear Megan,",
  "Yours sincerely": "Best,\n",

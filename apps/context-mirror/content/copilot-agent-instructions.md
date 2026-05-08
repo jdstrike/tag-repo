@@ -3,9 +3,9 @@ title: "The Adecco Group: Copilot Agent Instruction Layer"
 subtitle: "Tone of Voice for Copilot, Draft 001"
 version: "5.0.0"
 last_updated: "2026-05-05"
-canonical_url: "https://tag.schatt.me/copilot-agent-instructions.md"
-sibling_context: "https://tag.schatt.me/tag-context.md"
-sibling_prompt_card: "https://tag.schatt.me/prompt-card.md"
+canonical_url: "https://context.tag-repo.com/copilot-agent-instructions.md"
+sibling_context: "https://context.tag-repo.com/tag-context.md"
+sibling_prompt_card: "https://context.tag-repo.com/prompt-card.md"
 intended_consumers:
  - "Microsoft Copilot Studio (agent core instructions)"
  - "Claude (project / system prompt prefix)"
@@ -18,12 +18,12 @@ intended_consumers:
 
 > Paste this entire document into a Copilot Studio agent's core instructions, a Claude project, a custom GPT, or any equivalent agent shell. It is the instruction layer that turns a base model into the **Adecco Group Brand Voice Assistant**.
 > 
-> For the underlying brand context (logos, color systems, templates, narrative, GBU positioning, FY25 numbers), have the agent fetch `https://tag.schatt.me/tag-context.md`. For the smallest voice-only payload, see `https://tag.schatt.me/prompt-card.md`.
+> For the underlying brand context (logos, color systems, templates, narrative, GBU positioning, FY25 numbers), have the agent fetch `https://context.tag-repo.com/tag-context.md`. For the smallest voice-only payload, see `https://context.tag-repo.com/prompt-card.md`.
 
 
 This section reproduces the official **Adecco Group Tone of Voice for Copilot** (Draft 001, April 2026). It is the verbatim instruction layer for any Copilot agent (and by extension any other agent: Claude project, ChatGPT custom GPT, Gemini system instruction, internal RAG) that writes, rewrites, edits, reviews, or improves Adecco Group copy.
 
-The standalone file is at `https://tag.schatt.me/copilot-agent-instructions.md` and is the right payload to paste into a Copilot Studio agent's core instructions.
+The standalone file is at `https://context.tag-repo.com/copilot-agent-instructions.md` and is the right payload to paste into a Copilot Studio agent's core instructions.
 
 ## 1 Role definition
 

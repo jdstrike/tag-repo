@@ -36,6 +36,12 @@ find "$WORK" \( -name '*.html' -o -name '*.css' \) -type f -print0 | \
     -e 's|https://tag\.schatt\.me/assets/css/site\.css?v=[0-9.]*|/assets/css/site.css|g' \
     -e 's|https://tag\.schatt\.me/assets/css/site\.css|/assets/css/site.css|g'
 
+# Rewrite all remaining tag.schatt.me references to context.tag-repo.com
+# so the mirror is self-referential (links, sitemap pointer, doc snippets, etc.).
+find "$WORK" -type f \( -name '*.html' -o -name '*.md' -o -name '*.css' -o -name '*.js' \
+                       -o -name '*.txt' -o -name '*.json' -o -name '*.svg' -o -name '*.xml' \) -print0 | \
+  xargs -0 sed -i 's/tag\.schatt\.me/context.tag-repo.com/g'
+
 rm -rf content
 mv "$WORK" content
 trap - EXIT

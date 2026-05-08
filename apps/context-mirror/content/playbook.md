@@ -3,13 +3,13 @@ title: "TAG Brand Design System Playbook"
 description: "Reproducible workflow to build, deploy, and operate a complete brand and AI context for the Adecco Group. Adapted from the Autismus Stiftung playbook (v1.0, 2026-04-30)."
 date: 2026-04-30
 version: 1.0
-canonical_url: "https://tag.schatt.me/playbook.md"
+canonical_url: "https://context.tag-repo.com/playbook.md"
 applies_to: "the Adecco Group (institutional), Adecco + LHH + Akkodis"
 ---
 
 # TAG Brand Design System Playbook
 
-> Reproducible workflow that turns scattered TAG brand materials into a single hub at tag.schatt.me, consumable by any AI tool inside the Group (Microsoft Copilot, Claude, ChatGPT, Gemini, internal RAG) and by any human running TAG-branded work. This playbook documents what was built, in what order, with which tools, and which files. The same shape transfers to any other brand.
+> Reproducible workflow that turns scattered TAG brand materials into a single hub at context.tag-repo.com, consumable by any AI tool inside the Group (Microsoft Copilot, Claude, ChatGPT, Gemini, internal RAG) and by any human running TAG-branded work. This playbook documents what was built, in what order, with which tools, and which files. The same shape transfers to any other brand.
 
 ## 0. End state per brand
 
@@ -50,7 +50,7 @@ The discovery rule transfers verbatim: pull every existing brand asset before bu
 
 Key structural decisions:
 
-The file is self-contained. No external fetches at runtime. If something is missing, mirror it to `tag.schatt.me/assets/` and update the file.
+The file is self-contained. No external fetches at runtime. If something is missing, mirror it to `context.tag-repo.com/assets/` and update the file.
 
 Every section has a stable anchor (`## NN. title`) so the AI index can deep-link.
 
@@ -93,8 +93,8 @@ linear-gradient(90deg,
 The prompt-adapter is the most important component on the page. It is the first thing a visitor sees, and it is the only thing they need to grab to use TAG voice in any AI tool. The pre-formatted block contains:
 
 ```
-You are writing for the Adecco Group. Read https://tag.schatt.me/tag-context.md
-and apply the canonical Prompt Card at https://tag.schatt.me/prompt-card.md
+You are writing for the Adecco Group. Read https://context.tag-repo.com/tag-context.md
+and apply the canonical Prompt Card at https://context.tag-repo.com/prompt-card.md
 before producing any artefact.
 
 Apply the four-pair voice ... [voice rules]
@@ -103,7 +103,7 @@ Brand language ... [terms]
 Tagline verbatim: "Making the future work for everyone".
 
 For .docx / .pptx / Pardot landing pages: TEMPLATE-FIRST. Fetch the canonical
-template from https://tag.schatt.me/assets/templates/index.json and use it as
+template from https://context.tag-repo.com/assets/templates/index.json and use it as
 the container. Do not synthesize the layout from a description.
 
 Now help me with: [INSERT YOUR TASK]
@@ -148,7 +148,7 @@ A red warning box repeats the binding don'ts: no recolouring, no rotating, no di
 
 `tag_company_info.py` — the central data dict. Legal name, registered address (Bellerivestrasse 30, 8008 Zurich), phone, press office, registry, stock exchange ticker, headcount, the approved short and long boilerplate paragraphs, the GBU one-liners, and the brand colour palette. When TAG legal data changes, this file is the only thing that needs editing.
 
-`replace_docx.py` — fetches a template from `tag.schatt.me/assets/templates/`, replaces placeholders in the body only (header and footer are never touched, so the canonical TAG layout is preserved), saves under a new name. Convenience wrappers for memo and press release; library API (`fill_template`) for everything else.
+`replace_docx.py` — fetches a template from `context.tag-repo.com/assets/templates/`, replaces placeholders in the body only (header and footer are never touched, so the canonical TAG layout is preserved), saves under a new name. Convenience wrappers for memo and press release; library API (`fill_template`) for everything else.
 
 `tag_chart_style.py` — matplotlib and Plotly defaults that snap any chart onto the TAG palette (Primary 500 axes, Grey 100 gridlines, the 6-stop unity gradient as the colour cycle), with the unity gradient bar at the bottom of the figure. One `apply()` call sets every rcParam; one `finalize(fig, source=...)` call adds the source line and the gradient bar.
 
@@ -222,7 +222,7 @@ About 60 files for a complete system, of which 18 are the document templates and
 | pdftoppm (Poppler) | PDF → PNG for previews |
 | paramiko | SSH/SFTP deploy to Unraid |
 | nginx 1.27-alpine | Static hosting on Unraid |
-| Cloudflare Tunnel | Public hostname for tag.schatt.me |
+| Cloudflare Tunnel | Public hostname for context.tag-repo.com |
 | python-markdown | Markdown → SSR HTML for context.html |
 
 All open source. No paid tools needed.
@@ -262,6 +262,6 @@ When the legal entity changes (new HQ, new CEO, new ticker), edit `tag_company_i
 
 This methodology is free to reuse. Adopting it for another brand takes one person with Python basics, Design Systems affinity, and access to the brand's source materials about five working days.
 
-Source documentation of the system this playbook describes: [tag.schatt.me/tag-context.md](https://tag.schatt.me/tag-context.md), [tag.schatt.me/prompt-card.md](https://tag.schatt.me/prompt-card.md), [tag.schatt.me/llms.txt](https://tag.schatt.me/llms.txt).
+Source documentation of the system this playbook describes: [context.tag-repo.com/tag-context.md](https://context.tag-repo.com/tag-context.md), [context.tag-repo.com/prompt-card.md](https://context.tag-repo.com/prompt-card.md), [context.tag-repo.com/llms.txt](https://context.tag-repo.com/llms.txt).
 
 Original methodology source: Autismus Stiftung Brand Design System Playbook v1.0 (April 2026).

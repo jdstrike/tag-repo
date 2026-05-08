@@ -1,5 +1,5 @@
 {
-  "$schema": "https://tag.schatt.me/assets/templates/index.schema.json",
+  "$schema": "https://context.tag-repo.com/assets/templates/index.schema.json",
   "version": "1.0.0",
   "last_updated": "2026-04-29",
   "description": "Canonical TAG document and web template registry. Any AI tool generating a TAG-branded artefact must look up the appropriate template here first, fetch it, and use it as the container, not re-create the layout.",
@@ -12,9 +12,9 @@
       "intent_keywords_en": ["memo", "internal memo", "note to", "briefing memo"],
       "intent_keywords_de": ["Memo", "Notiz", "Aktennotiz", "interne Notiz"],
       "format": "docx",
-      "url": "https://tag.schatt.me/assets/templates/tag-memo-template.docx",
-      "preview_url": "https://tag.schatt.me/assets/templates/tag-memo-template.pdf",
-      "tagfam_variant": "https://tag.schatt.me/assets/templates/tagfam-memo-template.docx",
+      "url": "https://context.tag-repo.com/assets/templates/tag-memo-template.docx",
+      "preview_url": "https://context.tag-repo.com/assets/templates/tag-memo-template.pdf",
+      "tagfam_variant": "https://context.tag-repo.com/assets/templates/tagfam-memo-template.docx",
       "placeholders": [
         {"key": "TO",      "kind": "text", "example": "Sample Name"},
         {"key": "CC",      "kind": "text", "example": "Sample Name, Sample Name"},
@@ -34,8 +34,8 @@
       "intent_keywords_en": ["press release", "media release", "announcement"],
       "intent_keywords_de": ["Pressemitteilung", "Presseaussendung", "Bekanntmachung"],
       "format": "docx",
-      "url": "https://tag.schatt.me/assets/templates/tag-press-release-template.docx",
-      "preview_url": "https://tag.schatt.me/assets/templates/tag-press-release-template.pdf",
+      "url": "https://context.tag-repo.com/assets/templates/tag-press-release-template.docx",
+      "preview_url": "https://context.tag-repo.com/assets/templates/tag-press-release-template.pdf",
       "placeholders": [
         {"key": "HEADLINE",        "kind": "text", "example": "The Adecco Group ranked 7th among the best multinationals to work for in the world"},
         {"key": "SUBHEAD",         "kind": "text", "example": "A strong sense of purpose, team spirit and trust propel the Adecco Group onto the 2016 ranking"},
@@ -56,7 +56,7 @@
       "intent_keywords_en": ["letter", "letterhead", "formal letter", "official letter", "correspondence"],
       "intent_keywords_de": ["Brief", "Briefkopf", "Schreiben", "offizieller Brief", "Korrespondenz"],
       "format": "docx",
-      "url": "https://tag.schatt.me/assets/templates/tag-letterhead-zurich-hq.docx",
+      "url": "https://context.tag-repo.com/assets/templates/tag-letterhead-zurich-hq.docx",
       "registered_address": "Adecco Group AG, Bellerivestrasse 30, 8008 Zurich, Switzerland",
       "placeholders": [
         {"key": "DATE",        "kind": "text"},
@@ -80,9 +80,9 @@
       "intent_keywords_en": ["report", "brochure", "dossier", "white paper", "long document", "multi-page", "10-pager"],
       "intent_keywords_de": ["Bericht", "Broschuere", "Dossier", "Whitepaper", "Studie", "mehrseitig"],
       "format": "docx",
-      "url": "https://tag.schatt.me/assets/templates/tag-word-doc-template.docx",
-      "preview_url": "https://tag.schatt.me/assets/templates/tag-word-doc-template.pdf",
-      "tagfam_variant": "https://tag.schatt.me/assets/templates/tagfam-word-doc-template.docx",
+      "url": "https://context.tag-repo.com/assets/templates/tag-word-doc-template.docx",
+      "preview_url": "https://context.tag-repo.com/assets/templates/tag-word-doc-template.pdf",
+      "tagfam_variant": "https://context.tag-repo.com/assets/templates/tagfam-word-doc-template.docx",
       "styles_available": ["Heading1", "Heading2", "Heading3", "ListBullet", "ListBullet2", "ListBullet3", "TOCHeading", "TOC1", "TOC2", "TOC3", "Estilo1"]
     },
     {
@@ -92,7 +92,7 @@
       "intent_keywords_en": ["RFP short", "proposal short", "qualification response", "sales proposal", "tender response short"],
       "intent_keywords_de": ["Angebot kurz", "RFP kurz", "Qualifizierungsantwort"],
       "format": "docx",
-      "url": "https://tag.schatt.me/assets/templates/tag-rfp-short-template.docx",
+      "url": "https://context.tag-repo.com/assets/templates/tag-rfp-short-template.docx",
       "styles_available": ["RFP-title", "Coverconfidential", "A-H1", "A-Body", "Answer"]
     },
     {
@@ -102,7 +102,7 @@
       "intent_keywords_en": ["RFP long", "proposal long", "multi-GBU proposal", "tender response long"],
       "intent_keywords_de": ["Angebot lang", "RFP lang", "GBU-uebergreifendes Angebot"],
       "format": "pdf",
-      "url": "https://tag.schatt.me/assets/templates/tagfam-rfp-long-template.pdf",
+      "url": "https://context.tag-repo.com/assets/templates/tagfam-rfp-long-template.pdf",
       "note": "Source PDF only. For editing, ask Central Marketing for the .docx source."
     },
     {
@@ -112,7 +112,7 @@
       "intent_keywords_en": ["email signature", "signature block", "outlook signature"],
       "intent_keywords_de": ["E-Mail-Signatur", "Signatur", "Outlook-Signatur"],
       "format": "docx",
-      "url": "https://tag.schatt.me/assets/templates/tag-email-signature-template.docx",
+      "url": "https://context.tag-repo.com/assets/templates/tag-email-signature-template.docx",
       "placeholders": [
         {"key": "FIRST_NAME", "kind": "text"},
         {"key": "LAST_NAME",  "kind": "text"},
@@ -131,7 +131,7 @@
       "intent_keywords_en": ["about us", "boilerplate", "company description", "about TAG"],
       "intent_keywords_de": ["Ueber uns", "Unternehmensbeschreibung", "Kurzbeschreibung TAG"],
       "format": "docx",
-      "url": "https://tag.schatt.me/assets/templates/tag-boilerplate.docx",
+      "url": "https://context.tag-repo.com/assets/templates/tag-boilerplate.docx",
       "verbatim_text_section": "tag-context.md#661-official-about-the-adecco-group-current-september-2025-version"
     },
     {
@@ -141,7 +141,7 @@
       "intent_keywords_en": ["PowerPoint", "deck", "slides", "presentation", "pitch deck", "board deck"],
       "intent_keywords_de": ["PowerPoint", "Folien", "Praesentation", "Pitch", "Board-Deck"],
       "format": "pptx",
-      "url": "https://tag.schatt.me/assets/docs/tag-ppt-template-arial.pptx",
+      "url": "https://context.tag-repo.com/assets/docs/tag-ppt-template-arial.pptx",
       "layouts_available_count": 62,
       "layouts_documented_in": "tag-context.md#33-slide-layouts-pptx-template",
       "default_cover_layout": "Cover 01: Gradient Sphere",
@@ -155,7 +155,7 @@
       "intent_keywords_en": ["envelope", "mailing envelope"],
       "intent_keywords_de": ["Briefumschlag", "Umschlag"],
       "format": "pdf",
-      "url": "https://tag.schatt.me/assets/templates/tag-envelope-template.pdf"
+      "url": "https://context.tag-repo.com/assets/templates/tag-envelope-template.pdf"
     },
     {
       "id": "newsletter-header",
@@ -165,8 +165,8 @@
       "intent_keywords_de": ["Newsletter-Header", "Newsletter-Banner"],
       "format": "pdf",
       "variants": [
-        "https://tag.schatt.me/assets/templates/tag-newsletter-header-2.pdf",
-        "https://tag.schatt.me/assets/templates/tag-newsletter-header-6.pdf"
+        "https://context.tag-repo.com/assets/templates/tag-newsletter-header-2.pdf",
+        "https://context.tag-repo.com/assets/templates/tag-newsletter-header-6.pdf"
       ]
     },
     {
@@ -177,7 +177,7 @@
       "intent_keywords_de": ["Social Post quadratisch", "Instagram Post"],
       "format": "pdf",
       "size_px": "1080 x 1080",
-      "url": "https://tag.schatt.me/assets/templates/tag-social-square-1080.pdf"
+      "url": "https://context.tag-repo.com/assets/templates/tag-social-square-1080.pdf"
     },
     {
       "id": "social-vertical",
@@ -187,7 +187,7 @@
       "intent_keywords_de": ["Story", "Reel", "vertikaler Post"],
       "format": "pdf",
       "size_px": "1080 x 1920",
-      "url": "https://tag.schatt.me/assets/templates/tag-social-vertical-1080x1920.pdf"
+      "url": "https://context.tag-repo.com/assets/templates/tag-social-vertical-1080x1920.pdf"
     },
     {
       "id": "social-linkedin-landscape",
@@ -197,13 +197,13 @@
       "intent_keywords_de": ["LinkedIn quer"],
       "format": "pdf",
       "size_px": "1200 x 627",
-      "url": "https://tag.schatt.me/assets/templates/tag-social-linkedin-1200x627.pdf"
+      "url": "https://context.tag-repo.com/assets/templates/tag-social-linkedin-1200x627.pdf"
     },
     {
       "id": "social-pptx-guidelines",
       "purpose": "Social media PowerPoint template guidelines reference",
       "format": "pdf",
-      "url": "https://tag.schatt.me/assets/templates/tag-social-media-pptx-guidelines.pdf"
+      "url": "https://context.tag-repo.com/assets/templates/tag-social-media-pptx-guidelines.pdf"
     },
     {
       "id": "landing-page-light",
@@ -212,7 +212,7 @@
       "intent_keywords_en": ["landing page", "campaign page", "lead gen page", "pardot light", "marketing landing"],
       "intent_keywords_de": ["Landingpage", "Kampagnenseite", "Lead-Gen-Seite", "Pardot hell"],
       "format": "html",
-      "url": "https://tag.schatt.me/assets/templates/landing-page-light.html",
+      "url": "https://context.tag-repo.com/assets/templates/landing-page-light.html",
       "theme": "light",
       "stack": "Tailwind CDN + GSAP + Material Symbols + Pardot %%content%% region",
       "use_for": ["client microsites", "report downloads", "event invites", "executive content"]
@@ -224,7 +224,7 @@
       "intent_keywords_en": ["landing page dark", "scroll narrative", "report landing", "discover-style page"],
       "intent_keywords_de": ["Landingpage dunkel", "Scroll-Narrative", "Discover-Style"],
       "format": "html",
-      "url": "https://tag.schatt.me/assets/templates/landing-page-dark.html",
+      "url": "https://context.tag-repo.com/assets/templates/landing-page-dark.html",
       "theme": "dark",
       "stack": "Tailwind CDN + GSAP + Material Symbols + Pardot %%content%% region",
       "use_for": ["report downloads", "thought leadership", "AI/tech announcements", "C-suite content"]
@@ -236,7 +236,7 @@
       "intent_keywords_en": ["pardot master", "pardot template", "all components", "component library"],
       "intent_keywords_de": ["Pardot Master", "Komponentensammlung"],
       "format": "html",
-      "url": "https://tag.schatt.me/assets/templates/landing-page-master.html",
+      "url": "https://context.tag-repo.com/assets/templates/landing-page-master.html",
       "theme": "light",
       "note": "Use as a kitchen-sink reference. Copy individual sections rather than the whole file."
     }
@@ -255,8 +255,8 @@
       "modules_md": "https://designsystem.adeccogroup.com/7666d7eae/p/74fb9d-modules.md"
     },
     "static_html_or_microsite": {
-      "use": "tag.schatt.me/assets/tokens/tokens.css for foundation, plus Pardot template patterns from tag-context.md Part H",
-      "fonts": "Open Sauce Sans from tag.schatt.me/assets/fonts/"
+      "use": "context.tag-repo.com/assets/tokens/tokens.css for foundation, plus Pardot template patterns from tag-context.md Part H",
+      "fonts": "Open Sauce Sans from context.tag-repo.com/assets/fonts/"
     },
     "internal_dashboard_or_tool": {
       "use": "@adeccoux/tag-ds React components",

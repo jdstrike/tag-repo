@@ -1,4 +1,4 @@
-# tag.schatt.me hosts the Adecco Group brand and AI context.
+# context.tag-repo.com hosts the Adecco Group brand and AI context.
 # Designed to be consumed by any AI tool inside the company:
 # Microsoft Copilot, Claude, ChatGPT, Gemini, Perplexity, internal RAG.
 #
@@ -40,4 +40,4 @@ Disallow: /
 
 # LLM-friendly index pointer
 # https://llmstxt.org/
-Sitemap: https://tag.schatt.me/llms.txt
+Sitemap: https://context.tag-repo.com/llms.txt

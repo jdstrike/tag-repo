@@ -142,8 +142,8 @@ hr { border: none; border-top: 1px solid var(--tag-grey-300); margin: 32px 0; }
   </header>
   <h1 id="the-adecco-group-brand-ai-context">The Adecco Group: Brand &amp; AI Context</h1>
 <p>This file is the single source of truth that any AI tool (Microsoft Copilot, Claude, ChatGPT, Gemini, internal RAG systems) reads before producing any document, slide, image, PDF, email, or other artefact for The Adecco Group (TAG). It captures strategy, narrative, voice, tone-of-voice, identity, portfolio, differentiation, and proof points so that every output reinforces the same coherent story.</p>
-<p><strong>Self-contained</strong>: this file and every asset it references live on <code>tag.schatt.me</code>. There are no external dependencies. Do not fetch from third-party URLs (zeroheight, designsystem.adeccogroup.com, asset-library.adeccogroup.com, fontsarena.com, fonts.google.com) when working from this context. If something is missing, mirror it to <code>tag.schatt.me/assets/</code> and update this file.</p>
-<p>When in doubt, defer to the canonical brand guidelines PDF at <code>https://tag.schatt.me/assets/docs/brand-guidelines.pdf</code> and to the Central Marketing Team.</p>
+<p><strong>Self-contained</strong>: this file and every asset it references live on <code>context.tag-repo.com</code>. There are no external dependencies. Do not fetch from third-party URLs (zeroheight, designsystem.adeccogroup.com, asset-library.adeccogroup.com, fontsarena.com, fonts.google.com) when working from this context. If something is missing, mirror it to <code>context.tag-repo.com/assets/</code> and update this file.</p>
+<p>When in doubt, defer to the canonical brand guidelines PDF at <code>https://context.tag-repo.com/assets/docs/brand-guidelines.pdf</code> and to the Central Marketing Team.</p>
 <hr />
 <h2 id="0-quick-reference-for-any-ai-tool">0. Quick reference for any AI tool</h2>
 <h3 id="01-the-one-line-summary">0.1 The one-line summary</h3>
@@ -161,55 +161,55 @@ hr { border: none; border-top: 1px solid var(--tag-grey-300); margin: 32px 0; }
 <tbody>
 <tr>
 <td>Master MD context</td>
-<td><code>https://tag.schatt.me/tag-context.md</code></td>
+<td><code>https://context.tag-repo.com/tag-context.md</code></td>
 </tr>
 <tr>
 <td>Brand Guidelines PDF (V7, 85 pages)</td>
-<td><code>https://tag.schatt.me/assets/docs/brand-guidelines.pdf</code></td>
+<td><code>https://context.tag-repo.com/assets/docs/brand-guidelines.pdf</code></td>
 </tr>
 <tr>
 <td>Family lockup, colour positive</td>
-<td><code>https://tag.schatt.me/assets/logos/tag-family-lockup-colour-pos.svg</code></td>
+<td><code>https://context.tag-repo.com/assets/logos/tag-family-lockup-colour-pos.svg</code></td>
 </tr>
 <tr>
 <td>Family lockup, colour negative</td>
-<td><code>https://tag.schatt.me/assets/logos/tag-family-lockup-colour-neg.svg</code></td>
+<td><code>https://context.tag-repo.com/assets/logos/tag-family-lockup-colour-neg.svg</code></td>
 </tr>
 <tr>
 <td>Family lockup, white</td>
-<td><code>https://tag.schatt.me/assets/logos/tag-family-lockup-white.svg</code></td>
+<td><code>https://context.tag-repo.com/assets/logos/tag-family-lockup-white.svg</code></td>
 </tr>
 <tr>
 <td>Family lockup, black</td>
-<td><code>https://tag.schatt.me/assets/logos/tag-family-lockup-black.svg</code></td>
+<td><code>https://context.tag-repo.com/assets/logos/tag-family-lockup-black.svg</code></td>
 </tr>
 <tr>
 <td>Family lockup PNG, negative</td>
-<td><code>https://tag.schatt.me/assets/logos/tag-family-lockup-colour-neg.png</code></td>
+<td><code>https://context.tag-repo.com/assets/logos/tag-family-lockup-colour-neg.png</code></td>
 </tr>
 <tr>
 <td>Unity sphere PNG</td>
-<td><code>https://tag.schatt.me/assets/logos/tag-unity-sphere.png</code></td>
+<td><code>https://context.tag-repo.com/assets/logos/tag-unity-sphere.png</code></td>
 </tr>
 <tr>
 <td>Unity gradient bar PNG</td>
-<td><code>https://tag.schatt.me/assets/logos/tag-unity-gradient-bar.png</code></td>
+<td><code>https://context.tag-repo.com/assets/logos/tag-unity-gradient-bar.png</code></td>
 </tr>
 <tr>
 <td>Open Sauce Sans (Light, Regular, Medium, Bold)</td>
-<td><code>https://tag.schatt.me/assets/fonts/OpenSauceSans-{Light,Regular,Medium,Bold}.ttf</code></td>
+<td><code>https://context.tag-repo.com/assets/fonts/OpenSauceSans-{Light,Regular,Medium,Bold}.ttf</code></td>
 </tr>
 <tr>
 <td>Design tokens, CSS</td>
-<td><code>https://tag.schatt.me/assets/tokens/tokens.css</code></td>
+<td><code>https://context.tag-repo.com/assets/tokens/tokens.css</code></td>
 </tr>
 <tr>
 <td>Design tokens, JSON</td>
-<td><code>https://tag.schatt.me/assets/tokens/tokens.json</code></td>
+<td><code>https://context.tag-repo.com/assets/tokens/tokens.json</code></td>
 </tr>
 <tr>
 <td>PowerPoint template (Arial system font)</td>
-<td><code>https://tag.schatt.me/assets/docs/tag-ppt-template-arial.pptx</code></td>
+<td><code>https://context.tag-repo.com/assets/docs/tag-ppt-template-arial.pptx</code></td>
 </tr>
 </tbody>
 </table>
@@ -282,11 +282,11 @@ hr { border: none; border-top: 1px solid var(--tag-grey-300); margin: 32px 0; }
 <li><strong>No default audience.</strong> Always ask the user for the audience and the channel before producing anything substantial. If the user refuses to specify, ask one clarifying question and then default to "internal Adecco Group employees, no external distribution".</li>
 <li><strong>Tool-agnostic.</strong> Whether the AI is Copilot, Claude, ChatGPT, Gemini, or an internal system, the rules in this file are the same. Tool-specific prompt syntax adapts; brand standards do not.</li>
 <li><strong>Honour SparkAI governance.</strong> Every output must satisfy the five Responsible AI Principles (see Part G). If output would violate one (e.g. unverifiable claim, opaque reasoning), flag it and ask for human review.</li>
-<li><strong>TEMPLATE-FIRST is mandatory</strong> for documents and landing pages. Look up the template in <code>https://tag.schatt.me/assets/templates/index.json</code>, fetch the file, replace only content placeholders. See Section 71.</li>
+<li><strong>TEMPLATE-FIRST is mandatory</strong> for documents and landing pages. Look up the template in <code>https://context.tag-repo.com/assets/templates/index.json</code>, fetch the file, replace only content placeholders. See Section 71.</li>
 <li><strong>For React / product UI</strong>: use <code>@adeccoux/tag-ds</code> v4.9.0 (Storybook at <code>https://dev.tagds.adeccogroup.com</code>). For Pardot: use <code>landing-page-light.html</code> or <code>landing-page-dark.html</code> from the registry. See Section 73.</li>
-<li><strong>Use the canonical Prompt Card</strong> for any system-prompt-style use. The verbatim card is in Section 75 and as a standalone file at <code>https://tag.schatt.me/prompt-card.md</code>. It encodes the four tone-of-voice pairs, US English, brand language, and the pre/post-flight checklists.</li>
-<li><strong>For Copilot Studio agents (and any deeper agent role)</strong>: use the canonical Copilot Agent Instruction Layer in Section 76, also published verbatim at <code>https://tag.schatt.me/copilot-agent-instructions.md</code>. It defines the agent role (Adecco Group Brand Voice Assistant), the 7-input required process, the full do/don't writing rules, the claims-and-evidence protocol with accountability log, the review behaviour format, the output-style format, and the human-review escalation list.</li>
-<li><strong>For commercial knowledge</strong> (what TAG sells, how it goes to market, how it delivers): use the Business Context layer at <code>https://tag.schatt.me/business-context/</code> (human hub) and <code>https://tag.schatt.me/business-context.md</code> (paste-ready card). Section 77 cross-links the full structure. Pontoon and rPotential carry facts that must be reproduced verbatim.</li>
+<li><strong>Use the canonical Prompt Card</strong> for any system-prompt-style use. The verbatim card is in Section 75 and as a standalone file at <code>https://context.tag-repo.com/prompt-card.md</code>. It encodes the four tone-of-voice pairs, US English, brand language, and the pre/post-flight checklists.</li>
+<li><strong>For Copilot Studio agents (and any deeper agent role)</strong>: use the canonical Copilot Agent Instruction Layer in Section 76, also published verbatim at <code>https://context.tag-repo.com/copilot-agent-instructions.md</code>. It defines the agent role (Adecco Group Brand Voice Assistant), the 7-input required process, the full do/don't writing rules, the claims-and-evidence protocol with accountability log, the review behaviour format, the output-style format, and the human-review escalation list.</li>
+<li><strong>For commercial knowledge</strong> (what TAG sells, how it goes to market, how it delivers): use the Business Context layer at <code>https://context.tag-repo.com/business-context/</code> (human hub) and <code>https://context.tag-repo.com/business-context.md</code> (paste-ready card). Section 77 cross-links the full structure. Pontoon and rPotential carry facts that must be reproduced verbatim.</li>
 </ol>
 <hr />
 <h1 id="part-a-strategy-narrative">Part A: Strategy &amp; narrative</h1>
@@ -939,7 +939,7 @@ inquisitive, passionate, interesting, and interested.&quot;
 <h3 id="161-open-sauce-sans-primary">16.1 Open Sauce Sans (primary)</h3>
 <ul>
 <li>SIL Open Font License (OFL), unrestricted commercial use.</li>
-<li>Mirrored at <code>https://tag.schatt.me/assets/fonts/</code>. Light, Regular, Medium, Bold available locally.</li>
+<li>Mirrored at <code>https://context.tag-repo.com/assets/fonts/</code>. Light, Regular, Medium, Bold available locally.</li>
 <li>Hierarchy: feature headings Bold/ExtraBold (sentence case); page headings Bold; subheadings SemiBold/Bold; intros Medium/SemiBold; body Regular/Light; quotes Italic.</li>
 <li>Alignment: left for content-heavy materials; centred for covers and key statements.</li>
 </ul>
@@ -967,11 +967,11 @@ inquisitive, passionate, interesting, and interested.&quot;
 </table>
 <p>Headline sizes (mobile/desktop): Hero 56/64, H1 40/48, H2 32/40, H3 24/32, H4 20/24, Body 14-20.</p>
 <h2 id="17-design-tokens-machine-readable">17. Design tokens (machine-readable)</h2>
-<p>Full token set is at <code>https://tag.schatt.me/assets/tokens/tokens.css</code> (CSS) and <code>tokens.json</code> (DTCG format).</p>
+<p>Full token set is at <code>https://context.tag-repo.com/assets/tokens/tokens.css</code> (CSS) and <code>tokens.json</code> (DTCG format).</p>
 <p>Categories: spacing, text decoration &amp; case, letter spacing, font sizes, font weights, line heights, font families, semantic colours (success/alert/error), primary/secondary/accent palettes, neutrals, tertiary/chart colours, GBU originals, semantic surfaces, borders &amp; dividers, icon states, button states, action CTA states, feedback states, interactive states, skeleton, overlay, gradients, shadows (1x/2x/3x elevations).</p>
 <h2 id="18-iconography">18. Iconography</h2>
 <ul>
-<li><strong>Library</strong>: Material Design icons. Mirrored on demand at <code>https://tag.schatt.me/assets/icons/</code>.</li>
+<li><strong>Library</strong>: Material Design icons. Mirrored on demand at <code>https://context.tag-repo.com/assets/icons/</code>.</li>
 <li><strong>Variants</strong>: positive 100% black on white; positive 100% primary or secondary colour on white; negative 100% white on primary or secondary colour.</li>
 <li><strong>Minimum size</strong>: 10mm in print, 30px on screen.</li>
 <li>When generating icons, choose the geometric, simple, slightly rounded Material style.</li>
@@ -1632,9 +1632,9 @@ potential. Audience: [SPECIFY]. Channel: [SPECIFY]. Confidentiality: [SPECIFY].
 Task: [WHAT YOU WANT]
 </code></pre>
 <h3 id="442-claude-chatgpt-gemini-web-or-api">44.2 Claude / ChatGPT / Gemini (web or API)</h3>
-<p>These tools have no implicit corporate context. Always inject the brand context at the start of the conversation, either by pointing to <code>https://tag.schatt.me/tag-context.md</code> or by pasting the relevant section.</p>
+<p>These tools have no implicit corporate context. Always inject the brand context at the start of the conversation, either by pointing to <code>https://context.tag-repo.com/tag-context.md</code> or by pasting the relevant section.</p>
 <pre><code>You are an AI assistant operating under the Adecco Group brand context at
-https://tag.schatt.me/tag-context.md. Read it before answering. Apply the
+https://context.tag-repo.com/tag-context.md. Read it before answering. Apply the
 Four-pair voice, US English, sentence case headlines. Connect framing
 to the agility advantage. Output must satisfy the five Responsible AI
 Principles (Ethical, Human-Centric, Transparent, Safe, Lawful).
@@ -1988,17 +1988,17 @@ adeccogroup.com
 <h3 id="473-open-sauce-sans-font-face">47.3 Open Sauce Sans @font-face</h3>
 <pre><code class="language-css">@font-face{
  font-family:&quot;Open Sauce Sans&quot;;
- src:url(&quot;https://tag.schatt.me/assets/fonts/OpenSauceSans-Regular.ttf&quot;) format(&quot;truetype&quot;);
+ src:url(&quot;https://context.tag-repo.com/assets/fonts/OpenSauceSans-Regular.ttf&quot;) format(&quot;truetype&quot;);
  font-weight:400; font-style:normal; font-display:swap;
 }
 @font-face{
  font-family:&quot;Open Sauce Sans&quot;;
- src:url(&quot;https://tag.schatt.me/assets/fonts/OpenSauceSans-Medium.ttf&quot;) format(&quot;truetype&quot;);
+ src:url(&quot;https://context.tag-repo.com/assets/fonts/OpenSauceSans-Medium.ttf&quot;) format(&quot;truetype&quot;);
  font-weight:500; font-style:normal; font-display:swap;
 }
 @font-face{
  font-family:&quot;Open Sauce Sans&quot;;
- src:url(&quot;https://tag.schatt.me/assets/fonts/OpenSauceSans-Bold.ttf&quot;) format(&quot;truetype&quot;);
+ src:url(&quot;https://context.tag-repo.com/assets/fonts/OpenSauceSans-Bold.ttf&quot;) format(&quot;truetype&quot;);
  font-weight:700; font-style:normal; font-display:swap;
 }
 </code></pre>
@@ -2063,7 +2063,7 @@ adeccogroup.com
 <pre><code class="language-html">&lt;div class=&quot;without-padding-header-section-wrapper site-header-basic&quot;&gt;
  &lt;div class=&quot;other-section header-section--horizontal&quot;&gt;
  &lt;div class=&quot;header-logo&quot;&gt;
- &lt;img src=&quot;https://tag.schatt.me/assets/logos/tag-family-lockup-colour-pos.svg&quot;
+ &lt;img src=&quot;https://context.tag-repo.com/assets/logos/tag-family-lockup-colour-pos.svg&quot;
  alt=&quot;The Adecco Group&quot; /&gt;
  &lt;/div&gt;
  &lt;div class=&quot;header-menu&quot;&gt;
@@ -2162,7 +2162,7 @@ adeccogroup.com
 <p>For scroll-narrative landing pages with the unity sphere bleeding off the right edge:</p>
 <pre><code class="language-html">&lt;section id=&quot;hero&quot; class=&quot;relative min-h-[92vh] flex items-center overflow-hidden&quot;&gt;
  &lt;div class=&quot;absolute right-[-8%] top-1/2 -translate-y-1/2 w-[58vw] max-w-[840px] aspect-square opacity-25 pointer-events-none&quot;&gt;
- &lt;img src=&quot;https://tag.schatt.me/assets/logos/tag-unity-sphere.png&quot; class=&quot;sphere-img&quot; alt=&quot;&quot; /&gt;
+ &lt;img src=&quot;https://context.tag-repo.com/assets/logos/tag-unity-sphere.png&quot; class=&quot;sphere-img&quot; alt=&quot;&quot; /&gt;
  &lt;/div&gt;
  &lt;div class=&quot;absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/80 to-transparent&quot;&gt;&lt;/div&gt;
  &lt;div class=&quot;relative max-w-7xl mx-auto px-6 py-14 md:py-16&quot;&gt;
@@ -2180,7 +2180,7 @@ adeccogroup.com
  &lt;a href=&quot;#&quot; class=&quot;border border-white/12 bg-white/5 text-white px-6 py-3 rounded-full&quot;&gt;SECONDARY&lt;/a&gt;
  &lt;/div&gt;
  &lt;/div&gt;
- &lt;img src=&quot;https://tag.schatt.me/assets/logos/tag-unity-gradient-bar.png&quot; class=&quot;absolute bottom-0 left-0 right-0 stripe thin&quot; alt=&quot;&quot;&gt;
+ &lt;img src=&quot;https://context.tag-repo.com/assets/logos/tag-unity-gradient-bar.png&quot; class=&quot;absolute bottom-0 left-0 right-0 stripe thin&quot; alt=&quot;&quot;&gt;
 &lt;/section&gt;
 </code></pre>
 <h3 id="505-hero-overlay-variants">50.5 Hero overlay variants</h3>
@@ -2344,7 +2344,7 @@ adeccogroup.com
 <pre><code class="language-html">&lt;div class=&quot;without-padding-header-section-wrapper footer-section-wrapper full-bleed-bg&quot;&gt;
  &lt;div class=&quot;other-section medium-section-padding&quot;&gt;
  &lt;div class=&quot;footer-logo&quot;&gt;
- &lt;img src=&quot;https://tag.schatt.me/assets/logos/tag-family-lockup-white.svg&quot; alt=&quot;The Adecco Group&quot; /&gt;
+ &lt;img src=&quot;https://context.tag-repo.com/assets/logos/tag-family-lockup-white.svg&quot; alt=&quot;The Adecco Group&quot; /&gt;
  &lt;/div&gt;
  &lt;hr class=&quot;footer-separator&quot; /&gt;
  &lt;div class=&quot;footer-bottom&quot;&gt;
@@ -2469,14 +2469,14 @@ adeccogroup.com
 <p>Pattern shown verbatim in the live Pardot/Tailwind template.</p>
 <h2 id="58-stripes-spheres-rings-graphic-devices">58. Stripes, spheres, rings (graphic devices)</h2>
 <h3 id="581-unity-gradient-stripe-1-3px-horizontal-bar">58.1 Unity gradient stripe (1-3px horizontal bar)</h3>
-<pre><code class="language-html">&lt;img src=&quot;https://tag.schatt.me/assets/logos/tag-unity-gradient-bar.png&quot; alt=&quot;&quot; class=&quot;stripe&quot;&gt;
+<pre><code class="language-html">&lt;img src=&quot;https://context.tag-repo.com/assets/logos/tag-unity-gradient-bar.png&quot; alt=&quot;&quot; class=&quot;stripe&quot;&gt;
 </code></pre>
 <pre><code class="language-css">img.stripe { display:block; width:100%; height:3px; object-fit:cover; }
 img.stripe.thin { height:2px; }
 </code></pre>
 <h3 id="582-unity-sphere-decorative-opacity-tuned">58.2 Unity sphere (decorative, opacity-tuned)</h3>
 <pre><code class="language-html">&lt;div class=&quot;sphere-wrap absolute right-[-8%] w-[840px] aspect-square opacity-25 pointer-events-none&quot;&gt;
- &lt;img src=&quot;https://tag.schatt.me/assets/logos/tag-unity-sphere.png&quot; class=&quot;sphere-img&quot;&gt;
+ &lt;img src=&quot;https://context.tag-repo.com/assets/logos/tag-unity-sphere.png&quot; class=&quot;sphere-img&quot;&gt;
 &lt;/div&gt;
 </code></pre>
 <pre><code class="language-css">.sphere-img { width:100%; height:100%; border-radius:50%; object-fit:cover; }
@@ -2823,7 +2823,7 @@ A strong sense of purpose, team spirit and trust propel the Adecco Group onto th
 
 For further information please contact:
 The Adecco Group Corporate Press Office
-<a href="https://tag.schatt.me/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0474766177772a6b62626d67614465606167676b2a676b69">[email&#160;protected]</a> or +41 (0) 44 878 87 87
+<a href="https://context.tag-repo.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0474766177772a6b62626d67614465606167676b2a676b69">[email&#160;protected]</a> or +41 (0) 44 878 87 87
 adeccogroup.com
 Facebook: facebook.com/theadeccogroup
 X: @AdeccoGroup
@@ -2867,7 +2867,7 @@ Sincerely,
 Your Name
 Title
 M +00 000 000 0000
-E <a href="https://tag.schatt.me/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="afd6c0dadd81cac2cec6c3efcecbcaccccc0c8ddc0dadf81ccc0c2">[email&#160;protected]</a>
+E <a href="https://context.tag-repo.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="afd6c0dadd81cac2cec6c3efcecbcaccccc0c8ddc0dadf81ccc0c2">[email&#160;protected]</a>
 
 Adecco Group AG
 Bellerivestrasse 30
@@ -2890,7 +2890,7 @@ Job Title
 
 T +00 0 000 00 00
 M +00 000 000 0000 (optional)
-E <a href="https://tag.schatt.me/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="badcd3c8c9ce94d6dbc9cefadbdedfd9d9d5ddc8d5cfca94d9d5d7">[email&#160;protected]</a>
+E <a href="https://context.tag-repo.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="badcd3c8c9ce94d6dbc9cefadbdedfd9d9d5ddc8d5cfca94d9d5d7">[email&#160;protected]</a>
 
 Follow me on Twitter and LinkedIn
 
@@ -3147,51 +3147,51 @@ the opinions of the Company or its affiliates.
 <tbody>
 <tr>
 <td>Family lockup colour positive (SVG)</td>
-<td>https://tag.schatt.me/assets/logos/tag-family-lockup-colour-pos.svg</td>
+<td>https://context.tag-repo.com/assets/logos/tag-family-lockup-colour-pos.svg</td>
 </tr>
 <tr>
 <td>Family lockup colour negative (SVG)</td>
-<td>https://tag.schatt.me/assets/logos/tag-family-lockup-colour-neg.svg</td>
+<td>https://context.tag-repo.com/assets/logos/tag-family-lockup-colour-neg.svg</td>
 </tr>
 <tr>
 <td>Family lockup white (SVG, for dark backgrounds)</td>
-<td>https://tag.schatt.me/assets/logos/tag-family-lockup-white.svg</td>
+<td>https://context.tag-repo.com/assets/logos/tag-family-lockup-white.svg</td>
 </tr>
 <tr>
 <td>Family lockup black (SVG, for high-contrast print)</td>
-<td>https://tag.schatt.me/assets/logos/tag-family-lockup-black.svg</td>
+<td>https://context.tag-repo.com/assets/logos/tag-family-lockup-black.svg</td>
 </tr>
 <tr>
 <td>Family lockup colour negative (PNG, for Word/PPT)</td>
-<td>https://tag.schatt.me/assets/logos/tag-family-lockup-colour-neg.png</td>
+<td>https://context.tag-repo.com/assets/logos/tag-family-lockup-colour-neg.png</td>
 </tr>
 <tr>
 <td>Unity sphere PNG (decorative)</td>
-<td>https://tag.schatt.me/assets/logos/tag-unity-sphere.png</td>
+<td>https://context.tag-repo.com/assets/logos/tag-unity-sphere.png</td>
 </tr>
 <tr>
 <td>Unity gradient bar PNG (footer band)</td>
-<td>https://tag.schatt.me/assets/logos/tag-unity-gradient-bar.png</td>
+<td>https://context.tag-repo.com/assets/logos/tag-unity-gradient-bar.png</td>
 </tr>
 <tr>
 <td>Open Sauce Sans Light TTF</td>
-<td>https://tag.schatt.me/assets/fonts/OpenSauceSans-Light.ttf</td>
+<td>https://context.tag-repo.com/assets/fonts/OpenSauceSans-Light.ttf</td>
 </tr>
 <tr>
 <td>Open Sauce Sans Regular TTF</td>
-<td>https://tag.schatt.me/assets/fonts/OpenSauceSans-Regular.ttf</td>
+<td>https://context.tag-repo.com/assets/fonts/OpenSauceSans-Regular.ttf</td>
 </tr>
 <tr>
 <td>Open Sauce Sans Medium TTF</td>
-<td>https://tag.schatt.me/assets/fonts/OpenSauceSans-Medium.ttf</td>
+<td>https://context.tag-repo.com/assets/fonts/OpenSauceSans-Medium.ttf</td>
 </tr>
 <tr>
 <td>Open Sauce Sans Bold TTF</td>
-<td>https://tag.schatt.me/assets/fonts/OpenSauceSans-Bold.ttf</td>
+<td>https://context.tag-repo.com/assets/fonts/OpenSauceSans-Bold.ttf</td>
 </tr>
 <tr>
 <td>TAG PowerPoint template (Arial system font, 62 layouts)</td>
-<td>https://tag.schatt.me/assets/docs/tag-ppt-template-arial.pptx</td>
+<td>https://context.tag-repo.com/assets/docs/tag-ppt-template-arial.pptx</td>
 </tr>
 </tbody>
 </table>
@@ -3204,7 +3204,7 @@ the opinions of the Company or its affiliates.
 <h3 id="711-process">71.1 Process</h3>
 <ol>
 <li><strong>Identify the artefact type</strong> the user is asking for (memo, letter, press release, RFP, deck, landing page, etc.).</li>
-<li><strong>Look up the template</strong> in the registry at <code>https://tag.schatt.me/assets/templates/index.json</code>. Use the <code>intent_keywords_en</code> and <code>intent_keywords_de</code> arrays to match the user's request to a template <code>id</code>.</li>
+<li><strong>Look up the template</strong> in the registry at <code>https://context.tag-repo.com/assets/templates/index.json</code>. Use the <code>intent_keywords_en</code> and <code>intent_keywords_de</code> arrays to match the user's request to a template <code>id</code>.</li>
 <li><strong>Fetch the template file</strong> from the URL given in the matched template entry.</li>
 <li><strong>Open the file with the right library</strong>:
  * <code>.docx</code> → <code>python-docx</code> (<code>from docx import Document</code>)
@@ -3223,7 +3223,7 @@ the opinions of the Company or its affiliates.
 <h3 id="715-what-about-new-templates-the-user-just-gave-me">71.5 What about new templates the user just gave me?</h3>
 <p>If the user uploads a new template in conversation:</p>
 <ol>
-<li>Mirror the file to <code>https://tag.schatt.me/assets/templates/&lt;normalised-name&gt;</code> (the maintainer of this repo can do that with one rsync).</li>
+<li>Mirror the file to <code>https://context.tag-repo.com/assets/templates/&lt;normalised-name&gt;</code> (the maintainer of this repo can do that with one rsync).</li>
 <li>Add an entry to <code>index.json</code> with <code>id</code>, <code>purpose</code>, <code>audience</code>, <code>intent_keywords_en/de</code>, <code>format</code>, <code>url</code>, <code>placeholders</code>.</li>
 <li>Reference the new entry in the next response so future runs can find it.</li>
 <li>From that point on, the template is canonical and the TEMPLATE-FIRST rule applies.</li>
@@ -3377,7 +3377,7 @@ the opinions of the Company or its affiliates.
 │ unstable component behaviour.
 │
 ├── Is it a static HTML microsite, prototype, or demo?
-│ YES → use tag.schatt.me/assets/tokens/tokens.css for foundation,
+│ YES → use context.tag-repo.com/assets/tokens/tokens.css for foundation,
 │ plus the patterns in Part H (sections 47-58) of this file.
 │ No npm dependencies required.
 │
@@ -3406,7 +3406,7 @@ the opinions of the Company or its affiliates.
 </ul>
 <p>When generating React code for TAG, always include a Storybook URL for the component you used so the human reviewer can verify the implementation against the canonical version.</p>
 <h2 id="74-template-registry-quick-reference">74. Template registry quick reference</h2>
-<p>Browse the registry: <code>https://tag.schatt.me/assets/templates/index.json</code></p>
+<p>Browse the registry: <code>https://context.tag-repo.com/assets/templates/index.json</code></p>
 <p>Direct file URLs (canonical):</p>
 <table>
 <thead>
@@ -3418,87 +3418,87 @@ the opinions of the Company or its affiliates.
 <tbody>
 <tr>
 <td>memo (TAG)</td>
-<td><code>https://tag.schatt.me/assets/templates/tag-memo-template.docx</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/tag-memo-template.docx</code></td>
 </tr>
 <tr>
 <td>memo (TAGFAM)</td>
-<td><code>https://tag.schatt.me/assets/templates/tagfam-memo-template.docx</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/tagfam-memo-template.docx</code></td>
 </tr>
 <tr>
 <td>press-release</td>
-<td><code>https://tag.schatt.me/assets/templates/tag-press-release-template.docx</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/tag-press-release-template.docx</code></td>
 </tr>
 <tr>
 <td>letterhead</td>
-<td><code>https://tag.schatt.me/assets/templates/tag-letterhead-zurich-hq.docx</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/tag-letterhead-zurich-hq.docx</code></td>
 </tr>
 <tr>
 <td>word-doc (TAG)</td>
-<td><code>https://tag.schatt.me/assets/templates/tag-word-doc-template.docx</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/tag-word-doc-template.docx</code></td>
 </tr>
 <tr>
 <td>word-doc (TAGFAM)</td>
-<td><code>https://tag.schatt.me/assets/templates/tagfam-word-doc-template.docx</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/tagfam-word-doc-template.docx</code></td>
 </tr>
 <tr>
 <td>rfp-short</td>
-<td><code>https://tag.schatt.me/assets/templates/tag-rfp-short-template.docx</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/tag-rfp-short-template.docx</code></td>
 </tr>
 <tr>
 <td>rfp-long</td>
-<td><code>https://tag.schatt.me/assets/templates/tagfam-rfp-long-template.pdf</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/tagfam-rfp-long-template.pdf</code></td>
 </tr>
 <tr>
 <td>email-signature</td>
-<td><code>https://tag.schatt.me/assets/templates/tag-email-signature-template.docx</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/tag-email-signature-template.docx</code></td>
 </tr>
 <tr>
 <td>boilerplate</td>
-<td><code>https://tag.schatt.me/assets/templates/tag-boilerplate.docx</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/tag-boilerplate.docx</code></td>
 </tr>
 <tr>
 <td>powerpoint-deck</td>
-<td><code>https://tag.schatt.me/assets/docs/tag-ppt-template-arial.pptx</code></td>
+<td><code>https://context.tag-repo.com/assets/docs/tag-ppt-template-arial.pptx</code></td>
 </tr>
 <tr>
 <td>envelope</td>
-<td><code>https://tag.schatt.me/assets/templates/tag-envelope-template.pdf</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/tag-envelope-template.pdf</code></td>
 </tr>
 <tr>
 <td>newsletter-header (variant 2)</td>
-<td><code>https://tag.schatt.me/assets/templates/tag-newsletter-header-2.pdf</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/tag-newsletter-header-2.pdf</code></td>
 </tr>
 <tr>
 <td>newsletter-header (variant 6)</td>
-<td><code>https://tag.schatt.me/assets/templates/tag-newsletter-header-6.pdf</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/tag-newsletter-header-6.pdf</code></td>
 </tr>
 <tr>
 <td>social-square (1080x1080)</td>
-<td><code>https://tag.schatt.me/assets/templates/tag-social-square-1080.pdf</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/tag-social-square-1080.pdf</code></td>
 </tr>
 <tr>
 <td>social-vertical (1080x1920)</td>
-<td><code>https://tag.schatt.me/assets/templates/tag-social-vertical-1080x1920.pdf</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/tag-social-vertical-1080x1920.pdf</code></td>
 </tr>
 <tr>
 <td>social-linkedin-landscape (1200x627)</td>
-<td><code>https://tag.schatt.me/assets/templates/tag-social-linkedin-1200x627.pdf</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/tag-social-linkedin-1200x627.pdf</code></td>
 </tr>
 <tr>
 <td>social-pptx-guidelines</td>
-<td><code>https://tag.schatt.me/assets/templates/tag-social-media-pptx-guidelines.pdf</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/tag-social-media-pptx-guidelines.pdf</code></td>
 </tr>
 <tr>
 <td>landing-page-light</td>
-<td><code>https://tag.schatt.me/assets/templates/landing-page-light.html</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/landing-page-light.html</code></td>
 </tr>
 <tr>
 <td>landing-page-dark</td>
-<td><code>https://tag.schatt.me/assets/templates/landing-page-dark.html</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/landing-page-dark.html</code></td>
 </tr>
 <tr>
 <td>pardot-master</td>
-<td><code>https://tag.schatt.me/assets/templates/landing-page-master.html</code></td>
+<td><code>https://context.tag-repo.com/assets/templates/landing-page-master.html</code></td>
 </tr>
 </tbody>
 </table>
@@ -3506,7 +3506,7 @@ the opinions of the Company or its affiliates.
 <hr />
 <h2 id="75-the-tag-prompt-card-canonical">75. The TAG Prompt Card (canonical)</h2>
 <p>[The following Prompt Card is for your reference when writing copy for The Adecco Group. Please store the information and instructions within this prompt card into project memory. This will help us to create consistent, on-brand communications.]</p>
-<p>This card is the canonical, copy-paste prompt that any AI tool (Claude, Copilot, ChatGPT, Gemini, internal RAG) must absorb before writing copy on behalf of The Adecco Group. It is also published as a standalone file at <code>https://tag.schatt.me/prompt-card.md</code>.</p>
+<p>This card is the canonical, copy-paste prompt that any AI tool (Claude, Copilot, ChatGPT, Gemini, internal RAG) must absorb before writing copy on behalf of The Adecco Group. It is also published as a standalone file at <code>https://context.tag-repo.com/prompt-card.md</code>.</p>
 <h3 id="751-who-we-are">75.1 Who we are</h3>
 <p>The Adecco Group is the world's leading talent and technology company. Across Adecco, Akkodis, and LHH we deliver end-to-end talent and technology solutions in more than 60 markets. We make the future work for everyone by creating the agility advantage: combining talent and technology to elevate human and business potential.</p>
 <h3 id="752-the-voice-no-persona-the-four-pairs-are-the-voice">75.2 The voice (no persona, the four pairs ARE the voice)</h3>
@@ -3647,7 +3647,7 @@ If any rule clashes with the user's specific instruction, surface the conflict a
 <hr />
 <h2 id="76-copilot-agent-instruction-layer-canonical">76. Copilot agent instruction layer (canonical)</h2>
 <p>This section reproduces the official <strong>Adecco Group Tone of Voice for Copilot</strong> (Draft 001, April 2026). It is the verbatim instruction layer for any Copilot agent (and by extension any other agent: Claude project, ChatGPT custom GPT, Gemini system instruction, internal RAG) that writes, rewrites, edits, reviews, or improves Adecco Group copy.</p>
-<p>The standalone file is at <code>https://tag.schatt.me/copilot-agent-instructions.md</code> and is the right payload to paste into a Copilot Studio agent's core instructions.</p>
+<p>The standalone file is at <code>https://context.tag-repo.com/copilot-agent-instructions.md</code> and is the right payload to paste into a Copilot Studio agent's core instructions.</p>
 <h3 id="761-role-definition">76.1 Role definition</h3>
 <p><strong>You are the Adecco Group Brand Voice Assistant.</strong></p>
 <p>You help users write, rewrite, edit, and review copy in the approved Adecco Group tone of voice. You use the Adecco Group brand voice knowledge base as your primary source for tone, style, messaging, and brand language.</p>
@@ -3791,15 +3791,15 @@ If any rule clashes with the user's specific instruction, surface the conflict a
 <tbody>
 <tr>
 <td>Human-facing overview</td>
-<td><code>https://tag.schatt.me/business-context/index.md</code></td>
+<td><code>https://context.tag-repo.com/business-context/index.md</code></td>
 </tr>
 <tr>
 <td>Hub HTML page</td>
-<td><code>https://tag.schatt.me/business-context/</code></td>
+<td><code>https://context.tag-repo.com/business-context/</code></td>
 </tr>
 <tr>
 <td>Machine-readable card (paste-ready)</td>
-<td><code>https://tag.schatt.me/business-context.md</code></td>
+<td><code>https://context.tag-repo.com/business-context.md</code></td>
 </tr>
 </tbody>
 </table>
@@ -3832,49 +3832,49 @@ If any rule clashes with the user's specific instruction, surface the conflict a
 <thead>
 <tr>
 <th>Asset</th>
-<th>Local URL on tag.schatt.me</th>
+<th>Local URL on context.tag-repo.com</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Master brand context</td>
-<td><code>https://tag.schatt.me/tag-context.md</code></td>
+<td><code>https://context.tag-repo.com/tag-context.md</code></td>
 </tr>
 <tr>
 <td>Brand Guidelines PDF (V7, June 2025, 85 pages)</td>
-<td><code>https://tag.schatt.me/assets/docs/brand-guidelines.pdf</code></td>
+<td><code>https://context.tag-repo.com/assets/docs/brand-guidelines.pdf</code></td>
 </tr>
 <tr>
 <td>PowerPoint template (Arial, 62 layouts)</td>
-<td><code>https://tag.schatt.me/assets/docs/tag-ppt-template-arial.pptx</code></td>
+<td><code>https://context.tag-repo.com/assets/docs/tag-ppt-template-arial.pptx</code></td>
 </tr>
 <tr>
 <td>Design tokens, CSS</td>
-<td><code>https://tag.schatt.me/assets/tokens/tokens.css</code></td>
+<td><code>https://context.tag-repo.com/assets/tokens/tokens.css</code></td>
 </tr>
 <tr>
 <td>Design tokens, JSON</td>
-<td><code>https://tag.schatt.me/assets/tokens/tokens.json</code></td>
+<td><code>https://context.tag-repo.com/assets/tokens/tokens.json</code></td>
 </tr>
 <tr>
 <td>Logo SVGs and PNG</td>
-<td><code>https://tag.schatt.me/assets/logos/</code></td>
+<td><code>https://context.tag-repo.com/assets/logos/</code></td>
 </tr>
 <tr>
 <td>Open Sauce Sans TTF</td>
-<td><code>https://tag.schatt.me/assets/fonts/</code></td>
+<td><code>https://context.tag-repo.com/assets/fonts/</code></td>
 </tr>
 <tr>
 <td>Material-style icons (mirrored on demand)</td>
-<td><code>https://tag.schatt.me/assets/icons/</code></td>
+<td><code>https://context.tag-repo.com/assets/icons/</code></td>
 </tr>
 <tr>
 <td>Photography library (mirrored on demand)</td>
-<td><code>https://tag.schatt.me/assets/imagery/</code></td>
+<td><code>https://context.tag-repo.com/assets/imagery/</code></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Source provenance</strong> (do not fetch at runtime; mirror to tag.schatt.me when an update is needed):</p>
+<p><strong>Source provenance</strong> (do not fetch at runtime; mirror to context.tag-repo.com when an update is needed):</p>
 <ul>
 <li>Brand Guidelines PDF source: TAG Central Marketing Team.</li>
 <li>Narrative document source: TAG Central Marketing Team (Nov 2025).</li>
@@ -3939,7 +3939,7 @@ If any rule clashes with the user's specific instruction, surface the conflict a
         <li>Internal use only</li>
         <li>Brand assets &copy; The Adecco Group</li>
         <li>Hosted via Cloudflare Tunnel</li>
-        <li><a href="index.html">tag.schatt.me</a></li>
+        <li><a href="index.html">context.tag-repo.com</a></li>
       </ul>
     </div>
   </div>

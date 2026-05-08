@@ -3,10 +3,10 @@ title: "The Adecco Group: Business Context Card"
 subtitle: "Commercial knowledge, paste-ready"
 version: "1.2.0"
 last_updated: "2026-05-05"
-canonical_url: "https://tag.schatt.me/business-context.md"
-parent_brand_context: "https://tag.schatt.me/tag-context.md"
-parent_prompt_card: "https://tag.schatt.me/prompt-card.md"
-parent_copilot_instructions: "https://tag.schatt.me/copilot-agent-instructions.md"
+canonical_url: "https://context.tag-repo.com/business-context.md"
+parent_brand_context: "https://context.tag-repo.com/tag-context.md"
+parent_prompt_card: "https://context.tag-repo.com/prompt-card.md"
+parent_copilot_instructions: "https://context.tag-repo.com/copilot-agent-instructions.md"
 intended_consumers:
  - "Microsoft Copilot Studio (agent core knowledge)"
  - "Claude (project / system prompt prefix)"
@@ -18,9 +18,9 @@ intended_consumers:
 
 # The Adecco Group: Business Context Card
 
-> Paste this into a Copilot Studio agent's knowledge, a Claude project's memory, a custom GPT, or any agent shell that already carries the brand voice. It tells the agent **what** TAG sells, **how** it goes to market, **how** it delivers, and **what** sector signals to anchor in. For voice and tone, pair this with [/prompt-card.md](https://tag.schatt.me/prompt-card.md). For agent behaviour rules, pair with [/copilot-agent-instructions.md](https://tag.schatt.me/copilot-agent-instructions.md).
+> Paste this into a Copilot Studio agent's knowledge, a Claude project's memory, a custom GPT, or any agent shell that already carries the brand voice. It tells the agent **what** TAG sells, **how** it goes to market, **how** it delivers, and **what** sector signals to anchor in. For voice and tone, pair this with [/prompt-card.md](https://context.tag-repo.com/prompt-card.md). For agent behaviour rules, pair with [/copilot-agent-instructions.md](https://context.tag-repo.com/copilot-agent-instructions.md).
 >
-> The full structured library lives at [/business-context/](https://tag.schatt.me/business-context/index.md), a cross-linked structured library.
+> The full structured library lives at [/business-context/](https://context.tag-repo.com/business-context/index.md), a cross-linked structured library.
 
 ```
 THE ADECCO GROUP, BUSINESS CONTEXT (v1.0.0, 2026-05-05)
