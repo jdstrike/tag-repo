@@ -5,11 +5,11 @@ Two services hosted on the Contabo VPS at `tag-repo.com` via Dokploy.
 | Service | URL | Purpose |
 |---|---|---|
 | `apps/report-uploader` | `https://tag-repo.com` | Flask app accepting report uploads under `/reports/upload`, listing under `/reports/<id>` |
-| `apps/context-mirror` | `https://context.tag-repo.com` | Static Caddy mirror of `tag.schatt.me` — brand & AI context docs, design system, templates |
+| `apps/context-mirror` | `https://context.tag-repo.com` | Static Caddy mirror of `tag.schatt.me` (brand and AI context docs, design system, templates) |
 
 ## Deploy
 
-Both services run as Dokploy applications backed by a **local Docker registry on `127.0.0.1:5000`** (Dokploy's `Source: Docker` always pulls — see ops note below). To redeploy a service:
+Both services run as Dokploy applications backed by a **local Docker registry on `127.0.0.1:5000`** (Dokploy's `Source: Docker` always pulls; see ops note below). To redeploy a service:
 
 ```sh
 cd apps/<service>
