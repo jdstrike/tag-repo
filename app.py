@@ -620,6 +620,28 @@ def current_admin_scope():
 def current_admin_username():
     return session.get("admin_user", "system")
 
+def deny_out_of_scope(row_scope):
+    """Soft scope guard: country admins may not mutate rows tagged with a different scope.
+    Unscoped (NULL) rows are allowed (matches inbox visibility). Returns a 403 response or None."""
+    s = current_admin_scope()
+    if s != "all" and row_scope and row_scope != s:
+        return "Out of scope: this item belongs to " + str(row_scope), 403
+    return None
+
+def deny_unless_owns(row_scope):
+    """Hard scope guard: country admins may only mutate rows in exactly their scope.
+    Unscoped rows count as 'global'. Returns a 403 response or None."""
+    s = current_admin_scope()
+    if s != "all" and (row_scope or "global") != s:
+        return "Out of scope: this item is " + (row_scope or "global") + ", your scope is " + s, 403
+    return None
+
+def deny_unless_global_admin():
+    """Hard guard for global configuration (GA4, routing matrix). Returns a 403 response or None."""
+    if current_admin_scope() != "all":
+        return "Out of scope: only global admins can modify this configuration", 403
+    return None
+
 def user_required(f):
     """Any authenticated user (regular or admin) can access. Redirects to /signin if not signed in."""
     @wraps(f)
@@ -1798,6 +1820,8 @@ def page_routing():
 def admin_routing():
     db = get_db()
     if request.method == "POST":
+        denied = deny_unless_global_admin()
+        if denied: return denied
         action = request.form.get("action")
         now = datetime.utcnow().isoformat(timespec="seconds")+"Z"
         if action == "add":
@@ -2034,6 +2058,10 @@ def admin_calendar():
 @login_required
 def admin_campaign_edit(cid):
     db = get_db()
+    row = db.execute("SELECT country_scope FROM campaigns WHERE id=?", (cid,)).fetchone()
+    if not row: abort(404)
+    denied = deny_out_of_scope(row["country_scope"])
+    if denied: return denied
     fields = {
         "start_date": (request.form.get("start_date") or "").strip() or None,
         "end_date": (request.form.get("end_date") or "").strip() or None,
@@ -2172,6 +2200,8 @@ def admin_campaign_reject(cid):
     db = get_db()
     row = db.execute("SELECT * FROM campaigns WHERE id=?", (cid,)).fetchone()
     if not row: abort(404)
+    denied = deny_out_of_scope(row["country_scope"])
+    if denied: return denied
     comment = (request.form.get("admin_comment") or "").strip() or None
     db.execute("UPDATE campaigns SET status='rejected', admin_comment=? WHERE id=?", (comment, cid))
     db.commit()
@@ -2220,6 +2250,10 @@ def admin_campaign_reject(cid):
 @login_required
 def admin_campaign_delete(cid):
     db = get_db()
+    row = db.execute("SELECT country_scope FROM campaigns WHERE id=?", (cid,)).fetchone()
+    if not row: abort(404)
+    denied = deny_out_of_scope(row["country_scope"])
+    if denied: return denied
     db.execute("DELETE FROM campaigns WHERE id=?", (cid,))
     db.commit()
     return redirect(request.referrer or url_for("admin_campaigns"))
@@ -2261,12 +2295,17 @@ def admin_comb_rules():
             else:
                 vals_json = None
             if s and m and k in ("agency","targeting_type","segmentation","asset_type"):
+                row_scope = None if current_admin_scope() == "all" else current_admin_scope()
                 try:
-                    db.execute("INSERT OR REPLACE INTO combination_rules(source,medium,dimension_kind,allowed_values_json,required) VALUES(?,?,?,?,?)",
-                               (s, m, k, vals_json, required))
+                    db.execute("INSERT OR REPLACE INTO combination_rules(source,medium,dimension_kind,allowed_values_json,required,country_scope) VALUES(?,?,?,?,?,?)",
+                               (s, m, k, vals_json, required, row_scope))
                     db.commit()
                 except sqlite3.IntegrityError: pass
         elif action == "delete":
+            row = db.execute("SELECT country_scope FROM combination_rules WHERE id=?", (request.form.get("id"),)).fetchone()
+            if row:
+                denied = deny_unless_owns(row["country_scope"])
+                if denied: return denied
             db.execute("DELETE FROM combination_rules WHERE id=?", (request.form.get("id"),))
             db.commit()
         return redirect(url_for("admin_comb_rules"))
@@ -2286,13 +2325,18 @@ def admin_rules():
             med = (request.form.get("medium") or "").strip().lower()
             if src and med:
                 # Make sure both exist in taxonomy
-                db.execute("INSERT OR IGNORE INTO taxonomy(kind,value) VALUES('source',?)",(src,))
-                db.execute("INSERT OR IGNORE INTO taxonomy(kind,value) VALUES('medium',?)",(med,))
+                row_scope = None if current_admin_scope() == "all" else current_admin_scope()
+                db.execute("INSERT OR IGNORE INTO taxonomy(kind,value,country_scope) VALUES('source',?,?)",(src,row_scope))
+                db.execute("INSERT OR IGNORE INTO taxonomy(kind,value,country_scope) VALUES('medium',?,?)",(med,row_scope))
                 try:
-                    db.execute("INSERT INTO source_medium_rules(source,medium) VALUES(?,?)",(src,med))
+                    db.execute("INSERT INTO source_medium_rules(source,medium,country_scope) VALUES(?,?,?)",(src,med,row_scope))
                     db.commit()
                 except sqlite3.IntegrityError: pass
         elif action == "delete":
+            row = db.execute("SELECT country_scope FROM source_medium_rules WHERE id=?", (request.form.get("id"),)).fetchone()
+            if row:
+                denied = deny_unless_owns(row["country_scope"])
+                if denied: return denied
             db.execute("DELETE FROM source_medium_rules WHERE id=?", (request.form.get("id"),))
             db.commit()
         return redirect(url_for("admin_rules"))
@@ -2406,6 +2450,10 @@ def admin_suggestion_approve(sid):
 @login_required
 def admin_suggestion_reject(sid):
     db = get_db()
+    s = db.execute("SELECT country_scope FROM suggestions WHERE id=?", (sid,)).fetchone()
+    if not s: abort(404)
+    denied = deny_out_of_scope(s["country_scope"])
+    if denied: return denied
     now = datetime.utcnow().isoformat(timespec='seconds')+'Z'
     db.execute("UPDATE suggestions SET status='rejected', resolved_at=? WHERE id=?", (now, sid))
     db.commit()
@@ -2415,6 +2463,10 @@ def admin_suggestion_reject(sid):
 @login_required
 def admin_suggestion_delete(sid):
     db = get_db()
+    s = db.execute("SELECT country_scope FROM suggestions WHERE id=?", (sid,)).fetchone()
+    if not s: abort(404)
+    denied = deny_out_of_scope(s["country_scope"])
+    if denied: return denied
     db.execute("DELETE FROM suggestions WHERE id=?", (sid,))
     db.commit()
     return redirect(request.referrer or url_for("admin_inbox"))
@@ -2426,8 +2478,11 @@ def admin_countries():
     db = get_db()
     if request.method == "POST":
         action = request.form.get("action")
+        target_code = (request.form.get("country_code") or "").strip().lower()
+        if current_admin_scope() != "all" and target_code != current_admin_scope():
+            return "Out of scope: you can only edit the country config for " + current_admin_scope(), 403
         if action == "save":
-            code = (request.form.get("country_code") or "").strip().lower()
+            code = target_code
             name = (request.form.get("country_name") or "").strip()
             cfg = (request.form.get("config_json") or "{}").strip()
             import json as _j
@@ -2501,6 +2556,8 @@ def admin_users():
 def admin_ga4():
     db = get_db()
     if request.method == "POST":
+        denied = deny_unless_global_admin()
+        if denied: return denied
         action = request.form.get("action")
         if action == "add":
             gbu = (request.form.get("gbu_name") or "").strip()
@@ -2545,6 +2602,8 @@ def admin_templates():
             name = (request.form.get("name") or "").strip()
             desc = (request.form.get("description") or "").strip() or None
             scope = (request.form.get("country_scope") or "global").strip().lower()
+            if current_admin_scope() != "all":
+                scope = current_admin_scope()
             preset = {}
             for f in ["utm_source","utm_medium","utm_term","utm_campaign","gbu","country","agency","targeting_type","segmentation","asset_type"]:
                 v = (request.form.get(f) or "").strip()
@@ -2555,10 +2614,18 @@ def admin_templates():
                            (name, desc, _j.dumps(preset), scope, current_admin_username(), datetime.utcnow().isoformat(timespec="seconds")+"Z"))
                 db.commit()
         elif action == "delete":
+            row = db.execute("SELECT country_scope FROM templates WHERE id=?", (request.form.get("id"),)).fetchone()
+            if row:
+                denied = deny_unless_owns(row["country_scope"])
+                if denied: return denied
             db.execute("DELETE FROM templates WHERE id=?", (request.form.get("id"),))
             db.commit()
         elif action == "toggle":
             tid = request.form.get("id")
+            row = db.execute("SELECT country_scope FROM templates WHERE id=?", (tid,)).fetchone()
+            if row:
+                denied = deny_unless_owns(row["country_scope"])
+                if denied: return denied
             db.execute("UPDATE templates SET is_active = 1-is_active WHERE id=?", (tid,))
             db.commit()
         return redirect(url_for("admin_templates"))
@@ -2631,11 +2698,16 @@ def admin_taxonomy():
             if kind in ("source","medium","stage"):
                 value = value.lower()
             if kind and value:
+                row_scope = None if current_admin_scope() == "all" else current_admin_scope()
                 try:
-                    db.execute("INSERT INTO taxonomy(kind,value,code) VALUES(?,?,?)",(kind,value,code))
+                    db.execute("INSERT INTO taxonomy(kind,value,code,country_scope) VALUES(?,?,?,?)",(kind,value,code,row_scope))
                     db.commit()
                 except sqlite3.IntegrityError: pass
         elif action == "delete":
+            row = db.execute("SELECT country_scope FROM taxonomy WHERE id=?", (request.form.get("id"),)).fetchone()
+            if row:
+                denied = deny_unless_owns(row["country_scope"])
+                if denied: return denied
             db.execute("DELETE FROM taxonomy WHERE id=?", (request.form.get("id"),))
             db.commit()
         return redirect(url_for("admin_taxonomy"))
