@@ -1,5 +1,5 @@
 // Service worker: caches the app shell + static assets for offline experience
-const CACHE_NAME = 'utm-tool-v1.0.0';
+const CACHE_NAME = 'utm-tool-v1.1.0';
 const SHELL = [
   '/', '/static/qrcode.min.js',
   '/static/pwa/pwa-192.png', '/static/pwa/pwa-512.png',
