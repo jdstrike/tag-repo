@@ -481,6 +481,55 @@ def init_db():
         con.execute("ALTER TABLE links ADD COLUMN asset_type TEXT")
     con.commit()
 
+    # Migration: Tealium routing matrix (single source of truth for UTM -> downstream routing)
+    con.execute("""
+    CREATE TABLE IF NOT EXISTS routing_rules (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        utm_field TEXT NOT NULL,
+        destination_system TEXT NOT NULL,
+        destination_field TEXT NOT NULL,
+        transform TEXT,
+        status TEXT NOT NULL DEFAULT 'proposed',  -- live / proposed / planned / deprecated
+        notes TEXT,
+        sort_order INTEGER DEFAULT 0,
+        updated_at TEXT,
+        updated_by TEXT
+    )""")
+    con.commit()
+    cur = con.execute("SELECT COUNT(*) FROM routing_rules")
+    if cur.fetchone()[0] == 0:
+        _now = datetime.utcnow().isoformat(timespec="seconds")+"Z"
+        routing_seed = [
+            ("utm_source",   "GA4", "session_source / first_user_source", "passthrough (auto-collected by GA4 tag)", "live", "No Tealium work needed"),
+            ("utm_medium",   "GA4", "session_medium",                     "passthrough (auto-collected)",            "live", None),
+            ("utm_campaign", "GA4", "session_campaign_name",              "passthrough (auto-collected)",            "live", None),
+            ("utm_term",     "GA4", "session_manual_term",                "passthrough (auto-collected)",            "live", None),
+            ("utm_content",  "GA4", "session_manual_ad_content",          "passthrough (auto-collected)",            "live", None),
+            ("utm_id",       "GA4", "session_campaign_id",                "passthrough (auto-collected)",            "live", None),
+            ("utm_source",   "Tealium iQ", "utag_data.utm_source",     "pre-loader extension, passthrough", "proposed", "Snippet on /integrations"),
+            ("utm_medium",   "Tealium iQ", "utag_data.utm_medium",     "pre-loader extension, passthrough", "proposed", None),
+            ("utm_campaign", "Tealium iQ", "utag_data.utm_campaign",   "pre-loader extension, passthrough", "proposed", None),
+            ("utm_id",       "Tealium iQ", "utag_data.utm_id",         "passthrough + split on '-'",        "proposed", "Also populates tag_* dimensions"),
+            ("tag_agency",       "Tealium iQ", "utag_data.tag_agency",       "utm_id segment 1", "proposed", "Derived from utm_id"),
+            ("tag_targeting",    "Tealium iQ", "utag_data.tag_targeting",    "utm_id segment 2", "proposed", "Derived from utm_id"),
+            ("tag_segmentation", "Tealium iQ", "utag_data.tag_segmentation", "utm_id segment 3", "proposed", "Derived from utm_id"),
+            ("tag_asset",        "Tealium iQ", "utag_data.tag_asset",        "utm_id segment 4+", "proposed", "Derived from utm_id; multi-part values"),
+            ("utm_source",   "Salesforce", "utm_source__c",   "hidden form field via web-to-lead", "proposed", "Custom field on Lead"),
+            ("utm_medium",   "Salesforce", "utm_medium__c",   "hidden form field via web-to-lead", "proposed", None),
+            ("utm_campaign", "Salesforce", "utm_campaign__c", "hidden form field via web-to-lead", "proposed", None),
+            ("utm_content",  "Salesforce", "utm_content__c",  "hidden form field via web-to-lead", "proposed", None),
+            ("utm_id",       "Salesforce", "utm_id__c",       "hidden form field via web-to-lead", "proposed", None),
+            ("utm_id",       "ATS (Bullhorn)", "candidate.utm_link_id", "1st-party cookie (30d) -> hidden field on application form", "proposed", "Phase 5: candidate source attribution"),
+            ("utm_campaign", "LinkedIn CAPI", "conversion attribution", "matched via Tealium server-side connector", "planned", "Requires Tealium server-side"),
+            ("utm_medium",   "LinkedIn CAPI", "event filter",           "only paid/sponsored traffic forwarded",     "planned", None),
+            ("utm_campaign", "AudienceStream", "visitor attribute: last_campaign", "set on landing, persists per visitor", "planned", None),
+            ("tag_segmentation", "AudienceStream", "audience enrichment", "segment membership from utm_id dimension", "planned", None),
+        ]
+        for i, (f, sysname, df, tr, st, nt) in enumerate(routing_seed):
+            con.execute("INSERT INTO routing_rules(utm_field,destination_system,destination_field,transform,status,notes,sort_order,updated_at,updated_by) VALUES(?,?,?,?,?,?,?,?,?)",
+                        (f, sysname, df, tr, st, nt, i, _now, "system"))
+        con.commit()
+
     con.close()
 
 # -------------------- helpers --------------------
@@ -1664,6 +1713,57 @@ def extension_submission_kit():
 @user_required
 def page_integrations():
     return render_template("integrations.html", base=public_base())
+
+@app.route("/routing")
+@user_required
+def page_routing():
+    db = get_db()
+    rows = db.execute("SELECT * FROM routing_rules WHERE status != 'deprecated' ORDER BY sort_order, utm_field, destination_system").fetchall()
+    field_order = ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","utm_id",
+                   "tag_agency","tag_targeting","tag_segmentation","tag_asset"]
+    fields = sorted({r["utm_field"] for r in rows},
+                    key=lambda f: field_order.index(f) if f in field_order else 99)
+    systems = []
+    for r in rows:
+        if r["destination_system"] not in systems:
+            systems.append(r["destination_system"])
+    cell = {}
+    for r in rows:
+        cell.setdefault((r["utm_field"], r["destination_system"]), []).append(r)
+    return render_template("routing_matrix.html", rows=rows, fields=fields, systems=systems,
+                           cell=cell, base=public_base())
+
+@app.route("/admin/routing", methods=["GET","POST"])
+@login_required
+def admin_routing():
+    db = get_db()
+    if request.method == "POST":
+        action = request.form.get("action")
+        now = datetime.utcnow().isoformat(timespec="seconds")+"Z"
+        if action == "add":
+            f = (request.form.get("utm_field") or "").strip().lower()
+            sysname = (request.form.get("destination_system") or "").strip()
+            df = (request.form.get("destination_field") or "").strip()
+            tr = (request.form.get("transform") or "").strip() or None
+            st = (request.form.get("status") or "proposed").strip().lower()
+            nt = (request.form.get("notes") or "").strip() or None
+            if st not in ("live","proposed","planned","deprecated"): st = "proposed"
+            if f and sysname and df:
+                db.execute("INSERT INTO routing_rules(utm_field,destination_system,destination_field,transform,status,notes,updated_at,updated_by) VALUES(?,?,?,?,?,?,?,?)",
+                           (f, sysname, df, tr, st, nt, now, current_admin_username()))
+                db.commit()
+        elif action == "status":
+            st = (request.form.get("status") or "").strip().lower()
+            if st in ("live","proposed","planned","deprecated"):
+                db.execute("UPDATE routing_rules SET status=?, updated_at=?, updated_by=? WHERE id=?",
+                           (st, now, current_admin_username(), request.form.get("id")))
+                db.commit()
+        elif action == "delete":
+            db.execute("DELETE FROM routing_rules WHERE id=?", (request.form.get("id"),))
+            db.commit()
+        return redirect(url_for("admin_routing"))
+    rules = db.execute("SELECT * FROM routing_rules ORDER BY utm_field, destination_system").fetchall()
+    return render_template("admin_routing.html", rules=rules)
 
 @app.route("/healthz")
 def healthz(): return "ok", 200

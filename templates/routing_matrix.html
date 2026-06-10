@@ -1,0 +1,83 @@
+{% extends "_base.html" %}
+{% block title %}Tealium routing matrix | the Adecco Group UTM builder{% endblock %}
+{% block body %}
+<div class="hero-integrations">
+  <p style="font-size:12px;font-weight:700;color:#7E63E8;text-transform:uppercase;letter-spacing:.14em;margin:0 0 8px">Single source of truth</p>
+  <h1 style="font-size:42px;line-height:1.1;letter-spacing:-.02em;margin:0 0 16px;max-width:760px">Where does every UTM parameter actually go?</h1>
+  <p class="lede" style="max-width:680px;font-size:18px">This matrix documents how each UTM parameter and custom dimension routes through Tealium into our downstream systems &mdash; GA4, Salesforce, the ATS, LinkedIn CAPI and AudienceStream. One page, maintained by the admins, so nobody has to reverse-engineer the tag manager.</p>
+</div>
+
+<div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px">
+  <span style="display:inline-flex;align-items:center;gap:6px;font-size:13px"><span style="width:10px;height:10px;border-radius:50%;background:#1B8A5A;display:inline-block"></span> <b>live</b> &mdash; deployed and verified</span>
+  <span style="display:inline-flex;align-items:center;gap:6px;font-size:13px"><span style="width:10px;height:10px;border-radius:50%;background:#FFC133;display:inline-block"></span> <b>proposed</b> &mdash; snippet ready, not yet deployed</span>
+  <span style="display:inline-flex;align-items:center;gap:6px;font-size:13px"><span style="width:10px;height:10px;border-radius:50%;background:#9CA3AF;display:inline-block"></span> <b>planned</b> &mdash; on the roadmap</span>
+</div>
+
+<div class="card">
+  <h2>The matrix</h2>
+  <p class="muted" style="font-size:13px;margin-top:-4px">Rows = what we send. Columns = where it lands. Hover a cell for transformation details.</p>
+  <div class="table-scroll">
+  <table style="min-width:760px">
+    <thead>
+      <tr>
+        <th style="position:sticky;left:0;background:var(--surface, #fff)">UTM field</th>
+        {% for s in systems %}<th>{{ s }}</th>{% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for f in fields %}
+      <tr>
+        <td style="position:sticky;left:0;background:var(--surface, #fff)"><code><b>{{ f }}</b></code></td>
+        {% for s in systems %}
+        <td>
+          {% set entries = cell.get((f, s)) %}
+          {% if entries %}
+            {% for e in entries %}
+              <div title="{{ e.transform or '' }}{% if e.notes %} — {{ e.notes }}{% endif %}" style="margin-bottom:4px">
+                <span style="width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:5px;background:{% if e.status=='live' %}#1B8A5A{% elif e.status=='proposed' %}#FFC133{% else %}#9CA3AF{% endif %}"></span><code style="font-size:12px">{{ e.destination_field }}</code>
+              </div>
+            {% endfor %}
+          {% else %}<span class="muted" style="font-size:12px">&mdash;</span>{% endif %}
+        </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Full detail per route</h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>UTM field</th><th>Destination</th><th>Lands as</th><th>Transformation</th><th>Status</th><th>Notes</th></tr></thead>
+    <tbody>
+    {% for r in rows %}
+      <tr>
+        <td><code>{{ r.utm_field }}</code></td>
+        <td><b>{{ r.destination_system }}</b></td>
+        <td><code>{{ r.destination_field }}</code></td>
+        <td style="font-size:13px">{{ r.transform or '—' }}</td>
+        <td><span style="font-size:12px;font-weight:700;padding:2px 10px;border-radius:99px;{% if r.status=='live' %}background:rgba(27,138,90,.12);color:#1B8A5A{% elif r.status=='proposed' %}background:rgba(255,193,51,.16);color:#9A6B00{% else %}background:rgba(156,163,175,.16);color:#6B7280{% endif %}">{{ r.status }}</span></td>
+        <td style="font-size:13px">{{ r.notes or '—' }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="card subtle">
+  <h2>How to read this</h2>
+  <ol style="line-height:1.8;color:var(--primary-500);font-size:15px">
+    <li><b>GA4 routes are automatic.</b> The GA4 tag collects <code>utm_*</code> parameters out of the box &mdash; no Tealium work needed.</li>
+    <li><b>Tealium routes are the strategic layer.</b> The pre-loader extension (see <a href="{{ url_for('page_integrations') }}">Integrations</a>) writes UTM values into <code>utag_data</code>, which every downstream tag can read. Deploying it once unlocks all proposed routes below it.</li>
+    <li><b><code>utm_id</code> is our composite key.</b> It splits into agency / targeting / segmentation / asset &mdash; the four custom dimensions that make Adecco reporting richer than standard UTM.</li>
+    <li><b>Changes go through the admins.</b> If a route changes in Tealium iQ, this page must be updated &mdash; it is the single source of truth, not the tag manager UI.</li>
+  </ol>
+  {% if session.get('admin') %}
+  <p style="margin-top:12px"><a class="btn ghost" href="{{ url_for('admin_routing') }}">Edit the matrix (admin) &rarr;</a></p>
+  {% endif %}
+</div>
+{% endblock %}

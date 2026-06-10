@@ -1,0 +1,67 @@
+{% extends "_base.html" %}
+{% block title %}Routing matrix | Admin{% endblock %}
+{% block body %}
+<h1>Tealium routing matrix.</h1>
+<p class="lede">Maintain the single source of truth for how UTM parameters route into downstream systems. The public, read-only view lives at <a href="{{ url_for('page_routing') }}">/routing</a>.</p>
+
+<div class="card info" style="margin-bottom:20px">
+  <b>Rule of thumb:</b> whenever a Tealium iQ extension, a Salesforce field mapping, or an ATS snippet changes, update the corresponding row here first. The matrix is only valuable if it never lies.
+</div>
+
+<div class="card">
+  <h2>All routes ({{ rules|length }})</h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>UTM field</th><th>Destination</th><th>Lands as</th><th>Transformation</th><th>Status</th><th>Notes</th><th></th></tr></thead>
+    <tbody>
+    {% for r in rules %}
+      <tr>
+        <td><code>{{ r.utm_field }}</code></td>
+        <td><b>{{ r.destination_system }}</b></td>
+        <td><code>{{ r.destination_field }}</code></td>
+        <td style="font-size:13px">{{ r.transform or '—' }}</td>
+        <td>
+          <form method="post" style="display:inline">
+            <input type="hidden" name="action" value="status"><input type="hidden" name="id" value="{{ r.id }}">
+            <select name="status" onchange="this.form.submit()" style="font-size:12px;padding:4px 8px">
+              {% for st in ['live','proposed','planned','deprecated'] %}
+              <option value="{{ st }}" {% if r.status==st %}selected{% endif %}>{{ st }}</option>
+              {% endfor %}
+            </select>
+          </form>
+        </td>
+        <td style="font-size:13px">{{ r.notes or '—' }}</td>
+        <td><form method="post" style="display:inline" onsubmit="return confirm('Delete this route?')">
+          <input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="{{ r.id }}">
+          <button class="bad" style="padding:6px 10px;font-size:12px">Del</button></form></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Add a route</h2>
+  <form method="post" class="row3" style="align-items:end">
+    <input type="hidden" name="action" value="add">
+    <div><label>UTM field</label><input name="utm_field" required placeholder="e.g. utm_medium or tag_agency" list="fieldOptions">
+      <datalist id="fieldOptions">
+        {% for f in ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','utm_id','tag_agency','tag_targeting','tag_segmentation','tag_asset'] %}<option value="{{ f }}">{% endfor %}
+      </datalist>
+    </div>
+    <div><label>Destination system</label><input name="destination_system" required placeholder="e.g. Salesforce" list="systemOptions">
+      <datalist id="systemOptions">
+        {% for s in ['GA4','Tealium iQ','Salesforce','ATS (Bullhorn)','LinkedIn CAPI','AudienceStream'] %}<option value="{{ s }}">{% endfor %}
+      </datalist>
+    </div>
+    <div><label>Lands as (field name)</label><input name="destination_field" required placeholder="e.g. utm_medium__c"></div>
+    <div><label>Transformation</label><input name="transform" placeholder="e.g. passthrough, split on '-', lowercase"></div>
+    <div><label>Status</label><select name="status">
+      <option value="proposed">proposed</option><option value="live">live</option><option value="planned">planned</option>
+    </select></div>
+    <div style="grid-column:1/-1"><label>Notes</label><input name="notes" placeholder="Context, owner, ticket reference"></div>
+    <div style="grid-column:1/-1"><button class="primary">Add route</button></div>
+  </form>
+</div>
+{% endblock %}

@@ -1058,6 +1058,7 @@
   <nav>
     <a href="{{ url_for('index') }}">Builder</a>
       <a href="{{ url_for('page_integrations') }}">Integrations</a>
+      <a href="{{ url_for('page_routing') }}">Routing</a>
       {% if current_user %}<a href="{{ url_for('extension_page') }}">Extension</a>{% endif %}
     {% if session.get('admin') %}
       <a href="{{ url_for('admin_inbox') }}">Inbox</a>
@@ -1225,6 +1226,8 @@ window.addEventListener('beforeinstallprompt', (e) => {
     { label: 'CH Builder', sub: 'Switzerland-specific builder', url: '/ch' },
     { label: 'Choose your market', sub: 'Country picker', url: '/country' },
     { label: 'Integrations & activation', sub: 'ATS, CRM, Tealium, BI', url: '/integrations' },
+    { label: 'Tealium routing matrix', sub: 'Where every UTM parameter lands', url: '/routing' },
+    { label: 'Edit routing matrix', sub: 'Admin: maintain UTM routing', url: '/admin/routing' },
     { label: 'Browser Extension', sub: 'Install in Chrome/Edge', url: '/extension' },
     { label: 'My account', sub: 'See your links', url: '/me' },
     { label: 'Admin inbox', sub: 'Pending approvals', url: '/admin/inbox' },
