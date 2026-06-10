@@ -697,6 +697,45 @@ def build_utm_id(agency, targeting_type, segmentation, asset_type):
     parts = [p for p in [agency, targeting_type, segmentation, asset_type] if p]
     return "-".join(parts) if parts else None
 
+def parse_utm_id_parts(utm_id, db):
+    """Split a composite utm_id back into its 4 dimensions using taxonomy-based
+    longest-match parsing. Handles multi-hyphen values (c-suite, video-short) and
+    skipped dimensions (build_utm_id drops empty parts). Falls back to the legacy
+    positional split when nothing matches the taxonomy."""
+    kinds = ["agency", "targeting_type", "segmentation", "asset_type"]
+    out = {k: None for k in kinds}
+    if not utm_id:
+        return out
+    vocab = {}
+    for r in db.execute("SELECT kind, value FROM taxonomy WHERE kind IN ('agency','targeting_type','segmentation','asset_type')").fetchall():
+        vocab.setdefault(r["kind"], set()).add((r["value"] or "").strip().lower())
+    tokens = [t for t in utm_id.strip().lower().split("-") if t]
+    i = 0
+    matched_any = False
+    for k in kinds:
+        if i >= len(tokens):
+            break
+        vs = vocab.get(k, set())
+        max_len = max((v.count("-") + 1 for v in vs), default=1)
+        for L in range(min(max_len, len(tokens) - i), 0, -1):
+            cand = "-".join(tokens[i:i+L])
+            if cand in vs:
+                out[k] = cand
+                i += L
+                matched_any = True
+                break
+    if not matched_any:
+        # Legacy positional fallback for utm_ids that predate the taxonomy
+        parts = utm_id.split("-")
+        out["agency"] = parts[0] if len(parts) >= 1 else None
+        out["targeting_type"] = parts[1] if len(parts) >= 2 else None
+        out["segmentation"] = parts[2] if len(parts) >= 3 else None
+        out["asset_type"] = "-".join(parts[3:]) if len(parts) >= 4 else None
+    elif i < len(tokens):
+        rest = "-".join(tokens[i:])
+        out["asset_type"] = (out["asset_type"] + "-" + rest) if out["asset_type"] else rest
+    return out
+
 
 def ga4_links(property_id, campaign_name=None):
     """Return a dict of deep-link URLs for a GA4 property. Filtered by campaign if given."""
@@ -1073,15 +1112,14 @@ def api_parse_url():
                 if r: gbu = r["value"]
                 r = db.execute("SELECT value FROM taxonomy WHERE kind='country' AND code=?", (country_code,)).fetchone()
                 if r: country = r["value"]
-        # If utm_id has agency-targeting-segmentation-asset, split
+        # If utm_id has agency-targeting-segmentation-asset, split it back into
+        # dimensions via taxonomy-based longest-match (handles c-suite, video-short etc.)
         utm_id = q.get("utm_id","")
         agency = targeting = segmentation = asset = None
-        if utm_id and "-" in utm_id:
-            parts = utm_id.split("-")
-            if len(parts) >= 1: agency = parts[0]
-            if len(parts) >= 2: targeting = parts[1]
-            if len(parts) >= 3: segmentation = parts[2]
-            if len(parts) >= 4: asset = "-".join(parts[3:])  # asset may contain hyphens like image-static
+        if utm_id:
+            _idp = parse_utm_id_parts(utm_id, get_db())
+            agency, targeting = _idp["agency"], _idp["targeting_type"]
+            segmentation, asset = _idp["segmentation"], _idp["asset_type"]
         return jsonify({
             "destination": destination,
             "utm_source": q.get("utm_source"),
