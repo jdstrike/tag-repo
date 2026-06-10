@@ -1,0 +1,87 @@
+{% extends "_base.html" %}
+{% block title %}Inbox | Admin{% endblock %}
+{% block body %}
+<h1>Inbox.</h1>
+<p class="lede">Everything waiting for your action. New campaign requests at the top, taxonomy suggestions below. Approve, edit the name, reject with a reason. The requester gets an email either way.</p>
+
+<div class="card subtle">
+  <div class="kpi">
+    <div class="k"><b>{{ pending_campaigns|length }}</b><span>Campaigns waiting</span></div>
+    <div class="k"><b>{{ pending_suggestions|length }}</b><span>Taxonomy suggestions</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Campaign requests ({{ pending_campaigns|length }})</h2>
+  {% if not pending_campaigns %}
+    <div class="empty-state">
+      <div class="empty-state-icon" style="background:rgba(27,138,90,.1)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B8A5A" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3>Inbox zero</h3>
+      <p>No pending campaign requests. Everything has been approved or rejected. Nice work.</p>
+      <a href="{{ url_for('admin_structure') }}" class="btn ghost">See approved campaigns &rarr;</a>
+    </div>
+  {% else %}
+  <div class="approval-list">
+    {% for c in pending_campaigns %}
+    <div class="approval-card">
+      <div class="approval-head">
+        <div>
+          <div class="muted" style="font-size:12px">Requested {{ c.created_at[:16].replace('T',' ') }} by <b>{{ c.requested_by_email or 'anonymous' }}</b></div>
+          {% if c.notes %}<div style="margin-top:6px;font-size:13px;color:var(--primary-300)"><b>Request note:</b> {{ c.notes }}</div>{% endif %}
+        </div>
+        <span class="pill pending">pending</span>
+      </div>
+      <form method="post" action="{{ url_for('admin_campaign_approve', cid=c.id) }}" class="approval-form">
+        <label>Final campaign name (edit if needed)</label>
+        <input name="name" value="{{ c.name }}" pattern="[a-z0-9_-]{2,80}" maxlength="80" autocapitalize="off" autocorrect="off" spellcheck="false" required>
+        <div class="hint">Lowercase, numbers, underscore, hyphen. The requester will see this final name in the email.</div>
+        <label>Comment to requester (optional, included in email)</label>
+        <textarea name="admin_comment" rows="2" placeholder="e.g. 'Renamed to match the existing pride convention.' or 'Please add a year suffix and resubmit.'"></textarea>
+        <div class="approval-actions">
+          <button type="submit" class="good">Approve and email</button>
+          <button type="submit" class="bad" formaction="{{ url_for('admin_campaign_reject', cid=c.id) }}" formnovalidate>Reject with comment</button>
+        </div>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+<div class="card">
+  <h2>Taxonomy suggestions ({{ pending_suggestions|length }})</h2>
+  {% if not pending_suggestions %}
+    <div class="empty-state">
+      <div class="empty-state-icon" style="background:rgba(126,99,232,.1)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7E63E8" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <h3>No taxonomy suggestions waiting</h3>
+      <p>Users haven't proposed any new sources, mediums, or other dropdown values lately. When they do, you'll see them here.</p>
+    </div>
+  {% else %}
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Submitted</th><th>Kind</th><th>Value</th><th>Related</th><th>By</th><th>Notes</th><th></th></tr></thead>
+    <tbody>
+    {% for s in pending_suggestions %}
+      <tr>
+        <td style="white-space:nowrap">{{ s.created_at[:16].replace('T',' ') }}</td>
+        <td><span class="pill pending">{{ s.kind }}</span></td>
+        <td><b>{{ s.value }}</b></td>
+        <td>{{ s.related_value or '-' }}</td>
+        <td>{{ s.email or '-' }}</td>
+        <td style="max-width:280px">{{ s.notes or '-' }}</td>
+        <td style="white-space:nowrap">
+          <form style="display:inline" method="post" action="{{ url_for('admin_suggestion_approve', sid=s.id) }}"><button class="good">Approve</button></form>
+          <form style="display:inline" method="post" action="{{ url_for('admin_suggestion_reject', sid=s.id) }}"><button class="bad">Reject</button></form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

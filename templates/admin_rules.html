@@ -1,0 +1,57 @@
+{% extends "_base.html" %}
+{% block title %}Source / medium rules | Admin{% endblock %}
+{% block body %}
+<h1>Source and medium rules.</h1>
+<p class="lede">Define which mediums each source is allowed to combine with. The builder enforces these rules at link creation time. Aligned with the GA4 default channel group.</p>
+
+<div class="card">
+  <h2>Add a rule</h2>
+  <form method="post" class="row3" style="align-items:end">
+    <input type="hidden" name="action" value="add">
+    <div><label>Source</label>
+      <input list="srcList" name="source" required>
+      <datalist id="srcList">{% for s in sources %}<option value="{{s}}">{% endfor %}</datalist>
+    </div>
+    <div><label>Medium</label>
+      <input list="medList" name="medium" required>
+      <datalist id="medList">{% for m in mediums %}<option value="{{m}}">{% endfor %}</datalist>
+    </div>
+    <div><button class="primary">Add combination</button></div>
+  </form>
+  <p class="muted" style="margin-top:10px;font-size:13px">If the value does not exist in the taxonomy yet, it will be added automatically.</p>
+</div>
+
+<div class="card">
+  <h2>Current rules grouped by source</h2>
+  {% if not sm_map %}<p class="muted">No rules yet. Add one above.</p>{% else %}
+  <table>
+    <thead><tr><th>Source</th><th>Allowed mediums</th><th>Count</th></tr></thead>
+    <tbody>
+    {% for src, meds in sm_map.items() %}
+      <tr><td><b>{{ src }}</b></td>
+        <td>
+          {% for m in meds %}<span class="pill approved" style="margin:2px 4px 2px 0">{{m}}</span>{% endfor %}
+        </td>
+        <td>{{ meds|length }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+
+<div class="card subtle">
+  <h2>All rules (delete individual combinations)</h2>
+  <table>
+    <thead><tr><th>Source</th><th>Medium</th><th></th></tr></thead>
+    <tbody>
+    {% for r in rules %}
+      <tr><td>{{ r.source }}</td><td>{{ r.medium }}</td>
+        <td><form method="post" style="display:inline">
+          <input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="{{ r.id }}">
+          <button class="bad" style="padding:6px 12px;font-size:12px">Delete</button></form></td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

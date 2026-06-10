@@ -1,0 +1,42 @@
+{% extends "emails/_email_base.html" %}
+{% block body %}
+<p style="font-size:12px;font-weight:700;color:#5F708A;text-transform:uppercase;letter-spacing:.14em;margin:0 0 6px">Your generated link</p>
+<h1 style="font-size:26px;line-height:1.2;letter-spacing:-.02em;color:#1C304B;margin:0 0 14px;font-weight:700">Here's the link you just created.</h1>
+<p style="font-size:15px;line-height:1.55;color:#1C304B;margin:0 0 22px">Saved for your documentation. Keep this email for reference.</p>
+
+<!-- Short URL highlighted -->
+<div style="background:linear-gradient(145deg,#E0F1F0,#F6F7F9);border:1px solid #9DD3CE;border-radius:10px;padding:18px 20px;margin:0 0 18px">
+  <p style="margin:0 0 6px;font-size:11px;font-weight:700;color:#5F708A;text-transform:uppercase;letter-spacing:.14em">Short URL</p>
+  <p style="margin:0;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px;color:#1C304B;font-weight:700;word-break:break-all"><a href="{{ short_url }}" style="color:#1C304B;text-decoration:none">{{ short_url }}</a></p>
+</div>
+
+<!-- Campaign details -->
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#F6F7F9;border:1px solid #EEF1F5;border-radius:10px;margin:0 0 18px">
+  <tr><td style="padding:18px 20px">
+    <p style="margin:0 0 12px;font-size:11px;font-weight:700;color:#5F708A;text-transform:uppercase;letter-spacing:.14em">Campaign details</p>
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="font-size:13px">
+      <tr><td style="padding:3px 0;color:#5F708A;width:38%;vertical-align:top">Campaign</td><td style="padding:3px 0;color:#1C304B;font-weight:600">{{ utm_campaign }}</td></tr>
+      <tr><td style="padding:3px 0;color:#5F708A;vertical-align:top">Source / Medium</td><td style="padding:3px 0;color:#1C304B">{{ utm_source or '-' }} / {{ utm_medium or '-' }}</td></tr>
+      <tr><td style="padding:3px 0;color:#5F708A;vertical-align:top">Brand / Country</td><td style="padding:3px 0;color:#1C304B">{{ gbu or '-' }} / {{ country or '-' }}</td></tr>
+      {% if utm_term %}<tr><td style="padding:3px 0;color:#5F708A;vertical-align:top">Stage</td><td style="padding:3px 0;color:#1C304B">{{ utm_term }}</td></tr>{% endif %}
+      {% if utm_content %}<tr><td style="padding:3px 0;color:#5F708A;vertical-align:top">utm_content</td><td style="padding:3px 0;color:#1C304B;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px">{{ utm_content }}</td></tr>{% endif %}
+      {% if utm_id %}<tr><td style="padding:3px 0;color:#5F708A;vertical-align:top">utm_id</td><td style="padding:3px 0;color:#1C304B;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px">{{ utm_id }}</td></tr>{% endif %}
+      <tr><td style="padding:3px 0;color:#5F708A;vertical-align:top">Created</td><td style="padding:3px 0;color:#1C304B">{{ created_at[:16].replace('T',' ') }}</td></tr>
+    </table>
+  </td></tr>
+</table>
+
+<!-- Long URL -->
+<p style="margin:0 0 6px;font-size:11px;font-weight:700;color:#5F708A;text-transform:uppercase;letter-spacing:.14em">Long URL</p>
+<div style="background:#F6F7F9;border:1px solid #D6DBE3;border-radius:8px;padding:12px 14px;margin:0 0 22px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:#1C304B;word-break:break-all;line-height:1.5">{{ long_url }}</div>
+
+<!-- Destination -->
+<p style="margin:0 0 6px;font-size:11px;font-weight:700;color:#5F708A;text-transform:uppercase;letter-spacing:.14em">Destination</p>
+<p style="margin:0 0 24px;font-size:13px;word-break:break-all"><a href="{{ destination }}" style="color:#1A7BAD;text-decoration:underline">{{ destination }}</a></p>
+
+<table cellpadding="0" cellspacing="0" border="0" style="margin:0 auto 8px">
+  <tr><td style="border-radius:8px;background:#5CB8B2">
+    <a href="{{ base }}/" style="display:inline-block;padding:14px 28px;color:#1C304B;text-decoration:none;font-weight:700;font-size:15px;border-radius:8px">Build another link &rarr;</a>
+  </td></tr>
+</table>
+{% endblock %}

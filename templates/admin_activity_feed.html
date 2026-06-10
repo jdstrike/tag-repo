@@ -1,0 +1,101 @@
+{% extends "_base.html" %}
+{% block title %}Activity feed | Admin{% endblock %}
+{% block body %}
+<div class="page-hero-stripe page-hero-admin"></div>
+<h1>What's happening.</h1>
+<p class="lede">Chronological feed of every action across the tool. Scope filtered to <b>{{ scope }}</b>{% if scope == 'all' %} (you see everything){% endif %}.</p>
+
+{% if not events %}
+<div class="empty-state">
+  <div class="empty-state-icon">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#5F708A" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+  </div>
+  <h3>Nothing happening yet</h3>
+  <p>As people request campaigns, build links, and submit suggestions, the activity will flow into this feed in real time.</p>
+  <a href="/" class="btn primary">Build the first link &rarr;</a>
+</div>
+{% else %}
+<div class="activity-stream">
+  {% for e in events %}
+  <div class="activity-item activity-{{ e.type }}">
+    <div class="activity-icon">
+      {% if e.type == 'campaign_requested' %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      {% elif e.type == 'campaign_approved' %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      {% elif e.type == 'campaign_rejected' %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      {% elif e.type == 'link_built' %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      {% elif e.type == 'suggestion_received' %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      {% elif e.type == 'suggestion_approved' %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      {% elif e.type == 'click_burst' %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      {% else %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>{% endif %}
+    </div>
+    <div class="activity-body">
+      <div class="activity-headline">
+        <span class="activity-title">{{ e.title }}</span>
+        <span class="activity-ts" title="{{ e.ts }}">{{ e.ts[:16].replace('T', ' ') }}</span>
+      </div>
+      <div class="activity-desc"><code>{{ e.desc }}</code></div>
+      <div class="activity-meta">
+        by <b>{{ e.actor }}</b>
+        {% if e.meta.scope %}&middot; <span class="gbu-chip">{{ e.meta.scope }}</span>{% endif %}
+        {% if e.meta.gbu %}&middot; <span class="gbu-chip gbu-{{ e.meta.gbu|lower|replace(' ','-')|replace('the-adecco-group','tag') }}">{{ e.meta.gbu }}</span>{% endif %}
+        {% if e.meta.clicks is defined and e.meta.clicks > 0 %}&middot; <b>{{ e.meta.clicks }}</b> clicks{% endif %}
+        {% if e.meta.count %}&middot; <b>{{ e.meta.count }}</b> events{% endif %}
+        {% if e.meta.comment %}<div class="activity-comment">"{{ e.meta.comment }}"</div>{% endif %}
+        {% if e.meta.notes %}<div class="activity-comment">"{{ e.meta.notes }}"</div>{% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<style>
+  .activity-stream { display: flex; flex-direction: column; gap: 0; }
+  .activity-item {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .activity-item:last-child { border-bottom: none; }
+  .activity-item::before {
+    content: "";
+    position: absolute;
+    left: 19px;
+    top: 56px;
+    bottom: -1px;
+    width: 2px;
+    background: var(--border);
+  }
+  .activity-item:last-child::before { display: none; }
+  .activity-icon {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    background: var(--surface);
+    color: var(--primary-300);
+    position: relative; z-index: 1;
+  }
+  .activity-icon svg { width: 18px; height: 18px; }
+  .activity-campaign_requested .activity-icon { background: rgba(178, 90, 0, .12); color: #B25A00; }
+  .activity-campaign_approved .activity-icon { background: rgba(27, 138, 90, .12); color: #1B8A5A; }
+  .activity-campaign_rejected .activity-icon { background: rgba(179, 38, 30, .12); color: #B3261E; }
+  .activity-link_built .activity-icon { background: rgba(92, 184, 178, .12); color: #5CB8B2; }
+  .activity-suggestion_received .activity-icon { background: rgba(126, 99, 232, .12); color: #7E63E8; }
+  .activity-suggestion_approved .activity-icon { background: rgba(27, 138, 90, .12); color: #1B8A5A; }
+  .activity-click_burst .activity-icon { background: rgba(240, 90, 40, .15); color: #F05A28; animation: burstPulse 2s ease-in-out infinite; }
+  @keyframes burstPulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.1); } }
+
+  .activity-body { padding-top: 4px; }
+  .activity-headline { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+  .activity-title { font-weight: 700; font-size: 14px; color: var(--primary-500); }
+  .activity-ts { font-size: 12px; color: var(--primary-300); font-family: ui-monospace, Menlo, Consolas, monospace; }
+  .activity-desc code { font-size: 13px; background: var(--surface); padding: 3px 10px; border-radius: 6px; color: var(--primary-500); display: inline-block; }
+  .activity-meta { font-size: 12px; color: var(--primary-300); margin-top: 6px; }
+  .activity-meta b { color: var(--primary-500); font-weight: 600; }
+  .activity-comment { margin-top: 6px; font-style: italic; color: var(--primary-500); padding: 6px 10px; border-left: 2px solid var(--tag-turquoise); background: var(--surface); border-radius: 0 4px 4px 0; font-size: 13px; }
+</style>
+{% endblock %}

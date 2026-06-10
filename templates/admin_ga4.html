@@ -1,0 +1,67 @@
+{% extends "_base.html" %}
+{% block title %}GA4 properties | Admin{% endblock %}
+{% block body %}
+<h1>GA4 properties.</h1>
+<p class="lede">The 5 GA4 master properties the tool knows about. When a UTM link is built, we auto-detect which property the destination URL belongs to and surface deep-links into that property's reports. The Builder + Performance Dashboard use this mapping.</p>
+
+<div class="card info" style="margin-bottom:20px">
+  <b>Status:</b> Property IDs stored. Deep-links work now. For pulling real Sessions / Users / Conversions back into the Performance Dashboard, we need a Google Service Account with Viewer access to all 5 properties — walkthrough below.
+</div>
+
+<div class="card">
+  <h2>Active properties ({{ props|length }})</h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>GBU</th><th>Domain</th><th>Property ID</th><th>Measurement ID</th><th>Notes</th><th>Open in GA4</th><th></th></tr></thead>
+    <tbody>
+    {% for p in props %}
+      <tr>
+        <td><b>{{ p.gbu_name or '-' }}</b></td>
+        <td><code>{{ p.domain }}</code></td>
+        <td><code>{{ p.property_id }}</code></td>
+        <td><code>{{ p.measurement_id or '-' }}</code></td>
+        <td>{{ p.notes or '-' }}</td>
+        <td><a href="https://analytics.google.com/analytics/web/#/p{{ p.property_id }}/reports/intelligenthome" target="_blank" rel="noopener" class="btn ghost" style="padding:6px 12px;font-size:12px">Home &rarr;</a></td>
+        <td><form method="post" style="display:inline" onsubmit="return confirm('Delete this property mapping?')">
+          <input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="{{ p.id }}">
+          <button class="bad" style="padding:6px 10px;font-size:12px">Del</button></form></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Add or update a property</h2>
+  <form method="post" class="row3" style="align-items:end">
+    <input type="hidden" name="action" value="add">
+    <div><label>GBU name</label><input name="gbu_name" placeholder="e.g. Adia"></div>
+    <div><label>Domain</label><input name="domain" required placeholder="e.g. adia.com" oninput="this.value=this.value.toLowerCase().trim()"></div>
+    <div><label>Property ID</label><input name="property_id" required placeholder="e.g. 123456789" pattern="[0-9]+"></div>
+    <div><label>Measurement ID (optional)</label><input name="measurement_id" placeholder="e.g. G-XXXX"></div>
+    <div style="grid-column:1/-1"><label>Notes</label><input name="notes" placeholder="MASTER, BACKUP, etc."></div>
+    <div style="grid-column:1/-1"><button class="primary">Save</button></div>
+  </form>
+</div>
+
+<div class="card subtle">
+  <h2>Next step: connect the GA4 Data API for real metrics</h2>
+  <p>With the Service Account set up, the Performance Dashboard will show real Sessions, Users, Engaged Sessions, and Conversions per campaign across all 5 properties. Walkthrough:</p>
+  <ol style="line-height:1.8;color:var(--primary-500)">
+    <li>Open <a href="https://console.cloud.google.com/iam-admin/serviceaccounts" target="_blank" rel="noopener">Google Cloud Console → Service Accounts</a>. Create a new project if needed (e.g. "tag-utm-builder").</li>
+    <li>"Create Service Account" &rarr; name <code>utm-builder-ga4-reader</code> &rarr; "Create and Continue" &rarr; skip the role assignment &rarr; "Done".</li>
+    <li>Click the new service account &rarr; "Keys" tab &rarr; "Add Key" &rarr; "Create new key" &rarr; "JSON" &rarr; downloads a <code>.json</code> file. Keep this safe, it is your auth credential.</li>
+    <li>Copy the service account email (looks like <code>utm-builder-ga4-reader@PROJECT.iam.gserviceaccount.com</code>).</li>
+    <li>For each of the 5 GA4 properties:
+      <ul>
+        <li>Open GA4 &rarr; Admin &rarr; Property &rarr; "Property Access Management" &rarr; "+" button</li>
+        <li>Paste the service account email, role: <b>Viewer</b>, click "Add"</li>
+      </ul>
+    </li>
+    <li>Enable the GA4 Data API: <a href="https://console.cloud.google.com/apis/library/analyticsdata.googleapis.com" target="_blank" rel="noopener">enable it here</a> for your project.</li>
+    <li>Send me the JSON key file (or the contents pasted in chat). I wire it into the tool and you'll have live Sessions/Users/Conversions per campaign in the Performance Dashboard.</li>
+  </ol>
+  <p class="muted" style="font-size:13px">No additional GA4 cost. The Data API free tier handles 50k tokens/day per property — plenty for our query pattern.</p>
+</div>
+{% endblock %}

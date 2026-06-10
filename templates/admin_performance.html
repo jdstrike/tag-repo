@@ -1,0 +1,149 @@
+{% extends "_base.html" %}
+{% block title %}Performance | Admin{% endblock %}
+{% block body %}
+<h1>Campaign performance.</h1>
+<p class="lede">Live aggregates from every <code>/s/</code> redirect, copy, and email-to-self event. Each metric is computed from the activity log, not GA4, so you have a single source of truth from generation to click.</p>
+
+<div class="card subtle">
+  <div class="kpi">
+    <div class="k"><b>{{ total_links }}</b><span>Links built</span></div>
+    <div class="k"><b>{{ total_clicks }}</b><span>Clicks tracked</span></div>
+    <div class="k"><b>{{ total_copies }}</b><span>Copy events</span></div>
+    <div class="k"><b>{{ total_emails }}</b><span>Email-to-self</span></div>
+  </div>
+</div>
+
+
+<div class="card">
+  <h2>GA4 properties ({{ ga4_properties|length if ga4_properties else 0 }})</h2>
+  <p class="muted" style="font-size:13px;margin-top:-6px">Jump straight into the right property's reports. Use these instead of opening 5 GA4 tabs manually.</p>
+  {% if ga4_properties %}
+  <div class="ga4-grid">
+    {% for p in ga4_properties %}
+    <div class="ga4-card">
+      <div class="ga4-card-head">
+        <div>
+          <h3>{{ p.gbu_name }}</h3>
+          <p class="muted" style="font-size:12px;margin:2px 0 0;font-family:ui-monospace">{{ p.domain }}</p>
+        </div>
+        <span class="pill {{ 'approved' if p.is_master else 'pending' }}" style="white-space:nowrap">{{ p.notes or 'GA4' }}</span>
+      </div>
+      <div class="ga4-card-links">
+        <a class="ga4-link" href="https://analytics.google.com/analytics/web/#/p{{ p.property_id }}/reports/intelligenthome" target="_blank" rel="noopener">Home &rarr;</a>
+        <a class="ga4-link" href="https://analytics.google.com/analytics/web/#/p{{ p.property_id }}/reports/dashboard?r=acquisition-overview" target="_blank" rel="noopener">Acquisition &rarr;</a>
+        <a class="ga4-link" href="https://analytics.google.com/analytics/web/#/p{{ p.property_id }}/reports/explorer?params=_u..nav%3Dmaui&r=all-pages" target="_blank" rel="noopener">Traffic &rarr;</a>
+        <a class="ga4-link" href="https://analytics.google.com/analytics/web/#/p{{ p.property_id }}/reports/realtime" target="_blank" rel="noopener">Real-time &rarr;</a>
+        <a class="ga4-link" href="https://analytics.google.com/analytics/web/#/p{{ p.property_id }}/reports/dashboard?r=engagement-events" target="_blank" rel="noopener">Events &rarr;</a>
+      </div>
+      <p class="muted" style="font-size:11px;margin:8px 0 0;font-family:ui-monospace">Property {{ p.property_id }}{% if p.measurement_id %} &middot; {{ p.measurement_id }}{% endif %}</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+    <p class="muted">No GA4 properties configured. Add them under <a href="{{ url_for('admin_ga4') }}">GA4 admin</a>.</p>
+  {% endif %}
+</div>
+
+<div class="card">
+  <h2>GA4 channel mix (predicted)</h2>
+  <p class="muted" style="font-size:13px;margin-top:-6px">Computed from each link's source + medium using the GA4 default channel grouping. This is what GA4 will assign each visit to.</p>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Channel</th><th>Links</th><th>Clicks</th></tr></thead>
+    <tbody>
+    {% for name, b in by_channel %}
+      <tr><td><span class="ga4-pill {{ b.class }}">{{ name }}</span></td><td>{{ b.links }}</td><td><b>{{ b.clicks }}</b></td></tr>
+    {% endfor %}
+    {% if not by_channel %}<tr><td colspan="3" class="muted">No links yet.</td></tr>{% endif %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="card">
+    <h2>Top campaigns by clicks</h2>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Campaign</th><th>Links</th><th>Clicks</th></tr></thead>
+      <tbody>
+      {% for r in by_campaign %}<tr><td><b>{{ r.utm_campaign }}</b></td><td>{{ r.links }}</td><td><b>{{ r.clicks }}</b></td></tr>{% endfor %}
+      {% if not by_campaign %}<tr><td colspan="3" class="muted">No data yet.</td></tr>{% endif %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Top countries</h2>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Country</th><th>Links</th><th>Clicks</th></tr></thead>
+      <tbody>
+      {% for r in by_country %}<tr><td>{{ r.country }}</td><td>{{ r.links }}</td><td><b>{{ r.clicks }}</b></td></tr>{% endfor %}
+      {% if not by_country %}<tr><td colspan="3" class="muted">No data yet.</td></tr>{% endif %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="card">
+    <h2>Top sources</h2>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Source</th><th>Links</th><th>Clicks</th></tr></thead>
+      <tbody>
+      {% for r in by_source %}<tr><td>{{ r.utm_source }}</td><td>{{ r.links }}</td><td><b>{{ r.clicks }}</b></td></tr>{% endfor %}
+      {% if not by_source %}<tr><td colspan="3" class="muted">No data yet.</td></tr>{% endif %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Top mediums</h2>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Medium</th><th>Links</th><th>Clicks</th></tr></thead>
+      <tbody>
+      {% for r in by_medium %}<tr><td>{{ r.utm_medium }}</td><td>{{ r.links }}</td><td><b>{{ r.clicks }}</b></td></tr>{% endfor %}
+      {% if not by_medium %}<tr><td colspan="3" class="muted">No data yet.</td></tr>{% endif %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Brand (GBU) distribution</h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>GBU</th><th>Links</th><th>Clicks</th></tr></thead>
+    <tbody>
+    {% for r in by_gbu %}<tr><td><b>{{ r.gbu }}</b></td><td>{{ r.links }}</td><td><b>{{ r.clicks }}</b></td></tr>{% endfor %}
+    {% if not by_gbu %}<tr><td colspan="3" class="muted">No data yet.</td></tr>{% endif %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Click activity (last 30 days)</h2>
+  {% if timeline %}
+  <svg viewBox="0 0 800 180" style="width:100%;height:auto" aria-label="Clicks per day">
+    {% set max_c = 1 %}
+    {% for d in timeline %}{% if d.clicks > max_c %}{% set max_c = d.clicks %}{% endif %}{% endfor %}
+    {% set step = (800 / (timeline|length if timeline|length > 1 else 2)) %}
+    {% for d in timeline %}
+      {% set h = (d.clicks / max_c * 160) if max_c else 0 %}
+      <rect x="{{ loop.index0 * step + 4 }}" y="{{ 170 - h }}" width="{{ step - 8 }}" height="{{ h }}" fill="#5CB8B2" rx="2"/>
+      <title>{{ d.day }}: {{ d.clicks }} clicks</title>
+    {% endfor %}
+    <line x1="0" y1="170" x2="800" y2="170" stroke="#D6DBE3" stroke-width="1"/>
+  </svg>
+  <p class="muted" style="font-size:12px;text-align:center">{{ timeline[0].day }} to {{ timeline[-1].day }}, max {{ timeline|map(attribute='clicks')|max }} clicks/day</p>
+  {% else %}
+  <p class="muted">No click activity yet. Share a link and check back.</p>
+  {% endif %}
+</div>
+{% endblock %}

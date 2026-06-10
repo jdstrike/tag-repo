@@ -1,0 +1,21 @@
+services:
+  utm-tool:
+    build: .
+    image: utm-tool:latest
+    container_name: utm-tool
+    restart: unless-stopped
+    ports:
+      - "7842:8000"
+    volumes:
+      - /mnt/user/appdata/utm-tool:/app/data
+    environment:
+      UTM_SECRET_KEY: "${UTM_SECRET_KEY:-changeme-in-env}"
+      UTM_ADMIN_USER: "${UTM_ADMIN_USER:-admin}"
+      UTM_ADMIN_PASSWORD: "${UTM_ADMIN_PASSWORD:-TagUtm2026!}"
+      UTM_ADMIN_EMAIL: "${UTM_ADMIN_EMAIL:-johannes.schatt@googlemail.com}"
+      UTM_PUBLIC_BASE_URL: "${UTM_PUBLIC_BASE_URL:-}"
+      SMTP_HOST: "${SMTP_HOST:-}"
+      SMTP_PORT: "${SMTP_PORT:-587}"
+      SMTP_USER: "${SMTP_USER:-}"
+      SMTP_PASS: "${SMTP_PASS:-}"
+      SMTP_FROM: "${SMTP_FROM:-}"

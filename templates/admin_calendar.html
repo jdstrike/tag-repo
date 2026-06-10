@@ -1,0 +1,168 @@
+{% extends "_base.html" %}
+{% block title %}Campaign calendar | Admin{% endblock %}
+{% block body %}
+<div class="calendar-hero">
+  <p style="font-size:12px;font-weight:700;color:#5CB8B2;text-transform:uppercase;letter-spacing:.14em;margin:0 0 6px">Campaign timeline</p>
+  <h1 style="margin:0 0 8px">When is what running.</h1>
+  <p class="lede" style="max-width:680px">Visual timeline of every approved campaign across markets. Hover for owner + description. Color-coded by GBU.</p>
+</div>
+
+<div class="card subtle">
+  <div class="toolbar">
+    <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+      <a class="btn ghost" href="?year={{ year-1 }}">&larr; {{ year-1 }}</a>
+      <h2 style="margin:0;font-size:24px;font-weight:700;color:var(--primary-500);letter-spacing:-.02em;text-transform:none">{{ year }}</h2>
+      <a class="btn ghost" href="?year={{ year+1 }}">{{ year+1 }} &rarr;</a>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:12px">
+      <span class="muted">Color legend:</span>
+      <span class="gbu-chip gbu-adecco">Adecco</span>
+      <span class="gbu-chip gbu-akkodis">Akkodis</span>
+      <span class="gbu-chip gbu-lhh">LHH</span>
+      <span class="gbu-chip gbu-pontoon">Pontoon</span>
+      <span class="gbu-chip gbu-tag">TAG</span>
+      <span class="gbu-chip gbu-other">Other</span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="calendar-grid">
+    {% set months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'] %}
+    <div class="cal-header">
+      <div class="cal-camp-col">Campaign</div>
+      {% for m in months %}<div class="cal-month-col">{{ m }}</div>{% endfor %}
+    </div>
+    {% for c in scheduled %}
+    {% set sd = c.start_date or '' %}
+    {% set ed = c.end_date or '' %}
+    {% if sd and ed and sd[:4]|int <= year and ed[:4]|int >= year %}
+      {% set s_month = sd[5:7]|int if sd[:4]|int == year else 1 %}
+      {% set e_month = ed[5:7]|int if ed[:4]|int == year else 12 %}
+      {% set span = e_month - s_month + 1 %}
+      <div class="cal-row" data-gbu="{{ (c.gbu or '')|lower }}">
+        <div class="cal-camp-col" title="{{ c.description or '' }}">
+          <div class="cal-camp-name">{{ c.name }}</div>
+          <div class="cal-camp-meta">{{ c.gbu or '-' }} &middot; {{ c.owner_email or c.requested_by_email or 'no owner' }}</div>
+        </div>
+        {% for m in range(1,13) %}
+          {% if m == s_month %}
+            <div class="cal-bar cal-bar-{{ (c.gbu or 'other')|lower|replace(' ','-')|replace('the-adecco-group','tag') }}" style="grid-column: span {{ span }};" data-tip="{{ c.name }} ({{ sd }} → {{ ed }})">
+              <span>{{ c.name }}</span>
+            </div>
+          {% elif m > s_month and m <= e_month %}
+            {# part of span, no separate cell #}
+          {% else %}
+            <div class="cal-month-col"></div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% endfor %}
+    {% if not scheduled %}
+    <div style="padding:48px 24px;text-align:center;color:var(--primary-300)">
+      <p style="margin:0 0 8px;font-size:16px"><b>No campaigns scheduled for {{ year }}.</b></p>
+      <p style="margin:0;font-size:14px">Edit any campaign below to set start + end dates. They'll appear here in color-coded bars.</p>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="card">
+  <h2>All approved campaigns ({{ all_campaigns|length }})</h2>
+  <p class="muted" style="font-size:13px;margin-top:-6px">Click "Edit dates" on any row to add it to the calendar. The GBU dropdown colors the bar above.</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Name</th><th>GBU</th><th>Start</th><th>End</th><th>Owner</th><th>Description</th><th></th></tr></thead>
+      <tbody>
+        {% for c in all_campaigns %}
+        <tr id="camp-{{ c.id }}">
+          <td><b>{{ c.name }}</b></td>
+          <td>{% if c.gbu %}<span class="gbu-chip gbu-{{ c.gbu|lower|replace(' ','-')|replace('the-adecco-group','tag') }}">{{ c.gbu }}</span>{% else %}<span class="muted">-</span>{% endif %}</td>
+          <td><span class="muted">{{ c.start_date or '-' }}</span></td>
+          <td><span class="muted">{{ c.end_date or '-' }}</span></td>
+          <td style="font-size:12px;color:var(--primary-300)">{{ c.owner_email or c.requested_by_email or '-' }}</td>
+          <td style="font-size:12px;color:var(--primary-300);max-width:240px">{{ c.description or '-' }}</td>
+          <td><button type="button" class="btn ghost" style="padding:6px 12px;font-size:12px" onclick="document.getElementById('edit-{{c.id}}').style.display=document.getElementById('edit-{{c.id}}').style.display==='none'?'table-row':'none'">Edit dates</button></td>
+        </tr>
+        <tr id="edit-{{ c.id }}" style="display:none;background:var(--surface)">
+          <td colspan="7">
+            <form method="post" action="{{ url_for('admin_campaign_edit', cid=c.id) }}" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:10px;align-items:end;padding:10px 0">
+              <div>
+                <label>Start date</label>
+                <input type="date" name="start_date" value="{{ c.start_date or '' }}" style="font-size:13px">
+              </div>
+              <div>
+                <label>End date</label>
+                <input type="date" name="end_date" value="{{ c.end_date or '' }}" style="font-size:13px">
+              </div>
+              <div>
+                <label>GBU</label>
+                <select name="gbu" style="font-size:13px">
+                  <option value="">-</option>
+                  {% for g in gbus %}<option value="{{g}}" {% if c.gbu == g %}selected{% endif %}>{{g}}</option>{% endfor %}
+                </select>
+              </div>
+              <div>
+                <label>Owner email</label>
+                <input type="email" name="owner_email" value="{{ c.owner_email or '' }}" placeholder="responsible person" style="font-size:13px">
+              </div>
+              <div>
+                <button class="primary" style="padding:8px 14px;font-size:13px">Save</button>
+              </div>
+              <div style="grid-column:1 / -1">
+                <label>Description (shown on calendar hover)</label>
+                <input type="text" name="description" value="{{ c.description or '' }}" placeholder="What this campaign is about, key goal, target market" style="font-size:13px">
+              </div>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  .calendar-hero{padding:40px 0 24px;margin-bottom:24px;border-bottom:1px solid var(--border)}
+  .calendar-grid{display:flex;flex-direction:column;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .cal-header,.cal-row{display:grid;grid-template-columns:200px repeat(12, minmax(70px, 1fr));gap:4px;align-items:stretch;min-width:1040px}
+  .cal-header{padding:8px 0;border-bottom:1px solid var(--border);font-size:11px;font-weight:700;color:var(--primary-300);text-transform:uppercase;letter-spacing:.08em}
+  .cal-camp-col{padding:6px 10px;display:flex;flex-direction:column;justify-content:center;font-size:11px}
+  .cal-row .cal-camp-col{background:var(--surface);border-radius:6px}
+  .cal-camp-name{font-weight:700;color:var(--primary-500);font-size:13px;font-family:ui-monospace,Menlo,Consolas,monospace;text-transform:none;letter-spacing:0}
+  .cal-camp-meta{font-size:11px;color:var(--primary-300);text-transform:none;letter-spacing:0;font-weight:400;margin-top:2px}
+  .cal-month-col{min-height:44px;background:transparent;border-radius:4px}
+  .cal-row .cal-month-col{background:rgba(28,48,75,.02);border:1px dashed rgba(28,48,75,.05)}
+  .cal-bar{
+    min-height:44px;display:flex;align-items:center;justify-content:flex-start;
+    padding:0 14px;border-radius:6px;
+    font-size:12px;font-weight:600;color:#1C304B;
+    position:relative;cursor:pointer;
+    box-shadow:0 1px 2px rgba(28,48,75,.08);
+    transition: transform 150ms var(--easing), box-shadow 150ms var(--easing);
+  }
+  .cal-bar:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(28,48,75,.18);z-index:5}
+  .cal-bar span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:ui-monospace,Menlo,Consolas,monospace}
+  /* GBU colors */
+  .cal-bar-adecco{background:linear-gradient(135deg, #EB003F, #E87A71);color:#fff}
+  .cal-bar-akkodis{background:linear-gradient(135deg, #FDC601, #FFC133);color:#1C304B}
+  .cal-bar-lhh{background:linear-gradient(135deg, #640451, #7E63E8);color:#fff}
+  .cal-bar-pontoon{background:linear-gradient(135deg, #2DBFB8, #1A7BAD);color:#fff}
+  .cal-bar-tag{background:linear-gradient(135deg, #2DBFB8 0%, #1A7BAD 25%, #6B2D8B 50%, #E30613 75%, #F9B233 100%);color:#fff}
+  .cal-bar-other{background:linear-gradient(135deg, #5F708A, #B7C0CC);color:#fff}
+
+  .gbu-chip{display:inline-flex;align-items:center;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+  .gbu-adecco{background:#FBDAD7;color:#8C1D17}
+  .gbu-akkodis{background:#FFF3D6;color:#7A5400}
+  .gbu-lhh{background:#E8E0FB;color:#3B2070}
+  .gbu-pontoon{background:#D5F0E1;color:#0F5350}
+  .gbu-tag{background:linear-gradient(135deg, rgba(45,191,184,.15), rgba(249,178,51,.15));color:#1C304B;border:1px solid rgba(92,184,178,.4)}
+  .gbu-other{background:#EEF1F5;color:#5F708A}
+
+  @media (max-width:900px){
+    .cal-header,.cal-row{grid-template-columns:160px repeat(12, 60px);min-width:880px}
+    .cal-camp-name{font-size:11px}
+  }
+</style>
+{% endblock %}

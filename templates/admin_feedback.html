@@ -1,0 +1,86 @@
+{% extends "_base.html" %}
+{% block title %}Feedback inbox | Admin{% endblock %}
+{% block body %}
+<div class="page-hero-stripe page-hero-admin"></div>
+<h1>User feedback.</h1>
+<p class="lede">Bugs, wishes, praise, anything users want us to know. Sent via the "Feedback" flag on the right edge of every page.</p>
+
+<div class="card subtle">
+  <div class="kpi">
+    <div class="k"><b>{{ new_items|length }}</b><span>New</span></div>
+    <div class="k"><b>{{ resolved|length }}</b><span>Resolved (last 100)</span></div>
+  </div>
+</div>
+
+{% if new_items %}
+<div class="card">
+  <h2>New ({{ new_items|length }})</h2>
+  <div class="feedback-list">
+    {% for f in new_items %}
+    <div class="feedback-item">
+      <div class="feedback-head">
+        <span class="pill {{ 'rejected' if f.kind == 'bug' else 'approved' if f.kind == 'praise' else 'pending' }}">{{ {'bug':'🐛 Bug report','wish':'💡 Feature wish','praise':'🎉 Praise','other':'💬 Comment'}.get(f.kind, '💬 Feedback') }}</span>
+        <span class="feedback-meta">{{ f.created_at[:16].replace('T',' ') }} · <b>{{ f.username or 'anonymous' }}</b>{% if f.email %} · <a href="mailto:{{ f.email }}">{{ f.email }}</a>{% endif %}{% if f.page %} · <code>{{ f.page }}</code>{% endif %}</span>
+      </div>
+      <div class="feedback-message">{{ f.message }}</div>
+      <div class="feedback-actions">
+        <form method="post" action="{{ url_for('admin_feedback_action', fid=f.id, action='resolve') }}" style="display:inline">
+          <button class="good" style="padding:6px 14px;font-size:12px">Mark resolved</button>
+        </form>
+        <form method="post" action="{{ url_for('admin_feedback_action', fid=f.id, action='delete') }}" style="display:inline" onsubmit="return confirm('Delete this feedback?')">
+          <button class="bad" style="padding:6px 14px;font-size:12px">Delete</button>
+        </form>
+        {% if f.email %}<a class="btn ghost" style="padding:6px 14px;font-size:12px" href="mailto:{{ f.email }}?subject=Re: your UTM tool feedback">Reply by email &rarr;</a>{% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% else %}
+<div class="card">
+  <div class="empty-state">
+    <div class="empty-state-icon" style="background:rgba(27,138,90,.1)">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B8A5A" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h3>No new feedback</h3>
+    <p>When users click the "Feedback" flag and submit a bug, wish, or comment, it shows up here.</p>
+  </div>
+</div>
+{% endif %}
+
+{% if resolved %}
+<div class="card subtle">
+  <h2>Resolved ({{ resolved|length }})</h2>
+  <div class="feedback-list">
+    {% for f in resolved %}
+    <div class="feedback-item" style="opacity:.7">
+      <div class="feedback-head">
+        <span class="pill approved">resolved</span>
+        <span class="pill {{ 'rejected' if f.kind == 'bug' else 'pending' }}">{{ {'bug':'🐛 Bug report','wish':'💡 Feature wish','praise':'🎉 Praise','other':'💬 Comment'}.get(f.kind, '💬 Feedback') }}</span>
+        <span class="feedback-meta">{{ f.created_at[:10] }} · {{ f.username or 'anonymous' }} · resolved {{ (f.resolved_at or '')[:10] }}</span>
+      </div>
+      <div class="feedback-message">{{ f.message[:200] }}{% if f.message|length > 200 %}…{% endif %}</div>
+      <div class="feedback-actions">
+        <form method="post" action="{{ url_for('admin_feedback_action', fid=f.id, action='reopen') }}" style="display:inline">
+          <button class="warn" style="padding:6px 14px;font-size:12px">Reopen</button>
+        </form>
+        <form method="post" action="{{ url_for('admin_feedback_action', fid=f.id, action='delete') }}" style="display:inline" onsubmit="return confirm('Delete this feedback?')">
+          <button class="bad" style="padding:6px 14px;font-size:12px">Delete</button>
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<style>
+  .feedback-list{display:flex;flex-direction:column;gap:14px}
+  .feedback-item{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px}
+  .feedback-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+  .feedback-meta{font-size:12px;color:var(--primary-300)}
+  .feedback-meta code{background:var(--surface);padding:2px 6px;border-radius:4px;font-size:11px}
+  .feedback-message{font-size:14px;line-height:1.55;color:var(--primary-500);white-space:pre-wrap;margin-bottom:12px}
+  .feedback-actions{display:flex;gap:8px;flex-wrap:wrap}
+</style>
+{% endblock %}

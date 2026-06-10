@@ -1,0 +1,86 @@
+{% extends "_base.html" %}
+{% block title %}Campaigns | Admin{% endblock %}
+{% block body %}
+<h1>Campaigns.</h1>
+<p class="lede">Approve campaign names so the team can use them in the builder. You can also pre-create campaigns yourself.</p>
+
+<div class="card">
+  <h2>Add an approved campaign directly</h2>
+  <form method="post" action="{{ url_for('admin_campaign_add') }}" style="display:flex;gap:10px;align-items:end" onsubmit="return validateAddCamp(this)">
+    <div style="flex:1">
+      <label>Campaign name</label>
+      <input name="name" id="addCampName" placeholder="e.g. q4_leadershipsummit_2026" maxlength="80" autocapitalize="off" autocorrect="off" spellcheck="false" required>
+      <div class="hint">Lowercase letters, numbers, underscore or hyphen only.</div>
+    </div>
+    <button class="primary">Add and approve</button>
+  </form>
+  <script>
+    const ADD_CAMP_RE = /^[a-z0-9_-]{2,80}$/;
+    const addCampName = document.getElementById('addCampName');
+    addCampName.addEventListener('input', () => {
+      const c = addCampName.value.toLowerCase().replace(/[^a-z0-9_-]/g, '');
+      if (c !== addCampName.value) addCampName.value = c;
+    });
+    function validateAddCamp(form){
+      if(!ADD_CAMP_RE.test(form.name.value)){
+        alert('Campaign name must be lowercase letters, numbers, underscore or hyphen. 2 to 80 chars.');
+        return false;
+      }
+      return true;
+    }
+  </script>
+</div>
+
+{% if pending %}
+<div class="card">
+  <h2>Waiting for approval ({{ pending|length }})</h2>
+  <table>
+    <thead><tr><th>Requested</th><th>Name</th><th>Requested by</th><th>Notes</th><th></th></tr></thead>
+    <tbody>
+    {% for c in pending %}
+      <tr>
+        <td>{{ c.created_at[:16].replace('T',' ') }}</td>
+        <td><b>{{ c.name }}</b></td>
+        <td>{{ c.requested_by_email or '-' }}</td>
+        <td>{{ c.notes or '-' }}</td>
+        <td style="white-space:nowrap">
+          <form style="display:inline" method="post" action="{{ url_for('admin_campaign_approve', cid=c.id) }}"><button class="good">Approve</button></form>
+          <form style="display:inline" method="post" action="{{ url_for('admin_campaign_reject', cid=c.id) }}"><button class="bad">Reject</button></form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+<div class="card">
+  <h2>Approved ({{ approved|length }})</h2>
+  {% if not approved %}<p class="muted">No approved campaigns yet.</p>{% else %}
+  <table>
+    <thead><tr><th>Name</th><th>Approved</th><th>Requested by</th><th>Links built</th><th></th></tr></thead>
+    <tbody>
+    {% for c in approved %}
+      <tr><td><b>{{ c.name }}</b></td><td>{{ (c.approved_at or '')[:16].replace('T',' ') }}</td><td>{{ c.requested_by_email or '-' }}</td><td>{{ c.link_count }}</td>
+        <td><form style="display:inline" method="post" action="{{ url_for('admin_campaign_delete', cid=c.id) }}" onsubmit="return confirm('Delete this campaign? Links keep working but the campaign name leaves the dropdown.')"><button class="bad" style="padding:6px 12px;font-size:12px">Del</button></form></td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+
+{% if rejected %}
+<div class="card subtle">
+  <h2>Rejected ({{ rejected|length }})</h2>
+  <table>
+    <thead><tr><th>Requested</th><th>Name</th><th>Requested by</th><th></th></tr></thead>
+    <tbody>
+    {% for c in rejected %}
+      <tr><td>{{ c.created_at[:16].replace('T',' ') }}</td><td>{{ c.name }}</td><td>{{ c.requested_by_email or '-' }}</td>
+        <td><form style="display:inline" method="post" action="{{ url_for('admin_campaign_delete', cid=c.id) }}"><button class="bad" style="padding:6px 12px;font-size:12px">Del</button></form></td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+{% endblock %}

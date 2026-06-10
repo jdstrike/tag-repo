@@ -1,0 +1,51 @@
+{% extends "_base.html" %}
+{% block title %}Privacy policy | the Adecco Group UTM builder{% endblock %}
+{% block body %}
+<div class="card" style="max-width:780px">
+<h1>Privacy policy.</h1>
+<p class="muted" style="font-size:13px">Effective date: 2026-06-02 · Operated by the Adecco Group, Global Digital Marketing</p>
+
+<h2>What we collect</h2>
+<p>The Adecco Group UTM Builder helps employees generate tracking links for campaigns. We collect and process:</p>
+<ol style="font-size:14px;line-height:1.65;padding-left:22px">
+  <li><b>Account data</b> (if you create an account): username, work email, full name, password hash. Stored on the Adecco Group's controlled infrastructure.</li>
+  <li><b>Link metadata</b> (when you build a link): destination URL, UTM parameters (source, medium, campaign, term, content, id), brand and country, additional dimensions, generated short URL code, your account email as the link owner.</li>
+  <li><b>Click data</b> (when someone clicks one of the short links): timestamp, IP address, browser User-Agent, referring page URL. Used to count clicks and aggregate reporting.</li>
+  <li><b>Browser extension</b>: the URL of your currently active tab is read only when you click the extension icon, and only sent to the backend when you click "Generate link".</li>
+</ol>
+
+<h2>What we don't collect</h2>
+<ul style="font-size:14px;line-height:1.7">
+  <li>No third-party analytics or trackers</li>
+  <li>No telemetry sent to external services</li>
+  <li>No data shared beyond what you explicitly produce (your generated link, and the visitor's click data on it)</li>
+</ul>
+
+<h2>How we use it</h2>
+<ul style="font-size:14px;line-height:1.7">
+  <li><b>Account data</b>: to authenticate you and attribute your links</li>
+  <li><b>Link metadata</b>: to provide the link-building service, audit trail, admin approval workflow</li>
+  <li><b>Click data</b>: to provide aggregate metrics in the Performance Dashboard</li>
+  <li>All data processed on Adecco Group-controlled infrastructure</li>
+</ul>
+
+<h2>Retention</h2>
+<ul style="font-size:14px;line-height:1.7">
+  <li><b>Account data</b>: kept while your account is active. Deletion via admin request.</li>
+  <li><b>Link metadata</b>: kept indefinitely as marketing campaign record. Individual links can be deleted.</li>
+  <li><b>Click data</b>: detailed for 90 days, then aggregated.</li>
+</ul>
+
+<h2>Your rights (GDPR)</h2>
+<p>You can request access, correction, or deletion via the admin (<a href="mailto:johannes.schatt@adeccogroup.com">johannes.schatt@adeccogroup.com</a>). External visitors can request deletion of their click data by emailing the same address with the short link code in question.</p>
+
+<h2>Lawful basis</h2>
+<p style="font-size:14px;line-height:1.6"><b>Employees:</b> legitimate interest in operating internal marketing tools, balanced with employee rights.<br><b>Visitors:</b> legitimate interest in measuring marketing effectiveness, with data minimization (IPs partially anonymized after 30 days).</p>
+
+<h2>Updates</h2>
+<p>This policy may be updated. Material changes will be announced via in-app notice. The current version is always at <code>{{ base }}/privacy</code>.</p>
+
+<h2>Contact</h2>
+<p>Privacy questions or requests: <a href="mailto:johannes.schatt@adeccogroup.com">johannes.schatt@adeccogroup.com</a></p>
+</div>
+{% endblock %}

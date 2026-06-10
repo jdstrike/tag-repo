@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ subject|default('the Adecco Group UTM builder') }}</title>
+</head>
+<body style="margin:0;padding:0;background:#F6F7F9;font-family:'Open Sauce Sans',-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;color:#1C304B;-webkit-font-smoothing:antialiased">
+<div style="background:#F6F7F9;padding:32px 16px;width:100%">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="max-width:580px;width:100%;margin:0 auto;background:#FFFFFF;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(28,48,75,.06);border:1px solid #D6DBE3">
+    <!-- Unity gradient bar -->
+    <tr><td style="height:6px;line-height:6px;font-size:0;background:linear-gradient(90deg,#2DBFB8 0%,#1A7BAD 22%,#6B2D8B 44%,#E30613 63%,#F05A28 81%,#F9B233 100%)">&nbsp;</td></tr>
+
+    <!-- Header with logo -->
+    <tr><td style="padding:28px 32px 22px;border-bottom:1px solid #EEF1F5">
+      <table cellpadding="0" cellspacing="0" border="0" width="100%">
+        <tr>
+          <td style="vertical-align:middle">
+            <img src="https://context.tag-repo.com/assets/logos/tag-family-lockup-colour-pos.svg" alt="the Adecco Group" height="34" style="display:block;border:0;height:34px;width:auto" />
+          </td>
+          <td style="vertical-align:middle;text-align:right;font-size:11px;font-weight:500;color:#5F708A;text-transform:uppercase;letter-spacing:.14em">UTM builder</td>
+        </tr>
+      </table>
+    </td></tr>
+
+    <!-- Body block -->
+    <tr><td style="padding:36px 32px 28px">
+      {% block body %}{% endblock %}
+    </td></tr>
+
+    <!-- Footer -->
+    <tr><td style="padding:22px 32px 26px;background:#F6F7F9;border-top:1px solid #EEF1F5;font-size:12px;color:#5F708A;line-height:1.55">
+      <p style="margin:0 0 6px;font-weight:500;color:#1C304B">Making the future work for everyone.</p>
+      <p style="margin:0">Built for the Global Digital Marketing team. <a href="{{ base }}/" style="color:#5CB8B2;text-decoration:none">{{ base.replace('https://','').replace('http://','') }}</a></p>
+    </td></tr>
+  </table>
+  <p style="text-align:center;font-size:11px;color:#8B94A6;margin:20px auto 0;max-width:580px">You're receiving this because you used the Adecco Group UTM builder. Reply to this email to reach the admin.</p>
+</div>
+</body>
+</html>

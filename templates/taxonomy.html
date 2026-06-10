@@ -1,0 +1,29 @@
+{% extends "_base.html" %}
+{% block title %}Taxonomy | the Adecco Group UTM builder{% endblock %}
+{% block body %}
+<h1>Taxonomy.</h1>
+<p class="lede">Values for the builder dropdowns. Sources, mediums, and stages are simple labels. Brands and countries also need a short code (utm_content becomes brandcode_countrycode).</p>
+
+{% for kind, label in [('source','Traffic sources'),('medium','Mediums'),('stage','Campaign stages'),('gbu','Brands (GBUs)'),('country','Countries')] %}
+<div class="card">
+  <h2>{{ label }} ({{ tax[kind]|length }})</h2>
+  <form method="post" class="row3" style="margin-bottom:12px;align-items:end">
+    <input type="hidden" name="action" value="add"><input type="hidden" name="kind" value="{{ kind }}">
+    <div><label>Value</label><input name="value" required></div>
+    <div><label>Code {% if kind in ('gbu','country') %}(required){% else %}(optional){% endif %}</label><input name="code"></div>
+    <div><button class="primary">Add</button></div>
+  </form>
+  <table>
+    <thead><tr><th>Value</th><th>Code</th><th></th></tr></thead>
+    <tbody>
+    {% for t in tax[kind] %}
+      <tr><td>{{ t.value }}</td><td>{{ t.code or '-' }}</td>
+        <td><form method="post" style="display:inline" onsubmit="return confirm('Delete this value?')">
+          <input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="{{ t.id }}">
+          <button class="bad">Delete</button></form></td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endfor %}
+{% endblock %}

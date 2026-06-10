@@ -1,0 +1,191 @@
+{% extends "_base.html" %}
+{% block title %}Structure | Admin{% endblock %}
+{% block body %}
+<h1>Structure.</h1>
+<p class="lede">All settings that shape what users can pick in the builder. Tabs to keep it tidy.</p>
+
+<div class="tabbar">
+  <button class="tab-btn active" data-tab="campaigns">Campaigns ({{ campaigns|length }})</button>
+  <button class="tab-btn" data-tab="taxonomy">Taxonomy</button>
+  <button class="tab-btn" data-tab="rules">Source/Medium rules ({{ rules|length }})</button>
+  <button class="tab-btn" data-tab="combos">Combo rules ({{ comb_rules|length }})</button>
+  <button class="tab-btn" data-tab="countries">Countries ({{ countries|length }})</button>
+</div>
+
+<!-- ===== Campaigns ===== -->
+<div class="tab-panel" data-tab="campaigns">
+  <div class="card">
+    <h2>Approved campaigns</h2>
+    <p class="muted" style="font-size:13px;margin-top:-6px">These show up in the builder dropdown. Add a new one directly, or wait for users to request it via the builder.</p>
+    <form method="post" action="{{ url_for('admin_campaign_add') }}" style="display:flex;gap:10px;align-items:end;margin-bottom:18px" onsubmit="return /^[a-z0-9_-]{2,80}$/.test(this.name.value)||alert('lowercase a-z 0-9 _ - only')&&false">
+      <div style="flex:1">
+        <label>Campaign name</label>
+        <input name="name" placeholder="e.g. q4_leadership_2026" maxlength="80" pattern="[a-z0-9_-]{2,80}" autocapitalize="off" autocorrect="off" spellcheck="false" required oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9_-]/g,'')">
+      </div>
+      <button class="primary">Add &amp; auto-approve</button>
+    </form>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Name</th><th>Original</th><th>Approved</th><th>Requested by</th><th>Links built</th><th>Admin comment</th><th></th></tr></thead>
+      <tbody>
+      {% for c in campaigns %}
+        <tr>
+          <td><b>{{ c.name }}</b></td>
+          <td style="color:var(--primary-300);font-size:12px">{{ c.original_name or '-' }}</td>
+          <td>{{ (c.approved_at or '')[:10] }}</td>
+          <td>{{ c.requested_by_email or '-' }}</td>
+          <td><b>{{ c.link_count }}</b></td>
+          <td style="max-width:240px;font-size:12px;color:var(--primary-300)">{{ c.admin_comment or '-' }}</td>
+          <td><form method="post" action="{{ url_for('admin_campaign_delete', cid=c.id) }}" style="display:inline" onsubmit="return confirm('Delete? Links keep working but the name leaves the dropdown.')"><button class="bad" style="padding:6px 10px;font-size:12px">Del</button></form></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Taxonomy ===== -->
+<div class="tab-panel" data-tab="taxonomy" style="display:none">
+  <p class="muted">Manage the dropdown values for each dimension. Sources, mediums, stages, GBUs, countries, plus the 4 advanced dimensions.</p>
+  {% for kind, label in [('source','Traffic sources'),('medium','Mediums'),('stage','Campaign stages'),('gbu','Brands (GBUs)'),('country','Countries'),('agency','Agencies'),('targeting_type','Targeting types'),('segmentation','Segmentations'),('asset_type','Asset types')] %}
+  <div class="card">
+    <h2>{{ label }} ({{ tax[kind]|length }})</h2>
+    <form method="post" action="{{ url_for('admin_taxonomy') }}" class="row3" style="margin-bottom:12px;align-items:end">
+      <input type="hidden" name="action" value="add"><input type="hidden" name="kind" value="{{ kind }}">
+      <div><label>Value</label><input name="value" required oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9_-]/g,'')" maxlength="60" autocapitalize="off"></div>
+      <div><label>Code {% if kind in ('gbu','country') %}(required){% else %}(optional){% endif %}</label><input name="code" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9_-]/g,'')"></div>
+      <div><button class="primary">Add</button></div>
+    </form>
+    <div class="table-scroll">
+    <table style="font-size:12px">
+      <thead><tr><th>Value</th><th>Code</th><th></th></tr></thead>
+      <tbody>
+      {% for t in tax[kind][:50] %}
+        <tr><td>{{ t.value }}</td><td>{{ t.code or '-' }}</td>
+          <td><form method="post" action="{{ url_for('admin_taxonomy') }}" style="display:inline" onsubmit="return confirm('Delete?')">
+            <input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="{{ t.id }}">
+            <button class="bad" style="padding:4px 8px;font-size:11px">Del</button></form></td></tr>
+      {% endfor %}
+      {% if tax[kind]|length > 50 %}<tr><td colspan="3" class="muted">... {{ tax[kind]|length - 50 }} more (full list under <a href="{{ url_for('admin_taxonomy') }}">Taxonomy</a>)</td></tr>{% endif %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- ===== Source/Medium Rules ===== -->
+<div class="tab-panel" data-tab="rules" style="display:none">
+  <div class="card">
+    <h2>Source &times; medium combinations</h2>
+    <p class="muted" style="font-size:13px;margin-top:-6px">Which source can pair with which medium in the Global builder. If a combo is missing here, the builder rejects it.</p>
+    <form method="post" action="{{ url_for('admin_rules') }}" class="row3" style="align-items:end;margin-bottom:18px">
+      <input type="hidden" name="action" value="add">
+      <div><label>Source</label><input list="srcList" name="source" required oninput="this.value=this.value.toLowerCase()">
+        <datalist id="srcList">{% for s in sources %}<option value="{{s}}">{% endfor %}</datalist></div>
+      <div><label>Medium</label><input list="medList" name="medium" required oninput="this.value=this.value.toLowerCase()">
+        <datalist id="medList">{% for m in mediums %}<option value="{{m}}">{% endfor %}</datalist></div>
+      <div><button class="primary">Add</button></div>
+    </form>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Source</th><th>Medium</th><th></th></tr></thead>
+      <tbody>
+      {% for r in rules %}
+        <tr><td><b>{{ r.source }}</b></td><td>{{ r.medium }}</td>
+          <td><form method="post" action="{{ url_for('admin_rules') }}" style="display:inline">
+            <input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="{{ r.id }}">
+            <button class="bad" style="padding:6px 10px;font-size:12px">Del</button></form></td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Combo Rules ===== -->
+<div class="tab-panel" data-tab="combos" style="display:none">
+  <div class="card">
+    <h2>Combination rules</h2>
+    <p class="muted" style="font-size:13px;margin-top:-6px">For each (source, medium) pair, narrow which advanced dimension values are valid. Empty = N/A. Required = user must fill it.</p>
+    <form method="post" action="{{ url_for('admin_comb_rules') }}" class="row3" style="align-items:end;margin-bottom:18px">
+      <input type="hidden" name="action" value="add">
+      <div><label>Source</label><input list="srcList2" name="source" required oninput="this.value=this.value.toLowerCase()">
+        <datalist id="srcList2">{% for s in sources %}<option value="{{s}}">{% endfor %}</datalist></div>
+      <div><label>Medium</label><input list="medList2" name="medium" required oninput="this.value=this.value.toLowerCase()">
+        <datalist id="medList2">{% for m in mediums %}<option value="{{m}}">{% endfor %}</datalist></div>
+      <div><label>Dimension</label>
+        <select name="dimension_kind" required>
+          <option value="asset_type">asset_type</option>
+          <option value="targeting_type">targeting_type</option>
+          <option value="agency">agency</option>
+          <option value="segmentation">segmentation</option>
+        </select>
+      </div>
+      <div style="grid-column:1/-1"><label>Allowed values (comma-separated, empty = N/A)</label>
+        <input name="allowed_values" placeholder="e.g. video-short, image-carousel, native">
+      </div>
+      <div><label style="display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:normal"><input type="checkbox" name="required" style="width:auto;min-height:0"> Required</label></div>
+      <div style="grid-column:1/-1"><button class="primary">Save rule</button></div>
+    </form>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Source</th><th>Medium</th><th>Dimension</th><th>Allowed</th><th>Req</th><th></th></tr></thead>
+      <tbody>
+      {% for r in comb_rules %}
+        <tr><td><b>{{ r.source }}</b></td><td>{{ r.medium }}</td>
+          <td><span class="pill approved">{{ r.dimension_kind }}</span></td>
+          <td style="font-family:ui-monospace;font-size:11px;max-width:400px">{{ r.allowed_values_json or 'all values' }}</td>
+          <td>{{ 'yes' if r.required else '-' }}</td>
+          <td><form method="post" action="{{ url_for('admin_comb_rules') }}" style="display:inline">
+            <input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="{{ r.id }}">
+            <button class="bad" style="padding:6px 10px;font-size:12px">Del</button></form></td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Countries ===== -->
+<div class="tab-panel" data-tab="countries" style="display:none">
+  <div class="card">
+    <h2>Country configurations</h2>
+    <p class="muted" style="font-size:13px;margin-top:-6px">Country-specific naming conventions and field sets. DE and CH are wired into the dedicated <code>/de</code> and <code>/ch</code> builders. The JSON contains the dropdown values, format templates, and validation rules.</p>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Code</th><th>Name</th><th>Config size</th><th>Updated</th><th>Builder</th></tr></thead>
+      <tbody>
+      {% for c in countries %}
+        <tr>
+          <td><b>{{ c.country_code|upper }}</b></td>
+          <td>{{ c.country_name }}</td>
+          <td>{{ c.config_json|length }} bytes</td>
+          <td>{{ (c.updated_at or '')[:16].replace('T',' ') }}</td>
+          <td><a href="/{{ c.country_code }}">/{{ c.country_code }} &rarr;</a></td>
+        </tr>
+      {% endfor %}
+      {% if not countries %}<tr><td colspan="5" class="muted">No country configs. Add one under <a href="{{ url_for('admin_countries') }}">Countries</a>.</td></tr>{% endif %}
+      </tbody>
+    </table>
+    </div>
+    <p style="margin-top:14px;font-size:13px"><a href="{{ url_for('admin_countries') }}" class="btn ghost">Edit country configs (JSON) &rarr;</a></p>
+  </div>
+</div>
+
+<script>
+const tabs = document.querySelectorAll('.tab-btn');
+const panels = document.querySelectorAll('.tab-panel');
+tabs.forEach(b => b.addEventListener('click', () => {
+  tabs.forEach(t => t.classList.remove('active'));
+  panels.forEach(p => p.style.display = 'none');
+  b.classList.add('active');
+  document.querySelector(`.tab-panel[data-tab="${b.dataset.tab}"]`).style.display = 'block';
+  history.replaceState(null,'','#'+b.dataset.tab);
+}));
+// Restore tab from hash
+const h = location.hash.replace('#','');
+if (h) { const b = document.querySelector(`.tab-btn[data-tab="${h}"]`); if (b) b.click(); }
+</script>
+{% endblock %}

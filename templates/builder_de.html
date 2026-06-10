@@ -1,0 +1,263 @@
+{% extends "_base.html" %}
+{% block title %}DE Builder | the Adecco Group UTM builder{% endblock %}
+{% block body %}
+<div class="card">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap">
+    <div>
+      <h1>Germany builder.</h1>
+      <p class="lede">Build a fully-spec'd UTM following the German DMCC convention. Every dropdown maps to a 2-5 character abbreviation. The generated <code>utm_campaign</code> respects the 60-character BI cap. Dynamic placeholders for Meta and Joveo are supported.</p>
+    </div>
+    <a class="btn ghost" href="{{ url_for('country_picker') }}">&larr; Other markets</a>
+  </div>
+
+  <form id="fde" autocomplete="off">
+    <label>Landing page URL</label>
+    <input name="destination" id="destInp" placeholder="https://www.adecco.de/..." required inputmode="url">
+
+    <div class="row3">
+      <div>
+        <label>Campaign ID <span class="muted" style="text-transform:none;letter-spacing:normal">(1-5 digits)</span></label>
+        <input name="campaign_id" id="campIdInp" placeholder="e.g. 9520" pattern="[0-9]{1,5}" maxlength="5" required inputmode="numeric">
+      </div>
+      <div>
+        <label>Start date <span class="muted" style="text-transform:none;letter-spacing:normal">(YYMMDD)</span></label>
+        <input name="start_date" id="startInp" placeholder="e.g. 260301" pattern="[0-9]{6}" maxlength="6" required inputmode="numeric">
+      </div>
+      <div>
+        <label>Cost center <span class="muted" style="text-transform:none;letter-spacing:normal">(4-5 digits)</span></label>
+        <input list="ccList" name="cost_center" id="ccInp" placeholder="e.g. 00185" pattern="[0-9]{4,5}" required inputmode="numeric">
+        <datalist id="ccList">{% for v in cfg.dropdowns.cost_centers.keys() %}<option value="{{v}}">{% endfor %}</datalist>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>Platform (utm_source)</label>
+        <select name="platform" id="platformSel" class="searchable" required>
+          <option value="">Choose platform</option>
+          {% for k,v in cfg.dropdowns.platforms.items() %}<option value="{{k}}">{{k}} ({{v}})</option>{% endfor %}
+        </select>
+      </div>
+      <div>
+        <label>Channel (utm_medium)</label>
+        <select name="channel" required>
+          <option value="">Choose channel</option>
+          {% for k,v in cfg.dropdowns.channels.items() %}<option value="{{k}}">{{k}} ({{v}})</option>{% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <details class="advanced-toggle">
+      <summary>Dynamic source override (Meta &#123;&#123;placement&#125;&#125; / Joveo)</summary>
+      <div style="padding:0 16px 14px;display:flex;flex-direction:column;gap:8px">
+        <p class="muted" style="font-size:13px;margin:0 0 6px">Some platforms supply the real source name at runtime. Toggle one to overwrite <code>utm_source</code> with the dynamic placeholder instead of the platform abbreviation.</p>
+        <label style="display:flex;align-items:center;gap:10px;text-transform:none;letter-spacing:normal;font-weight:500;margin:0">
+          <input type="radio" name="dynamic_source" value="" checked style="width:auto;min-height:0"> Use the platform I selected above
+        </label>
+        <label style="display:flex;align-items:center;gap:10px;text-transform:none;letter-spacing:normal;font-weight:500;margin:0">
+          <input type="radio" name="dynamic_source" value="meta" style="width:auto;min-height:0"> <code>&#123;&#123;placement&#125;&#125;</code> (Meta dynamic placement, fills with instagram / facebook / etc at delivery)
+        </label>
+        <label style="display:flex;align-items:center;gap:10px;text-transform:none;letter-spacing:normal;font-weight:500;margin:0">
+          <input type="radio" name="dynamic_source" value="joveo" style="width:auto;min-height:0"> <code>[dynamic source by joveo]</code> (Joveo job-board macro)
+        </label>
+      </div>
+    </details>
+
+    <div class="row">
+      <div>
+        <label>Campaign type</label>
+        <select name="campaign_type" class="searchable" required>
+          <option value="">Choose type</option>
+          {% for k,v in cfg.dropdowns.campaign_types.items() %}<option value="{{k}}">{{k}} ({{v}})</option>{% endfor %}
+        </select>
+      </div>
+      <div>
+        <label>Asset type</label>
+        <select name="asset_type" class="searchable">
+          <option value="">Choose asset</option>
+          {% for k,v in cfg.dropdowns.asset_types.items() %}<option value="{{k}}">{{k}} ({{v}})</option>{% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>Business unit</label>
+        <select name="business_unit">
+          <option value="">Choose business unit</option>
+          {% for pair in cfg.business_units %}<option value="{{pair[0]}}">{{pair[0]}} ({{pair[1]}})</option>{% endfor %}
+        </select>
+      </div>
+      <div>
+        <label>KLDB <span class="muted" style="text-transform:none;letter-spacing:normal">(4-5 digit code)</span></label>
+        <input list="kldbList" name="kldb" placeholder="e.g. 43223" pattern="[0-9]{4,5}" inputmode="numeric">
+        <datalist id="kldbList">{% for v in cfg.dropdowns.kldbs.keys() %}<option value="{{v}}">{% endfor %}</datalist>
+      </div>
+    </div>
+
+    <details class="advanced-toggle">
+      <summary>Optional tokens (Job, Client, Location, Target group, Audience, Agency, Goal)</summary>
+      <div class="row">
+        <div>
+          <label>Job</label>
+          <select name="job" class="searchable">
+            <option value="">Choose job</option>
+            {% for k,v in cfg.dropdowns.jobs.items() %}<option value="{{k}}">{{k}} ({{v}})</option>{% endfor %}
+          </select>
+        </div>
+        <div>
+          <label>Client</label>
+          <select name="client" class="searchable">
+            <option value="">Choose client</option>
+            {% for k,v in cfg.dropdowns.clients.items() %}<option value="{{k}}">{{k}} ({{v}})</option>{% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Location</label>
+          <select name="location" class="searchable">
+            <option value="">Choose location</option>
+            {% for k,v in cfg.dropdowns.locations.items() %}<option value="{{k}}">{{k}} ({{v}})</option>{% endfor %}
+          </select>
+        </div>
+        <div>
+          <label>Meta DIS-AG target group <span class="muted" style="text-transform:none;letter-spacing:normal">(adds zg-token before BU)</span></label>
+          <select name="target_group">
+            <option value="">none</option>
+            <option value="zg0">zg0 (open audience)</option>
+            <option value="zg1">zg1 (active job-seekers)</option>
+            <option value="zg2">zg2 (job-interest)</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Audience</label>
+          <select name="audience">
+            <option value="">Choose audience</option>
+            {% for pair in cfg.audiences %}<option value="{{pair[0]}}">{{pair[0]}} ({{pair[1]}})</option>{% endfor %}
+          </select>
+        </div>
+        <div>
+          <label>Campaign goal</label>
+          <select name="campaign_goal">
+            <option value="">Choose goal</option>
+            {% for pair in cfg.campaign_goals %}<option value="{{pair[0]}}">{{pair[0]}} ({{pair[1]}})</option>{% endfor %}
+          </select>
+        </div>
+      </div>
+      <label>Agency</label>
+      <select name="agency">
+        <option value="">Choose agency</option>
+        {% for k,v in cfg.dropdowns.agencies.items() %}<option value="{{k}}">{{k}} ({{v}})</option>{% endfor %}
+      </select>
+    </details>
+
+    <label>Notes (optional, not in URL)</label>
+    <input name="notes" placeholder="Internal note for the audit log">
+
+    <div id="charBar" class="char-bar" style="display:none">
+      <span>utm_campaign preview:</span>
+      <code id="campPreview" style="font-family:ui-monospace;font-size:13px;color:var(--primary-500);background:var(--surface);padding:4px 8px;border-radius:6px"></code>
+      <span style="margin-left:auto"><b id="charCount">0</b>/{{ cfg.char_cap }} chars</span>
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="primary">Generate DE link</button>
+      <button type="reset" class="ghost">Reset</button>
+    </div>
+    <div id="buildMsg"></div>
+  </form>
+</div>
+
+<div class="card" id="resultCard" style="display:none">
+  <h2>Your DE link</h2>
+  <label>Generated utm_campaign</label>
+  <div class="out" id="campOut"></div>
+  <label style="margin-top:14px">Long URL</label>
+  <div class="out" id="longOut"></div>
+  <button type="button" class="copy" onclick="navigator.clipboard.writeText(document.getElementById('longOut').textContent)">Copy long URL</button>
+  <label style="margin-top:14px">Short URL</label>
+  <div class="out" id="shortOut"></div>
+  <button type="button" class="copy" onclick="navigator.clipboard.writeText(document.getElementById('shortOut').textContent)">Copy short URL</button>
+  <div class="ga4-result" id="ga4ResultDeCh" style="display:none;margin-top:18px">
+    <h3 style="margin:0 0 6px;font-size:14px;font-weight:700;letter-spacing:.04em">GA4 reports</h3>
+    <p class="muted" style="font-size:12px;margin:0 0 12px;line-height:1.5">This destination matches <b id="ga4GbuDeCh">-</b>.</p>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <a id="ga4HomeDeCh" class="btn ghost" style="padding:8px 14px;font-size:13px" target="_blank" rel="noopener">Home &rarr;</a>
+      <a id="ga4AcqDeCh" class="btn ghost" style="padding:8px 14px;font-size:13px" target="_blank" rel="noopener">Acquisition &rarr;</a>
+      <a id="ga4RTDeCh" class="btn ghost" style="padding:8px 14px;font-size:13px" target="_blank" rel="noopener">Real-time &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const f = document.getElementById('fde');
+const charBar = document.getElementById('charBar');
+const campPreview = document.getElementById('campPreview');
+const charCount = document.getElementById('charCount');
+const CAP = {{ cfg.char_cap }};
+const ABBR = {
+  platforms: {{ cfg.dropdowns.platforms|tojson }},
+  channels: {{ cfg.dropdowns.channels|tojson }},
+  campaign_types: {{ cfg.dropdowns.campaign_types|tojson }},
+  asset_types: {{ cfg.dropdowns.asset_types|tojson }},
+  jobs: {{ cfg.dropdowns.jobs|tojson }},
+  clients: {{ cfg.dropdowns.clients|tojson }},
+  locations: {{ cfg.dropdowns.locations|tojson }},
+  business_units: Object.fromEntries({{ cfg.business_units|tojson }}),
+};
+function abbr(group, v){ return v ? (ABBR[group][v] || v) : ''; }
+function updatePreview(){
+  const fd = new FormData(f);
+  const tg = fd.get('target_group') || '';
+  const clientAbbr = abbr('clients', fd.get('client'));
+  const locAbbr = abbr('locations', fd.get('location'));
+  const parts = [
+    fd.get('campaign_id'),
+    abbr('platforms', fd.get('platform')),
+    abbr('channels', fd.get('channel')),
+    abbr('campaign_types', fd.get('campaign_type')),
+    abbr('asset_types', fd.get('asset_type')),
+    fd.get('cost_center'),
+    fd.get('start_date'),
+    fd.get('kldb'),
+    abbr('jobs', fd.get('job')),
+  ];
+  if (clientAbbr) parts.push(clientAbbr);
+  if (tg) parts.push(tg);
+  parts.push(abbr('business_units', fd.get('business_unit')));
+  if (locAbbr) parts.push(locAbbr);
+  const name = parts.filter(Boolean).join('_');
+  campPreview.textContent = name || '(fill in fields to preview)';
+  charCount.textContent = name.length;
+  charCount.style.color = name.length > CAP ? 'var(--error)' : (name.length > CAP*0.9 ? 'var(--alert)' : 'var(--primary-500)');
+  charBar.style.display = name ? 'flex' : 'none';
+}
+f.addEventListener('input', updatePreview);
+f.addEventListener('change', updatePreview);
+
+f.addEventListener('submit', async e => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(f).entries());
+  const msg = document.getElementById('buildMsg'); msg.innerHTML='';
+  const r = await fetch('/api/de/build', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)});
+  const j = await r.json();
+  if(!r.ok){ msg.innerHTML = '<div class="err" style="margin-top:14px">'+(j.error||'Error')+'</div>'; return; }
+  document.getElementById('resultCard').style.display='block';
+  document.getElementById('campOut').textContent = j.campaign_name + '  (' + j.char_count + '/' + j.char_cap + ' chars)';
+  document.getElementById('longOut').textContent = j.long_url;
+  document.getElementById('shortOut').textContent = j.short_url;
+  const ga4Box = document.getElementById('ga4ResultDeCh');
+  if (j.ga4_property && j.ga4_property.links) {
+    document.getElementById('ga4GbuDeCh').textContent = j.ga4_property.gbu_name + ' (' + j.ga4_property.domain + ')';
+    document.getElementById('ga4HomeDeCh').href = j.ga4_property.links.home;
+    document.getElementById('ga4AcqDeCh').href = j.ga4_property.links.acquisition;
+    document.getElementById('ga4RTDeCh').href = j.ga4_property.links.real_time;
+    ga4Box.style.display = 'block';
+  } else { ga4Box.style.display = 'none'; }
+  document.getElementById('resultCard').scrollIntoView({behavior:'smooth'});
+});
+</script>
+{% endblock %}

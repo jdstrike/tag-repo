@@ -1,0 +1,221 @@
+{% extends "_base.html" %}
+{% block title %}Take your UTM data anywhere | the Adecco Group UTM builder{% endblock %}
+{% block body %}
+<div class="hero-integrations">
+  <p style="font-size:12px;font-weight:700;color:#5CB8B2;text-transform:uppercase;letter-spacing:.14em;margin:0 0 8px">Integrations &amp; activation</p>
+  <h1 style="font-size:42px;line-height:1.1;letter-spacing:-.02em;margin:0 0 16px;max-width:760px">Take your UTM data anywhere your team works.</h1>
+  <p class="lede" style="max-width:680px;font-size:18px">Every link you build here can flow into your ATS, CRM, marketing automation, or BI stack. Pick a use case, get a working snippet, hand it to IT or run it yourself.</p>
+</div>
+
+<div class="integration-grid">
+
+  <!-- Recruiting / ATS -->
+  <div class="integration-card int-ats">
+    <div class="int-icon" style="background:linear-gradient(135deg,#FFF3D6,#FFC133)">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7A5400" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>
+    </div>
+    <span class="int-tag">High impact</span>
+    <h2>Recruiting (ATS)</h2>
+    <p class="int-lead">Track which campaign brought which actual hire. Bullhorn, SmartRecruiters, Workday, Successfactors.</p>
+    <ul class="int-points">
+      <li>UTM-Cookie wird beim Klick auf <code>/s/&lt;code&gt;</code> gesetzt (1st-party, GDPR-konform)</li>
+      <li>JS-Snippet auf der Application-Page liest Cookie + schreibt in hidden form-field</li>
+      <li>ATS speichert die <code>utm_link_id</code> mit jedem Bewerber</li>
+      <li>Per ATS-API ziehst du: Cost-per-Application, Cost-per-Hire, Time-to-Hire pro Quelle</li>
+    </ul>
+    <details class="int-snippet">
+      <summary>Show JS snippet</summary>
+      <pre><code>// Paste this into your application page &lt;head&gt;
+(function(){
+  var params = new URLSearchParams(location.search);
+  var key = 'utm_link_id';
+  var fromUrl = params.get('utm_id') || params.get(key);
+  if (fromUrl) {
+    document.cookie = key+'='+encodeURIComponent(fromUrl)+
+      '; path=/; max-age=2592000; SameSite=Lax';
+  }
+  // Wait for form to appear, inject hidden field
+  document.addEventListener('DOMContentLoaded', function(){
+    var match = document.cookie.match(new RegExp('(^|;\\\\s*)'+key+'=([^;]+)'));
+    if (!match) return;
+    var val = decodeURIComponent(match[2]);
+    document.querySelectorAll('form').forEach(function(f){
+      if (f.querySelector('input[name="'+key+'"]')) return;
+      var inp = document.createElement('input');
+      inp.type='hidden'; inp.name=key; inp.value=val;
+      f.appendChild(inp);
+    });
+  });
+})();</code></pre>
+    </details>
+    <p class="int-business" style="color:#7A5400">Business value: directly answers "which marketing channel produced our best hires" — the question the CMO asks every quarter.</p>
+  </div>
+
+  <!-- Sales CRM -->
+  <div class="integration-card int-crm">
+    <div class="int-icon" style="background:linear-gradient(135deg,#E0F1F0,#5CB8B2)">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0F5350" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    </div>
+    <span class="int-tag">High impact</span>
+    <h2>Sales CRM</h2>
+    <p class="int-lead">Match every inbound lead back to its first-touch campaign. Salesforce, HubSpot, Microsoft Dynamics.</p>
+    <ul class="int-points">
+      <li>UTM-Parameter werden auf der Landing-Page in hidden form-fields gespeichert</li>
+      <li>Bei Form-Submit fließen sie via API als Custom-Fields ins Lead-Objekt</li>
+      <li>CRM-Dashboard zeigt: Lead-Quelle, Campaign-Attribution, Pipeline-Velocity pro UTM</li>
+    </ul>
+    <details class="int-snippet">
+      <summary>Show Salesforce Web-to-Lead mapping</summary>
+      <pre><code>// Salesforce: create custom fields on Lead
+//   utm_source__c, utm_medium__c, utm_campaign__c, utm_content__c, utm_id__c
+// In your form:
+&lt;input type="hidden" name="00N0X00000XXXXX" id="utm_source" /&gt;
+&lt;input type="hidden" name="00N0X00000YYYYY" id="utm_medium" /&gt;
+&lt;input type="hidden" name="00N0X00000ZZZZZ" id="utm_campaign" /&gt;
+&lt;script&gt;
+  var p = new URLSearchParams(location.search);
+  ['source','medium','campaign','content','id'].forEach(function(k){
+    var el = document.getElementById('utm_'+k);
+    if (el) el.value = p.get('utm_'+k) || '';
+  });
+&lt;/script&gt;</code></pre>
+    </details>
+    <p class="int-business" style="color:#0F5350">Business value: links your marketing spend to closed-won revenue, makes ROAS calculable per campaign.</p>
+  </div>
+
+  <!-- Tag Manager / Tealium -->
+  <div class="integration-card int-tealium">
+    <div class="int-icon" style="background:linear-gradient(135deg,#E8E0FB,#7E63E8)">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3B2070" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-3-3.87"/><path d="M4 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="10" cy="7" r="4"/></svg>
+    </div>
+    <span class="int-tag">Strategic</span>
+    <h2>Tealium iQ &amp; AudienceStream</h2>
+    <p class="int-lead">Enrich every visitor's data layer with UTM context. Power server-side tracking + consent-aware activation.</p>
+    <ul class="int-points">
+      <li>Extension liest <code>utm_*</code> + unsere Custom-Dimensions aus der URL</li>
+      <li>Schreibt sie in <code>utag_data</code> für alle nachgelagerten Tags</li>
+      <li>Optional Push in AudienceStream als Visitor-Attribut</li>
+      <li>Server-Side Connector ersetzt Cookieless-Tracking-Gaps</li>
+    </ul>
+    <details class="int-snippet">
+      <summary>Show Tealium pre-loader</summary>
+      <pre><code>// Tealium iQ → Extension → Pre Loader
+(function(){
+  var p = new URLSearchParams(location.search);
+  ['source','medium','campaign','term','content','id'].forEach(function(k){
+    var v = p.get('utm_'+k);
+    if (v) b['utm_'+k] = v;
+  });
+  // Adecco custom dimensions
+  if (p.get('utm_id')) {
+    var id = p.get('utm_id').split('-');
+    b.tag_agency = id[0] || '';
+    b.tag_targeting = id[1] || '';
+    b.tag_segmentation = id[2] || '';
+    b.tag_asset = id.slice(3).join('-');
+  }
+})();</code></pre>
+    </details>
+    <p class="int-business" style="color:#3B2070">Business value: future-proof consent-aware tracking. Tealium can replace client-side GA4 hits with server-side when 3rd-party cookies die.</p>
+  </div>
+
+  <!-- Email Marketing -->
+  <div class="integration-card int-email">
+    <div class="int-icon" style="background:linear-gradient(135deg,#FCE4D6,#F05A28)">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7A2D00" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </div>
+    <span class="int-tag">Quick win</span>
+    <h2>Email Marketing</h2>
+    <p class="int-lead">Track every newsletter click separately. Salesforce Marketing Cloud, Mailchimp, Klaviyo, HubSpot.</p>
+    <ul class="int-points">
+      <li>Build short-link per Newsletter-Issue (z.B. <code>linkedin_newsletter</code>)</li>
+      <li>UTM-Content unterscheidet CTA-Position (top / inline / footer)</li>
+      <li>Webhook back: jeder Klick triggert ein Salesforce-Marketing-Cloud Event</li>
+      <li>Personalisierung via Token: <code>{first_name}</code> in der Destination-URL</li>
+    </ul>
+    <p class="int-business" style="color:#7A2D00">Business value: weiß wer welchen Newsletter-CTA geklickt hat, segmentiert für Follow-up automatisiert.</p>
+  </div>
+
+  <!-- BI / Data Lake -->
+  <div class="integration-card int-bi">
+    <div class="int-icon" style="background:linear-gradient(135deg,#E0EAF6,#1A7BAD)">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1C4070" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 12l3-3 4 4 5-5"/></svg>
+    </div>
+    <span class="int-tag">Strategic</span>
+    <h2>Data Lake &amp; BI</h2>
+    <p class="int-lead">Push UTM activity into BigQuery, Snowflake, or your data lake for cross-source analytics.</p>
+    <ul class="int-points">
+      <li>Webhook fires on every click + every campaign event</li>
+      <li>Daily CSV-Export landet im S3 / Azure Blob bucket</li>
+      <li>SQL-View für Looker / PowerBI / Tableau / Hex</li>
+      <li>Join mit GA4 + CRM + ATS für vollständiges Attribution-Modell</li>
+    </ul>
+    <p class="int-business" style="color:#1C4070">Business value: single source of truth über alle Marketing-Touchpoints. Endlich eine Antwort auf "wo verlieren wir Conversions?"</p>
+  </div>
+
+  <!-- Slack -->
+  <div class="integration-card int-slack">
+    <div class="int-icon" style="background:linear-gradient(135deg,#D5F0E1,#1B8A5A)">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0F5A38" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2h-7l-4 4v-4H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </div>
+    <span class="int-tag">Coming next</span>
+    <h2>Slack Workflow</h2>
+    <p class="int-lead">Build, approve, monitor — without leaving Slack.</p>
+    <ul class="int-points">
+      <li><code>/utm new pride_2026 linkedin sponsored</code> → fertige Short-URL + QR-Code im Channel</li>
+      <li>Pending-Approvals werden im <code>#marketing-approvals</code> gepostet, ein-Klick Approve/Reject</li>
+      <li>Performance-Alerts: "Pride campaign -80% clicks today"</li>
+      <li>Weekly Digest jeden Montag mit Top-5 Kampagnen</li>
+    </ul>
+    <p class="int-business" style="color:#0F5A38">Business value: senkt Adoption-Hürde radikal. Marketers müssen das Tool nicht öffnen, sie können.</p>
+  </div>
+
+  <!-- CMS -->
+  <div class="integration-card int-cms">
+    <div class="int-icon" style="background:linear-gradient(135deg,#F0E4FC,#6B2D8B)">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3B2070" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+    </div>
+    <span class="int-tag">Quick win</span>
+    <h2>CMS &amp; Website</h2>
+    <p class="int-lead">Sitecore, Adobe Experience Manager, WordPress, Contentful.</p>
+    <ul class="int-points">
+      <li>Plugin / Component pulls validated UTM-Links live aus unserer API</li>
+      <li>Content-Editor wählt aus Approved Library statt manuell zu tippen</li>
+      <li>Auto-Link-Update wenn Destination sich ändert (eine Stelle, propagiert überall)</li>
+      <li>Auto-QR-Code Generation in Print-Templates</li>
+    </ul>
+    <p class="int-business" style="color:#3B2070">Business value: Schluss mit broken Tracking-Links im Live-Content. Single Source of Truth zwischen CMS und Marketing.</p>
+  </div>
+
+  <!-- Webhook -->
+  <div class="integration-card int-webhook">
+    <div class="int-icon" style="background:linear-gradient(135deg,#FBE0E2,#E30613)">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7A1818" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+    </div>
+    <span class="int-tag">Flexible</span>
+    <h2>Custom Webhook</h2>
+    <p class="int-lead">Wenn dein Lieblings-Tool nicht in der Liste ist — POST an deine eigene URL.</p>
+    <ul class="int-points">
+      <li>Konfiguriere Webhook-URL im Admin</li>
+      <li>JSON-Body bei jedem Event: campaign created, link built, click registered, copy logged</li>
+      <li>HMAC-signed für Security</li>
+      <li>Du wirst es in n8n, Zapier, oder deinem eigenen Service verarbeiten</li>
+    </ul>
+    <p class="int-business" style="color:#7A1818">Business value: zukunftssicher. Jedes Tool ist ein POST entfernt.</p>
+  </div>
+
+</div>
+
+<div class="card" style="margin-top:32px;background:linear-gradient(135deg,rgba(92,184,178,.04),rgba(45,191,184,.02));border:1px solid rgba(92,184,178,.25)">
+  <h2 style="margin-top:0">How to start</h2>
+  <ol style="line-height:1.8;color:var(--primary-500);font-size:15px">
+    <li><b>Pick a use case</b> above. Most teams start with ATS (recruiting attribution) or CRM (lead source).</li>
+    <li><b>Identify the destination page</b> where you'd implement the JS-snippet (e.g. <code>adeccogroup.com/karriere</code>).</li>
+    <li><b>Talk to your IT or web team</b>. The snippets above are production-ready, but they need to land in your CMS / tag manager.</li>
+    <li><b>Set up the reporting end</b>. We push the data, your ATS/CRM/BI consumes it.</li>
+    <li><b>Sign in</b> at <a href="{{ url_for('public_signin') }}">{{ base }}/signin</a> and start tagging links. Every link becomes a data point.</li>
+  </ol>
+  <p style="margin-top:16px;font-size:14px;color:var(--primary-300)"><b>Questions?</b> Reach out to the Global Digital Marketing team or reply to any of the campaign notification emails — they all route back to the admin.</p>
+</div>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "_base.html" %}
+{% block title %}Suggestions | Admin{% endblock %}
+{% block body %}
+<h1>Taxonomy suggestions.</h1>
+<p class="lede">Users can suggest new sources, mediums, source+medium combinations, or campaign stages from the builder. Approve to add them to the live taxonomy immediately.</p>
+
+{% if pending %}
+<div class="card">
+  <h2>Waiting for review ({{ pending|length }})</h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Submitted</th><th>Kind</th><th>Value</th><th>Related</th><th>By</th><th>Notes</th><th></th></tr></thead>
+    <tbody>
+    {% for s in pending %}
+      <tr>
+        <td style="white-space:nowrap">{{ s.created_at[:16].replace('T',' ') }}</td>
+        <td><span class="pill pending">{{ s.kind }}</span></td>
+        <td><b>{{ s.value }}</b></td>
+        <td>{{ s.related_value or '-' }}</td>
+        <td>{{ s.email or '-' }}</td>
+        <td>{{ s.notes or '-' }}</td>
+        <td style="white-space:nowrap">
+          <form style="display:inline" method="post" action="{{ url_for('admin_suggestion_approve', sid=s.id) }}"><button class="good">Approve</button></form>
+          <form style="display:inline" method="post" action="{{ url_for('admin_suggestion_reject', sid=s.id) }}"><button class="bad">Reject</button></form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+{% else %}
+<div class="card">
+    <div class="empty-state">
+      <div class="empty-state-icon" style="background:rgba(92,184,178,.12)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#5CB8B2" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3>No suggestions in the queue</h3>
+      <p>When users submit a taxonomy proposal from the builder's "+ Suggest" banner, it'll wait here for your review.</p>
+    </div></div>
+{% endif %}
+
+{% if resolved %}
+<div class="card">
+  <h2>Resolved ({{ resolved|length }})</h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Resolved</th><th>Status</th><th>Kind</th><th>Value</th><th>Related</th><th>By</th><th></th></tr></thead>
+    <tbody>
+    {% for s in resolved %}
+      <tr>
+        <td>{{ (s.resolved_at or '')[:16].replace('T',' ') }}</td>
+        <td><span class="pill {{ s.status }}">{{ s.status }}</span></td>
+        <td>{{ s.kind }}</td>
+        <td><b>{{ s.value }}</b></td>
+        <td>{{ s.related_value or '-' }}</td>
+        <td>{{ s.email or '-' }}</td>
+        <td><form method="post" action="{{ url_for('admin_suggestion_delete', sid=s.id) }}" style="display:inline"><button class="bad" style="padding:6px 10px;font-size:12px">Del</button></form></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

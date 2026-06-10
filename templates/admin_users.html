@@ -1,0 +1,199 @@
+{% extends "_base.html" %}
+{% block title %}Users | Admin{% endblock %}
+{% block body %}
+<h1>Users.</h1>
+<p class="lede">All accounts that can sign in. Regular users build links and see their own history. Admins approve campaigns and manage the structure. Country admins (scope: de/ch/...) only see their market's data.</p>
+
+<!-- Create new admin form -->
+<div class="card">
+  <h2 style="margin-top:0">Invite a new admin</h2>
+  <form method="post" autocomplete="off">
+    <input type="hidden" name="action" value="add">
+    <div class="row">
+      <div>
+        <label>Username</label>
+        <input name="username" required oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9._-]/g,'')" maxlength="40" placeholder="e.g. anna.mueller">
+      </div>
+      <div>
+        <label>Full name</label>
+        <input name="full_name" placeholder="Anna Müller">
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>Work email</label>
+        <input name="email" type="email" oninput="this.value=this.value.toLowerCase().trim()" placeholder="anna.mueller@adecco.com">
+      </div>
+      <div>
+        <label>Initial password</label>
+        <input name="password" type="password" required minlength="8" placeholder="min 8 characters">
+      </div>
+    </div>
+    <label>Role &amp; scope</label>
+    <select name="scope" required>
+      <option value="all">admin · all (full access including user management)</option>
+      <option value="global">admin · global only</option>
+      <option value="de">admin · de (Germany)</option>
+      <option value="ch">admin · ch (Switzerland)</option>
+      <option value="it">admin · it (Italy)</option>
+      <option value="fr">admin · fr (France)</option>
+      <option value="es">admin · es (Spain)</option>
+      <option value="at">admin · at (Austria)</option>
+      <option value="be">admin · be (Belgium)</option>
+      <option value="nl">admin · nl (Netherlands)</option>
+      <option value="gb">admin · gb (United Kingdom)</option>
+      <option value="us">admin · us (United States)</option>
+    </select>
+    <div class="actions">
+      <button class="primary">Create admin</button>
+    </div>
+  </form>
+  <p class="muted" style="font-size:13px;margin-top:14px">Regular users self-register at <a href="{{ url_for('public_signup') }}">{{ url_for('public_signup') }}</a> &mdash; this form only creates pre-elevated admin accounts.</p>
+</div>
+
+<!-- All accounts table with stable layout -->
+<div class="card">
+  <h2 style="margin-top:0">All accounts <span class="muted" style="font-size:14px;font-weight:400;text-transform:none;letter-spacing:0">({{ admins|length }} total · {{ admins|selectattr('role','equalto','admin')|list|length }} admins · {{ admins|selectattr('role','equalto','user')|list|length }} users)</span></h2>
+  <div class="users-grid">
+    {% for a in admins %}
+    <div class="user-row {% if a.username == me %}user-row-self{% endif %}">
+
+      <div class="user-identity">
+        <div class="user-name">
+          <b>{{ a.full_name or a.username }}</b>
+          {% if a.username == me %}<span class="pill approved" style="margin-left:6px;font-size:10px">you</span>{% endif %}
+        </div>
+        <div class="user-meta">
+          @{{ a.username }} · <a href="mailto:{{ a.email }}" style="color:var(--primary-300)">{{ a.email or 'no email' }}</a>
+        </div>
+      </div>
+
+      <div class="user-role-cell">
+        <span class="pill {{ 'approved' if (a.role or 'admin') == 'admin' else 'pending' }}">
+          {{ a.role or 'admin' }}{% if (a.role or 'admin') == 'admin' %} · {{ a.scope }}{% endif %}
+        </span>
+        <div class="user-last-login">{% if a.last_login_at %}last login {{ a.last_login_at[:10] }}{% else %}never signed in{% endif %}</div>
+      </div>
+
+      <div class="user-actions">
+        {% if (a.role or 'admin') == 'admin' %}
+          <!-- Admin: change scope inline -->
+          <form method="post" class="inline-form" onchange="this.submit()">
+            <input type="hidden" name="action" value="change_scope">
+            <input type="hidden" name="id" value="{{ a.id }}">
+            <select name="scope" title="Change scope">
+              {% for s in ['all','global','de','ch','it','fr','es','at','be','nl','gb','us'] %}
+                <option value="{{s}}" {% if s == a.scope %}selected{% endif %}>{{s}}</option>
+              {% endfor %}
+            </select>
+          </form>
+        {% endif %}
+
+        <details class="user-menu">
+          <summary aria-label="More actions">⋯</summary>
+          <div class="user-menu-panel">
+
+            {% if (a.role or 'admin') == 'user' %}
+              <form method="post" action="{{ url_for('admin_promote', uid=a.id) }}" class="menu-form">
+                <input type="hidden" name="role" value="admin">
+                <input type="hidden" name="scope" value="global">
+                <button type="submit" class="menu-item menu-item-good">↑ Promote to admin (global)</button>
+              </form>
+            {% elif a.username != me %}
+              <form method="post" action="{{ url_for('admin_promote', uid=a.id) }}" class="menu-form">
+                <input type="hidden" name="role" value="user">
+                <button type="submit" class="menu-item menu-item-warn">↓ Demote to user</button>
+              </form>
+            {% endif %}
+
+            <form method="post" class="menu-form pw-reset-form">
+              <input type="hidden" name="action" value="reset_password">
+              <input type="hidden" name="id" value="{{ a.id }}">
+              <div class="pw-reset-row">
+                <input name="new_password" type="password" required minlength="8" placeholder="New password (8+)">
+                <button type="submit" class="menu-item menu-item-default">Reset password</button>
+              </div>
+            </form>
+
+            {% if a.username != me %}
+              <form method="post" class="menu-form" onsubmit="return confirm('Delete the account &quot;{{ a.username }}&quot; permanently?')">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="{{ a.id }}">
+                <button type="submit" class="menu-item menu-item-bad">Delete account</button>
+              </form>
+            {% endif %}
+
+          </div>
+        </details>
+      </div>
+
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .users-grid { display:flex; flex-direction:column; gap:8px; }
+  .user-row {
+    display:grid;
+    grid-template-columns: 1fr auto auto;
+    gap:18px;
+    align-items:center;
+    padding:14px 18px;
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:10px;
+    transition: border-color 150ms var(--easing), background 150ms var(--easing);
+  }
+  .user-row:hover { border-color: var(--border-strong); }
+  .user-row-self { background: rgba(92,184,178,.04); border-color: rgba(92,184,178,.3); }
+  .user-name b { color:var(--primary-500); font-size:15px; }
+  .user-meta { font-size:12px; color:var(--primary-300); margin-top:2px; font-family:ui-monospace,Menlo,Consolas,monospace; }
+  .user-role-cell { text-align:right; min-width:160px; }
+  .user-last-login { font-size:11px; color:var(--primary-300); margin-top:4px; text-transform:uppercase; letter-spacing:.06em; font-weight:500; }
+  .user-actions { display:flex; gap:8px; align-items:center; }
+  .user-actions .inline-form select { padding:6px 10px; font-size:12px; min-height:32px; width:auto; min-width:88px; }
+  .user-menu { position:relative; }
+  .user-menu > summary {
+    list-style:none; cursor:pointer; width:32px; height:32px;
+    border-radius:6px; border:1px solid var(--border); background:var(--white);
+    display:inline-flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:18px; color:var(--primary-300);
+    transition: background 120ms var(--easing), color 120ms var(--easing), border-color 120ms var(--easing);
+  }
+  .user-menu > summary::-webkit-details-marker { display:none; }
+  .user-menu > summary:hover { background:var(--surface); color:var(--primary-500); border-color:var(--border-strong); }
+  .user-menu[open] > summary { background:var(--primary-500); color:var(--white); border-color:var(--primary-500); }
+  .user-menu-panel {
+    position:absolute; top:calc(100% + 6px); right:0; z-index:10;
+    min-width:260px;
+    background:var(--white); border:1px solid var(--border); border-radius:10px;
+    box-shadow: var(--shadow-3);
+    padding:6px;
+    display:flex; flex-direction:column; gap:2px;
+  }
+  .menu-form { margin:0; }
+  .menu-item {
+    width:100%; text-align:left; padding:10px 12px; font-size:13px; font-weight:500;
+    background:transparent; color:var(--primary-500); border:none; border-radius:6px;
+    cursor:pointer; min-height:36px; box-shadow:none;
+    transition: background 100ms var(--easing);
+  }
+  .menu-item:hover { background:var(--surface); transform:none; box-shadow:none; }
+  .menu-item-good:hover { background:rgba(27,138,90,.1); color:var(--success); }
+  .menu-item-warn:hover { background:rgba(178,90,0,.1); color:var(--alert); }
+  .menu-item-bad:hover { background:rgba(179,38,30,.08); color:var(--error); }
+  .pw-reset-form { padding:8px 4px 4px; border-top:1px dashed var(--border); margin-top:4px; }
+  .pw-reset-row { display:flex; gap:6px; }
+  .pw-reset-row input { padding:7px 10px; font-size:12px; min-height:32px; flex:1; }
+  .pw-reset-row button { padding:7px 12px; font-size:11px; font-weight:600; min-height:32px; white-space:nowrap; }
+  [data-theme="dark"] .user-row { background:#13202F; }
+  [data-theme="dark"] .user-menu > summary { background:#1A2840; border-color:#3A4762; }
+  [data-theme="dark"] .user-menu-panel { background:#1A2840; border-color:#3A4762; }
+  @media(max-width:680px){
+    .user-row { grid-template-columns:1fr; gap:10px; }
+    .user-role-cell { text-align:left; }
+    .user-actions { justify-content:flex-start; }
+  }
+</style>
+{% endblock %}

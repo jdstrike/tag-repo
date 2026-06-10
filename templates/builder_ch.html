@@ -1,0 +1,206 @@
+{% extends "_base.html" %}
+{% block title %}CH Builder | the Adecco Group UTM builder{% endblock %}
+{% block body %}
+<div class="card">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap">
+    <div>
+      <h1>Switzerland builder.</h1>
+      <p class="lede">Swiss multilingual UTM. Brand, language (DE / FR / IT / EN), and dependent Channel &rarr; Source &rarr; Type pick. Cost center matches <code>A###</code>. Output is lowercased automatically.</p>
+    </div>
+    <a class="btn ghost" href="{{ url_for('country_picker') }}">&larr; Other markets</a>
+  </div>
+
+  <form id="fch" autocomplete="off">
+    <label>Landing page URL</label>
+    <input name="destination" placeholder="https://www.adecco.ch/..." required inputmode="url">
+
+    <div class="row">
+      <div>
+        <label>Campaign name <span class="muted" style="text-transform:none;letter-spacing:normal">(letters+digits, no spaces)</span></label>
+        <input name="campaign_name" id="campNameInp" placeholder="e.g. Wellbeinatworksurvey" pattern="[A-Za-z0-9]+" required>
+      </div>
+      <div>
+        <label>Year</label>
+        <input name="year" placeholder="2026" pattern="[0-9]{4}" maxlength="4" required inputmode="numeric" value="2026">
+      </div>
+    </div>
+
+    <div class="row3">
+      <div>
+        <label>Campaign type</label>
+        <select name="campaign_type" required>
+          <option value="">-</option>
+          {% for v in cfg.campaign_types %}<option value="{{v}}">{{v}}</option>{% endfor %}
+        </select>
+      </div>
+      <div>
+        <label>Brand</label>
+        <select name="brand" required>
+          <option value="">-</option>
+          {% for v in cfg.brands %}<option value="{{v}}">{{v}}</option>{% endfor %}
+        </select>
+      </div>
+      <div>
+        <label>Language</label>
+        <select name="language" required>
+          <option value="">-</option>
+          {% for v in cfg.languages %}<option value="{{v}}">{{v}}</option>{% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="row3">
+      <div>
+        <label>Channel</label>
+        <select name="channel" id="chSel" required>
+          <option value="">Pick channel first</option>
+          {% for v in cfg.channels %}<option value="{{v}}">{{v}}</option>{% endfor %}
+        </select>
+      </div>
+      <div>
+        <label>Source</label>
+        <select name="source" id="srcSel" required disabled>
+          <option value="">Pick channel first</option>
+        </select>
+      </div>
+      <div>
+        <label>Type</label>
+        <select name="type" id="typeSel" required disabled>
+          <option value="">Pick source first</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>Cost center <span class="muted" style="text-transform:none;letter-spacing:normal">(A### like A970)</span></label>
+        <input list="ccList" name="costcenter" placeholder="A970" pattern="^A[0-9]{3}$|^[0-9]{3}$" maxlength="4" required>
+        <datalist id="ccList">{% for v in cfg.costcenters %}<option value="{{v}}">{% endfor %}</datalist>
+      </div>
+      <div>
+        <label>Your work email (optional, for log)</label>
+        <input name="creator_email" type="email" placeholder="firstname.lastname@adecco.com" autocapitalize="off" autocorrect="off" spellcheck="false">
+      </div>
+    </div>
+
+    <label>Notes (optional, not in URL)</label>
+    <input name="notes" placeholder="Internal note for the audit log">
+
+    <div id="ga4Bar" class="ga4-bar" style="display:none">
+      <span class="ga4-label">GA4 will classify this link as</span>
+      <span class="ga4-pill" id="ga4Pill">Unassigned</span>
+    </div>
+
+    <div id="campPreview" class="info" style="display:none;margin-top:14px;font-family:ui-monospace;font-size:13px">
+      <b>utm_campaign preview:</b> <span id="campPreviewText"></span>
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="primary">Generate CH link</button>
+      <button type="reset" class="ghost">Reset</button>
+    </div>
+    <div id="buildMsg"></div>
+  </form>
+</div>
+
+<div class="card" id="resultCard" style="display:none">
+  <h2>Your CH link</h2>
+  <label>utm_campaign</label><div class="out" id="campOut"></div>
+  <label style="margin-top:14px">Long URL</label><div class="out" id="longOut"></div>
+  <button type="button" class="copy" onclick="navigator.clipboard.writeText(document.getElementById('longOut').textContent)">Copy long URL</button>
+  <label style="margin-top:14px">Short URL</label><div class="out" id="shortOut"></div>
+  <button type="button" class="copy" onclick="navigator.clipboard.writeText(document.getElementById('shortOut').textContent)">Copy short URL</button>
+  <div class="ga4-result" id="ga4ResultDeCh" style="display:none;margin-top:18px">
+    <h3 style="margin:0 0 6px;font-size:14px;font-weight:700;letter-spacing:.04em">GA4 reports</h3>
+    <p class="muted" style="font-size:12px;margin:0 0 12px;line-height:1.5">This destination matches <b id="ga4GbuDeCh">-</b>.</p>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <a id="ga4HomeDeCh" class="btn ghost" style="padding:8px 14px;font-size:13px" target="_blank" rel="noopener">Home &rarr;</a>
+      <a id="ga4AcqDeCh" class="btn ghost" style="padding:8px 14px;font-size:13px" target="_blank" rel="noopener">Acquisition &rarr;</a>
+      <a id="ga4RTDeCh" class="btn ghost" style="padding:8px 14px;font-size:13px" target="_blank" rel="noopener">Real-time &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const CFG = {{ sm_map_json|safe }};
+// Build channel -> [sources] and source -> [types] maps
+const chSrcMap = {};
+CFG.channel_source_pairs.forEach(([ch, s]) => { (chSrcMap[ch] = chSrcMap[ch] || []).push(s); });
+const srcTypeMap = {};
+CFG.source_type_pairs.forEach(([s, t]) => { (srcTypeMap[s] = srcTypeMap[s] || []).push(t); });
+
+const chSel = document.getElementById('chSel');
+const srcSel = document.getElementById('srcSel');
+const typeSel = document.getElementById('typeSel');
+chSel.addEventListener('change', () => {
+  const sources = chSrcMap[chSel.value] || [];
+  srcSel.innerHTML = '<option value="">Choose source</option>' + sources.map(s => `<option value="${s}">${s}</option>`).join('');
+  srcSel.disabled = sources.length === 0;
+  typeSel.innerHTML = '<option value="">Pick source first</option>';
+  typeSel.disabled = true;
+  updatePreview(); updateGa4();
+});
+srcSel.addEventListener('change', () => {
+  const types = srcTypeMap[srcSel.value] || [];
+  typeSel.innerHTML = '<option value="">Choose type</option>' + types.map(t => `<option value="${t}">${t}</option>`).join('');
+  typeSel.disabled = types.length === 0;
+  updatePreview(); updateGa4();
+});
+typeSel.addEventListener('change', () => { updatePreview(); updateGa4(); });
+
+const campPreviewBox = document.getElementById('campPreview');
+const campPreviewText = document.getElementById('campPreviewText');
+const f = document.getElementById('fch');
+function updatePreview(){
+  const fd = new FormData(f);
+  const cc = (fd.get('costcenter')||'').toLowerCase();
+  const ct = (fd.get('campaign_type')||'').toLowerCase();
+  const br = (fd.get('brand')||'').toLowerCase();
+  const nm = (fd.get('campaign_name')||'').toLowerCase();
+  const yr = fd.get('year')||'';
+  const lg = (fd.get('language')||'').toLowerCase();
+  if (cc && ct && br && nm && yr && lg) {
+    campPreviewText.textContent = `${cc}_${ct}_${br}_${nm}_${yr}_${lg}`;
+    campPreviewBox.style.display = 'block';
+  } else campPreviewBox.style.display = 'none';
+}
+f.addEventListener('input', updatePreview);
+f.addEventListener('change', updatePreview);
+
+const ga4Bar = document.getElementById('ga4Bar');
+const ga4Pill = document.getElementById('ga4Pill');
+async function updateGa4(){
+  const src = (srcSel.value || '').toLowerCase().replace(/ /g,'');
+  const medium = CFG.channel_to_medium[chSel.value] || '';
+  if (!src && !medium){ ga4Bar.style.display = 'none'; return; }
+  ga4Bar.style.display = 'flex';
+  const u = new URL('/api/ga4-channel', window.location.origin);
+  u.searchParams.set('source', src); u.searchParams.set('medium', medium);
+  const r = await fetch(u); const j = await r.json();
+  ga4Pill.textContent = j.channel;
+  ga4Pill.className = 'ga4-pill ' + (j.css_class || 'channel-unassigned');
+}
+
+f.addEventListener('submit', async e => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(f).entries());
+  const msg = document.getElementById('buildMsg'); msg.innerHTML='';
+  const r = await fetch('/api/ch/build', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)});
+  const j = await r.json();
+  if(!r.ok){ msg.innerHTML = '<div class="err" style="margin-top:14px">'+(j.error||'Error')+'</div>'; return; }
+  document.getElementById('resultCard').style.display='block';
+  document.getElementById('campOut').textContent = j.campaign_name;
+  document.getElementById('longOut').textContent = j.long_url;
+  document.getElementById('shortOut').textContent = j.short_url;
+  const ga4Box = document.getElementById('ga4ResultDeCh');
+  if (j.ga4_property && j.ga4_property.links) {
+    document.getElementById('ga4GbuDeCh').textContent = j.ga4_property.gbu_name + ' (' + j.ga4_property.domain + ')';
+    document.getElementById('ga4HomeDeCh').href = j.ga4_property.links.home;
+    document.getElementById('ga4AcqDeCh').href = j.ga4_property.links.acquisition;
+    document.getElementById('ga4RTDeCh').href = j.ga4_property.links.real_time;
+    ga4Box.style.display = 'block';
+  } else { ga4Box.style.display = 'none'; }
+  document.getElementById('resultCard').scrollIntoView({behavior:'smooth'});
+});
+</script>
+{% endblock %}

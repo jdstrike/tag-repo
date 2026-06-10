@@ -1,0 +1,1030 @@
+{% extends "_base.html" %}
+{% block title %}Build a campaign link | the Adecco Group{% endblock %}
+{% block body %}
+<div class="builder-layout">
+<div class="builder-main">
+<div class="card">
+  <h1>Build a campaign link.</h1>
+<p class="lede">Generate GA4-ready tracking links for any Adecco, LHH, or Akkodis campaign. You get a long URL, a branded short URL on <code>{{ base }}/s/&lt;code&gt;</code>, and a downloadable QR code at no extra cost. Source and medium combinations are validated against the GA4 channel rules. Campaign names go through admin approval.</p>
+
+  <div class="builder-toolbar">
+    {% if current_user %}
+      <div class="owner-info">
+        <span class="muted">Signed in as <b>{{ current_user.full_name or current_user.username }}</b>. Every link is auto-tagged with your email.</span>
+      </div>
+    {% else %}
+      <div class="owner-info" style="background:#FFF3D6;border-color:#F0D697;color:#7A5400">
+        <span><b>You're not signed in.</b> <a href="{{ url_for('public_signin') }}">Sign in</a> or <a href="{{ url_for('public_signup') }}">create an account</a> to auto-tag your links.</span>
+      </div>
+    {% endif %}
+    <div class="toolbar-actions">
+      <button type="button" class="ghost" id="quickFillBtn">Quick-fill from URL</button>
+      <select id="tplPicker" style="max-width:240px">
+        <option value="">Apply a template...</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="quickFillPanel" style="display:none" class="inline-panel">
+    <h2 style="margin-top:0">Quick-fill from existing URL</h2>
+    <p class="muted" style="margin-bottom:10px">Paste a URL with UTM parameters and the builder reads them back into the form. Useful for duplicating or tweaking an existing link.</p>
+    <input id="qfUrl" placeholder="e.g. https://adeccogroup.com/page?utm_source=linkedin&utm_medium=sponsored&utm_campaign=pride&utm_content=ade_be" oninput="this.value=this.value.trim()">
+    <div class="actions">
+      <button type="button" class="primary" id="qfApply">Parse and fill the form</button>
+      <button type="button" class="ghost" id="qfCancel">Cancel</button>
+    </div>
+    <div id="qfMsg"></div>
+  </div>
+
+
+  <div class="brief-panel">
+    <label>Or describe your campaign in plain English</label>
+    <div class="brief-row">
+      <input id="briefInput" placeholder="e.g. Pride 2026 LinkedIn paid carousel targeting HR leaders in DACH, retargeting last year visitors" maxlength="400">
+      <button type="button" class="primary" id="briefBtn">Suggest fields</button>
+    </div>
+    <div id="briefMsg" class="muted" style="font-size:12px;margin-top:8px"></div>
+  </div>
+  <form id="f" autocomplete="off">
+    <label class="step-label"><span class="step-num">1</span> Landing page URL</label>
+    <div style="display:flex;gap:8px;align-items:stretch">
+      <input name="destination" id="destInp" placeholder="https://adeccogroup.com/your-page" required inputmode="url" style="flex:1">
+      <button type="button" class="ghost" id="preflightBtn" style="flex-shrink:0;padding:0 18px;white-space:nowrap">Check destination</button>
+    </div>
+    <div id="preflightPanel" style="display:none;margin-top:12px;position:relative"></div>
+
+    <div class="row">
+      <div>
+        <label class="step-label"><span class="step-num">2</span> Campaign <span class="step-meta">(utm_campaign)</span></label>
+        <div class="campaign-row">
+          <select name="utm_campaign" id="campaignSel" required>
+            <option value="">{{ 'No approved campaigns yet' if not campaigns else 'Choose an approved campaign' }}</option>
+            {% for c in campaigns %}<option value="{{c.name}}">{{c.name}}</option>{% endfor %}
+          </select>
+          <button type="button" class="ghost" id="reqCampBtn">+ Request new</button>
+        </div>
+      </div>
+      <div>
+        <label class="step-label"><span class="step-meta">Stage (utm_term)</span></label>
+        <select name="utm_term">
+          <option value="">Choose a stage</option>
+          {% for o in tax.stage %}<option value="{{o.value}}">{{o.value}}</option>{% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div id="reqCampPanel" style="display:none" class="inline-panel">
+      <h2 style="margin-top:0">Request a new campaign name</h2>
+      <p class="muted" style="margin-bottom:10px">The admin will be notified and approve it. You will see it in the dropdown the moment it is approved.</p>
+      <div class="row">
+        <div>
+          <label>Campaign name</label>
+          <input id="reqCampName" placeholder="e.g. pride_2026 or q4-launch" maxlength="80" autocapitalize="off" autocorrect="off" spellcheck="false">
+          <div id="reqCampHint" class="hint">Lowercase letters, numbers, underscore or hyphen only. 2 to 80 characters.</div>
+        </div>
+        <div>
+          <label>Your work email (required)</label>
+          <input id="reqCampEmail" type="email" placeholder="firstname.lastname@adecco.com" autocapitalize="off" autocorrect="off" spellcheck="false">
+        </div>
+      </div>
+      <label>Notes (optional)</label>
+      <input id="reqCampNotes" placeholder="What this campaign is for, target launch date, etc.">
+      <div class="actions">
+        <button type="button" class="primary" id="reqCampSend">Submit for approval</button>
+        <button type="button" class="ghost" id="reqCampCancel">Cancel</button>
+      </div>
+      <div id="reqCampMsg"></div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label class="step-label"><span class="step-num">3</span> Traffic source <span class="step-meta">(utm_source)</span></label>
+        <select name="utm_source" id="sourceSel" required>
+          <option value="">Choose a source</option>
+          {% for o in tax.source %}<option value="{{o.value}}">{{o.value}}</option>{% endfor %}
+        </select>
+      </div>
+      <div>
+        <label class="step-label"><span class="step-arrow" title="depends on source">→</span> Medium <span class="step-meta">(utm_medium)</span> <span id="medHint" class="muted" style="text-transform:none;letter-spacing:normal;font-weight:400"></span></label>
+        <select name="utm_medium" id="mediumSel" required disabled>
+          <option value="">Pick a source first</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label class="step-label"><span class="step-num">4</span> GBU / Brand</label>
+        <select name="gbu" id="gbuSel">
+          <option value="">Choose a brand</option>
+          {% for o in tax.gbu %}<option value="{{o.value}}" data-code="{{o.code}}">{{o.value}} ({{o.code}})</option>{% endfor %}
+        </select>
+      </div>
+      <div>
+        <label class="step-label">Country</label>
+        <select name="country" id="countrySel">
+          <option value="">Choose a country</option>
+          {% for o in tax.country %}<option value="{{o.value}}" data-code="{{o.code}}">{{o.value}} ({{o.code}})</option>{% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <label class="step-label"><span class="step-arrow" title="auto-generated">→</span> utm_content <span class="step-meta auto-badge">auto from brand + country</span></label>
+    <input id="contentPreview" placeholder="generated when you pick a brand and country" readonly>
+
+    <details class="advanced-toggle" id="advWrap">
+      <summary>Advanced dimensions (Agency, Targeting, Segmentation, Asset type)</summary>
+      <div class="row">
+        <div>
+          <label>Agency</label>
+          <select name="agency" id="agencySel">
+            <option value="">Choose agency</option>
+            {% for o in tax.agency %}<option value="{{o.value}}">{{o.value}}</option>{% endfor %}
+          </select>
+        </div>
+        <div>
+          <label>Targeting type</label>
+          <select name="targeting_type" id="targetingSel">
+            <option value="">Choose targeting</option>
+            {% for o in tax.targeting_type %}<option value="{{o.value}}">{{o.value}}</option>{% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Segmentation</label>
+          <select name="segmentation" id="segSel">
+            <option value="">Choose segmentation</option>
+            {% for o in tax.segmentation %}<option value="{{o.value}}">{{o.value}}</option>{% endfor %}
+          </select>
+        </div>
+        <div>
+          <label>Asset type</label>
+          <select name="asset_type" id="assetSel">
+            <option value="">Choose asset type</option>
+            {% for o in tax.asset_type %}<option value="{{o.value}}">{{o.value}}</option>{% endfor %}
+          </select>
+        </div>
+      </div>
+      <label>utm_id (auto, agency-targeting-segmentation-asset)</label>
+      <input id="utmIdPreview" placeholder="generated when you pick any advanced dimension" readonly>
+    </details>
+
+    <div id="ga4PreviewBar" class="ga4-bar" style="display:none">
+      <span class="ga4-label">GA4 will classify this link as</span>
+      <span class="ga4-pill" id="ga4Pill">Unassigned</span>
+      <span class="muted" style="font-size:12px;margin-left:auto">based on source + medium</span>
+    </div>
+
+    <label>Notes (optional)</label>
+    <input name="notes" placeholder="e.g. cross-channel pride push BE">
+
+    <label style="display:flex;align-items:center;gap:10px;text-transform:none;letter-spacing:normal;font-weight:500;margin-top:18px;cursor:pointer">
+      <input type="checkbox" id="variantToggle" style="width:auto;min-height:0;margin:0"> Generate A/B variants
+    </label>
+    <div id="variantOpts" style="display:none;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-top:8px">
+      <label style="margin-top:0">Number of variants (2-10)</label>
+      <input type="number" id="variantCount" value="3" min="2" max="10" style="max-width:120px">
+      <p class="muted" style="font-size:12px;margin:8px 0 0">Will create N links with utm_content suffixes <code>_v1</code>, <code>_v2</code>, ... so you can A/B test creatives or audiences against each other.</p>
+    </div>
+    <div class="actions">
+      <button type="submit" class="primary">Generate link</button>
+      <button type="reset" class="ghost">Reset</button>
+    </div>
+    <div id="buildMsg"></div>
+  </form>
+</div>
+</div>
+
+<aside class="builder-aside">
+<div class="help-card int-teaser">
+  <span class="int-tag" style="position:static;display:inline-block;margin-bottom:8px">Did you know?</span>
+  <h3 class="help-h">Push UTM data anywhere</h3>
+  <p style="font-size:13px;color:var(--primary-300);line-height:1.55;margin:0 0 12px">
+    Every link you build can flow into your ATS (Bullhorn, SmartRecruiters), CRM (Salesforce, HubSpot), Tealium, or BI stack. We have ready-to-paste JS snippets.
+  </p>
+  <a href="{{ url_for('page_integrations') }}" class="btn primary" style="display:block;text-align:center;padding:10px 14px;font-size:13px">See all integrations &rarr;</a>
+</div>
+
+<div class="help-card sticky">
+  <h3 class="help-h">How this works</h3>
+  <ol class="help-steps">
+    <li>
+      <b>1. Destination URL</b>
+      <p>Where will visitors land? The "Check destination" button validates HTTPS, GA4 tracking, load speed, and social preview tags before you publish.</p>
+    </li>
+    <li>
+      <b>2. Campaign</b>
+      <p>Pick an approved campaign name or request a new one. The admin gets an email; you'll get one back when it's approved (or renamed).</p>
+    </li>
+    <li>
+      <b>3. Source → Medium</b>
+      <p>Pick a traffic source (e.g. <code>linkedin</code>). The medium dropdown filters to GA4-valid combinations (e.g. <code>sponsored</code>, <code>organic</code>). The GA4 pill shows the predicted channel.</p>
+    </li>
+    <li>
+      <b>4. Brand + Country → utm_content</b>
+      <p>Pick a GBU + country. The <code>utm_content</code> field auto-fills with <code>brandcode_countrycode</code> (e.g. <code>ade_be</code>). Cannot be edited manually.</p>
+    </li>
+    <li>
+      <b>5. Advanced (optional)</b>
+      <p>Agency, Targeting Type, Segmentation, Asset Type — these concatenate into <code>utm_id</code> for richer reporting. Source+Medium narrows what's allowed.</p>
+    </li>
+    <li>
+      <b>6. Generate</b>
+      <p>You get: long URL (full UTM), short URL (branded <code>utm.tag-repo.com/s/...</code>), QR code (PNG + SVG), and direct GA4 links. Optional A/B variant mode.</p>
+    </li>
+  </ol>
+  <p class="help-tip">
+    <b>Pro tip:</b> Try the "<a href="#" id="reopenTour">guided tour</a>" or use Cmd+K (or Ctrl+K on Windows) to jump anywhere in the tool.
+  </p>
+</div>
+
+
+<div class="help-card suggest-sidebar-card">
+  <span class="int-tag" style="position:static;display:inline-block;margin-bottom:10px;background:rgba(126,99,232,.12);color:#3B2070">Suggest</span>
+  <h3 class="help-h" style="margin:0 0 4px;background:none;-webkit-background-clip:initial;color:var(--primary-500)">Missing something?</h3>
+  <p style="font-size:13px;color:var(--primary-300);line-height:1.55;margin:0 0 14px">
+    A source, medium, asset type, agency, segmentation, stage, or anything else? Tell the admin team. Approved values appear in the dropdowns immediately.
+  </p>
+  <div id="suggestStrip" class="suggest-strip suggest-strip-sidebar">
+  <button type="button" class="primary suggest-toggle" id="suggestToggle" style="width:100%;background:#7E63E8;color:#fff;padding:11px 14px;font-size:13px;font-weight:700">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block;vertical-align:middle;margin-right:6px"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Suggest something
+  </button>
+  <div class="suggest-strip-body" id="suggestBody" style="display:none">
+    <div class="row3">
+      <div>
+        <label>What would you like to add?</label>
+        <select id="sgKindTop">
+          <option value="source_medium">A new source + medium combination</option>
+          <option value="source">A new source on its own</option>
+          <option value="medium">A new medium on its own</option>
+          <option value="stage">A new campaign stage</option>
+          <option value="agency">A new agency</option>
+          <option value="targeting_type">A new targeting type</option>
+          <option value="segmentation">A new segmentation</option>
+          <option value="asset_type">A new asset type</option>
+          <option value="other">Something else (free text)</option>
+        </select>
+      </div>
+      <div>
+        <label id="sgValueLabelTop">Source value</label>
+        <input id="sgValueTop" placeholder="e.g. tiktok" autocapitalize="off" autocorrect="off" spellcheck="false">
+      </div>
+      <div id="sgRelatedRowTop">
+        <label>Medium value</label>
+        <input id="sgRelatedTop" placeholder="e.g. paid" autocapitalize="off" autocorrect="off" spellcheck="false">
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>Your work email</label>
+        <input id="sgEmailTop" type="email" placeholder="firstname.lastname@adecco.com" autocapitalize="off" autocorrect="off" spellcheck="false">
+      </div>
+      <div>
+        <label>Your comment for the admin <span style="text-transform:none;letter-spacing:normal;color:var(--primary-500);font-weight:400">(strongly recommended)</span></label>
+        <textarea id="sgNotesTop" placeholder="Why is this needed? Which campaign or market? What problem does it solve? The admin sees this in the approval email and uses it to decide." rows="3" style="resize:vertical;min-height:80px"></textarea>
+        <div class="hint">The admin gets this comment in the approval email. The more context, the faster you get approved.</div>
+      </div>
+    </div>
+    <div class="actions">
+      <button type="button" class="primary" id="sgSendTop">Send suggestion</button>
+      <button type="button" class="ghost" id="sgCancelTop">Cancel</button>
+    </div>
+    <div id="sgMsgTop"></div>
+  </div>
+</div>
+
+</div>
+
+</aside>
+</div>
+
+<div class="card" id="resultCard" style="display:none">
+  <h2>Your link</h2>
+  <div class="result-grid">
+    <div class="result-urls">
+      <label>Long URL with UTM parameters</label>
+      <div class="out" id="longOut"></div>
+      <button type="button" class="copy" id="copyLong">Copy long URL</button>
+
+      <label style="margin-top:18px">Short URL</label>
+      <div class="out" id="shortOut"></div>
+      <button type="button" class="copy" id="copyShort">Copy short URL</button>
+
+      <div id="copyEmailPanel" style="display:none" class="inline-panel">
+        <p style="margin:0 0 10px"><b>Before you copy, tell us who you are.</b> Every copied link is logged for governance and reporting.</p>
+        <div class="row">
+          <div>
+            <label>Your work email</label>
+            <input id="copyEmail" type="email" placeholder="firstname.lastname@adecco.com" autocapitalize="off" autocorrect="off" spellcheck="false">
+          </div>
+          <div style="display:flex;align-items:flex-end">
+            <button type="button" class="primary" id="copyConfirm">Confirm and copy</button>
+          </div>
+        </div>
+        <div id="copyErr"></div>
+      </div>
+
+      <div class="inline-panel" style="margin-top:18px">
+        <h2 style="margin-top:0">Email this link to yourself for documentation</h2>
+        <p class="muted" style="margin-bottom:10px">We will send a full summary, including long URL, short URL, and all UTM parameters, to your work email.</p>
+        <div class="row">
+          <div>
+            <label>Your work email</label>
+            <input id="emailLinkInp" type="email" placeholder="firstname.lastname@adecco.com" autocapitalize="off" autocorrect="off" spellcheck="false">
+          </div>
+          <div style="display:flex;align-items:flex-end">
+            <button type="button" class="primary" id="emailLinkSend">Email it to me</button>
+          </div>
+        </div>
+        <div id="emailLinkMsg"></div>
+      </div>
+    </div>
+
+    <div class="result-sidebar">
+      <div class="result-qr">
+        <label style="text-align:center">QR code (encodes short URL)</label>
+        <div class="qr-wrap"><div id="qrBox"></div></div>
+        <div class="qr-actions">
+          <button type="button" class="ghost qr-btn" id="qrDownloadPng">Download PNG</button>
+          <button type="button" class="ghost qr-btn" id="qrDownloadSvg">Download SVG</button>
+        </div>
+        <p class="muted" style="font-size:12px;text-align:center;margin-top:8px">High-contrast, scan-tested. Free to print, embed, or send.</p>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='qrcode.min.js') }}"></script>
+<script>
+const SM_MAP = {{ sm_map_json|safe }};
+const f = document.getElementById('f');
+const sourceSel = document.getElementById('sourceSel');
+const mediumSel = document.getElementById('mediumSel');
+const medHint = document.getElementById('medHint');
+const gbuSel = document.getElementById('gbuSel');
+const countrySel = document.getElementById('countrySel');
+const cPrev = document.getElementById('contentPreview');
+const destInp = document.getElementById('destInp');
+
+destInp.addEventListener('blur', () => {
+  let v = destInp.value.trim();
+  if (!v) return;
+  if (!/^https?:\/\//i.test(v)) v = 'https://' + v;
+  try {
+    const u = new URL(v);
+    u.hostname = u.hostname.toLowerCase();
+    u.protocol = u.protocol.toLowerCase();
+    destInp.value = u.toString();
+  } catch(e) { /* server will validate */ }
+});
+
+function refreshMediums(){
+  const src = sourceSel.value;
+  mediumSel.innerHTML = '';
+  if(!src){
+    mediumSel.disabled = true;
+    mediumSel.innerHTML = '<option value="">Pick a source first</option>';
+    medHint.textContent = '';
+    return;
+  }
+  const allowed = SM_MAP[src] || [];
+  if(allowed.length === 0){
+    mediumSel.disabled = true;
+    mediumSel.innerHTML = '<option value="">No mediums configured for this source</option>';
+    medHint.textContent = '(ask admin to add a rule)';
+    return;
+  }
+  mediumSel.disabled = false;
+  const opts = ['<option value="">Choose a medium</option>'].concat(
+    allowed.map(m => `<option value="${m}">${m}</option>`));
+  mediumSel.innerHTML = opts.join('');
+  medHint.textContent = `(${allowed.length} allowed for ${src})`;
+}
+sourceSel.addEventListener('change', refreshMediums);
+
+function updatePreview(){
+  const b = gbuSel.options[gbuSel.selectedIndex]?.dataset.code;
+  const c = countrySel.options[countrySel.selectedIndex]?.dataset.code;
+  cPrev.value = (b && c) ? (b + '_' + c) : (b || '');
+}
+gbuSel.addEventListener('change', updatePreview);
+countrySel.addEventListener('change', updatePreview);
+
+const CAMP_RE = /^[a-z0-9_-]{2,80}$/;
+const TAX_RE = /^[a-z0-9_-]{2,60}$/;
+function cleanLower(v){ return v.toLowerCase().replace(/[^a-z0-9_-]/g, ''); }
+function cleanEmail(v){ return v.toLowerCase().trim(); }
+
+const reqCampName = document.getElementById('reqCampName');
+const reqCampHint = document.getElementById('reqCampHint');
+const reqCampEmail = document.getElementById('reqCampEmail');
+reqCampName.addEventListener('input', () => {
+  const c = cleanLower(reqCampName.value);
+  if (c !== reqCampName.value) reqCampName.value = c;
+  if (!reqCampName.value) { reqCampName.classList.remove('invalid'); reqCampHint.classList.remove('bad'); reqCampHint.textContent = 'Lowercase letters, numbers, underscore or hyphen only. 2 to 80 characters.'; }
+  else if (CAMP_RE.test(reqCampName.value)) { reqCampName.classList.remove('invalid'); reqCampHint.classList.remove('bad'); reqCampHint.textContent = 'Valid format.'; }
+  else { reqCampName.classList.add('invalid'); reqCampHint.classList.add('bad'); reqCampHint.textContent = 'Too short. Minimum 2 characters.'; }
+});
+reqCampEmail.addEventListener('input', () => { reqCampEmail.value = cleanEmail(reqCampEmail.value); });
+
+const reqBtn = document.getElementById('reqCampBtn');
+const reqPanel = document.getElementById('reqCampPanel');
+const reqMsg = document.getElementById('reqCampMsg');
+reqBtn.addEventListener('click', () => { reqPanel.style.display = reqPanel.style.display === 'none' ? 'block' : 'none'; if(reqPanel.style.display==='block') reqCampName.focus(); });
+document.getElementById('reqCampCancel').addEventListener('click', () => { reqPanel.style.display='none'; reqMsg.innerHTML=''; });
+document.getElementById('reqCampSend').addEventListener('click', async () => {
+  const name = cleanLower(reqCampName.value);
+  const email = cleanEmail(reqCampEmail.value);
+  const notes = document.getElementById('reqCampNotes').value.trim();
+  reqMsg.innerHTML = '';
+  if(!name){ reqMsg.innerHTML = '<div class="err" style="margin-top:10px">Campaign name required.</div>'; return; }
+  if(!CAMP_RE.test(name)){ reqMsg.innerHTML = '<div class="err" style="margin-top:10px">Campaign name must be lowercase letters, numbers, underscore or hyphen only. 2 to 80 characters.</div>'; return; }
+  if(!email || !email.includes('@')){ reqMsg.innerHTML = '<div class="err" style="margin-top:10px">A valid work email is required for the request.</div>'; return; }
+  const r = await fetch('/api/campaigns/request', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({name,email,notes,country_scope:"global"})});
+  const j = await r.json();
+  if(!r.ok){ reqMsg.innerHTML = '<div class="err" style="margin-top:10px">'+(j.error||'Error')+'</div>'; return; }
+  reqMsg.innerHTML = '<div class="ok" style="margin-top:10px">Request submitted. The admin has been notified. The campaign will appear in the dropdown after approval.</div>';
+});
+
+
+// Advanced dimensions live preview for utm_id
+const agencySel = document.getElementById('agencySel');
+const targetingSel = document.getElementById('targetingSel');
+const segSel = document.getElementById('segSel');
+const assetSel = document.getElementById('assetSel');
+const utmIdPreview = document.getElementById('utmIdPreview');
+function updateUtmId(){
+  const parts = [agencySel.value, targetingSel.value, segSel.value, assetSel.value].filter(Boolean);
+  utmIdPreview.value = parts.join('-');
+}
+[agencySel, targetingSel, segSel, assetSel].forEach(el => el.addEventListener('change', updateUtmId));
+
+// Live GA4 channel preview
+const ga4Bar = document.getElementById('ga4PreviewBar');
+const ga4Pill = document.getElementById('ga4Pill');
+async function updateGa4Preview(){
+  const s = sourceSel.value, m = mediumSel.value;
+  if (!s && !m){ ga4Bar.style.display = 'none'; return; }
+  ga4Bar.style.display = 'flex';
+  try {
+    const u = new URL('/api/ga4-channel', window.location.origin);
+    u.searchParams.set('source', s); u.searchParams.set('medium', m);
+    const r = await fetch(u);
+    const j = await r.json();
+    ga4Pill.textContent = j.channel;
+    ga4Pill.className = 'ga4-pill ' + (j.css_class || 'channel-unassigned');
+  } catch(e) { ga4Pill.textContent = '?'; }
+}
+sourceSel.addEventListener('change', updateGa4Preview);
+mediumSel.addEventListener('change', updateGa4Preview);
+
+
+// Conditional filtering of advanced dimensions based on (source, medium)
+const ADV_SELECTS = {agency: agencySel, targeting_type: targetingSel, segmentation: segSel, asset_type: assetSel};
+const ADV_ALL_OPTIONS = {};
+Object.entries(ADV_SELECTS).forEach(([k, el]) => {
+  ADV_ALL_OPTIONS[k] = Array.from(el.options).slice(1).map(o => o.value); // skip placeholder
+});
+const ADV_RULE_HINT = document.createElement('div');
+ADV_RULE_HINT.className = 'rule-hint';
+const advWrap = document.getElementById('advWrap');
+if (advWrap) advWrap.parentNode.insertBefore(ADV_RULE_HINT, advWrap.nextSibling);
+
+async function applyCombinationRules(){
+  const s = sourceSel.value, m = mediumSel.value;
+  // Reset to all options
+  Object.entries(ADV_SELECTS).forEach(([k, el]) => {
+    el.removeAttribute('required');
+    const cur = el.value;
+    const placeholder = el.options[0]?.text || 'Choose';
+    el.innerHTML = `<option value="">${placeholder}</option>` + ADV_ALL_OPTIONS[k].map(v => `<option value="${v}">${v}</option>`).join('');
+    if (ADV_ALL_OPTIONS[k].includes(cur)) el.value = cur;
+  });
+  ADV_RULE_HINT.innerHTML = '';
+  if (!s || !m) return;
+  try {
+    const u = new URL('/api/combination-rules', window.location.origin);
+    u.searchParams.set('source', s); u.searchParams.set('medium', m);
+    const r = await fetch(u);
+    const j = await r.json();
+    const rules = j.rules || {};
+    if (Object.keys(rules).length === 0) return;
+    const hints = [];
+    Object.entries(rules).forEach(([dim, rule]) => {
+      const el = ADV_SELECTS[dim]; if (!el) return;
+      const allowed = rule.allowed;
+      if (allowed && allowed.length === 0) {
+        // Empty list = N/A for this combination
+        const cur = el.value;
+        el.innerHTML = `<option value="">N/A for ${s} + ${m}</option>`;
+        el.disabled = true;
+        if (cur) el.value = '';
+      } else if (Array.isArray(allowed)) {
+        el.disabled = false;
+        const cur = el.value;
+        const placeholder = `Choose ${dim.replace('_',' ')}`;
+        el.innerHTML = `<option value="">${placeholder}</option>` + allowed.map(v => `<option value="${v}">${v}</option>`).join('');
+        if (allowed.includes(cur)) el.value = cur;
+      } else {
+        el.disabled = false;
+      }
+      if (rule.required) { el.setAttribute('required',''); hints.push(`${dim.replace('_',' ')} required`); }
+    });
+    if (hints.length) ADV_RULE_HINT.innerHTML = `<span class="pill pending" style="margin-right:6px">Rules active</span> ${hints.join(', ')} for ${s} + ${m}`;
+    else ADV_RULE_HINT.innerHTML = `<span class="pill approved" style="margin-right:6px">Filtered</span> Advanced dimensions are narrowed for ${s} + ${m}. Open the panel to see.`;
+  } catch(e) { /* silent */ }
+}
+sourceSel.addEventListener('change', applyCombinationRules);
+mediumSel.addEventListener('change', applyCombinationRules);
+// Re-enable disabled select elements before form submit so HTML required validation works
+f.addEventListener('submit', () => {
+  Object.values(ADV_SELECTS).forEach(el => { if (el.disabled) el.disabled = false; });
+}, true);
+// === Smart defaults: remember user's last picks per browser ===
+const SMART_KEY = 'utm-smart-defaults-v1';
+function loadSmartDefaults() {
+  try { return JSON.parse(localStorage.getItem(SMART_KEY) || '{}'); } catch(_) { return {}; }
+}
+function saveSmartDefaults() {
+  try {
+    const d = {
+      utm_source: sourceSel.value,
+      utm_medium: mediumSel.value,
+      utm_term: (f.utm_term ? f.utm_term.value : ''),
+      gbu: gbuSel.value,
+      country: countrySel.value,
+      agency: agencySel ? agencySel.value : '',
+      targeting_type: targetingSel ? targetingSel.value : '',
+      segmentation: segSel ? segSel.value : '',
+      asset_type: assetSel ? assetSel.value : '',
+    };
+    localStorage.setItem(SMART_KEY, JSON.stringify(d));
+  } catch(_){}
+}
+// Apply defaults on load (unless ?prefill= override is active)
+const _smartPrefillActive = new URLSearchParams(window.location.search).get('prefill');
+if (!_smartPrefillActive) {
+  const _d = loadSmartDefaults();
+  const _filledKeys = Object.entries(_d).filter(([k,v]) => v).map(([k,v]) => k);
+  if (_filledKeys.length >= 2) {
+    setTimeout(() => {
+      applyPreset(_d);
+      try { window.toast && window.toast('Restored your last ' + _filledKeys.length + ' picks. Adjust if needed.', 'info'); } catch(_){}
+    }, 300);
+  }
+}
+// Save defaults on every form submit (so next time the user gets their last config)
+f.addEventListener('submit', () => setTimeout(saveSmartDefaults, 100), false);
+
+
+// --- Build link + QR ---
+let lastBuild = null;
+let pendingCopyWhich = null;
+
+function renderQR(text){
+  const box = document.getElementById('qrBox');
+  box.innerHTML = '';
+  new QRCode(box, {
+    text: text, width: 200, height: 200,
+    colorDark: '#1C304B', colorLight: '#FFFFFF',
+    correctLevel: QRCode.CorrectLevel.M
+  });
+}
+function buildQrSvg(text){
+  const tmp = document.createElement('div');
+  const q = new QRCode(tmp, {text, width:1, height:1, correctLevel: QRCode.CorrectLevel.M});
+  const model = q._oQRCode;
+  const n = model.getModuleCount();
+  const cell = 10, margin = 40;
+  const size = n * cell + margin * 2;
+  let rects = '';
+  for (let r=0; r<n; r++) for (let c=0; c<n; c++)
+    if (model.isDark(r,c)) rects += `<rect x="${margin + c*cell}" y="${margin + r*cell}" width="${cell}" height="${cell}"/>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}"><rect width="${size}" height="${size}" fill="#FFFFFF"/><g fill="#1C304B">${rects}</g></svg>`;
+}
+
+f.addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = f.querySelector('button[type="submit"]');
+  if (btn) btn.classList.add('is-loading');
+  const data = {
+    destination: destInp.value,
+    utm_campaign: document.getElementById('campaignSel').value,
+    utm_term: f.utm_term.value,
+    utm_source: sourceSel.value,
+    utm_medium: mediumSel.value,
+    gbu: gbuSel.value,
+    country: countrySel.value,
+    agency: document.getElementById('agencySel').value,
+    targeting_type: document.getElementById('targetingSel').value,
+    segmentation: document.getElementById('segSel').value,
+    asset_type: document.getElementById('assetSel').value,
+    notes: f.notes.value,
+  };
+  const msg = document.getElementById('buildMsg');
+  msg.innerHTML = '';
+  const r = await fetch('/api/build', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)});
+  const j = await r.json();
+  if(!r.ok){ msg.innerHTML = '<div class="err" style="margin-top:14px">'+(j.error||'Error')+'</div>'; if (btn) btn.classList.remove('is-loading'); try{window.toast&&window.toast(j.error||'Error','error');}catch(_){} return; }
+  lastBuild = j;
+  const rc = document.getElementById('resultCard');
+  rc.style.display='block';
+  // Color-code the result card by GBU
+  const pickedGbu = (gbuSel.options[gbuSel.selectedIndex]?.text || '').toLowerCase().replace(/[^a-z]/g,'-').replace('the-adecco-group','the-adecco-group').replace('--+','-');
+  if (pickedGbu.includes('adecco') && !pickedGbu.includes('group')) rc.dataset.gbu='adecco';
+  else if (pickedGbu.includes('akkodis')) rc.dataset.gbu='akkodis';
+  else if (pickedGbu.includes('lhh')) rc.dataset.gbu='lhh';
+  else if (pickedGbu.includes('pontoon')) rc.dataset.gbu='pontoon';
+  else if (pickedGbu.includes('adecco-group')) rc.dataset.gbu='the-adecco-group';
+  else rc.removeAttribute('data-gbu');
+  document.getElementById('longOut').textContent = j.long_url;
+  document.getElementById('shortOut').textContent = j.short_url;
+  document.getElementById('copyEmailPanel').style.display='none';
+  document.getElementById('emailLinkMsg').innerHTML = '';
+  renderQR(j.short_url);
+  if (btn) btn.classList.remove('is-loading');
+  try { window.toast && window.toast('Link generated. Ready to share.', 'success'); } catch(_){}
+  // GA4 deep-links panel
+  const ga4Box = document.getElementById('ga4Result');
+  if (j.ga4_property && j.ga4_property.links) {
+    document.getElementById('ga4Gbu').textContent = j.ga4_property.gbu_name + ' (' + j.ga4_property.domain + ')';
+    document.getElementById('ga4LinkHome').href = j.ga4_property.links.home;
+    document.getElementById('ga4LinkAcq').href = j.ga4_property.links.acquisition;
+    document.getElementById('ga4LinkRT').href = j.ga4_property.links.real_time;
+    ga4Box.style.display = 'block';
+  } else {
+    ga4Box.style.display = 'none';
+  }
+  document.getElementById('resultCard').scrollIntoView({behavior:'smooth', block:'start'});
+});
+
+function downloadFile(filename, dataUrl){
+  const a = document.createElement('a');
+  a.href = dataUrl; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+document.getElementById('qrDownloadPng').addEventListener('click', () => {
+  if(!lastBuild) return;
+  const img = document.querySelector('#qrBox img');
+  const canvas = document.querySelector('#qrBox canvas');
+  if (img && img.src) downloadFile(`qr_${lastBuild.short_code}.png`, img.src);
+  else if (canvas) downloadFile(`qr_${lastBuild.short_code}.png`, canvas.toDataURL('image/png'));
+});
+document.getElementById('qrDownloadSvg').addEventListener('click', () => {
+  if(!lastBuild) return;
+  const svg = buildQrSvg(lastBuild.short_url);
+  downloadFile(`qr_${lastBuild.short_code}.svg`, 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg))));
+});
+
+// Copy
+async function performCopy(which){
+  const text = (which === 'long') ? document.getElementById('longOut').textContent : document.getElementById('shortOut').textContent;
+  try { await navigator.clipboard.writeText(text); }
+  catch(e) { const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); }
+  const btn = (which === 'long') ? document.getElementById('copyLong') : document.getElementById('copyShort');
+  const old = btn.textContent; btn.textContent = 'Copied'; setTimeout(() => btn.textContent = old, 1400);
+}
+const copyEmailInp = document.getElementById('copyEmail');
+copyEmailInp.addEventListener('input', () => { copyEmailInp.value = cleanEmail(copyEmailInp.value); });
+document.getElementById('copyLong').addEventListener('click', () => { pendingCopyWhich = 'long'; document.getElementById('copyEmailPanel').style.display='block'; copyEmailInp.focus(); });
+document.getElementById('copyShort').addEventListener('click', () => { pendingCopyWhich = 'short'; document.getElementById('copyEmailPanel').style.display='block'; copyEmailInp.focus(); });
+document.getElementById('copyConfirm').addEventListener('click', async () => {
+  const email = cleanEmail(copyEmailInp.value);
+  const err = document.getElementById('copyErr'); err.innerHTML = '';
+  if(!email || !email.includes('@')){ err.innerHTML = '<div class="err" style="margin-top:8px">A valid work email is required.</div>'; return; }
+  if(!lastBuild){ err.innerHTML = '<div class="err" style="margin-top:8px">No link to copy.</div>'; return; }
+  const r = await fetch('/api/copy-log', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({link_id:lastBuild.link_id, email, which:pendingCopyWhich})});
+  if(!r.ok){ const j = await r.json(); err.innerHTML = '<div class="err" style="margin-top:8px">'+(j.error||'Logging failed')+'</div>'; return; }
+  await performCopy(pendingCopyWhich);
+  document.getElementById('copyEmailPanel').style.display='none';
+});
+
+// Email link to me
+const emailLinkInp = document.getElementById('emailLinkInp');
+emailLinkInp.addEventListener('input', () => { emailLinkInp.value = cleanEmail(emailLinkInp.value); });
+document.getElementById('emailLinkSend').addEventListener('click', async () => {
+  const msg = document.getElementById('emailLinkMsg'); msg.innerHTML = '';
+  if(!lastBuild){ msg.innerHTML = '<div class="err" style="margin-top:10px">Generate a link first.</div>'; return; }
+  const email = cleanEmail(emailLinkInp.value);
+  if(!email || !email.includes('@')){ msg.innerHTML = '<div class="err" style="margin-top:10px">A valid work email is required.</div>'; return; }
+  const r = await fetch('/api/email-link', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({link_id:lastBuild.link_id, email})});
+  const j = await r.json();
+  if(!r.ok){ msg.innerHTML = '<div class="err" style="margin-top:10px">'+(j.error||'Error')+'</div>'; return; }
+  if(j.sent) msg.innerHTML = '<div class="ok" style="margin-top:10px">Sent to ' + email + '. Check your inbox.</div>';
+  else msg.innerHTML = '<div class="info" style="margin-top:10px">Logged. SMTP is not configured on the server, so the email was not actually sent. Ask admin to configure SMTP.</div>';
+});
+
+// Top suggestion strip - covers source, medium, source+medium, stage, all 4 advanced dims, plus free-text "other"
+const sgToggle = document.getElementById('suggestToggle');
+const sgBody = document.getElementById('suggestBody');
+const sgKindTop = document.getElementById('sgKindTop');
+const sgValueTop = document.getElementById('sgValueTop');
+const sgRelatedTop = document.getElementById('sgRelatedTop');
+const sgEmailTop = document.getElementById('sgEmailTop');
+const sgRelatedRowTop = document.getElementById('sgRelatedRowTop');
+const sgValueLabelTop = document.getElementById('sgValueLabelTop');
+
+const sgPresets = {
+  source_medium: {label:'Source value', placeholder:'e.g. tiktok', relPlaceholder:'e.g. paid', showRelated:true},
+  source:        {label:'Source value', placeholder:'e.g. tiktok'},
+  medium:        {label:'Medium value', placeholder:'e.g. paid'},
+  stage:         {label:'Stage value', placeholder:'e.g. awareness'},
+  agency:        {label:'Agency value', placeholder:'e.g. localagency-zurich'},
+  targeting_type:{label:'Targeting value', placeholder:'e.g. behavioral'},
+  segmentation:  {label:'Segmentation value', placeholder:'e.g. apprentices'},
+  asset_type:    {label:'Asset type value', placeholder:'e.g. live-event'},
+  other:         {label:'Describe what is missing', placeholder:'e.g. need a new GBU lockup for Adia in CH', freeText:true},
+};
+function syncSgTop(){
+  const k = sgKindTop.value;
+  const p = sgPresets[k] || sgPresets.source;
+  sgValueLabelTop.textContent = p.label;
+  sgValueTop.placeholder = p.placeholder;
+  sgRelatedRowTop.style.display = p.showRelated ? 'block' : 'none';
+  if (p.relPlaceholder) sgRelatedTop.placeholder = p.relPlaceholder;
+  // For "other", allow free text (no lowercase stripping)
+  sgValueTop.dataset.freeText = p.freeText ? '1' : '';
+  sgValueTop.maxLength = p.freeText ? 400 : 60;
+}
+sgKindTop.addEventListener('change', syncSgTop); syncSgTop();
+
+sgToggle.addEventListener('click', () => {
+  sgBody.style.display = sgBody.style.display === 'none' ? 'block' : 'none';
+  sgToggle.textContent = sgBody.style.display === 'none' ? '+ Suggest' : '- Close';
+  if (sgBody.style.display === 'block') sgValueTop.focus();
+});
+document.getElementById('sgCancelTop').addEventListener('click', () => { sgBody.style.display = 'none'; sgToggle.textContent = '+ Suggest'; document.getElementById('sgMsgTop').innerHTML = ''; });
+
+[sgValueTop, sgRelatedTop].forEach(el => el.addEventListener('input', () => {
+  if (el.dataset.freeText === '1') return; // free text: keep as-is (but trim later)
+  el.value = cleanLower(el.value);
+}));
+sgEmailTop.addEventListener('input', () => { sgEmailTop.value = cleanEmail(sgEmailTop.value); });
+
+document.getElementById('sgSendTop').addEventListener('click', async () => {
+  const msg = document.getElementById('sgMsgTop'); msg.innerHTML = '';
+  const kind = sgKindTop.value;
+  const rawValue = sgValueTop.value.trim();
+  const value = (kind === 'other') ? rawValue : cleanLower(rawValue);
+  const related = cleanLower(sgRelatedTop.value);
+  const email = cleanEmail(sgEmailTop.value);
+  const notes = document.getElementById('sgNotesTop').value.trim();
+  if (kind === 'other') {
+    if (value.length < 4) { msg.innerHTML = '<div class="err" style="margin-top:10px">Please describe in at least 4 characters.</div>'; return; }
+  } else if (!TAX_RE.test(value)) {
+    msg.innerHTML = '<div class="err" style="margin-top:10px">Value must be lowercase a-z 0-9 _ - and 2 to 60 chars.</div>'; return;
+  }
+  if (kind === 'source_medium' && !TAX_RE.test(related)) { msg.innerHTML = '<div class="err" style="margin-top:10px">Medium value must be lowercase a-z 0-9 _ - and 2 to 60 chars.</div>'; return; }
+  if (!email || !email.includes('@')) { msg.innerHTML = '<div class="err" style="margin-top:10px">Work email required.</div>'; return; }
+  const r = await fetch('/api/suggest', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({kind, value, related_value: related, email, notes})});
+  const j = await r.json();
+  if(!r.ok){ msg.innerHTML = '<div class="err" style="margin-top:10px">'+(j.error||'Error')+'</div>'; return; }
+  msg.innerHTML = '<div class="ok" style="margin-top:10px">Thanks. Sent for review. Admin will get it in the queue.</div>';
+  sgValueTop.value = ''; sgRelatedTop.value = ''; document.getElementById('sgNotesTop').value = '';
+});
+// ====== Quick-fill / Templates / Prefill ======
+
+// Load templates into picker
+(async () => {
+  try {
+    const r = await fetch('/api/templates?scope=global');
+    const tpls = await r.json();
+    const sel = document.getElementById('tplPicker');
+    tpls.forEach(t => {
+      const o = document.createElement('option');
+      o.value = t.id;
+      o.textContent = t.name + (t.description ? ' — ' + t.description.slice(0,50) : '');
+      o.dataset.preset = JSON.stringify(t.preset);
+      sel.appendChild(o);
+    });
+  } catch(e) { console.warn('templates load failed', e); }
+})();
+
+function applyPreset(preset) {
+  // Map preset keys → form fields
+  const fieldMap = {
+    utm_source: 'sourceSel',
+    utm_medium: 'mediumSel',
+    utm_campaign: 'campaignSel',
+    utm_term: f.utm_term ? null : null,  // utm_term is in f directly
+    gbu: 'gbuSel',
+    country: 'countrySel',
+    agency: 'agencySel',
+    targeting_type: 'targetingSel',
+    segmentation: 'segSel',
+    asset_type: 'assetSel',
+  };
+  // Source first so dependent mediums refresh
+  if (preset.utm_source) {
+    const s = document.getElementById('sourceSel');
+    if (Array.from(s.options).some(o => o.value === preset.utm_source)) {
+      s.value = preset.utm_source;
+      s.dispatchEvent(new Event('change'));
+    }
+  }
+  // Wait a tick for medium dropdown to refresh
+  setTimeout(() => {
+    if (preset.utm_medium) {
+      const m = document.getElementById('mediumSel');
+      if (Array.from(m.options).some(o => o.value === preset.utm_medium)) {
+        m.value = preset.utm_medium;
+        m.dispatchEvent(new Event('change'));
+      }
+    }
+    if (preset.utm_term && f.utm_term) {
+      f.utm_term.value = preset.utm_term;
+    }
+    if (preset.utm_campaign) {
+      const c = document.getElementById('campaignSel');
+      if (Array.from(c.options).some(o => o.value === preset.utm_campaign)) c.value = preset.utm_campaign;
+    }
+    ['gbu','country','agency','targeting_type','segmentation','asset_type'].forEach(k => {
+      const id = fieldMap[k]; if (!id) return;
+      const el = document.getElementById(id);
+      if (el && preset[k]) {
+        if (Array.from(el.options).some(o => o.value === preset[k])) {
+          el.value = preset[k];
+          el.dispatchEvent(new Event('change'));
+        }
+      }
+    });
+  }, 50);
+}
+
+document.getElementById('tplPicker').addEventListener('change', (e) => {
+  const opt = e.target.options[e.target.selectedIndex];
+  if (!opt.dataset.preset) return;
+  try { applyPreset(JSON.parse(opt.dataset.preset)); } catch(_) {}
+  e.target.value = '';  // reset picker so user can apply again
+});
+
+// Quick-fill modal
+const qfBtn = document.getElementById('quickFillBtn');
+const qfPanel = document.getElementById('quickFillPanel');
+const qfMsg = document.getElementById('qfMsg');
+qfBtn.addEventListener('click', () => { qfPanel.style.display = qfPanel.style.display === 'none' ? 'block' : 'none'; if (qfPanel.style.display === 'block') document.getElementById('qfUrl').focus(); });
+document.getElementById('qfCancel').addEventListener('click', () => { qfPanel.style.display = 'none'; qfMsg.innerHTML=''; });
+document.getElementById('qfApply').addEventListener('click', async () => {
+  const url = document.getElementById('qfUrl').value.trim();
+  if (!url) { qfMsg.innerHTML = '<div class="err" style="margin-top:10px">Paste a URL first</div>'; return; }
+  const r = await fetch('/api/parse-url', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({url})});
+  const j = await r.json();
+  if (!r.ok) { qfMsg.innerHTML = '<div class="err" style="margin-top:10px">' + (j.error || 'Parse failed') + '</div>'; return; }
+  // Fill destination + apply preset
+  if (j.destination) destInp.value = j.destination;
+  applyPreset(j);
+  qfMsg.innerHTML = '<div class="ok" style="margin-top:10px">Filled the form. Adjust as needed and click Generate.</div>';
+  setTimeout(() => { qfPanel.style.display = 'none'; qfMsg.innerHTML = ''; }, 2000);
+});
+
+// Handle ?prefill=link_id → fetch link details from server and apply
+const prefillId = new URLSearchParams(window.location.search).get('prefill');
+if (prefillId) {
+  fetch('/api/parse-url', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({url: 'PREFILL_'+prefillId})})
+    .then(r => r.ok ? r.json() : null).catch(()=>null);
+  // Simpler: hit a new endpoint
+  fetch('/api/prefill-link?id=' + encodeURIComponent(prefillId))
+    .then(r => r.ok ? r.json() : null)
+    .then(j => { if (j && j.destination) { destInp.value = j.destination; applyPreset(j); } })
+    .catch(()=>{});
+}
+
+
+
+// === Brief parser: Suggest fields button ===
+document.getElementById('briefBtn').addEventListener('click', async () => {
+  const briefMsg = document.getElementById('briefMsg');
+  const text = document.getElementById('briefInput').value.trim();
+  if (!text) { briefMsg.innerHTML = '<div class="err" style="margin-top:8px">Type a campaign description first.</div>'; return; }
+  briefMsg.innerHTML = '<div class="info" style="margin-top:8px">Analyzing your brief...</div>';
+  try {
+    const r = await fetch('/api/parse-brief', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({brief: text})});
+    const j = await r.json();
+    if (!r.ok) { briefMsg.innerHTML = '<div class="err" style="margin-top:8px">' + (j.error || 'Error') + '</div>'; return; }
+    const s = j.suggested || {};
+    const filledNames = Object.keys(s);
+    applyPreset(s);
+    // Glow the filled fields
+    const fieldMap = {
+      utm_source:'sourceSel', utm_medium:'mediumSel', utm_campaign:'campaignSel',
+      gbu:'gbuSel', country:'countrySel',
+      agency:'agencySel', targeting_type:'targetingSel', segmentation:'segSel', asset_type:'assetSel',
+    };
+    setTimeout(() => {
+      filledNames.forEach(k => {
+        const id = fieldMap[k];
+        const el = id ? document.getElementById(id) : (k === 'utm_term' ? f.utm_term : null);
+        if (el) { el.classList.add('field-glow'); setTimeout(() => el.classList.remove('field-glow'), 2200); }
+      });
+    }, 100);
+    if (filledNames.length === 0) {
+      briefMsg.innerHTML = '<div class="err" style="margin-top:8px">Could not extract anything from that brief. Try wording like: "linkedin paid carousel for HR leaders in Germany" or "newsletter email for c-suite executives".</div>';
+    } else {
+      const labels = {utm_source:'Source', utm_medium:'Medium', utm_campaign:'Campaign', utm_term:'Stage', gbu:'GBU', country:'Country', agency:'Agency', targeting_type:'Targeting', segmentation:'Segmentation', asset_type:'Asset'};
+      let html = '<div class="ok" style="margin-top:8px"><b>Filled ' + filledNames.length + ' fields</b> from your brief:';
+      html += '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">';
+      filledNames.forEach(k => {
+        html += '<span style="background:rgba(92,184,178,.2);color:#0F5350;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:600">' + (labels[k] || k) + ': ' + s[k] + '</span>';
+      });
+      html += '</div></div>';
+      briefMsg.innerHTML = html;
+    }
+  } catch(e) { briefMsg.innerHTML = '<div class="err" style="margin-top:8px">Parse failed: ' + (e.message || e) + '</div>'; }
+});
+
+// === Pre-flight URL check button ===
+document.getElementById('preflightBtn').addEventListener('click', async () => {
+  const panel = document.getElementById('preflightPanel');
+  const btn = document.getElementById('preflightBtn');
+  // Toggle: if panel already shown with results, close it
+  if (panel.style.display === 'block' && panel.dataset.state === 'done') {
+    panel.style.display = 'none';
+    panel.dataset.state = '';
+    btn.textContent = 'Check destination';
+    return;
+  }
+  const url = destInp.value.trim();
+  if (!url) { panel.innerHTML = '<div class="err" style="margin:0">Enter a URL first</div>'; panel.style.display = 'block'; panel.dataset.state = 'done'; return; }
+  panel.innerHTML = '<div class="info" style="margin:0">Running pre-flight check... (up to 8 seconds)</div>';
+  panel.style.display = 'block';
+  panel.dataset.state = 'loading';
+  btn.textContent = 'Checking...';
+  try {
+    const r = await fetch('/api/preflight?url=' + encodeURIComponent(url));
+    const j = await r.json();
+    if (!r.ok) { panel.innerHTML = '<div class="err" style="margin:0">' + (j.error || 'Check failed') + '</div>'; return; }
+    const scoreColor = j.score >= 80 ? '#0F5A38' : j.score >= 60 ? '#8A6300' : '#8C1D17';
+    const scoreBg = j.score >= 80 ? '#D5F0E1' : j.score >= 60 ? '#FFF3D6' : '#FBDAD7';
+    let html = '<button type="button" id="preflightClose" style="position:absolute;top:8px;right:8px;background:transparent;border:none;color:var(--primary-300);font-size:20px;cursor:pointer;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:0;min-height:28px;box-shadow:none" title="Close (or click Check destination again)">×</button>';
+    html += '<div style="background:' + scoreBg + ';border-radius:10px;padding:14px 18px 14px 18px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-right:48px">';
+    html += '<div><b style="font-size:13px;color:' + scoreColor + ';text-transform:uppercase;letter-spacing:.08em">Pre-flight score</b><br><span style="font-size:13px;color:' + scoreColor + ';word-break:break-all">' + (j.url || '') + '</span></div>';
+    html += '<div style="font-size:42px;font-weight:700;color:' + scoreColor + ';flex-shrink:0;margin-left:12px">' + j.score + '</div></div>';
+    html += '<ul style="list-style:none;padding:0;margin:0">';
+    (j.checks || []).forEach(c => {
+      const icon = c.status === 'ok' ? '✓' : c.status === 'warn' ? '!' : '×';
+      const color = c.status === 'ok' ? '#0F5A38' : c.status === 'warn' ? '#8A6300' : '#8C1D17';
+      const bg = c.status === 'ok' ? '#D5F0E1' : c.status === 'warn' ? '#FFF3D6' : '#FBDAD7';
+      html += '<li style="display:flex;gap:12px;padding:8px 12px;background:var(--surface);border-radius:6px;margin-bottom:4px;font-size:13px">';
+      html += '<span style="width:24px;height:24px;border-radius:50%;background:' + bg + ';color:' + color + ';display:inline-flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0">' + icon + '</span>';
+      html += '<span><b>' + c.name + '</b>' + (c.detail ? '<br><span style="color:var(--primary-300);font-size:12px">' + c.detail + '</span>' : '') + '</span></li>';
+    });
+    html += '</ul>';
+    panel.innerHTML = html;
+    panel.dataset.state = 'done';
+    btn.textContent = 'Hide check';
+    const closeBtn = document.getElementById('preflightClose');
+    if (closeBtn) closeBtn.addEventListener('click', () => {
+      panel.style.display = 'none';
+      panel.dataset.state = '';
+      btn.textContent = 'Check destination';
+    });
+  } catch(e) { 
+    panel.innerHTML = '<div class="err" style="margin:0">Network error: ' + (e.message || e) + '</div>'; 
+    panel.dataset.state = 'done'; btn.textContent = 'Check destination';
+  }
+});
+
+// === A/B Variant toggle + submit override ===
+document.getElementById('variantToggle').addEventListener('change', e => {
+  document.getElementById('variantOpts').style.display = e.target.checked ? 'block' : 'none';
+});
+
+f.addEventListener('submit', async e => {
+  if (!document.getElementById('variantToggle').checked) return;
+  e.preventDefault(); e.stopImmediatePropagation();
+  const count = parseInt(document.getElementById('variantCount').value, 10) || 3;
+  const data = {
+    destination: destInp.value,
+    utm_campaign: document.getElementById('campaignSel').value,
+    utm_term: f.utm_term.value, utm_source: sourceSel.value, utm_medium: mediumSel.value,
+    gbu: gbuSel.value, country: countrySel.value,
+    agency: agencySel.value, targeting_type: targetingSel.value, segmentation: segSel.value, asset_type: assetSel.value,
+    notes: f.notes.value, variant_count: count,
+  };
+  const msg = document.getElementById('buildMsg'); msg.innerHTML = '<div class="info" style="margin-top:14px">Generating ' + count + ' variants...</div>';
+  const r = await fetch('/api/build/variants', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)});
+  const j = await r.json();
+  if (!r.ok) { msg.innerHTML = '<div class="err" style="margin-top:14px">' + (j.error || 'Variant generation failed') + '</div>'; return; }
+  document.getElementById('resultCard').style.display = 'block';
+  document.getElementById('shortOut').textContent = (j.variants||[]).map(v => v.short_url).join('\n');
+  document.getElementById('longOut').textContent = (j.variants||[]).map(v => v.long_url).join('\n');
+  document.getElementById('copyEmailPanel').style.display = 'none';
+  if (j.variants && j.variants[0]) { lastBuild = j.variants[0]; renderQR(j.variants[0].short_url); }
+  msg.innerHTML = '<div class="ok" style="margin-top:14px"><b>' + j.count + ' variants generated</b>. Test which performs best, then compare clicks in Performance.</div>';
+  document.getElementById('resultCard').scrollIntoView({behavior:'smooth'});
+}, true);
+
+// === Re-open guided tour link in sidebar ===
+document.addEventListener('click', (e) => {
+  if (e.target && e.target.id === 'reopenTour') {
+    e.preventDefault();
+    try { localStorage.removeItem('utm-onboarded'); } catch(_){}
+    location.reload();
+  }
+});
+
+</script>
+{% endblock %}

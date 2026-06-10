@@ -1,0 +1,14 @@
+{% extends "_base.html" %}
+{% block title %}Sign in | the Adecco Group UTM builder{% endblock %}
+{% block body %}
+<div class="card" style="max-width:440px;margin:60px auto">
+  <h1>Sign in.</h1>
+  <p class="muted" style="margin-bottom:18px">Per-user accounts with country scopes. Ask your admin for credentials.</p>
+  {% if err %}<div class="err">{{err}}</div>{% endif %}
+  <form method="post" autocomplete="on">
+    <label>Username</label><input name="username" autofocus autocomplete="username" oninput="this.value=this.value.toLowerCase()" maxlength="40">
+    <label>Password</label><input name="password" type="password" autocomplete="current-password">
+    <div class="actions"><button class="primary">Sign in</button></div>
+  </form>
+</div>
+{% endblock %}

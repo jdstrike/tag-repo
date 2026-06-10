@@ -1,0 +1,29 @@
+{
+  "name": "the Adecco Group UTM Builder",
+  "short_name": "TAG UTM",
+  "description": "Build GA4-ready tracking links for any Adecco, LHH, Akkodis, or Pontoon campaign.",
+  "start_url": "/?source=pwa",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#FFFFFF",
+  "theme_color": "#1C304B",
+  "scope": "/",
+  "lang": "en",
+  "id": "tag-utm-builder",
+  "categories": ["productivity", "business", "marketing"],
+  "icons": [
+    {"src": "/static/pwa/pwa-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "/static/pwa/pwa-256.png", "sizes": "256x256", "type": "image/png", "purpose": "any"},
+    {"src": "/static/pwa/pwa-384.png", "sizes": "384x384", "type": "image/png", "purpose": "any"},
+    {"src": "/static/pwa/pwa-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "/static/pwa/pwa-mask-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable"},
+    {"src": "/static/pwa/pwa-mask-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ],
+  "shortcuts": [
+    {"name": "Global builder", "short_name": "Global", "url": "/", "icons": [{"src": "/static/pwa/pwa-192.png", "sizes": "192x192"}]},
+    {"name": "DE builder", "short_name": "DE", "url": "/de", "icons": [{"src": "/static/pwa/pwa-192.png", "sizes": "192x192"}]},
+    {"name": "CH builder", "short_name": "CH", "url": "/ch", "icons": [{"src": "/static/pwa/pwa-192.png", "sizes": "192x192"}]},
+    {"name": "My links", "short_name": "Me", "url": "/me", "icons": [{"src": "/static/pwa/pwa-192.png", "sizes": "192x192"}]}
+  ],
+  "prefer_related_applications": false
+}

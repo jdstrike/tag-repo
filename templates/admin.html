@@ -1,0 +1,129 @@
+{% extends "_base.html" %}
+{% block title %}Admin | the Adecco Group UTM builder{% endblock %}
+{% block body %}
+<h1>Admin dashboard.</h1>
+<p class="lede">Approve campaign names, manage source and medium rules, audit every link and who copied it.</p>
+
+<div class="card subtle">
+  <div class="toolbar">
+    <div class="kpi">
+      <div class="k"><b>{{ pending_campaigns|length }}</b><span>Campaigns waiting</span></div>
+      <div class="k"><b>{{ approved_campaigns|length }}</b><span>Active campaigns</span></div>
+      <div class="k"><b>{{ links|length }}</b><span>Links built (last 300)</span></div>
+      <div class="k"><b>{{ total_clicks }}</b><span>Clicks tracked</span></div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <a class="btn ghost" href="{{ url_for('admin_campaigns') }}">Campaigns</a>
+      <a class="btn ghost" href="{{ url_for('admin_rules') }}">Source/medium rules</a>
+      <a class="btn ghost" href="{{ url_for('admin_taxonomy') }}">Taxonomy</a>
+      <a class="btn ghost" href="{{ url_for('admin_export') }}">Export CSV</a>
+    </div>
+  </div>
+</div>
+
+{% if pending_campaigns %}
+<div class="card">
+  <h2>Campaigns waiting for approval ({{ pending_campaigns|length }})</h2>
+  <table>
+    <thead><tr><th>Requested</th><th>Name</th><th>Requested by</th><th>Notes</th><th></th></tr></thead>
+    <tbody>
+    {% for c in pending_campaigns %}
+      <tr>
+        <td>{{ c.created_at[:16].replace('T',' ') }}</td>
+        <td><b>{{ c.name }}</b></td>
+        <td>{{ c.requested_by_email or '-' }}</td>
+        <td>{{ c.notes or '-' }}</td>
+        <td style="white-space:nowrap">
+          <form style="display:inline" method="post" action="{{ url_for('admin_campaign_approve', cid=c.id) }}"><button class="good">Approve</button></form>
+          <form style="display:inline" method="post" action="{{ url_for('admin_campaign_reject', cid=c.id) }}"><button class="bad">Reject</button></form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+<div class="card">
+  <h2>All links ({{ links|length }})</h2>
+  <div id="bulkBar" style="display:none;background:var(--primary-500);color:var(--white);padding:10px 16px;border-radius:8px;margin-bottom:12px;display:none;align-items:center;gap:12px;flex-wrap:wrap">
+    <span><b id="bulkCount">0</b> selected</span>
+    <button type="button" class="bad" id="bulkDelete" style="padding:8px 14px;font-size:13px;min-height:32px">Delete selected</button>
+    <button type="button" class="ghost" id="bulkExport" style="padding:8px 14px;font-size:13px;min-height:32px;background:rgba(255,255,255,.1);color:var(--white);border-color:rgba(255,255,255,.3)">Export selected (CSV)</button>
+    <button type="button" id="bulkClear" style="padding:8px 14px;font-size:13px;min-height:32px;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.3)">Clear</button>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const all = document.getElementById('bulkSelectAll');
+      const checks = document.querySelectorAll('.bulkCheck');
+      const bar = document.getElementById('bulkBar');
+      const cnt = document.getElementById('bulkCount');
+      function refresh(){
+        const sel = Array.from(checks).filter(c => c.checked).map(c => c.value);
+        cnt.textContent = sel.length;
+        bar.style.display = sel.length ? 'flex' : 'none';
+      }
+      if (all) all.addEventListener('change', () => { checks.forEach(c => c.checked = all.checked); refresh(); });
+      checks.forEach(c => c.addEventListener('change', refresh));
+      document.getElementById('bulkClear').addEventListener('click', () => { checks.forEach(c => c.checked = false); if (all) all.checked = false; refresh(); });
+      document.getElementById('bulkDelete').addEventListener('click', async () => {
+        const sel = Array.from(checks).filter(c => c.checked).map(c => c.value);
+        if (!sel.length) return;
+        if (!confirm('Delete ' + sel.length + ' links permanently?')) return;
+        const r = await fetch('/admin/links/bulk-delete', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ids: sel})});
+        if (r.ok) location.reload();
+        else alert('Bulk delete failed');
+      });
+      document.getElementById('bulkExport').addEventListener('click', () => {
+        const sel = Array.from(checks).filter(c => c.checked).map(c => c.value);
+        if (!sel.length) return;
+        window.location.href = '/admin/links/bulk-export?ids=' + sel.join(',');
+      });
+    });
+  </script>
+  {% if not links %}
+    <p class="muted">No links yet.</p>
+  {% else %}
+  <table>
+    <thead><tr><th style="width:30px"><input type="checkbox" id="bulkSelectAll" style="width:auto;min-height:0"></th><th>Created</th><th>Short link</th><th>Campaign</th><th>Brand / Country</th><th>Source / Medium</th><th>Creator / Copiers</th><th>Clicks / Copies</th><th></th></tr></thead>
+    <tbody>
+    {% for l in links %}
+      <tr>
+        <td><input type="checkbox" class="bulkCheck" value="{{ l.id }}" style="width:auto;min-height:0"></td>
+        <td style="white-space:nowrap">{{ l.created_at[:16].replace('T',' ') }}</td>
+        <td style="white-space:nowrap">
+          <a href="{{ base }}/s/{{ l.short_code }}" target="_blank">/s/{{ l.short_code }}</a>
+        </td>
+        <td><b>{{ l.utm_campaign or '-' }}</b></td>
+        <td>{{ l.gbu or '-' }} / {{ l.country or '-' }}</td>
+        <td>{{ l.utm_source or '-' }} / {{ l.utm_medium or '-' }}</td>
+        <td style="font-size:12px;max-width:220px;word-break:break-word">{{ l.event_emails or l.requested_by_email or '-' }}</td>
+        <td style="white-space:nowrap"><b>{{ l.clicks }}</b> clk / <b>{{ l.copy_count }}</b> cp</td>
+        <td style="white-space:nowrap">
+          <a class="btn ghost" style="padding:6px 12px;font-size:12px" href="{{ url_for('admin_link_events', lid=l.id) }}">Log</a>
+          <a class="btn ghost" style="padding:6px 12px;font-size:12px" href="{{ url_for('index') }}?prefill={{ l.id }}" title="Open builder with this link prefilled">Dup</a>
+          <form style="display:inline" method="post" action="{{ url_for('admin_delete', lid=l.id) }}" onsubmit="return confirm('Delete this link?')"><button class="bad" style="padding:6px 12px;font-size:12px">Del</button></form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+
+<div class="card subtle">
+  <h2>Approved campaigns ({{ approved_campaigns|length }})</h2>
+  {% if not approved_campaigns %}
+    <p class="muted">No approved campaigns yet.</p>
+  {% else %}
+  <table>
+    <thead><tr><th>Name</th><th>Approved</th><th>Requested by</th><th>Links built</th></tr></thead>
+    <tbody>
+    {% for c in approved_campaigns %}
+      <tr><td><b>{{ c.name }}</b></td><td>{{ (c.approved_at or '')[:16].replace('T',' ') }}</td><td>{{ c.requested_by_email or '-' }}</td><td>{{ c.link_count }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+{% endblock %}

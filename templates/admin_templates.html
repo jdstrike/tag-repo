@@ -1,0 +1,93 @@
+{% extends "_base.html" %}
+{% block title %}Templates | Admin{% endblock %}
+{% block body %}
+<h1>Templates.</h1>
+<p class="lede">Pre-defined parameter bundles. Users select a template in the builder and 80% of the form auto-fills, they only adjust what differs.</p>
+
+<div class="card">
+  <h2>Active templates ({{ templates|length }})</h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Name</th><th>Description</th><th>Scope</th><th>Preset values</th><th>Created</th><th></th></tr></thead>
+    <tbody>
+    {% for t in templates %}
+      <tr style="{{ 'opacity:.5' if not t.is_active }}">
+        <td><b>{{ t.name }}</b></td>
+        <td style="max-width:240px;color:var(--primary-300);font-size:13px">{{ t.description or '-' }}</td>
+        <td><span class="pill {{ 'approved' if t.is_active else 'rejected' }}">{{ t.country_scope }}{{ '' if t.is_active else ' (off)' }}</span></td>
+        <td style="font-family:ui-monospace;font-size:11px;max-width:380px">{{ t.preset_json }}</td>
+        <td style="font-size:12px;color:var(--primary-300)">{{ (t.created_at or '')[:10] }}<br>{{ t.created_by or '?' }}</td>
+        <td style="white-space:nowrap">
+          <form method="post" style="display:inline"><input type="hidden" name="action" value="toggle"><input type="hidden" name="id" value="{{ t.id }}">
+            <button class="warn" style="padding:6px 10px;font-size:12px">{{ 'Disable' if t.is_active else 'Enable' }}</button></form>
+          <form method="post" style="display:inline" onsubmit="return confirm('Delete this template?')"><input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="{{ t.id }}">
+            <button class="bad" style="padding:6px 10px;font-size:12px">Del</button></form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Add a new template</h2>
+  <form method="post" autocomplete="off">
+    <input type="hidden" name="action" value="add">
+    <div class="row">
+      <div>
+        <label>Name (shown in builder dropdown)</label>
+        <input name="name" required placeholder="e.g. TikTok Paid Campaign">
+      </div>
+      <div>
+        <label>Country scope</label>
+        <select name="country_scope">
+          <option value="global">global (all markets)</option>
+          <option value="de">de (Germany only)</option>
+          <option value="ch">ch (Switzerland only)</option>
+          <option value="it">it (Italy)</option>
+          <option value="fr">fr (France)</option>
+          <option value="es">es (Spain)</option>
+        </select>
+      </div>
+    </div>
+    <label>Description (shown as helper text)</label>
+    <input name="description" placeholder="What this template is for">
+
+    <h2 style="margin-top:24px">Preset values (any can be empty)</h2>
+    <div class="row">
+      <div>
+        <label>Source</label>
+        <select name="utm_source"><option value="">-</option>{% for v in tax.source %}<option value="{{v}}">{{v}}</option>{% endfor %}</select>
+      </div>
+      <div>
+        <label>Medium</label>
+        <select name="utm_medium"><option value="">-</option>{% for v in tax.medium %}<option value="{{v}}">{{v}}</option>{% endfor %}</select>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>Stage (term)</label>
+        <select name="utm_term"><option value="">-</option>{% for v in tax.stage %}<option value="{{v}}">{{v}}</option>{% endfor %}</select>
+      </div>
+      <div>
+        <label>Campaign (optional, usually left blank)</label>
+        <input name="utm_campaign" placeholder="leave blank for user to choose">
+      </div>
+    </div>
+    <div class="row">
+      <div><label>GBU</label><select name="gbu"><option value="">-</option>{% for v in tax.gbu %}<option value="{{v}}">{{v}}</option>{% endfor %}</select></div>
+      <div><label>Country</label><select name="country"><option value="">-</option>{% for v in tax.country %}<option value="{{v}}">{{v}}</option>{% endfor %}</select></div>
+    </div>
+    <div class="row">
+      <div><label>Agency</label><select name="agency"><option value="">-</option>{% for v in tax.agency %}<option value="{{v}}">{{v}}</option>{% endfor %}</select></div>
+      <div><label>Targeting type</label><select name="targeting_type"><option value="">-</option>{% for v in tax.targeting_type %}<option value="{{v}}">{{v}}</option>{% endfor %}</select></div>
+    </div>
+    <div class="row">
+      <div><label>Segmentation</label><select name="segmentation"><option value="">-</option>{% for v in tax.segmentation %}<option value="{{v}}">{{v}}</option>{% endfor %}</select></div>
+      <div><label>Asset type</label><select name="asset_type"><option value="">-</option>{% for v in tax.asset_type %}<option value="{{v}}">{{v}}</option>{% endfor %}</select></div>
+    </div>
+    <div class="actions"><button class="primary">Create template</button></div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends "_base.html" %}
+{% block title %}Browser Extension | the Adecco Group UTM builder{% endblock %}
+{% block body %}
+<div class="hero-integrations">
+  <p style="font-size:12px;font-weight:700;color:#5CB8B2;text-transform:uppercase;letter-spacing:.14em;margin:0 0 8px">New &middot; Productivity</p>
+  <h1 style="margin:0 0 16px">Build UTMs from any browser tab.</h1>
+  <p class="lede" style="max-width:680px;font-size:17px">Install the Chrome extension. The current tab URL becomes the destination, the popup builds the link in two clicks, the result goes straight to your clipboard. No tab-switching, no copy-paste dance.</p>
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
+    <a class="btn primary" href="{{ url_for('extension_download') }}" style="font-size:15px;padding:14px 28px">
+      Download extension (.zip)
+    </a>
+    <a class="btn ghost" href="#how-to-install" style="font-size:14px;padding:14px 24px">How to install &rarr;</a>
+  </div>
+</div>
+
+
+<div class="card" style="background:linear-gradient(135deg,rgba(0,120,212,.06),rgba(92,184,178,.04));border:1px solid rgba(0,120,212,.25);margin-bottom:20px">
+  <span class="int-tag" style="position:static;display:inline-block;margin-bottom:8px;background:rgba(0,120,212,.15);color:#0078D4">Coming to Edge Add-ons Store</span>
+  <h2 style="margin-top:0">Publish to Microsoft Edge Add-ons</h2>
+  <p style="font-size:14px;line-height:1.6;color:var(--primary-500)">Once submitted via the Microsoft Partner Center, the extension will be installable with a single click from the Edge Add-ons store. This is the recommended distribution channel for Adecco employees. We have prepared a complete submission kit with package, store assets, screenshots, privacy policy, and reviewer notes.</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+    <a class="btn primary" href="{{ url_for('extension_submission_kit') }}">Download submission kit (.zip)</a>
+    <a class="btn ghost" href="https://partner.microsoft.com/dashboard/microsoftedge/" target="_blank" rel="noopener">Open Microsoft Partner Center &rarr;</a>
+  </div>
+  <p class="muted" style="font-size:12px;margin:12px 0 0">Submission kit contains: extension package (signed), store logo at 300x300 and 150x150, a 1366x768 screenshot, store listing description (English), reviewer notes, privacy policy text, plus a step-by-step submission walkthrough.</p>
+</div>
+
+<div class="integration-grid">
+
+  <div class="integration-card">
+    <div class="int-icon" style="background:linear-gradient(135deg,#E0F1F0,#5CB8B2)">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0F5350" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    </div>
+    <h2>2-second link creation</h2>
+    <p class="int-lead">Click the toolbar icon, pick Campaign + Source + Medium, hit Generate. Short URL is in your clipboard before you finish reading this card.</p>
+    <ul class="int-points">
+      <li>Current tab URL auto-fills as destination</li>
+      <li>Same Campaign / Source / Medium dropdowns as the web tool</li>
+      <li>Conditional source &rarr; medium filtering enforced</li>
+      <li>Auto-tagged with your logged-in user's email</li>
+    </ul>
+  </div>
+
+  <div class="integration-card">
+    <div class="int-icon" style="background:linear-gradient(135deg,#FFF3D6,#FFC133)">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7A5400" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+    </div>
+    <h2>Single sign-on with the web tool</h2>
+    <p class="int-lead">If you're signed in to utm.tag-repo.com in any browser tab, the extension works automatically. No separate credentials.</p>
+    <ul class="int-points">
+      <li>Uses the same session as the web app</li>
+      <li>No API keys to paste or manage</li>
+      <li>Sign in once via the extension's "Open utm.tag-repo.com" button</li>
+    </ul>
+  </div>
+
+  <div class="integration-card">
+    <div class="int-icon" style="background:linear-gradient(135deg,#FCE4D6,#F05A28)">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7A2D00" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2h-7l-4 4v-4H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </div>
+    <h2>One-click copy</h2>
+    <p class="int-lead">Generated link has copy buttons for both short and long URL. Paste directly into your Slack, email, social tool, or anywhere else.</p>
+    <ul class="int-points">
+      <li>Result panel shows short URL, long URL, and GA4 channel</li>
+      <li>Copy buttons with visual confirmation</li>
+      <li>Direct link to open the full web builder if you need advanced fields</li>
+    </ul>
+  </div>
+
+  <div class="integration-card">
+    <div class="int-icon" style="background:linear-gradient(135deg,#E8E0FB,#7E63E8)">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3B2070" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    <h2>Privacy &amp; security</h2>
+    <p class="int-lead">Extension only talks to utm.tag-repo.com. No third-party trackers, no data leaves Adecco infrastructure.</p>
+    <ul class="int-points">
+      <li>Host permission limited to utm.tag-repo.com</li>
+      <li>Only reads the current tab URL when you open the popup</li>
+      <li>No background activity, no telemetry</li>
+      <li>Source code is auditable (it's in the ZIP you downloaded)</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="card" id="how-to-install" style="margin-top:32px">
+  <h2 style="margin-top:0">How to install (Chrome / Edge)</h2>
+  <ol style="line-height:1.85;color:var(--primary-500);font-size:15px;padding-left:22px">
+    <li>Click <a href="{{ url_for('extension_download') }}"><b>Download extension (.zip)</b></a> above. A file named <code>tag-utm-builder-extension-v1.0.0.zip</code> will land in your Downloads folder.</li>
+    <li><b>Unzip</b> the file. You should see a folder <code>utm-extension/</code> with <code>manifest.json</code>, <code>popup.html</code>, and a few icons.</li>
+    <li>Open Chrome and go to <code>chrome://extensions/</code> in the address bar.</li>
+    <li>Top-right, toggle <b>Developer mode</b> on.</li>
+    <li>Click <b>Load unpacked</b> and select the unzipped <code>utm-extension/</code> folder.</li>
+    <li>The TAG icon appears in your toolbar. Pin it by clicking the puzzle-piece icon and then the pin icon next to "the Adecco Group UTM Builder".</li>
+    <li>Click the TAG icon on any tab. If you see "Sign in required", click the button and sign in to utm.tag-repo.com in the new tab. Come back, click the TAG icon again, build a link.</li>
+  </ol>
+  <p class="muted" style="margin-top:16px;font-size:13px">For Firefox: same flow but go to <code>about:debugging#/runtime/this-firefox</code> and load <code>manifest.json</code> as a temporary add-on. For Safari, we'd need to build a separate package, sag Bescheid if du das brauchst.</p>
+</div>
+
+<div class="card subtle" style="margin-top:20px">
+  <h2 style="margin-top:0">Permissions explained</h2>
+  <table>
+    <thead><tr><th>Permission</th><th>What it does</th><th>Why we need it</th></tr></thead>
+    <tbody>
+      <tr><td><b>activeTab</b></td><td>Reads the URL of the currently active tab</td><td>To pre-fill the destination field</td></tr>
+      <tr><td><b>storage</b></td><td>Saves preferences locally</td><td>Remembers your last-used source / medium picks</td></tr>
+      <tr><td><b>clipboardWrite</b></td><td>Writes text to the clipboard</td><td>So the "Copy" buttons actually copy</td></tr>
+      <tr><td><b>host_permissions</b></td><td>Talks to <code>utm.tag-repo.com</code> only</td><td>To call the API for build / dropdowns / session</td></tr>
+    </tbody>
+  </table>
+  <p class="muted" style="margin-top:14px;font-size:13px">Source code lives entirely in the ZIP. Audit it with any text editor. No bundling, no minification, no obfuscation.</p>
+</div>
+
+{% endblock %}

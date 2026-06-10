@@ -1,0 +1,59 @@
+{% extends "_base.html" %}
+{% block title %}Countries | Admin{% endblock %}
+{% block body %}
+<h1>Country configurations.</h1>
+<p class="lede">Set country-specific rules: required fields, default brand, mandatory taxonomies, locale-specific naming conventions. Excel imports for Switzerland, Germany, and other markets land here.</p>
+
+<div class="card info" style="margin-bottom:20px">
+  <b>Status:</b> Schema ready. Per-country enforcement in the Builder is wired but no rules are active yet. Add a country config below, or wait until the local-market Excel files are imported.
+</div>
+
+<div class="card">
+  <h2>Add or update a country config</h2>
+  <form method="post" class="row">
+    <input type="hidden" name="action" value="save">
+    <div>
+      <label>Country (ISO-style code)</label>
+      <select name="country_code" required>
+        {% for c in countries %}<option value="{{ c.country_code }}">{{ c.country_code }} - {{ c.country_name }}</option>{% endfor %}
+      </select>
+    </div>
+    <div>
+      <label>Display name</label>
+      <input name="country_name" placeholder="e.g. Germany" required>
+    </div>
+    <div style="grid-column:1/-1">
+      <label>Config (JSON)</label>
+      <textarea name="config_json" rows="8" placeholder='{"required_fields":["agency","targeting_type"],"default_gbu":"Adecco","custom_segmentations":["azubi","fachkraefte"],"language":"de"}' style="font-family:ui-monospace,Consolas,monospace;font-size:13px">{}</textarea>
+      <div class="hint">Free-form JSON. The Builder will read this and apply local rules in a future iteration (default values, extra required dropdowns, locale-aware naming).</div>
+    </div>
+    <div style="grid-column:1/-1">
+      <button class="primary">Save country config</button>
+    </div>
+  </form>
+</div>
+
+<div class="card">
+  <h2>Active country configs ({{ configs|length }})</h2>
+  {% if not configs %}<p class="muted">No country configs saved yet.</p>{% else %}
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Code</th><th>Name</th><th>Config</th><th>Updated</th><th></th></tr></thead>
+    <tbody>
+    {% for c in configs %}
+      <tr>
+        <td><b>{{ c.country_code }}</b></td>
+        <td>{{ c.country_name }}</td>
+        <td style="max-width:480px"><code style="word-break:break-word;white-space:pre-wrap">{{ c.config_json }}</code></td>
+        <td>{{ (c.updated_at or '')[:16].replace('T',' ') }}</td>
+        <td><form method="post" style="display:inline" onsubmit="return confirm('Delete this country config?')">
+          <input type="hidden" name="action" value="delete"><input type="hidden" name="country_code" value="{{ c.country_code }}">
+          <button class="bad" style="padding:6px 10px;font-size:12px">Del</button></form></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

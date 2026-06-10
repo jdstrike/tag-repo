@@ -1,0 +1,36 @@
+{% extends "_base.html" %}
+{% block title %}Link audit log | Admin{% endblock %}
+{% block body %}
+<h1>Link audit log.</h1>
+<div style="margin-bottom:14px"><button type="button" class="ghost" onclick="window.print()" style="padding:8px 14px;font-size:13px">Print this report</button></div>
+<p class="lede">Everyone who created or copied <code>/s/{{ link.short_code }}</code>.</p>
+
+<div class="card">
+  <h2>Link details</h2>
+  <p><b>Short:</b> <a href="{{ base }}/s/{{ link.short_code }}" target="_blank">{{ base }}/s/{{ link.short_code }}</a></p>
+  <p><b>Long:</b> <code>{{ link.long_url }}</code></p>
+  <p><b>Campaign:</b> {{ link.utm_campaign }} &middot; <b>Source/Medium:</b> {{ link.utm_source }} / {{ link.utm_medium }} &middot; <b>Brand/Country:</b> {{ link.gbu or '-' }} / {{ link.country or '-' }}</p>
+  <p><b>Created:</b> {{ link.created_at[:16].replace('T',' ') }} &middot; <b>Clicks:</b> {{ link.clicks }}</p>
+</div>
+
+<div class="card">
+  <h2>Events ({{ events|length }})</h2>
+  {% if not events %}<p class="muted">No events logged yet.</p>{% else %}
+  <table>
+    <thead><tr><th>Timestamp</th><th>Event</th><th>Email</th><th>IP</th><th>User agent</th></tr></thead>
+    <tbody>
+    {% for e in events %}
+      <tr>
+        <td>{{ e.ts[:19].replace('T',' ') }}</td>
+        <td><span class="pill {{ 'approved' if 'copied' in e.event_type else 'pending' }}">{{ e.event_type }}</span></td>
+        <td><b>{{ e.email or '-' }}</b></td>
+        <td>{{ e.ip or '-' }}</td>
+        <td style="max-width:280px;font-size:12px;color:var(--primary-300);word-break:break-word">{{ e.ua or '-' }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+  <p style="margin-top:14px"><a href="{{ url_for('admin_dashboard') }}">Back to dashboard</a></p>
+</div>
+{% endblock %}

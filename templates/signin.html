@@ -1,0 +1,16 @@
+{% extends "_base.html" %}
+{% block title %}Sign in | the Adecco Group UTM builder{% endblock %}
+{% block body %}
+<div class="card" style="max-width:440px;margin:60px auto">
+  <h1>Sign in.</h1>
+  <p class="muted" style="margin-bottom:18px">Sign in to auto-tag every link you build. Don't have an account yet? <a href="{{ url_for('public_signup') }}">Sign up</a>.</p>
+  {% if err %}<div class="err">{{err}}</div>{% endif %}
+  <form method="post" autocomplete="on">
+    <label>Username or email</label>
+    <input name="username" autofocus autocomplete="username" oninput="this.value=this.value.toLowerCase()">
+    <label>Password</label>
+    <input name="password" type="password" autocomplete="current-password">
+    <div class="actions"><button class="primary">Sign in</button></div>
+  </form>
+</div>
+{% endblock %}

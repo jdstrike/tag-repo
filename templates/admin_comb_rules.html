@@ -1,0 +1,64 @@
+{% extends "_base.html" %}
+{% block title %}Combination rules | Admin{% endblock %}
+{% block body %}
+<h1>Combination rules.</h1>
+<p class="lede">Narrow which advanced dimensions (agency, targeting, segmentation, asset type) are allowed for each source + medium combination. Empty <code>allowed</code> = dimension is N/A. Marking a dimension as required forces the user to fill it.</p>
+
+<div class="card">
+  <h2>Add or replace a rule</h2>
+  <form method="post" class="row3" style="align-items:end">
+    <input type="hidden" name="action" value="add">
+    <div>
+      <label>Source</label>
+      <input list="srcList" name="source" required autocapitalize="off">
+      <datalist id="srcList">{% for s in sources %}<option value="{{s}}">{% endfor %}</datalist>
+    </div>
+    <div>
+      <label>Medium</label>
+      <input list="medList" name="medium" required autocapitalize="off">
+      <datalist id="medList">{% for m in mediums %}<option value="{{m}}">{% endfor %}</datalist>
+    </div>
+    <div>
+      <label>Dimension</label>
+      <select name="dimension_kind" required>
+        <option value="asset_type">asset_type</option>
+        <option value="targeting_type">targeting_type</option>
+        <option value="agency">agency</option>
+        <option value="segmentation">segmentation</option>
+      </select>
+    </div>
+    <div style="grid-column:1/-1">
+      <label>Allowed values (comma or space separated, leave empty for N/A, omit entire row for "no rule")</label>
+      <input name="allowed_values" placeholder="e.g. video-short,image-carousel,native">
+      <div class="hint">Empty = field will be disabled and shown as "N/A" for this combination. To restore "anything goes", delete the rule.</div>
+    </div>
+    <div>
+      <label style="display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:normal"><input type="checkbox" name="required" style="width:auto;min-height:0"> Required field</label>
+    </div>
+    <div style="grid-column:1/-1"><button class="primary">Save rule</button></div>
+  </form>
+</div>
+
+<div class="card">
+  <h2>Active rules ({{ rules|length }})</h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Source</th><th>Medium</th><th>Dimension</th><th>Allowed values</th><th>Required</th><th></th></tr></thead>
+    <tbody>
+    {% for r in rules %}
+      <tr>
+        <td><b>{{ r.source }}</b></td>
+        <td>{{ r.medium }}</td>
+        <td><span class="pill approved">{{ r.dimension_kind }}</span></td>
+        <td style="max-width:520px;font-family:ui-monospace;font-size:12px">{{ r.allowed_values_json or 'all values' }}</td>
+        <td>{{ 'yes' if r.required else 'no' }}</td>
+        <td><form method="post" style="display:inline">
+          <input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="{{ r.id }}">
+          <button class="bad" style="padding:6px 10px;font-size:12px">Del</button></form></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+{% endblock %}

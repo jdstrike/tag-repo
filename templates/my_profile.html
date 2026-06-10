@@ -1,0 +1,47 @@
+{% extends "_base.html" %}
+{% block title %}My account | the Adecco Group UTM builder{% endblock %}
+{% block body %}
+<h1>My account.</h1>
+<p class="lede">Your links and account info. Every link you build is auto-tagged with your email.</p>
+
+<div class="card subtle">
+  <div class="kpi">
+    <div class="k"><b>{{ me.username }}</b><span>Username</span></div>
+    <div class="k"><b>{{ me.role }}</b><span>Role</span></div>
+    <div class="k"><b>{{ my_links|length }}</b><span>Links built (last 50)</span></div>
+    <div class="k"><b>{{ me.email or '-' }}</b><span>Email</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>My recent links ({{ my_links|length }})</h2>
+  {% if not my_links %}
+    <div class="empty-state">
+      <div class="empty-state-icon" style="background:rgba(92,184,178,.12)">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#5CB8B2" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </div>
+      <h3>No links yet</h3>
+      <p>Your first tracking link is one builder away. It'll be auto-tagged with your email so you can see all your campaigns here.</p>
+      <a href="{{ url_for('index') }}" class="btn primary">Build your first link &rarr;</a>
+    </div>
+    {% else %}
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Created</th><th>Short</th><th>Campaign</th><th>Source/Medium</th><th>Clicks</th><th></th></tr></thead>
+    <tbody>
+    {% for l in my_links %}
+      <tr>
+        <td style="white-space:nowrap;font-size:12px">{{ l.created_at[:16].replace('T',' ') }}</td>
+        <td style="white-space:nowrap"><a href="{{ base }}/s/{{ l.short_code }}" target="_blank">/s/{{ l.short_code }}</a></td>
+        <td><b>{{ l.utm_campaign or '-' }}</b></td>
+        <td>{{ l.utm_source or '-' }} / {{ l.utm_medium or '-' }}</td>
+        <td><b>{{ l.clicks }}</b></td>
+        <td><a class="btn ghost" style="padding:6px 12px;font-size:12px" href="{{ url_for('index') }}?prefill={{ l.id }}">Duplicate</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

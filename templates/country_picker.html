@@ -1,0 +1,46 @@
+{% extends "_base.html" %}
+{% block title %}Choose your market | the Adecco Group UTM builder{% endblock %}
+{% block body %}
+<h1>Choose your market.</h1>
+<p class="lede">Each market has its own naming convention, dropdown set, and validation rules. Pick the one that matches your campaign so the generated link follows the local standard.</p>
+
+<div class="market-grid">
+  <a class="market-card" href="{{ url_for('index') }}">
+    <div class="market-flag global-flag" aria-hidden="true">
+      <svg viewBox="0 0 60 60" width="60" height="60"><circle cx="30" cy="30" r="28" fill="none" stroke="#5CB8B2" stroke-width="2"/><ellipse cx="30" cy="30" rx="14" ry="28" fill="none" stroke="#5CB8B2" stroke-width="1.5"/><path d="M2 30 H58 M30 2 V58" stroke="#5CB8B2" stroke-width="1.5"/></svg>
+    </div>
+    <h2 class="market-title">Global</h2>
+    <p class="market-desc">The standard global builder. Source, medium, brand, country. Best for cross-market campaigns like Pride.</p>
+    <ul class="market-points">
+      <li>Source &times; Medium rules</li><li>GA4 channel preview</li><li>QR code &amp; email</li><li>Admin campaign approval</li>
+    </ul>
+    <span class="market-cta">Open global builder &rarr;</span>
+  </a>
+
+  <a class="market-card" href="{{ url_for('builder_de') }}">
+    <div class="market-flag de-flag" aria-hidden="true">
+      <svg viewBox="0 0 60 36" width="60" height="36"><rect width="60" height="12" y="0" fill="#000"/><rect width="60" height="12" y="12" fill="#DD0000"/><rect width="60" height="12" y="24" fill="#FFCE00"/></svg>
+    </div>
+    <h2 class="market-title">Germany (DE)</h2>
+    <p class="market-desc">Full-spec German naming convention. Job, client, KLDB, cost center, business unit. Enforces the 60-character BI cap.</p>
+    <ul class="market-points">
+      <li>{{ '~' }}1300 abbreviation values</li><li>Joveo + Meta placeholder support</li><li>60-char hard cap</li><li>YYMMDD date token</li>
+    </ul>
+    <span class="market-cta">Open DE builder &rarr;</span>
+  </a>
+
+  <a class="market-card" href="{{ url_for('builder_ch') }}">
+    <div class="market-flag ch-flag" aria-hidden="true">
+      <svg viewBox="0 0 60 60" width="60" height="60"><rect width="60" height="60" fill="#FF0000"/><rect x="25" y="12" width="10" height="36" fill="#fff"/><rect x="12" y="25" width="36" height="10" fill="#fff"/></svg>
+    </div>
+    <h2 class="market-title">Switzerland (CH)</h2>
+    <p class="market-desc">Swiss multilingual convention. Brand, language (DE / FR / IT / EN), channel-source-type dependent dropdowns, A### cost center.</p>
+    <ul class="market-points">
+      <li>4 languages required</li><li>Channel &rarr; Source &rarr; Type chain</li><li>A### cost-center regex</li><li>Self-serve, no approval</li>
+    </ul>
+    <span class="market-cta">Open CH builder &rarr;</span>
+  </a>
+</div>
+
+<p class="muted" style="margin-top:32px;font-size:13px;text-align:center">More markets in the pipeline. Admins can add country configurations under <a href="{{ url_for('admin_countries') if session.get('admin') else url_for('admin_login') }}">Countries</a>.</p>
+{% endblock %}

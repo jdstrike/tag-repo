@@ -1,0 +1,38 @@
+{% extends "_base.html" %}
+{% block title %}Support | the Adecco Group UTM builder{% endblock %}
+{% block body %}
+<div class="card" style="max-width:780px">
+<h1>Support.</h1>
+<p class="lede">Questions about the tool? Want a new campaign approved? Need a country-specific dropdown value added? Here's how to reach the team.</p>
+
+<h2>For Adecco Group employees</h2>
+<ul style="font-size:14px;line-height:1.85;padding-left:0;list-style:none">
+  <li><b>Suggestion banner</b>: open <a href="{{ url_for('index') }}">the builder</a> and click "+ Suggest" at the top. Pick whether you want a new source, medium, asset type, agency value, or just describe what's missing in free text. The admin gets an email and approves directly from the inbox.</li>
+  <li><b>New campaign request</b>: in the builder, click "+ Request new" next to the Campaign dropdown. Submit the name + reason; admins approve (or rename + comment) and you'll get an email confirmation.</li>
+  <li><b>Direct contact</b>: <a href="mailto:johannes.schatt@adeccogroup.com">johannes.schatt@adeccogroup.com</a> for system issues, bug reports, feature requests.</li>
+  <li><b>For DE specifics</b>: contact the German Marketing Data Team (DMCC)</li>
+  <li><b>For CH specifics</b>: contact the Swiss country marketing lead</li>
+</ul>
+
+<h2>Common issues</h2>
+<dl style="font-size:14px;line-height:1.6">
+  <dt style="font-weight:700;margin-top:14px">"I can't sign in"</dt>
+  <dd style="color:var(--primary-300);margin:4px 0 0">If your password isn't working, an admin can reset it via the Users panel. If your username doesn't exist yet, sign up at <a href="{{ url_for('public_signup') }}">{{ base }}/signup</a>.</dd>
+
+  <dt style="font-weight:700;margin-top:14px">"My campaign is not in the dropdown"</dt>
+  <dd style="color:var(--primary-300);margin:4px 0 0">Either it hasn't been approved yet (check the email confirmation), or it doesn't exist. Use "+ Request new" to add it.</dd>
+
+  <dt style="font-weight:700;margin-top:14px">"My source-medium combination isn't allowed"</dt>
+  <dd style="color:var(--primary-300);margin:4px 0 0">We enforce GA4-compliant pairs. If you need a new pair (e.g. a new platform), use the "+ Suggest" banner with kind "source + medium combination".</dd>
+
+  <dt style="font-weight:700;margin-top:14px">"My email approvals aren't arriving"</dt>
+  <dd style="color:var(--primary-300);margin:4px 0 0">Check spam. New domains build sender reputation over weeks. The admin can check delivery status in Resend's dashboard.</dd>
+
+  <dt style="font-weight:700;margin-top:14px">"Pre-flight URL check says my page is missing GA4"</dt>
+  <dd style="color:var(--primary-300);margin:4px 0 0">Either the page genuinely doesn't have GA4 installed (talk to whoever owns the page), or it's served via Tealium server-side and we can't detect it client-side. The pre-flight is a best-effort check.</dd>
+</dl>
+
+<h2>For the Microsoft Edge Add-ons reviewer</h2>
+<p>Test account info, walkthrough, and source code audit details are in the submission kit. Direct contact: <a href="mailto:johannes.schatt@adeccogroup.com">johannes.schatt@adeccogroup.com</a></p>
+</div>
+{% endblock %}
