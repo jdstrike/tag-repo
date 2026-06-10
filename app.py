@@ -1285,8 +1285,30 @@ def api_preflight():
     else:
         checks.append({"name":"Page title","status":"fail","detail":"No <title> tag found"})
 
+    # ---- Social preview payload (LinkedIn-style card in the builder) ----
+    og_site  = _re.search(r"<meta[^>]+property=[\'\"]og:site_name[\'\"][^>]+content=[\'\"]([^\'\"]+)", body, _re.I)
+    meta_desc = _re.search(r"<meta[^>]+name=[\'\"]description[\'\"][^>]+content=[\'\"]([^\'\"]+)", body, _re.I)
+    import html as _html
+    from urllib.parse import urljoin
+    _t = _re.search(r"<title>([^<]+)</title>", body, _re.I)
+    og_img_url = None
+    if og_image:
+        og_img_url = og_image.group(1).strip()
+        if og_img_url.startswith("//"): og_img_url = (p.scheme or "https") + ":" + og_img_url
+        elif not og_img_url.lower().startswith(("http://","https://")):
+            og_img_url = urljoin(final_url or url, og_img_url)
+    og_payload = {
+        "title": _html.unescape(og_title.group(1).strip()) if og_title else (_html.unescape(_t.group(1).strip()) if _t else None),
+        "description": _html.unescape((og_desc or meta_desc).group(1).strip()) if (og_desc or meta_desc) else None,
+        "image": og_img_url,
+        "site_name": _html.unescape(og_site.group(1).strip()) if og_site else None,
+        "domain": (urlparse(final_url or url).netloc or "").lower(),
+        "complete": bool(og_title and og_image and og_desc),
+    }
+
     score = int(100 * weight_ok / weight_total) if weight_total else 0
     return jsonify({"url": url, "final_url": final_url, "load_time_ms": load_time_ms, "checks": checks, "score": score,
+                    "og": og_payload,
                     "stack": {"onetrust": has_onetrust, "tealium": has_tealium, "gtm": has_gtm, "adobe_launch": has_adobe_launch, "ga4_id_inline": ga4_match.group(1) if ga4_match else None}})
 
 @app.route("/api/parse-brief", methods=["POST"])
