@@ -1,11 +1,12 @@
 # tag-repo
 
-Two services hosted on the Contabo VPS at `tag-repo.com` via Dokploy.
+Services hosted on the Contabo VPS at `tag-repo.com` via Dokploy.
 
 | Service | URL | Purpose |
 |---|---|---|
 | `apps/report-uploader` | `https://tag-repo.com` | Flask app accepting report uploads under `/reports/upload`, listing under `/reports/<id>` |
 | `apps/context-mirror` | `https://context.tag-repo.com` | Static Caddy mirror of `tag.schatt.me` (brand and AI context docs, design system, templates) |
+| `apps/minigame` | not deployed yet | "Skill Match", a small browser game in The Adecco Group design. Open `index.html` locally or serve the folder statically |
 
 ## Deploy
 
