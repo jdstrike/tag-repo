@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Skill Match</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1C304B;
+    --navy-2: #24405f;
+    --white: #ffffff;
+    --surface-02: #f8f8f9;
+    --muted: #5C6B82;
+    --teal: #2DBFB8;
+    --blue: #1A7BAD;
+    --purple: #6B2D8B;
+    --red: #E30613;
+    --orange: #F05A28;
+    --yellow: #F9B233;
+    --accent: #5CB8B2;
+    --success: #73d85a;
+    --error: #e87a71;
+    --unity: linear-gradient(135deg, #2DBFB8 0%, #1A7BAD 22%, #6B2D8B 44%, #E30613 63%, #F05A28 81%, #F9B233 100%);
+    --unity-bar: linear-gradient(90deg, #2DBFB8 0%, #1A7BAD 20%, #6B2D8B 42%, #E30613 62%, #F05A28 81%, #F9B233 100%);
+    --font: "Open Sauce Sans", "Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: var(--font);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 16px;
+  }
+  header img { height: 48px; display: block; }
+  .stats { display: flex; gap: 20px; font-weight: 500; font-size: 14px; }
+  .stats b { display: block; font-size: 22px; font-weight: 700; line-height: 1.1; }
+  .stats span { color: #b0bcd0; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+  .bar { height: 4px; background: var(--unity-bar); }
+
+  .role {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    background: var(--navy-2);
+  }
+  .role .label { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #b0bcd0; }
+  .role .title { font-size: 20px; font-weight: 700; margin-right: 8px; }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip {
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1.5px solid rgba(255,255,255,.35);
+    font-size: 13px;
+    font-weight: 500;
+    transition: background .2s, border-color .2s, color .2s;
+  }
+  .chip.done { background: var(--white); color: var(--navy); border-color: var(--white); }
+
+  main { position: relative; flex: 1; min-height: 0; }
+  canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+
+  .overlay {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    padding: 16px;
+    background: rgba(28,48,75,.86);
+  }
+  .overlay[hidden] { display: none; }
+  .card {
+    max-width: 440px; width: 100%;
+    background: var(--white); color: var(--navy);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(0,0,0,.35);
+  }
+  .card .hero { height: 8px; background: var(--unity-bar); }
+  .card .body { padding: 28px 28px 24px; }
+  .card .eyebrow { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); font-weight: 700; }
+  .card h1 { font-size: 32px; line-height: 1.15; margin: 8px 0 12px; }
+  .card p { color: var(--muted); line-height: 1.5; margin: 0 0 12px; font-size: 15px; }
+  .card ul { margin: 0 0 20px; padding-left: 18px; color: var(--muted); line-height: 1.6; font-size: 14px; }
+  .big { font-size: 56px; font-weight: 700; line-height: 1; background: var(--unity); -webkit-background-clip: text; background-clip: text; color: transparent; margin: 4px 0 8px; }
+  button {
+    font: inherit; font-weight: 700; font-size: 16px;
+    border: 0; border-radius: 999px;
+    padding: 14px 28px;
+    background: var(--navy); color: var(--white);
+    cursor: pointer;
+    transition: background .15s, transform .1s;
+  }
+  button:hover { background: #009acc; }
+  button:active { transform: scale(.97); }
+  button:focus-visible { outline: 3px solid #33cdff; outline-offset: 2px; }
+  .tagline { margin-top: 18px; font-size: 13px; color: var(--muted); }
+
+  @media (max-width: 560px) {
+    header img { height: 36px; }
+    .stats { gap: 14px; }
+    .stats b { font-size: 18px; }
+    .role .title { font-size: 17px; }
+    .card h1 { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <img src="logo-white.svg" alt="The Adecco Group">
+    <div class="stats" aria-live="polite">
+      <div><span>Score</span><b id="score">0</b></div>
+      <div><span>Placed</span><b id="placed">0</b></div>
+      <div><span>Lives</span><b id="lives">♥♥♥</b></div>
+    </div>
+  </header>
+  <div class="bar"></div>
+  <section class="role">
+    <div>
+      <div class="label">Open role</div>
+      <div class="title" id="roleTitle">Data Analyst</div>
+    </div>
+    <div class="chips" id="chips"></div>
+  </section>
+  <main>
+    <canvas id="game"></canvas>
+
+    <div class="overlay" id="start">
+      <div class="card">
+        <div class="hero"></div>
+        <div class="body">
+          <div class="eyebrow">Mini game</div>
+          <h1>Skill Match</h1>
+          <p>Every open role needs the right skills. Catch them, fill the role, place the talent.</p>
+          <ul>
+            <li>Move with mouse, touch or the arrow keys.</li>
+            <li>Catch the skills the open role needs.</li>
+            <li>Wrong skill? You lose a life. Three lives in total.</li>
+            <li>Every placement makes the market a little faster.</li>
+          </ul>
+          <button id="startBtn">Start game</button>
+          <div class="tagline">Making the future work for everyone</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay" id="over" hidden>
+      <div class="card">
+        <div class="hero"></div>
+        <div class="body">
+          <div class="eyebrow">Game over</div>
+          <div class="big" id="finalScore">0</div>
+          <p id="finalText">points</p>
+          <p id="bestText"></p>
+          <button id="againBtn">Play again</button>
+          <div class="tagline">Making the future work for everyone</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+<script>
+(() => {
+  const ROLES = [
+    { title: "Data Analyst",        skills: ["SQL", "Python", "Dashboards"] },
+    { title: "Project Manager",     skills: ["Planning", "Leadership", "Agile"] },
+    { title: "Software Engineer",   skills: ["JavaScript", "Testing", "Git"] },
+    { title: "Nurse",               skills: ["Empathy", "First Aid", "Teamwork"] },
+    { title: "Sales Consultant",    skills: ["Negotiation", "CRM", "Listening"] },
+    { title: "Logistics Lead",      skills: ["Forklift", "Scheduling", "Safety"] },
+    { title: "AI Engineer",         skills: ["Python", "Prompting", "Ethics"] },
+    { title: "Career Coach",        skills: ["Listening", "Empathy", "Feedback"] },
+    { title: "Mechanical Engineer", skills: ["CAD", "Physics", "Problem Solving"] },
+    { title: "HR Business Partner", skills: ["Feedback", "Labor Law", "Coaching"] },
+  ];
+  const ALL_SKILLS = [...new Set(ROLES.flatMap(r => r.skills))];
+  const COLORS = ["#2DBFB8", "#1A7BAD", "#6B2D8B", "#E30613", "#F05A28", "#F9B233"];
+
+  const $ = id => document.getElementById(id);
+  const canvas = $("game");
+  const ctx = canvas.getContext("2d");
+  const FONT = getComputedStyle(document.documentElement).getPropertyValue("--font");
+
+  let W = 0, H = 0, dpr = 1;
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const r = canvas.getBoundingClientRect();
+    W = r.width; H = r.height;
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    player.y = H - 44;
+    player.x = Math.min(Math.max(player.x || W / 2, player.w / 2), W - player.w / 2);
+  }
+
+  const player = { x: 0, y: 0, w: 120, h: 22, targetX: null };
+  const keys = { left: false, right: false };
+
+  let state = "start";
+  let score, placed, lives, level, role, collected, items, particles, floaters, spawnTimer, lastRole, shake;
+  let best = 0;
+  try { best = +localStorage.getItem("skillmatch-best") || 0; } catch (e) {}
+
+  function pickRole() {
+    let r;
+    do { r = ROLES[Math.floor(Math.random() * ROLES.length)]; } while (r === lastRole && ROLES.length > 1);
+    lastRole = r;
+    role = r;
+    collected = new Set();
+    renderRole();
+  }
+
+  function renderRole() {
+    $("roleTitle").textContent = role.title;
+    $("chips").innerHTML = role.skills
+      .map(s => `<span class="chip${collected.has(s) ? " done" : ""}">${collected.has(s) ? "✓ " : ""}${s}</span>`)
+      .join("");
+  }
+
+  function renderStats() {
+    $("score").textContent = score;
+    $("placed").textContent = placed;
+    $("lives").textContent = "♥".repeat(lives) + "♡".repeat(Math.max(0, 3 - lives));
+  }
+
+  function reset() {
+    score = 0; placed = 0; lives = 3; level = 1;
+    items = []; particles = []; floaters = [];
+    spawnTimer = 0; shake = 0;
+    player.x = W / 2;
+    pickRole();
+    renderStats();
+  }
+
+  function spawn() {
+    const needed = role.skills.filter(s => !collected.has(s));
+    // Roughly half the drops are skills the current role still needs.
+    const useNeeded = needed.length && Math.random() < 0.5;
+    let label;
+    if (useNeeded) {
+      label = needed[Math.floor(Math.random() * needed.length)];
+    } else {
+      const pool = ALL_SKILLS.filter(s => !role.skills.includes(s));
+      label = pool[Math.floor(Math.random() * pool.length)];
+    }
+    ctx.font = `600 14px ${FONT}`;
+    const w = ctx.measureText(label).width + 28;
+    items.push({
+      label, w, h: 32,
+      x: w / 2 + Math.random() * Math.max(1, W - w),
+      y: -20,
+      vy: 70 + level * 14 + Math.random() * 40,
+      wobble: Math.random() * Math.PI * 2,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+    });
+  }
+
+  function burst(x, y, color, n = 16) {
+    for (let i = 0; i < n; i++) {
+      const a = Math.random() * Math.PI * 2, s = 60 + Math.random() * 180;
+      particles.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 60, life: 0.8, color });
+    }
+  }
+
+  function floatText(x, y, text, color) {
+    floaters.push({ x, y, text, color, life: 1 });
+  }
+
+  function catchItem(it) {
+    if (role.skills.includes(it.label) && !collected.has(it.label)) {
+      collected.add(it.label);
+      score += 10 * level;
+      burst(it.x, it.y, it.color);
+      floatText(it.x, it.y, `+${10 * level}`, "#73d85a");
+      if (collected.size === role.skills.length) {
+        placed++;
+        const bonus = 50 * level;
+        score += bonus;
+        level++;
+        floatText(W / 2, H / 2, `Placed! +${bonus}`, "#F9B233");
+        for (let i = 0; i < 6; i++) burst(Math.random() * W, H * 0.4 + Math.random() * H * 0.3, COLORS[i], 20);
+        items = [];
+        pickRole();
+      } else {
+        renderRole();
+      }
+    } else if (role.skills.includes(it.label)) {
+      // Already collected: harmless, small bonus.
+      score += 2;
+      floatText(it.x, it.y, "+2", "#b0bcd0");
+    } else {
+      lives--;
+      shake = 0.3;
+      burst(it.x, it.y, "#e87a71", 10);
+      floatText(it.x, it.y, "Wrong skill", "#e87a71");
+      if (lives <= 0) return gameOver();
+    }
+    renderStats();
+  }
+
+  function gameOver() {
+    state = "over";
+    renderStats();
+    if (score > best) { best = score; try { localStorage.setItem("skillmatch-best", best); } catch (e) {} }
+    $("finalScore").textContent = score;
+    $("finalText").textContent = `points, ${placed} ${placed === 1 ? "talent" : "talents"} placed`;
+    $("bestText").textContent = `Personal best: ${best}`;
+    $("over").hidden = false;
+    $("againBtn").focus();
+  }
+
+  function update(dt) {
+    // Player movement
+    const speed = 520;
+    if (keys.left) { player.x -= speed * dt; player.targetX = null; }
+    if (keys.right) { player.x += speed * dt; player.targetX = null; }
+    if (player.targetX !== null) player.x += (player.targetX - player.x) * Math.min(1, dt * 14);
+    player.x = Math.min(Math.max(player.x, player.w / 2), W - player.w / 2);
+
+    // Spawning
+    spawnTimer -= dt;
+    if (spawnTimer <= 0) {
+      spawn();
+      spawnTimer = Math.max(0.45, 1.3 - level * 0.08) * (0.7 + Math.random() * 0.6);
+    }
+
+    // Items
+    for (let i = items.length - 1; i >= 0; i--) {
+      const it = items[i];
+      it.y += it.vy * dt;
+      it.wobble += dt * 2;
+      it.x += Math.sin(it.wobble) * 12 * dt;
+      const hitY = it.y + it.h / 2 >= player.y - player.h / 2 && it.y - it.h / 2 <= player.y + player.h / 2;
+      const hitX = Math.abs(it.x - player.x) < (it.w + player.w) / 2 - 6;
+      if (hitY && hitX) {
+        items.splice(i, 1);
+        catchItem(it);
+        if (state !== "play") return;
+      } else if (it.y - it.h > H) {
+        items.splice(i, 1);
+      }
+    }
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.vy += 400 * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.life -= dt;
+      if (p.life <= 0) particles.splice(i, 1);
+    }
+    for (let i = floaters.length - 1; i >= 0; i--) {
+      const f = floaters[i];
+      f.y -= 40 * dt; f.life -= dt * 0.9;
+      if (f.life <= 0) floaters.splice(i, 1);
+    }
+    shake = Math.max(0, shake - dt);
+  }
+
+  function roundRect(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.roundRect ? ctx.roundRect(x, y, w, h, r) : ctx.rect(x, y, w, h);
+  }
+
+  function drawBackground(t) {
+    ctx.fillStyle = "#1C304B";
+    ctx.fillRect(0, 0, W, H);
+    // Soft unity-gradient glow
+    const g = ctx.createRadialGradient(W * 0.85, H * 0.15, 0, W * 0.85, H * 0.15, Math.max(W, H) * 0.7);
+    g.addColorStop(0, "rgba(107,45,139,0.35)");
+    g.addColorStop(0.5, "rgba(26,123,173,0.12)");
+    g.addColorStop(1, "rgba(28,48,75,0)");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+    const g2 = ctx.createRadialGradient(W * 0.1, H, 0, W * 0.1, H, Math.max(W, H) * 0.6);
+    g2.addColorStop(0, "rgba(45,191,184,0.22)");
+    g2.addColorStop(1, "rgba(28,48,75,0)");
+    ctx.fillStyle = g2;
+    ctx.fillRect(0, 0, W, H);
+    // Dot grid
+    ctx.fillStyle = "rgba(255,255,255,0.05)";
+    const off = (t * 10) % 32;
+    for (let y = -32 + off; y < H; y += 32)
+      for (let x = 16; x < W; x += 32) ctx.fillRect(x, y, 2, 2);
+  }
+
+  function draw(t) {
+    ctx.save();
+    if (shake > 0) ctx.translate((Math.random() - 0.5) * 10 * shake, (Math.random() - 0.5) * 10 * shake);
+    drawBackground(t);
+
+    // Items
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = `600 14px ${FONT}`;
+    for (const it of items) {
+      const needed = role.skills.includes(it.label) && !collected.has(it.label);
+      ctx.fillStyle = it.color;
+      ctx.shadowColor = needed ? it.color : "transparent";
+      ctx.shadowBlur = needed ? 14 : 0;
+      roundRect(it.x - it.w / 2, it.y - it.h / 2, it.w, it.h, 16);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = it.color === "#F9B233" ? "#1C304B" : "#ffffff";
+      ctx.fillText(it.label, it.x, it.y + 1);
+    }
+
+    // Player: white pill with unity gradient stripe
+    const px = player.x - player.w / 2, py = player.y - player.h / 2;
+    ctx.fillStyle = "#ffffff";
+    ctx.shadowColor = "rgba(0,0,0,0.3)"; ctx.shadowBlur = 12; ctx.shadowOffsetY = 4;
+    roundRect(px, py, player.w, player.h, player.h / 2);
+    ctx.fill();
+    ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+    const lg = ctx.createLinearGradient(px, 0, px + player.w, 0);
+    ["#2DBFB8", "#1A7BAD", "#6B2D8B", "#E30613", "#F05A28", "#F9B233"].forEach((c, i) => lg.addColorStop(i / 5, c));
+    ctx.fillStyle = lg;
+    roundRect(px + 8, py + player.h - 6, player.w - 16, 3, 2);
+    ctx.fill();
+    ctx.fillStyle = "#1C304B";
+    ctx.font = `700 11px ${FONT}`;
+    ctx.fillText("TALENT", player.x, player.y - 2);
+
+    // Particles
+    for (const p of particles) {
+      ctx.globalAlpha = Math.max(0, p.life / 0.8);
+      ctx.fillStyle = p.color;
+      ctx.beginPath(); ctx.arc(p.x, p.y, 3, 0, Math.PI * 2); ctx.fill();
+    }
+    // Floating text
+    for (const f of floaters) {
+      ctx.globalAlpha = Math.max(0, f.life);
+      ctx.fillStyle = f.color;
+      ctx.font = `700 ${f.text.startsWith("Placed") ? 34 : 16}px ${FONT}`;
+      ctx.fillText(f.text, f.x, f.y);
+    }
+    ctx.globalAlpha = 1;
+
+    // Level indicator
+    ctx.textAlign = "left";
+    ctx.fillStyle = "rgba(255,255,255,0.5)";
+    ctx.font = `500 12px ${FONT}`;
+    ctx.fillText(`LEVEL ${level}`, 16, 20);
+    ctx.restore();
+  }
+
+  let last = performance.now();
+  function loop(now) {
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    if (state === "play") update(dt);
+    if (role) draw(now / 1000);
+    requestAnimationFrame(loop);
+  }
+
+  function start() {
+    $("start").hidden = true;
+    $("over").hidden = true;
+    reset();
+    state = "play";
+    canvas.focus();
+  }
+
+  // Input
+  function pointerTo(e) {
+    const r = canvas.getBoundingClientRect();
+    player.targetX = e.clientX - r.left;
+  }
+  canvas.addEventListener("pointermove", pointerTo);
+  canvas.addEventListener("pointerdown", pointerTo);
+  window.addEventListener("keydown", e => {
+    if (e.key === "ArrowLeft" || e.key === "a") keys.left = true;
+    if (e.key === "ArrowRight" || e.key === "d") keys.right = true;
+    if ((e.key === "Enter" || e.key === " ") && state !== "play" && document.activeElement.tagName !== "BUTTON") {
+      e.preventDefault(); start();
+    }
+  });
+  window.addEventListener("keyup", e => {
+    if (e.key === "ArrowLeft" || e.key === "a") keys.left = false;
+    if (e.key === "ArrowRight" || e.key === "d") keys.right = false;
+  });
+  $("startBtn").addEventListener("click", start);
+  $("againBtn").addEventListener("click", start);
+  window.addEventListener("resize", resize);
+
+  resize();
+  reset();
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
